@@ -2,7 +2,7 @@
 //  BaseListenerProtocol.swift
 //
 //  Created on 06.01.2021.
-//  Copyright © 2026 IGR Soft. All rights reserved.
+//  Copyright © 2026 Agnidia. All rights reserved.
 //
 
 import Foundation

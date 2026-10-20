@@ -2,7 +2,7 @@
 //  SecurityUtil.swift
 //
 //  Created on 02.02.2022.
-//  Copyright © 2026 IGR Soft. All rights reserved.
+//  Copyright © 2026 Agnidia. All rights reserved.
 //
 
 import CryptoKit

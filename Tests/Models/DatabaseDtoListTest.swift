@@ -2,7 +2,7 @@
 //  DatabaseDtoListTest.swift
 //
 //  Created on 01.01.2026.
-//  Copyright © 2026 IGR Soft. All rights reserved.
+//  Copyright © 2026 Agnidia. All rights reserved.
 //
 
 import AppKit

@@ -2,7 +2,7 @@
 //  SaveSnapshotViews.swift
 //
 //  Created on 26.12.2021.
-//  Copyright © 2026 IGR Soft. All rights reserved.
+//  Copyright © 2026 Agnidia. All rights reserved.
 //
 
 import CameraSnap

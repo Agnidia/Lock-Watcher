@@ -1,5 +1,13 @@
 # Lock-Watcher — Changelog
 
+## v1.7.2 (Build 1703) — 2026-10-20
+
+### Changed
+- Updated the company branding from IGRSoft to Agnidia
+- Updated the company website, support, and privacy policy links
+
+---
+
 ## v1.7.1 (Build 1702) — 2026-10-13
 
 ### Fixed

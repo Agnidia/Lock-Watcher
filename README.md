@@ -7,14 +7,14 @@ Turn your Mac into a powerful surveillance system with Lock-Watcher. Detect and 
 ## Company Information
 
 **Company Name**: Agnidia
-**Domain**: com.igrsoft
-**Contact**: support@igrsoft.com
+**Domain**: agnidia.com
+**Contact**: info@agnidia.dev
 
 ## Project Information
 
 **Project Name**: Lock-Watcher
 **Bundle Identifier**: com.igrsoft.Lock-Watcher
-**Current Version**: 1.7.1 (Build 1702)
+**Current Version**: 1.7.2 (Build 1703)
 
 ### Project Description
 
@@ -233,7 +233,7 @@ docs: improve README
 
 ## License
 
-Copyright 2025 IGR Soft. All rights reserved.
+Copyright 2025 Agnidia. All rights reserved.
 
 See [LICENSE](LICENSE) file for details.
 
@@ -245,7 +245,7 @@ Available on the [Mac App Store](https://apps.apple.com/app/lock-watcher/id15834
 
 For issues or questions:
 - Create an issue in this repository
-- Contact: support@igrsoft.com
+- Contact: info@agnidia.dev
 
 ---
 
