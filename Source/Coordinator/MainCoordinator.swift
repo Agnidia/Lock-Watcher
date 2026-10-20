@@ -2,7 +2,7 @@
 //  MainCoordinator.swift
 //
 //  Created on 29.06.2023.
-//  Copyright © 2026 IGR Soft. All rights reserved.
+//  Copyright © 2026 Agnidia. All rights reserved.
 //
 
 import AppKit

@@ -2,7 +2,7 @@
 //  main.swift
 //
 //  Created on 28.03.2021.
-//  Copyright © 2026 IGR Soft. All rights reserved.
+//  Copyright © 2026 Agnidia. All rights reserved.
 //
 
 import Foundation

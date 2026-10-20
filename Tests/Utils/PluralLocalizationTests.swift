@@ -2,7 +2,7 @@
 //  PluralLocalizationTests.swift
 //
 //  Created on 13.10.2026.
-//  Copyright © 2026 IGR Soft. All rights reserved.
+//  Copyright © 2026 Agnidia. All rights reserved.
 //
 
 import SwiftUI

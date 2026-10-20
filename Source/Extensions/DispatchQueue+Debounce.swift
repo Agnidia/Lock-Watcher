@@ -2,7 +2,7 @@
 //  DispatchQueue+Debounce.swift
 //
 //  Created on 08.01.2022.
-//  Copyright © 2026 IGR Soft. All rights reserved.
+//  Copyright © 2026 Agnidia. All rights reserved.
 //
 
 import Foundation
