@@ -334,7 +334,7 @@ enum AccessibilityLabel {
     enum Info {
         static let openSettings = NSLocalizedString("AccessibilityOpenSettings", comment: "Open application settings")
         static let quitApp = NSLocalizedString("AccessibilityQuitApp", comment: "Quit Lock-Watcher")
-        static let visitWebsite = NSLocalizedString("AccessibilityVisitWebsite", comment: "Visit IGR Software website")
+        static let visitWebsite = NSLocalizedString("AccessibilityVisitWebsite", comment: "Visit Agnidia website")
         static let expandSection = NSLocalizedString("AccessibilityExpandInfo", comment: "Expand information section")
         static let collapseSection = NSLocalizedString("AccessibilityCollapseInfo", comment: "Collapse information section")
     }
@@ -355,13 +355,13 @@ enum AccessibilityLabel {
         static let snapshotOnDisplayAttach = NSLocalizedString("AccessibilitySnapshotDisplayAttach", comment: "Take snapshot when a display is attached while locked")
         static let snapshotOnLocationChange = NSLocalizedString("AccessibilitySnapshotLocationChange", comment: "Take snapshot when the Mac moves while locked")
         static func snapshotOnLockedInput(_ delay: Int) -> String {
-            String(format: NSLocalizedString("AccessibilitySnapshotLockedInput %d", comment: "Take snapshot on keyboard or mouse input while locked, after N seconds"), delay)
+            PluralLocalization.string("AccessibilitySnapshotLockedInput %d", count: delay)
         }
 
         static let lockedInputDelay = NSLocalizedString("AccessibilityLockedInputDelay", comment: "Delay before the locked-input snapshot")
 
         static func keepLast(_ count: Int) -> String {
-            String(format: NSLocalizedString("AccessibilityKeepLast %d", comment: "Keep last N snapshots"), count)
+            PluralLocalization.string("AccessibilityKeepLast %d", count: count)
         }
 
         static let addLocation = NSLocalizedString("AccessibilityAddLocation", comment: "Add GPS location to snapshots")
@@ -371,7 +371,7 @@ enum AccessibilityLabel {
         static let snapshotQuality = NSLocalizedString("AccessibilitySnapshotQuality", comment: "Snapshot JPEG quality")
         static let outputType = NSLocalizedString("AccessibilityOutputType", comment: "Capture a photo or a video")
         static func videoDuration(_ seconds: Int) -> String {
-            String(format: NSLocalizedString("AccessibilityVideoDuration %d", comment: "Video length in seconds"), seconds)
+            PluralLocalization.string("AccessibilityVideoDuration %d", count: seconds)
         }
 
         static let outputSize = NSLocalizedString("AccessibilityOutputSize", comment: "Capture size for photos and videos")
@@ -392,7 +392,7 @@ enum AccessibilityLabel {
         static let fault = NSLocalizedString("AccessibilitySetupFault", comment: "Setup failed, camera access required")
         static let openCameraSettings = NSLocalizedString("AccessibilityOpenCameraSettings", comment: "Open camera privacy settings")
         static func countdown(_ seconds: Int) -> String {
-            String(format: NSLocalizedString("AccessibilityCountdown %d", comment: "Closing in N seconds"), seconds)
+            PluralLocalization.string("AccessibilityCountdown %d", count: seconds)
         }
     }
 
@@ -437,3 +437,8 @@ enum AccessibilityHint {
         static let takeSnapshotHint = NSLocalizedString("AccessibilityHintTakeSnapshot", comment: "Double-tap to test camera and complete setup")
     }
 }
+
+// MARK: - Test Info
+
+// @test-file: Tests/Utils/PluralLocalizationTests.swift
+// @test-coverage: Spoken count labels use the plural-aware catalog path.

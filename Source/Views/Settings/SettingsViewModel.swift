@@ -36,9 +36,13 @@ final class SettingsViewModel: DomainViewConstantProtocol {
     /// Represents the app's settings.
     private var settings: AppSettingsProtocol
 
-    /// Reports `false` only for a denied or restricted location authorization.
     @ObservationIgnored
-    private let requestLocationPermission: (@escaping Commons.BoolClosure) -> Void
+    private let locationAuthorization: LocationAuthorizationProviding
+
+    @ObservationIgnored
+    private var authorizationObservation: LocationAuthorizationObservation?
+
+    private var authorizationRevision = 0
 
     // MARK: - Variables
 
@@ -143,9 +147,15 @@ final class SettingsViewModel: DomainViewConstantProtocol {
 
     var isUseSnapshotOnLocationChange: Binding<Bool> {
         Binding<Bool>(get: {
-            self.settings.triggers.isUseSnapshotOnLocationChange
+            _ = self.authorizationRevision
+            let status = self.locationAuthorization.authorizationStatus
+            return self.settings.triggers.isUseSnapshotOnLocationChange
+                && (status == .authorizedAlways || (status == .notDetermined && self.locationAuthorization.isRequestPending))
         }, set: {
+            guard self.settings.triggers.isUseSnapshotOnLocationChange != $0 else { return }
             self.settings.triggers.isUseSnapshotOnLocationChange = $0
+            self.authorizationRevision += 1
+            self.updateGeofenceTrigger(enabled: $0)
         })
     }
 
@@ -383,11 +393,15 @@ final class SettingsViewModel: DomainViewConstantProtocol {
     /// Initializer for the SettingsViewModel.
     init(settings: AppSettingsProtocol,
          thiefManager: ThiefManagerProtocol,
-         requestLocationPermission: @escaping (@escaping Commons.BoolClosure) -> Void = PermissionsUtils.updateLocationPermissions)
+         locationAuthorization: LocationAuthorizationProviding = LocationAuthorizationService())
     {
         self.settings = settings
         self.thiefManager = thiefManager
-        self.requestLocationPermission = requestLocationPermission
+        self.locationAuthorization = locationAuthorization
+
+        authorizationObservation = locationAuthorization.observeAuthorization { [weak self] _ in
+            self?.authorizationRevision += 1
+        }
 
         watchDropboxUserNameUpdate()
     }
@@ -404,15 +418,24 @@ final class SettingsViewModel: DomainViewConstantProtocol {
             return
         }
 
-        requestLocationPermission { [weak self] isGranted in
-            Task { @MainActor in
-                guard let self else { return }
-                if !isGranted {
-                    self.settings.triggers.isUseSnapshotOnLocationChange = false
-                }
-                self.restartWatching()
+        locationAuthorization.requestAuthorization { [weak self] isGranted in
+            guard let self else { return }
+            if !isGranted {
+                settings.triggers.isUseSnapshotOnLocationChange = false
+                authorizationRevision += 1
+            }
+            if !isGranted || settings.triggers.isUseSnapshotOnLocationChange {
+                restartWatching()
             }
         }
+    }
+
+    func requestSnapshotLocationAuthorization(completion: @escaping @MainActor (Bool) -> Void) {
+        locationAuthorization.requestAuthorization(completion: completion)
+    }
+
+    func refreshLocationAuthorization() {
+        locationAuthorization.refreshAuthorization()
     }
 
     /// Enables or disables the location manager in the thief manager.

@@ -40,7 +40,7 @@
     
     _messageContent = [_messageContent stringByAppendingString:@"--\n"];
     _messageContent = [_messageContent stringByAppendingString:@"Lock Watcher\n"];
-    _messageContent = [_messageContent stringByAppendingFormat:@"%@\n\n", @"http://www.IGRSoft.com"];
+    _messageContent = [_messageContent stringByAppendingFormat:@"%@\n\n", @"http://www.Agnidia.com"];
     
     /* create a new outgoing message object */
     MailOutgoingMessage *emailMessage = [[[mail classForScriptingClass:@"outgoing message"] alloc] initWithProperties:

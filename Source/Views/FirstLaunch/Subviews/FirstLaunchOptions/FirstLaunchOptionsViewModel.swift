@@ -16,8 +16,15 @@ final class FirstLaunchOptionsViewModel {
     /// Ignored by observation as changes are tracked via bindings.
     var settings: AppSettingsProtocol
 
-    init(settings: AppSettingsProtocol) {
+    private let locationAuthorization: LocationAuthorizationProviding
+
+    init(settings: AppSettingsProtocol, locationAuthorization: LocationAuthorizationProviding = LocationAuthorizationService()) {
         self.settings = settings
+        self.locationAuthorization = locationAuthorization
+    }
+
+    func requestSnapshotLocationAuthorization(completion: @escaping @MainActor (Bool) -> Void) {
+        locationAuthorization.requestAuthorization(completion: completion)
     }
 
     var isUseSnapshotOnWakeUp: Binding<Bool> {
@@ -48,6 +55,10 @@ final class FirstLaunchOptionsViewModel {
         )
     }
 }
+
+// MARK: - Test Info
+
+// @test-file: Tests/ViewModels/FirstLaunchViewModelTests.swift
 
 extension FirstLaunchOptionsViewModel {
     static var preview: FirstLaunchOptionsViewModel {

@@ -180,6 +180,16 @@ final class GeofenceListenerTests: XCTestCase {
         XCTAssertEqual(monitor.stopCount, 1)
     }
 
+    func testRestrictionStopsActiveMonitoring() {
+        _ = sut.start()
+        XCTAssertTrue(sut.isRunning)
+
+        monitor.changeAuthorization(to: .restricted)
+
+        XCTAssertFalse(sut.isRunning)
+        XCTAssertEqual(monitor.stopCount, 1)
+    }
+
     func testStartIsIdempotentAndStopEndsMonitoring() {
         _ = sut.start()
         _ = sut.start()

@@ -80,7 +80,7 @@ final class InfoViewModelTests: XCTestCase {
     // MARK: - Static Properties Tests
 
     func testLinkTextIsCorrect() {
-        XCTAssertEqual(sut.linkText, "© IGR Software 2008 - 2026")
+        XCTAssertEqual(sut.linkText, "© Agnidia 2008 - 2026")
     }
 
     func testLinkUrlIsCorrect() {

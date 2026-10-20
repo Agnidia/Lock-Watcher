@@ -41,7 +41,7 @@ struct InfoView: View {
                     .accessibilityIdentifier(AccessibilityID.Info.quitButton)
                     .accessibilityLabel(AccessibilityLabel.Info.quitApp)
                 
-                // Link to the IGR Software website.
+                // Link to the Agnidia website.
                 Link(viewModel.linkText, destination: viewModel.linkUrl)
                     .frame(maxWidth: .infinity)
                     .accessibilityIdentifier(AccessibilityID.Info.websiteLink)

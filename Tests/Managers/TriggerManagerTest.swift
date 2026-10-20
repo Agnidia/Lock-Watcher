@@ -5,6 +5,7 @@
 //  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
+import CoreLocation
 import XCTest
 @testable import Lock_Watcher
 
@@ -170,7 +171,7 @@ final class TriggerManagerTests: XCTestCase {
     /// Builds a manager whose factory hands out `MockListener`s and records every instance per name.
     private func makeFactoryManager() -> (TriggerManager, StubValue<[ListenerName: [MockListener]]>) {
         let made = StubValue<[ListenerName: [MockListener]]>([:])
-        let manager = TriggerManager(logger: LogMock(), lockDetector: MockLockDetector()) { name, _, _ in
+        let manager = TriggerManager(logger: LogMock(), lockDetector: MockLockDetector(), locationAuthorization: MockLocationAuthorizationService()) { name, _, _ in
             let listener = MockListener()
             made.value[name, default: []].append(listener)
             return listener
@@ -215,7 +216,7 @@ final class TriggerManagerTests: XCTestCase {
 
     func testDisabledFlagStopsOpenListenerThatIsNotRunning() {
         let made = StubValue<[ListenerName: [MockListener]]>([:])
-        let manager = TriggerManager(logger: LogMock(), lockDetector: MockLockDetector()) { name, _, _ in
+        let manager = TriggerManager(logger: LogMock(), lockDetector: MockLockDetector(), locationAuthorization: MockLocationAuthorizationService()) { name, _, _ in
             let listener = MockListener()
             listener.stubbedIsRunningAfterStart = name != .onGeofenceListener
             made.value[name, default: []].append(listener)
@@ -242,6 +243,95 @@ final class TriggerManagerTests: XCTestCase {
 
         XCTAssertEqual(Set(made.value.keys), Set(ListenerName.allCases))
         XCTAssertTrue(made.value.values.allSatisfy { $0.count == 1 })
+        manager.stop()
+    }
+
+    private func makeGeofenceManager(status: CLAuthorizationStatus) -> (TriggerManager, MockLocationAuthorizationService, MockListener) {
+        let authorization = MockLocationAuthorizationService(status: status)
+        let geofence = MockListener()
+        let manager = TriggerManager(logger: LogMock(), lockDetector: MockLockDetector(), locationAuthorization: authorization) { name, _, _ in
+            name == .onGeofenceListener ? geofence : MockListener()
+        }
+        return (manager, authorization, geofence)
+    }
+
+    func testPendingGrantStartsGeofenceOnce() {
+        let (manager, authorization, geofence) = makeGeofenceManager(status: .notDetermined)
+        authorization.requestAuthorization { _ in }
+        let settings = MockAppSettings()
+        settings.triggers.isUseSnapshotOnLocationChange = true
+        manager.start(settings: settings) { _ in }
+
+        XCTAssertTrue(settings.triggers.isUseSnapshotOnLocationChange)
+        XCTAssertEqual(geofence.invokedStartCount, 0)
+
+        authorization.send(.authorizedAlways)
+        XCTAssertEqual(geofence.invokedStartCount, 1)
+        manager.stop()
+    }
+
+    func testFirstDenialClearsGeofenceWithoutStarting() {
+        let (manager, authorization, geofence) = makeGeofenceManager(status: .notDetermined)
+        authorization.requestAuthorization { _ in }
+        let settings = MockAppSettings()
+        settings.triggers.isUseSnapshotOnLocationChange = true
+        manager.start(settings: settings) { _ in }
+
+        authorization.send(.denied)
+        XCTAssertFalse(settings.triggers.isUseSnapshotOnLocationChange)
+        XCTAssertEqual(geofence.invokedStartCount, 0)
+        manager.stop()
+    }
+
+    func testRevocationClearsFlagAndStopsGeofence() {
+        for status: CLAuthorizationStatus in [.denied, .restricted] {
+            let (manager, authorization, geofence) = makeGeofenceManager(status: .authorizedAlways)
+            let settings = MockAppSettings()
+            settings.triggers.isUseSnapshotOnLocationChange = true
+            manager.start(settings: settings) { _ in }
+            XCTAssertEqual(geofence.invokedStartCount, 1)
+
+            authorization.send(status)
+            XCTAssertFalse(settings.triggers.isUseSnapshotOnLocationChange)
+            XCTAssertEqual(geofence.invokedStopCount, 1)
+
+            authorization.send(.authorizedAlways)
+            XCTAssertEqual(geofence.invokedStartCount, 1)
+            manager.stop()
+        }
+    }
+
+    func testRelaunchClearsPersistedFlagBeforeListenerStarts() {
+        for status: CLAuthorizationStatus in [.denied, .restricted, .notDetermined] {
+            let (manager, _, geofence) = makeGeofenceManager(status: status)
+            let settings = MockAppSettings()
+            settings.triggers.isUseSnapshotOnLocationChange = true
+            manager.start(settings: settings) { _ in }
+            XCTAssertFalse(settings.triggers.isUseSnapshotOnLocationChange)
+            XCTAssertEqual(geofence.invokedStartCount, 0)
+            manager.stop()
+        }
+    }
+
+    func testStoppedManagerDoesNotStartAfterGrant() {
+        let (manager, authorization, geofence) = makeGeofenceManager(status: .notDetermined)
+        authorization.requestAuthorization { _ in }
+        let settings = MockAppSettings()
+        settings.triggers.isUseSnapshotOnLocationChange = true
+        manager.start(settings: settings) { _ in }
+        manager.stop()
+        authorization.send(.authorizedAlways)
+        XCTAssertEqual(geofence.invokedStartCount, 0)
+    }
+
+    func testSnapshotPermissionGrantDoesNotEnableGeofence() {
+        let (manager, authorization, geofence) = makeGeofenceManager(status: .notDetermined)
+        let settings = MockAppSettings()
+        manager.start(settings: settings) { _ in }
+        authorization.requestAuthorization { _ in }
+        authorization.send(.authorizedAlways)
+        XCTAssertFalse(settings.triggers.isUseSnapshotOnLocationChange)
+        XCTAssertEqual(geofence.invokedStartCount, 0)
         manager.stop()
     }
 

@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@MainActor
 struct SettingsView: View {
     /// The view model injected via environment.
     @Environment(SettingsViewModel.self) var viewModel
@@ -61,9 +62,6 @@ struct SettingsView: View {
                                 viewModel.restartWatching()
                             }
                         UseSnapshotOnLocationChangeView(isUseSnapshotOnLocationChange: viewModel.isUseSnapshotOnLocationChange)
-                            .onChange(of: viewModel.isUseSnapshotOnLocationChange.wrappedValue) { _, value in
-                                viewModel.updateGeofenceTrigger(enabled: value)
-                            }
                         UseSnapshotOnLockedInputView(isUseSnapshotOnLockedInput: viewModel.isUseSnapshotOnLockedInput,
                                                      lockedInputDelay: viewModel.lockedInputDelay)
                             .onChange(of: viewModel.isUseSnapshotOnLockedInput.wrappedValue) { _, _ in
@@ -79,7 +77,7 @@ struct SettingsView: View {
                     VStack(alignment: .leading) {
                         KeepLastCountView(keepLastActionsCount: viewModel.keepLastActionsCount)
 
-                        AddLocationToSnapshotView(addLocationToSnapshot: viewModel.addLocationToSnapshot)
+                        AddLocationToSnapshotView(addLocationToSnapshot: viewModel.addLocationToSnapshot, requestAuthorization: viewModel.requestSnapshotLocationAuthorization)
                             .onChange(of: viewModel.addLocationToSnapshot.wrappedValue) { _, value in
                                 viewModel.setupLocationManager(enable: value)
                             }
@@ -126,6 +124,7 @@ struct SettingsView: View {
             .padding(viewModel.viewSettings.border)
             .frame(width: viewModel.viewSettings.window.width, alignment: .top)
             .accessibilityIdentifier(AccessibilityID.Settings.container)
+            .onAppear(perform: viewModel.refreshLocationAuthorization)
         } else {
             Text("")
                 .onAppear {
@@ -139,3 +138,7 @@ struct SettingsView: View {
     SettingsView()
         .environment(SettingsViewModel.preview)
 }
+
+// MARK: - Test Info
+
+// @test-file: Tests/ViewModels/SettingsViewModelTests.swift

@@ -5,6 +5,7 @@
 //  Copyright © 2026 IGR Soft. All rights reserved.
 //
 
+import CoreLocation
 import Foundation
 
 /// MainActor-isolated trigger closure type
@@ -47,6 +48,10 @@ final class TriggerManager: TriggerManagerProtocol {
 
     private let makeListener: ListenerFactory
 
+    private let locationAuthorization: LocationAuthorizationProviding
+    private var authorizationObservation: LocationAuthorizationObservation?
+    private var isWatching = false
+
     /// Tasks consuming listener streams.
     private var listenerTasks: [ListenerName: Task<Void, Never>] = [:]
 
@@ -66,11 +71,16 @@ final class TriggerManager: TriggerManagerProtocol {
 
     init(logger: LogProtocol = Log(category: .triggerManager),
          lockDetector: MacOSLockDetectorProtocol = MacOSLockDetector(),
+         locationAuthorization: LocationAuthorizationProviding = LocationAuthorizationService(),
          makeListener: @escaping ListenerFactory = TriggerManager.defaultListener)
     {
         self.logger = logger
         self.lockDetector = lockDetector
+        self.locationAuthorization = locationAuthorization
         self.makeListener = makeListener
+        authorizationObservation = locationAuthorization.observeAuthorization { [weak self] status in
+            self?.reconcileGeofence(status: status)
+        }
     }
 
     static func defaultListener(_ name: ListenerName, _ lockDetector: MacOSLockDetectorProtocol, _ triggers: TriggerSettings) -> BaseListenerProtocol? {
@@ -94,6 +104,9 @@ final class TriggerManager: TriggerManagerProtocol {
 
         self.settings = settings
         self.triggerBlock = triggerBlock
+        isWatching = true
+
+        locationAuthorization.refreshAuthorization()
 
         applyLockedInputDelay()
 
@@ -103,13 +116,13 @@ final class TriggerManager: TriggerManagerProtocol {
         startListener(.onUSBConnectionListener, enabled: settings?.triggers.isUseSnapshotOnUSBMount == true)
         startListener(.onLoginListener, enabled: settings?.triggers.isUseSnapshotOnLogin == true)
         startListener(.onDisplayListener, enabled: settings?.triggers.isUseSnapshotOnDisplayAttach == true)
-        startListener(.onGeofenceListener, enabled: settings?.triggers.isUseSnapshotOnLocationChange == true)
         startListener(.onLockedInputListener, enabled: settings?.triggers.isUseSnapshotOnLockedInput == true)
     }
 
     /// Stops all active listeners.
     func stop() {
         logger.debug("Stop all triggers")
+        isWatching = false
 
         for (_, task) in listenerTasks {
             task.cancel()
@@ -122,6 +135,21 @@ final class TriggerManager: TriggerManagerProtocol {
     }
 
     // MARK: - private
+
+    private func reconcileGeofence(status: CLAuthorizationStatus) {
+        guard let settings else {
+            startListener(.onGeofenceListener, enabled: false)
+            return
+        }
+
+        if status != .authorizedAlways, !(status == .notDetermined && locationAuthorization.isRequestPending), settings.triggers.isUseSnapshotOnLocationChange {
+            var triggers = settings.triggers
+            triggers.isUseSnapshotOnLocationChange = false
+            self.settings?.triggers = triggers
+        }
+
+        startListener(.onGeofenceListener, enabled: isWatching && status == .authorizedAlways && settings.triggers.isUseSnapshotOnLocationChange)
+    }
 
     /// A listener can hold an open stream while `isRunning` is false (geofence without
     /// authorization), so a disabled flag stops any listener that still has a task.
@@ -165,7 +193,8 @@ final class TriggerManager: TriggerManagerProtocol {
         listeners[type]?.stop()
 
         listeners[type] = buildListener(type)
-        startListener(type, enabled: true)
+        let geofenceAllowed = type != .onGeofenceListener || (isWatching && locationAuthorization.authorizationStatus == .authorizedAlways && currentTriggers.isUseSnapshotOnLocationChange)
+        startListener(type, enabled: geofenceAllowed)
     }
 
     private func buildListener(_ name: ListenerName) -> BaseListenerProtocol? {
@@ -189,3 +218,4 @@ final class TriggerManager: TriggerManagerProtocol {
 // MARK: - Test Info
 
 // @test-file: Tests/Managers/TriggerManagerTest.swift
+// @related-tests: Tests/Listeners/GeofenceListenerTests.swift

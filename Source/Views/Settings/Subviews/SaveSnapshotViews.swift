@@ -8,13 +8,33 @@
 import CameraSnap
 import SwiftUI
 
+@MainActor
+struct StableCountLabel: View {
+    let key: String
+    let count: Int
+    let range: ClosedRange<Int>
+    var bundle: Bundle = .main
+
+    var body: some View {
+        ZStack(alignment: .leading) {
+            ForEach(Array(range), id: \.self) { candidate in
+                Text(PluralLocalization.string(key, count: candidate, bundle: bundle))
+                    .hidden()
+                    .accessibilityHidden(true)
+            }
+            Text(PluralLocalization.string(key, count: count, bundle: bundle))
+        }
+    }
+}
+
 /// A view component that allows the user to determine the number of last actions to keep.
+@MainActor
 struct KeepLastCountView: View {
     @Binding var keepLastActionsCount: Int
 
     var body: some View {
         Stepper(value: $keepLastActionsCount, in: 1 ... 30) {
-            Text(String(format: NSLocalizedString("KeepLastN %d", comment: ""), keepLastActionsCount))
+            StableCountLabel(key: "KeepLastN %d", count: keepLastActionsCount, range: 1 ... 30)
         }
         .accessibilityIdentifier(AccessibilityID.Settings.keepLastStepper)
         .accessibilityLabel(AccessibilityLabel.Settings.keepLast(keepLastActionsCount))
@@ -44,8 +64,10 @@ struct SendNotificationToMailView: View {
 }
 
 /// A view component that allows the user to toggle whether to add location information to the snapshot.
+@MainActor
 struct AddLocationToSnapshotView: View {
     @Binding var addLocationToSnapshot: Bool
+    let requestAuthorization: @MainActor (@escaping @MainActor (Bool) -> Void) -> Void
 
     @State private var showingAlert = false
 
@@ -55,10 +77,8 @@ struct AddLocationToSnapshotView: View {
         }
         .onChange(of: addLocationToSnapshot) { _, value in
             if value {
-                PermissionsUtils.updateLocationPermissions { [self] isGranted in
-                    Task { @MainActor in
-                        showingAlert = !isGranted
-                    }
+                requestAuthorization { isGranted in
+                    showingAlert = !isGranted
                 }
             }
         }
@@ -164,12 +184,13 @@ struct SnapshotOutputTypeView: View {
 }
 
 /// A view component that allows the user to set the video length.
+@MainActor
 struct VideoDurationView: View {
     @Binding var videoDuration: Int
 
     var body: some View {
         Stepper(value: $videoDuration, in: SnapshotSettings.videoDurationRange) {
-            Text(String(format: NSLocalizedString("VideoDuration %d", comment: ""), videoDuration))
+            StableCountLabel(key: "VideoDuration %d", count: videoDuration, range: SnapshotSettings.videoDurationRange)
         }
         .accessibilityIdentifier(AccessibilityID.Settings.videoDurationStepper)
         .accessibilityLabel(AccessibilityLabel.Settings.videoDuration(videoDuration))
@@ -306,3 +327,9 @@ struct LocalNotificationView: View {
         .accessibilityHint(AccessibilityHint.Settings.toggleHint)
     }
 }
+
+// MARK: - Test Info
+
+// @test-file: Tests/Utils/PluralLocalizationTests.swift
+// @related-tests: Tests/ViewModels/SettingsViewModelTests.swift
+// @test-coverage: Visible keep-last and video-duration labels share count forms with VoiceOver.

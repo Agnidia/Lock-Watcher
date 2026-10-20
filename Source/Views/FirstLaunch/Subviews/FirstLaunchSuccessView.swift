@@ -36,7 +36,7 @@ struct FirstLaunchSuccessView: View {
                 .accessibilityHidden(true)
 
             // Countdown timer text, showing the user how much time is left before moving on.
-            Text(String(format: NSLocalizedString("SuccessTimer %d", comment: ""), successCountDown))
+            Text(PluralLocalization.string("SuccessTimer %d", count: successCountDown))
                 .font(DesignSystem.Typography.body)
                 .accessibilityIdentifier(AccessibilityID.FirstLaunch.successCountdown)
                 .accessibilityLabel(AccessibilityLabel.FirstLaunch.countdown(successCountDown))
@@ -47,3 +47,8 @@ struct FirstLaunchSuccessView: View {
 #Preview("Success View") {
     FirstLaunchSuccessView(successCountDown: 5, frameSize: CGSize(width: 400, height: 300))
 }
+
+// MARK: - Test Info
+
+// @test-file: Tests/Utils/PluralLocalizationTests.swift
+// @test-coverage: Visible countdown uses the same count as its VoiceOver label.

@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@MainActor
 struct FirstLaunchOptionsView: View {
     // The view model that provides data and behavior.
     
@@ -17,7 +18,7 @@ struct FirstLaunchOptionsView: View {
             LaunchAtLoginView()
             UseSnapshotOnWakeUpView(isUseSnapshotOnWakeUp: viewModel.isUseSnapshotOnWakeUp)
             UseSnapshotOnLoginView(isUseSnapshotOnLogin: viewModel.isUseSnapshotOnLogin)
-            AddLocationToSnapshotView(addLocationToSnapshot: viewModel.addLocationToSnapshot)
+            AddLocationToSnapshotView(addLocationToSnapshot: viewModel.addLocationToSnapshot, requestAuthorization: viewModel.requestSnapshotLocationAuthorization)
             ICloudSyncView(isICloudSyncEnable: viewModel.isICloudSyncEnable)
 
             Divider()
@@ -30,3 +31,7 @@ struct FirstLaunchOptionsView: View {
     FirstLaunchOptionsView()
         .environment(FirstLaunchOptionsViewModel.preview)
 }
+
+// MARK: - Test Info
+
+// @test-file: Tests/ViewModels/FirstLaunchViewModelTests.swift

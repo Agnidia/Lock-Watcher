@@ -9,6 +9,7 @@ import AppKit
 import SwiftUI
 
 /// `MainCoordinator` manages and coordinates the main window of the application, especially its display and authentication.
+@MainActor
 final class MainCoordinator: BaseCoordinatorProtocol {
     // MARK: - Dependency Injection
     
@@ -19,6 +20,8 @@ final class MainCoordinator: BaseCoordinatorProtocol {
     
     /// Likely manages data or tasks related to unauthorized access.
     private var thiefManager: ThiefManagerProtocol
+
+    private let locationAuthorization: LocationAuthorizationProviding
     
     // MARK: - Variables
     
@@ -57,10 +60,11 @@ final class MainCoordinator: BaseCoordinatorProtocol {
     ///     - settings: Application settings.
     ///     - thiefManager: Manager related to unauthorized access.
     ///     - statusBarButton: Status bar button to toggle the main window.
-    init(logger: LogProtocol = Log(category: .coordinator), settings: AppSettingsProtocol, thiefManager: ThiefManagerProtocol, statusBarButton: NSStatusBarButton, securityUtil: SecurityUtilProtocol) {
+    init(logger: LogProtocol = Log(category: .coordinator), settings: AppSettingsProtocol, thiefManager: ThiefManagerProtocol, statusBarButton: NSStatusBarButton, securityUtil: SecurityUtilProtocol, locationAuthorization: LocationAuthorizationProviding = LocationAuthorizationService()) {
         self.logger = logger
         self.settings = settings
         self.thiefManager = thiefManager
+        self.locationAuthorization = locationAuthorization
         self.statusBarButton = statusBarButton
         authManager = .init(logger: logger, securityUtil: securityUtil)
     }
@@ -113,6 +117,7 @@ final class MainCoordinator: BaseCoordinatorProtocol {
             let firstLaunchViewModel = FirstLaunchViewModel(
                 settings: settings,
                 thiefManager: thiefManager,
+                locationAuthorization: locationAuthorization,
                 closeClosure: { [weak self] in
                     self?.firstLaunchWindow?.close()
                     closeClosure()
@@ -146,3 +151,7 @@ final class MainCoordinator: BaseCoordinatorProtocol {
         mainPopover.performClose(sender)
     }
 }
+
+// MARK: - Test Info
+
+// @test-file: Tests/Coordinator/MainCoordinatorTest.swift

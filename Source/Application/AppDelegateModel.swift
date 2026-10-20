@@ -26,12 +26,17 @@ protocol AppDelegateModelProtocol {
 /// Application delegate model managing core app components.
 ///
 /// `@MainActor` isolation ensures all UI-related state is accessed from the main thread.
+@MainActor
 final class AppDelegateModel: AppDelegateModelProtocol {
     /// Represents general settings for the application.
     private lazy var settings = AppSettings()
 
+    private lazy var locationAuthorizationService = LocationAuthorizationService()
+
+    private lazy var triggerManager: TriggerManagerProtocol = TriggerManager(locationAuthorization: locationAuthorizationService)
+
     /// Manages "Thief" operations based on provided settings.
-    private lazy var thiefManager: ThiefManagerProtocol = ThiefManager(settings: settings) { [weak self] dto in
+    private lazy var thiefManager: ThiefManagerProtocol = ThiefManager(settings: settings, triggerManager: triggerManager) { [weak self] dto in
         // MainActor hop is required since ThiefClosure is @Sendable
         Task { @MainActor in
             self?.statusBarItem.button?.image = .statusBarIcon(triggered: dto.triggerType != .setup)
@@ -44,11 +49,11 @@ final class AppDelegateModel: AppDelegateModelProtocol {
             fatalError("Impossible to construct main coordinator, status bar button is missing.")
         }
 
-        return MainCoordinator(settings: settings, thiefManager: thiefManager, statusBarButton: button, securityUtil: SecurityUtil())
+        return MainCoordinator(settings: settings, thiefManager: thiefManager, statusBarButton: button, securityUtil: SecurityUtil(), locationAuthorization: locationAuthorizationService)
     }()
 
     /// The settings view model for injection into the settings view.
-    private(set) lazy var settingsViewModel: SettingsViewModel = .init(settings: settings, thiefManager: thiefManager)
+    private(set) lazy var settingsViewModel: SettingsViewModel = .init(settings: settings, thiefManager: thiefManager, locationAuthorization: locationAuthorizationService)
 
     /// Represents the status bar item used in the application.
     private lazy var statusBarItem: NSStatusItem = {
@@ -97,3 +102,7 @@ final class AppDelegateModel: AppDelegateModelProtocol {
         return false
     }
 }
+
+// MARK: - Test Info
+
+// @test-file: Tests/Application/MainAppTest.swift

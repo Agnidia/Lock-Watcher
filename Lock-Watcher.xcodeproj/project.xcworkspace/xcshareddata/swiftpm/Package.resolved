@@ -4,7 +4,7 @@
     {
       "identity" : "camerasnap",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/IGRSoft/CameraSnap.git",
+      "location" : "https://github.com/Agnidia/CameraSnap.git",
       "state" : {
         "revision" : "16dc3cc45bd7a310dc5aa54cd19012b7171c820c",
         "version" : "0.3.1"
@@ -40,7 +40,7 @@
     {
       "identity" : "simpleping",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/IGRSoft/SimplePing.git",
+      "location" : "https://github.com/Agnidia/SimplePing.git",
       "state" : {
         "revision" : "ab2d683ce6c39252e286db8bbbc15dd0234f0364",
         "version" : "0.1.2"
@@ -49,7 +49,7 @@
     {
       "identity" : "simpletracer",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/IGRSoft/SimpleTracer",
+      "location" : "https://github.com/Agnidia/SimpleTracer",
       "state" : {
         "revision" : "793cbe3dcf566109e3d2df2226f7f3064a62df7e",
         "version" : "0.1.3"

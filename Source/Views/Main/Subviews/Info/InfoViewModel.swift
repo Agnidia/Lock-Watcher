@@ -67,7 +67,7 @@ final class InfoViewModel {
     }
     
     /// The text for a link in the view.
-    let linkText: String = "© IGR Software 2008 - 2026"
+    let linkText: String = "© Agnidia 2008 - 2026"
     
     /// The URL corresponding to the link text.
     let linkUrl: URL = .init(string: "https://igrsoft.com")!

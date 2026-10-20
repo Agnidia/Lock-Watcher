@@ -7,6 +7,7 @@
 
 import CameraSnap
 import Combine
+import CoreLocation
 import SwiftUI
 import XCTest
 @testable import Lock_Watcher
@@ -16,18 +17,21 @@ final class SettingsViewModelTests: XCTestCase {
     private var sut: SettingsViewModel!
     private var mockSettings: AppSettingsPreview!
     private var mockThiefManager: MockThiefManager!
+    private var mockAuthorization: MockLocationAuthorizationService!
 
     override func setUp() async throws {
         try await super.setUp()
         mockSettings = AppSettingsPreview()
         mockThiefManager = MockThiefManager()
         mockThiefManager.stubbedDatabaseManager = MockDatabaseManager()
-        sut = SettingsViewModel(settings: mockSettings, thiefManager: mockThiefManager)
+        mockAuthorization = MockLocationAuthorizationService()
+        sut = SettingsViewModel(settings: mockSettings, thiefManager: mockThiefManager, locationAuthorization: mockAuthorization)
     }
 
     override func tearDown() async throws {
         sut = nil
         mockThiefManager = nil
+        mockAuthorization = nil
         mockSettings = nil
         try await super.tearDown()
     }
@@ -206,53 +210,129 @@ final class SettingsViewModelTests: XCTestCase {
 
     // MARK: - Geofence Permission Tests
 
-    private func geofenceViewModel(granted: Bool, requests: StubValue<Int>) -> SettingsViewModel {
-        SettingsViewModel(settings: mockSettings, thiefManager: mockThiefManager) { completion in
-            requests.value += 1
-            completion(granted)
-        }
-    }
-
-    private func waitForRestart(count: Int) async throws {
-        for _ in 0 ..< 50 where mockThiefManager.invokedRestartWatchingCount < count {
-            try await Task.sleep(nanoseconds: 10_000_000)
-        }
-    }
-
-    func testDeniedLocationTurnsGeofenceFlagOff() async throws {
-        let requests = StubValue(0)
-        let viewModel = geofenceViewModel(granted: false, requests: requests)
-        viewModel.isUseSnapshotOnLocationChange.wrappedValue = true
-
-        viewModel.updateGeofenceTrigger(enabled: true)
-        try await waitForRestart(count: 1)
-
+    func testDeniedLocationTurnsGeofenceFlagOff() {
+        mockAuthorization.send(.denied)
+        sut.isUseSnapshotOnLocationChange.wrappedValue = true
         XCTAssertFalse(mockSettings.triggers.isUseSnapshotOnLocationChange)
         XCTAssertEqual(mockThiefManager.invokedRestartWatchingCount, 1)
-        XCTAssertEqual(requests.value, 1)
+        XCTAssertEqual(mockAuthorization.requestCount, 1)
     }
 
-    func testGrantedLocationKeepsGeofenceFlagOn() async throws {
-        let requests = StubValue(0)
-        let viewModel = geofenceViewModel(granted: true, requests: requests)
-        viewModel.isUseSnapshotOnLocationChange.wrappedValue = true
-
-        viewModel.updateGeofenceTrigger(enabled: true)
-        try await waitForRestart(count: 1)
-
+    func testGrantedLocationKeepsGeofenceFlagOn() {
+        sut.isUseSnapshotOnLocationChange.wrappedValue = true
         XCTAssertTrue(mockSettings.triggers.isUseSnapshotOnLocationChange)
         XCTAssertEqual(mockThiefManager.invokedRestartWatchingCount, 1)
     }
 
-    func testDisablingGeofenceSkipsPermissionRequest() async {
-        let requests = StubValue(0)
-        let viewModel = geofenceViewModel(granted: false, requests: requests)
-
-        viewModel.updateGeofenceTrigger(enabled: false)
-        await Task.yield()
-
-        XCTAssertEqual(requests.value, 0)
+    func testDisablingGeofenceSkipsPermissionRequest() {
+        mockSettings.triggers.isUseSnapshotOnLocationChange = true
+        sut.isUseSnapshotOnLocationChange.wrappedValue = false
+        XCTAssertEqual(mockAuthorization.requestCount, 0)
         XCTAssertEqual(mockThiefManager.invokedRestartWatchingCount, 1)
+    }
+
+    func testDelayedFirstDenialClearsIntentAfterAnswer() {
+        mockAuthorization.send(.notDetermined)
+        sut.isUseSnapshotOnLocationChange.wrappedValue = true
+
+        XCTAssertTrue(mockSettings.triggers.isUseSnapshotOnLocationChange)
+        XCTAssertTrue(sut.isUseSnapshotOnLocationChange.wrappedValue)
+        XCTAssertEqual(mockThiefManager.invokedRestartWatchingCount, 0)
+
+        mockAuthorization.send(.denied)
+
+        XCTAssertFalse(mockSettings.triggers.isUseSnapshotOnLocationChange)
+        XCTAssertFalse(sut.isUseSnapshotOnLocationChange.wrappedValue)
+        XCTAssertEqual(mockThiefManager.invokedRestartWatchingCount, 1)
+    }
+
+    func testDelayedFirstGrantKeepsIntentAfterAnswer() {
+        mockAuthorization.send(.notDetermined)
+        sut.isUseSnapshotOnLocationChange.wrappedValue = true
+        XCTAssertEqual(mockThiefManager.invokedRestartWatchingCount, 0)
+
+        mockAuthorization.send(.authorizedAlways)
+
+        XCTAssertTrue(mockSettings.triggers.isUseSnapshotOnLocationChange)
+        XCTAssertTrue(sut.isUseSnapshotOnLocationChange.wrappedValue)
+        XCTAssertEqual(mockThiefManager.invokedRestartWatchingCount, 1)
+    }
+
+    func testTurningOffDuringPromptStaysOffAfterGrant() {
+        mockAuthorization.send(.notDetermined)
+        sut.isUseSnapshotOnLocationChange.wrappedValue = true
+        sut.isUseSnapshotOnLocationChange.wrappedValue = false
+        mockAuthorization.send(.authorizedAlways)
+
+        XCTAssertFalse(mockSettings.triggers.isUseSnapshotOnLocationChange)
+        XCTAssertEqual(mockThiefManager.invokedRestartWatchingCount, 1)
+    }
+
+    func testRevocationImmediatelyShowsGeofenceOff() {
+        sut.isUseSnapshotOnLocationChange.wrappedValue = true
+        mockAuthorization.send(.restricted)
+        XCTAssertFalse(sut.isUseSnapshotOnLocationChange.wrappedValue)
+    }
+
+    func testSettingsOpeningRefreshesAuthorization() {
+        sut.refreshLocationAuthorization()
+        XCTAssertEqual(mockAuthorization.refreshCount, 1)
+    }
+
+    func testGeofenceBindingInvalidatesWhenUserChangesIntent() {
+        let changed = expectation(description: "geofence binding re-evaluated")
+        withObservationTracking {
+            _ = sut.isUseSnapshotOnLocationChange.wrappedValue
+        } onChange: {
+            changed.fulfill()
+        }
+
+        sut.isUseSnapshotOnLocationChange.wrappedValue = true
+
+        wait(for: [changed], timeout: 1)
+    }
+
+    func testSnapshotRequestReceivesEventualPromptResult() {
+        mockAuthorization.send(.notDetermined)
+        var result: Bool?
+        sut.requestSnapshotLocationAuthorization { result = $0 }
+        XCTAssertNil(result)
+        mockAuthorization.send(.denied)
+        XCTAssertEqual(result, false)
+    }
+
+    func testRealServiceCompletesPendingRequestsOnceAfterTerminalStatus() {
+        let status = StubValue<CLAuthorizationStatus>(.notDetermined)
+        let requests = StubValue(0)
+        let service = LocationAuthorizationService(status: { status.value }, request: { requests.value += 1 })
+        var results: [Bool] = []
+
+        service.requestAuthorization { results.append($0) }
+        service.requestAuthorization { results.append($0) }
+        XCTAssertEqual(requests.value, 1)
+        XCTAssertTrue(results.isEmpty)
+
+        service.authorizationDidChange()
+        XCTAssertTrue(results.isEmpty)
+
+        status.value = .authorizedAlways
+        service.authorizationDidChange()
+        service.authorizationDidChange()
+        XCTAssertEqual(results, [true, true])
+    }
+
+    func testRealServiceReportsDenialOnlyAfterAnswer() {
+        let status = StubValue<CLAuthorizationStatus>(.notDetermined)
+        let service = LocationAuthorizationService(status: { status.value }, request: {})
+        var result: Bool?
+
+        service.requestAuthorization { result = $0 }
+        service.authorizationDidChange()
+        XCTAssertNil(result)
+
+        status.value = .denied
+        service.authorizationDidChange()
+        XCTAssertEqual(result, false)
     }
 
     // MARK: - Options Bindings Tests
@@ -535,3 +615,4 @@ final class SettingsViewModelTests: XCTestCase {
 // MARK: - Source Info
 
 // @source-file: Source/Views/Settings/SettingsViewModel.swift
+// @doc-refs: Source/Utils/LocationAuthorizationService.swift

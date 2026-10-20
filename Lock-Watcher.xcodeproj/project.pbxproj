@@ -87,6 +87,9 @@
 		A57905F42A9E791D00647BF8 /* LoggerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905F32A9E791D00647BF8 /* LoggerTest.swift */; };
 		A57905F72A9FAB3E00647BF8 /* FileSystemTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905F62A9FAB3E00647BF8 /* FileSystemTest.swift */; };
 		6DD049F94CFA8B56465FC5CE /* RetentionPrunerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2782678C38D2012B3586EB5D /* RetentionPrunerTest.swift */; };
+		C0DE36000000000000000002 /* PluralLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE36000000000000000001 /* PluralLocalization.swift */; };
+		C0DE36000000000000000003 /* PluralLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE36000000000000000001 /* PluralLocalization.swift */; };
+		C0DE36000000000000000005 /* PluralLocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE36000000000000000004 /* PluralLocalizationTests.swift */; };
 		A57905F92A9FAB9E00647BF8 /* MockLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905F82A9FAB9E00647BF8 /* MockLog.swift */; };
 		A4D19EB7EDD325AE986E6960 /* MockCaptureDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDEDAD56CC495F7044C41A0 /* MockCaptureDependencies.swift */; };
 		A57905FB2A9FB0A300647BF8 /* NetworkUtilTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905FA2A9FB0A300647BF8 /* NetworkUtilTests.swift */; };
@@ -144,6 +147,9 @@
 		A58FC76326E282C7007674F6 /* MailNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D80225AA0F1A0046B7C8 /* MailNotifier.swift */; };
 		A5942651283FE287008A38E6 /* PermissionsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5942650283FE287008A38E6 /* PermissionsUtils.swift */; };
 		A5942652283FE287008A38E6 /* PermissionsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5942650283FE287008A38E6 /* PermissionsUtils.swift */; };
+		C0DE37000000000000000002 /* LocationAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE37000000000000000001 /* LocationAuthorizationService.swift */; };
+		C0DE37000000000000000003 /* LocationAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE37000000000000000001 /* LocationAuthorizationService.swift */; };
+		C0DE37000000000000000005 /* MockLocationAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE37000000000000000004 /* MockLocationAuthorizationService.swift */; };
 		A599EB2327AAF9DF003A69B5 /* SecurityAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A599EB2227AAF9DF003A69B5 /* SecurityAlertView.swift */; };
 		A599EB2427AAF9DF003A69B5 /* SecurityAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A599EB2227AAF9DF003A69B5 /* SecurityAlertView.swift */; };
 		A599EB2927AB0B07003A69B5 /* SecurityUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A599EB2827AB0B07003A69B5 /* SecurityUtil.swift */; };
@@ -379,6 +385,8 @@
 		A533D7C625A9D96A0046B7C8 /* WakeUpListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WakeUpListener.swift; sourceTree = "<group>"; };
 		A533D7CC25A9D9E30046B7C8 /* WrongPasswordListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrongPasswordListener.swift; sourceTree = "<group>"; };
 		A533D7D325A9E31F0046B7C8 /* FileSystemUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemUtil.swift; sourceTree = "<group>"; };
+		C0DE36000000000000000001 /* PluralLocalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluralLocalization.swift; sourceTree = "<group>"; };
+		C0DE36000000000000000004 /* PluralLocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluralLocalizationTests.swift; sourceTree = "<group>"; };
 		5BF31DBD8F783140FE391FCA /* RetentionPruner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetentionPruner.swift; sourceTree = "<group>"; };
 		A533D7DD25A9EDA30046B7C8 /* ThiefDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThiefDto.swift; sourceTree = "<group>"; };
 		8071EF860D5C85BC85858992 /* CaptureMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureMedia.swift; sourceTree = "<group>"; };
@@ -391,7 +399,7 @@
 		A533D83A25AA12110046B7C8 /* XPCMail-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XPCMail-Bridging-Header.h"; sourceTree = "<group>"; };
 		A533D83B25AA12110046B7C8 /* XPCMailProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPCMailProtocol.swift; sourceTree = "<group>"; };
 		A5457A8B26C1FB1400386738 /* NSImage+Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Text.swift"; sourceTree = "<group>"; };
-		A5477B912D11E60500FA176B /* Mail.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = Mail.app; path = ../../../../../../System/Applications/Mail.app; sourceTree = "<group>"; };
+		A5477B912D11E60500FA176B /* Mail.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = Mail.app; path = /System/Applications/Mail.app; sourceTree = "<absolute>"; };
 		A54A1F792703769800176069 /* LoginListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginListener.swift; sourceTree = "<group>"; };
 		A54E4A1726108E9600E7B1D4 /* XPCAuthentication.xpc */ = {isa = PBXFileReference; explicitFileType = "wrapper.xpc-service"; includeInIndex = 0; path = XPCAuthentication.xpc; sourceTree = BUILT_PRODUCTS_DIR; };
 		A54E4A1F26108E9600E7B1D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -456,6 +464,8 @@
 		A58D76A525A5E4A400EC3792 /* IGRPowerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGRPowerModel.h; sourceTree = "<group>"; };
 		A58FC75326E2814E007674F6 /* Lock-Watcher-non-mas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lock-Watcher-non-mas.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5942650283FE287008A38E6 /* PermissionsUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsUtils.swift; sourceTree = "<group>"; };
+		C0DE37000000000000000001 /* LocationAuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAuthorizationService.swift; sourceTree = "<group>"; };
+		C0DE37000000000000000004 /* MockLocationAuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLocationAuthorizationService.swift; sourceTree = "<group>"; };
 		A599EB2227AAF9DF003A69B5 /* SecurityAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityAlertView.swift; sourceTree = "<group>"; };
 		A599EB2827AB0B07003A69B5 /* SecurityUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityUtil.swift; sourceTree = "<group>"; };
 		A599EB3027AB1259003A69B5 /* ProtectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtectionView.swift; sourceTree = "<group>"; };
@@ -648,11 +658,13 @@
 			isa = PBXGroup;
 			children = (
 				A533D7D325A9E31F0046B7C8 /* FileSystemUtil.swift */,
+				C0DE36000000000000000001 /* PluralLocalization.swift */,
 				5BF31DBD8F783140FE391FCA /* RetentionPruner.swift */,
 				A5ACC7C627835BF800999CF0 /* NetworkUtil.swift */,
 				A599EB2827AB0B07003A69B5 /* SecurityUtil.swift */,
 				A51ABA2C283BE98200007B15 /* DeviceUtil.swift */,
 				A5942650283FE287008A38E6 /* PermissionsUtils.swift */,
+				C0DE37000000000000000001 /* LocationAuthorizationService.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -755,6 +767,7 @@
 				A57905CA2A96159E00647BF8 /* MockCoordinator.swift */,
 				A57905D42A9BD08600647BF8 /* MockAppDelegateModel.swift */,
 				A57905EA2A9D309000647BF8 /* MockListener.swift */,
+				C0DE37000000000000000004 /* MockLocationAuthorizationService.swift */,
 				C0DE29000000000000000017 /* MockLockDetector.swift */,
 				C0DE29000000000000000019 /* MockLocationMonitor.swift */,
 				A57905F82A9FAB9E00647BF8 /* MockLog.swift */,
@@ -812,6 +825,7 @@
 			children = (
 				A57905F62A9FAB3E00647BF8 /* FileSystemTest.swift */,
 				2782678C38D2012B3586EB5D /* RetentionPrunerTest.swift */,
+				C0DE36000000000000000004 /* PluralLocalizationTests.swift */,
 				A57905FA2A9FB0A300647BF8 /* NetworkUtilTests.swift */,
 				A57905FC2A9FBF5300647BF8 /* SecurityUtilTest.swift */,
 				A5BAB7692A9FCAA6005A0C88 /* DeviceUtilTests.swift */,
@@ -1312,7 +1326,7 @@
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1220;
 				LastUpgradeCheck = 2700;
-				ORGANIZATIONNAME = "IGR Soft";
+				ORGANIZATIONNAME = "Agnidia";
 				TargetAttributes = {
 					A533D82525AA11F40046B7C8 = {
 						CreatedOnToolsVersion = 12.3;
@@ -1471,6 +1485,7 @@
 				A5258AC82831652B0034E32F /* FirstLaunchFaultViews.swift in Sources */,
 				A5D23E3427A1E4BA001C0370 /* View+OpenWindow.swift in Sources */,
 				A58FC73126E2814E007674F6 /* FileSystemUtil.swift in Sources */,
+				C0DE36000000000000000002 /* PluralLocalization.swift in Sources */,
 				F1FA8EB5A85AC5451A8BF811 /* RetentionPruner.swift in Sources */,
 				A5A5657D2A54263900D7E030 /* FirstLaunchDomain.swift in Sources */,
 				A5A565772A54229100D7E030 /* FirstLaunchOptionsView.swift in Sources */,
@@ -1508,6 +1523,7 @@
 				A5EFE8B926E2B587001FC4EA /* Date+Formatter.swift in Sources */,
 				A58C63F52A4CC5E4004DE972 /* MainCoordinator.swift in Sources */,
 				A5942652283FE287008A38E6 /* PermissionsUtils.swift in Sources */,
+				C0DE37000000000000000003 /* LocationAuthorizationService.swift in Sources */,
 				A58FC73C26E2814E007674F6 /* XPCAuthenticationProtocol.swift in Sources */,
 				A54F781A2D119AFD00AA5592 /* MacOSLockDetectManager.swift in Sources */,
 				A58C63C22A4C5AF6004DE972 /* MainView.swift in Sources */,
@@ -1561,6 +1577,7 @@
 				A599EB3127AB1259003A69B5 /* ProtectionView.swift in Sources */,
 				A5A252212A52DDBE00889F5C /* AppCommons.swift in Sources */,
 				A533D7D425A9E31F0046B7C8 /* FileSystemUtil.swift in Sources */,
+				C0DE36000000000000000003 /* PluralLocalization.swift in Sources */,
 				5F9281C124B2AB8AF1B1ABAD /* RetentionPruner.swift in Sources */,
 				A5C6DBF425796A90009DE750 /* SettingsView.swift in Sources */,
 				A5E49CCB2A53582C00C3740B /* LastThiefDetectionView.swift in Sources */,
@@ -1602,6 +1619,7 @@
 				4E21C33AF83747195EAA2DC4 /* MediaAttachmentPolicy.swift in Sources */,
 				A58C63F42A4CC5E4004DE972 /* MainCoordinator.swift in Sources */,
 				A5942651283FE287008A38E6 /* PermissionsUtils.swift in Sources */,
+				C0DE37000000000000000002 /* LocationAuthorizationService.swift in Sources */,
 				A54E4A2E26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift in Sources */,
 				A58C63C12A4C5AF6004DE972 /* MainView.swift in Sources */,
 				A54F78192D119AFD00AA5592 /* MacOSLockDetectManager.swift in Sources */,
@@ -1662,6 +1680,7 @@
 				A57905C72A96145300647BF8 /* MockThiefManager.swift in Sources */,
 				A57905F72A9FAB3E00647BF8 /* FileSystemTest.swift in Sources */,
 				6DD049F94CFA8B56465FC5CE /* RetentionPrunerTest.swift in Sources */,
+				C0DE36000000000000000005 /* PluralLocalizationTests.swift in Sources */,
 				A5BAB76C2A9FCB06005A0C88 /* MockDeviceUtil.swift in Sources */,
 				A57905C42A960C8300647BF8 /* AppCommonsTest.swift in Sources */,
 				A57905DD2A9D15CA00647BF8 /* DateFormatterTest.swift in Sources */,
@@ -1674,6 +1693,7 @@
 				C0DE29000000000000000018 /* MockLockDetector.swift in Sources */,
 				C0DE2900000000000000001A /* MockLocationMonitor.swift in Sources */,
 				A57905EB2A9D309000647BF8 /* MockListener.swift in Sources */,
+				C0DE37000000000000000005 /* MockLocationAuthorizationService.swift in Sources */,
 				A57905E12A9D1C9200647BF8 /* NSImageDataTest.swift in Sources */,
 				A57905CB2A96159E00647BF8 /* MockCoordinator.swift in Sources */,
 				A57905E92A9D2D8700647BF8 /* UserDefaultPropertyWrapperTest.swift in Sources */,
@@ -2064,7 +2084,7 @@
 		};
 		A535F5D027B9165F0096D0C3 /* XCRemoteSwiftPackageReference "SimpleTracer" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/IGRSoft/SimpleTracer";
+			repositoryURL = "https://github.com/Agnidia/SimpleTracer";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 0.1.1;
@@ -2072,7 +2092,7 @@
 		};
 		A58FC72426E2814E007674F6 /* XCRemoteSwiftPackageReference "CameraSnap" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/IGRSoft/CameraSnap.git";
+			repositoryURL = "https://github.com/Agnidia/CameraSnap.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 0.3.1;
@@ -2112,7 +2132,7 @@
 		};
 		A5C6DC4425796CCB009DE750 /* XCRemoteSwiftPackageReference "CameraSnap" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/IGRSoft/CameraSnap.git";
+			repositoryURL = "https://github.com/Agnidia/CameraSnap.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 0.3.1;

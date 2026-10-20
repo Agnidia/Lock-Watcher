@@ -1,5 +1,14 @@
 # Lock-Watcher — Changelog
 
+## v1.7.1 (Build 1702) — 2026-10-13
+
+### Fixed
+- Correct singular and plural formatting in localized text
+- Synchronize the geofence authorization state with macOS permission changes
+- Keep settings steppers aligned when their values change
+
+---
+
 ## v1.7.0 (Build 1701) — 2026-10-12
 
 ### New

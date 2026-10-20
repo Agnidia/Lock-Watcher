@@ -112,6 +112,7 @@ struct UseSnapshotOnLocationChangeView: View {
 }
 
 /// A toggle for taking a snapshot on keyboard or mouse input while the Mac is locked.
+@MainActor
 struct UseSnapshotOnLockedInputView: View {
     @Binding var isUseSnapshotOnLockedInput: Bool
     @Binding var lockedInputDelay: Int
@@ -119,7 +120,7 @@ struct UseSnapshotOnLockedInputView: View {
     var body: some View {
         HStack(spacing: DesignSystem.Spacing.sm) {
             Toggle(isOn: $isUseSnapshotOnLockedInput) {
-                Text(String(format: NSLocalizedString("SnapshotOnLockedInput %d", comment: ""), lockedInputDelay))
+                StableCountLabel(key: "SnapshotOnLockedInput %d", count: lockedInputDelay, range: TriggerSettings.lockedInputDelayRange)
             }
             .accessibilityIdentifier(AccessibilityID.Settings.lockedInputToggle)
             .accessibilityLabel(AccessibilityLabel.Settings.snapshotOnLockedInput(lockedInputDelay))
@@ -132,11 +133,13 @@ struct UseSnapshotOnLockedInputView: View {
             .disabled(!isUseSnapshotOnLockedInput)
             .accessibilityIdentifier(AccessibilityID.Settings.lockedInputDelayStepper)
             .accessibilityLabel(AccessibilityLabel.Settings.lockedInputDelay)
-            .accessibilityValue(String(format: NSLocalizedString("AccessibilityLockedInputDelayValue %d", comment: ""), lockedInputDelay))
+            .accessibilityValue(PluralLocalization.string("AccessibilityLockedInputDelayValue %d", count: lockedInputDelay))
         }
     }
 }
 
 // MARK: - Test Info
 
-// @test-file: Tests/ViewModels/SettingsViewModelTests.swift
+// @test-file: Tests/Utils/PluralLocalizationTests.swift
+// @related-tests: Tests/ViewModels/SettingsViewModelTests.swift
+// @test-coverage: Locked-input visible, spoken, and stepper-value counts use plural variants.

@@ -6,7 +6,7 @@ Turn your Mac into a powerful surveillance system with Lock-Watcher. Detect and 
 
 ## Company Information
 
-**Company Name**: IGR Soft
+**Company Name**: Agnidia
 **Domain**: com.igrsoft
 **Contact**: support@igrsoft.com
 
@@ -14,7 +14,7 @@ Turn your Mac into a powerful surveillance system with Lock-Watcher. Detect and 
 
 **Project Name**: Lock-Watcher
 **Bundle Identifier**: com.igrsoft.Lock-Watcher
-**Current Version**: 1.7.0 (Build 1701)
+**Current Version**: 1.7.1 (Build 1702)
 
 ### Project Description
 
@@ -249,4 +249,4 @@ For issues or questions:
 
 ---
 
-**Made with care by IGR Soft**
+**Made with care by Agnidia**

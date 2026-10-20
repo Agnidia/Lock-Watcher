@@ -29,6 +29,8 @@ final class FirstLaunchViewModel: DomainViewConstantProtocol {
     /// The manager responsible for handling "thief" related operations.
     private var thiefManager: ThiefManagerProtocol
 
+    private let locationAuthorization: LocationAuthorizationProviding
+
     /// The closure to close the view.
     @ObservationIgnored
     private var closeClosure: Commons.EmptyClosure
@@ -78,7 +80,7 @@ final class FirstLaunchViewModel: DomainViewConstantProtocol {
     /// View model for the first launch options.
     @ObservationIgnored
     lazy var firstLaunchOptionsViewModel: FirstLaunchOptionsViewModel = {
-        FirstLaunchOptionsViewModel(settings: settings)
+        FirstLaunchOptionsViewModel(settings: settings, locationAuthorization: locationAuthorization)
     }()
 
     // MARK: - Combine
@@ -90,9 +92,10 @@ final class FirstLaunchViewModel: DomainViewConstantProtocol {
     // MARK: - Initializer
     
     /// Initializes the view model with dependencies.
-    init(settings: AppSettingsProtocol, thiefManager: ThiefManagerProtocol, closeClosure: @escaping Commons.EmptyClosure) {
+    init(settings: AppSettingsProtocol, thiefManager: ThiefManagerProtocol, locationAuthorization: LocationAuthorizationProviding = LocationAuthorizationService(), closeClosure: @escaping Commons.EmptyClosure) {
         self.settings = settings
         self.thiefManager = thiefManager
+        self.locationAuthorization = locationAuthorization
         self.closeClosure = closeClosure
     }
     
@@ -190,6 +193,10 @@ final class FirstLaunchViewModel: DomainViewConstantProtocol {
         }
     }
 }
+
+// MARK: - Test Info
+
+// @test-file: Tests/ViewModels/FirstLaunchViewModelTests.swift
 
 /// Provides a preview version of the `FirstLaunchViewModel`.
 extension FirstLaunchViewModel {
