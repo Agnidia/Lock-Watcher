@@ -1,5 +1,5 @@
 {
-  "originHash" : "f1e3a82aedc809e1df0fcc63d353703892f8bdba7a0edf8e5add3201f34078dd",
+  "originHash" : "70aa3eda334690f2df24af2483de7eac3148d2e33cfb2cffb1646683a753a637",
   "pins" : [
     {
       "identity" : "camerasnap",
@@ -40,7 +40,7 @@
     {
       "identity" : "simpleping",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Agnidia/SimplePing.git",
+      "location" : "https://github.com/IGRSoft/SimplePing.git",
       "state" : {
         "revision" : "ab2d683ce6c39252e286db8bbbc15dd0234f0364",
         "version" : "0.1.2"
