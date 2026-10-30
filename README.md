@@ -1,3 +1,5 @@
+![Project Logo](logo.png)
+
 # Lock-Watcher
 
 **macOS Surveillance Application for Security Monitoring**
@@ -8,7 +10,7 @@ Turn your Mac into a powerful surveillance system with Lock-Watcher. Detect and 
 
 **Company Name**: Agnidia
 **Domain**: agnidia.com
-**Contact**: info@agnidia.dev
+**Contact**: info@agnidia.com
 
 ## Project Information
 
