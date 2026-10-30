@@ -61,11 +61,7 @@ public final class SecurityUtil: SecurityUtilProtocol, @unchecked Sendable {
     /// - Parameter password: The password to validate.
     /// - Returns: A boolean indicating whether the password is valid or not.
     func isValid(password: String) -> Bool {
-        guard let token = keychain[appKey], token.isEmpty == false else {
-            return false
-        }
-        
-        guard let hashString = hashString(for: password), hashString.isEmpty == false else {
+        guard let token = keychain[appKey], token.isEmpty == false, let hashString = hashString(for: password), hashString.isEmpty == false else {
             return false
         }
         

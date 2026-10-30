@@ -7,9 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A6C19D77826FC68E35EC557 /* RetentionNoticePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A4B9BAD5C90652BB00BE0B /* RetentionNoticePresenter.swift */; };
+		1E2580FEDDAF29FF51C0EA69 /* RetentionManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9BF7A21C7AD87947CBBE7F /* RetentionManagerTest.swift */; };
+		219B437953D2D0303F447B58 /* PosterFrameExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81568DC9E52A2197D9DCE46 /* PosterFrameExtractor.swift */; };
 		223ECA98AAED41D6ABEA0B10 /* View+DebugPrintChanges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7231D6808D9A41A3B98349AD /* View+DebugPrintChanges.swift */; };
+		48840F12FFE1A0B720C3AD79 /* MediaAttachmentPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7E1BAF43CF0706B24C1370 /* MediaAttachmentPolicy.swift */; };
+		4E21C33AF83747195EAA2DC4 /* MediaAttachmentPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7E1BAF43CF0706B24C1370 /* MediaAttachmentPolicy.swift */; };
+		54290CC888505DC2A4247A81 /* PosterFrameExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81568DC9E52A2197D9DCE46 /* PosterFrameExtractor.swift */; };
+		5F9281C124B2AB8AF1B1ABAD /* RetentionPruner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF31DBD8F783140FE391FCA /* RetentionPruner.swift */; };
+		648394149F7F7A14AC34F01C /* RetentionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D53152CC6879994F4B915A /* RetentionManager.swift */; };
+		6DD049F94CFA8B56465FC5CE /* RetentionPrunerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2782678C38D2012B3586EB5D /* RetentionPrunerTest.swift */; };
+		7C04B71B11A24ADDD36AAF55 /* ThiefManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E951AD0F24CEB08DC9472B5 /* ThiefManagerTest.swift */; };
 		88E296FF5E1B425E8DD45DF2 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC60C237B024E3BBF8B24A1 /* DesignSystem.swift */; };
+		8DC6AC6B35C38A5518766155 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 1BDF37F11F45CF42F30BFBDA /* PrivacyInfo.xcprivacy */; };
+		8E4283BEBFFD519EE44B04B2 /* CameraCapturing.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CC60BCD1D394467FE1AC7 /* CameraCapturing.swift */; };
 		94EEE5BD505D440EB2CA1079 /* View+DebugPrintChanges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7231D6808D9A41A3B98349AD /* View+DebugPrintChanges.swift */; };
+		A4D19EB7EDD325AE986E6960 /* MockCaptureDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDEDAD56CC495F7044C41A0 /* MockCaptureDependencies.swift */; };
 		A519997A26D92D4400F482BC /* SwiftyDropbox in Frameworks */ = {isa = PBXBuildFile; productRef = A519997926D92D4400F482BC /* SwiftyDropbox */; };
 		A519997C26D92E6100F482BC /* DropboxNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A519997B26D92E6100F482BC /* DropboxNotifier.swift */; };
 		A519998126DA41C700F482BC /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A519998026DA41C700F482BC /* DatabaseManager.swift */; };
@@ -23,9 +36,7 @@
 		A533D7BC25A8FCC20046B7C8 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = A533D7BB25A8FCC20046B7C8 /* LaunchAtLogin */; };
 		A533D7C725A9D96A0046B7C8 /* WakeUpListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D7C625A9D96A0046B7C8 /* WakeUpListener.swift */; };
 		A533D7D425A9E31F0046B7C8 /* FileSystemUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D7D325A9E31F0046B7C8 /* FileSystemUtil.swift */; };
-		5F9281C124B2AB8AF1B1ABAD /* RetentionPruner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF31DBD8F783140FE391FCA /* RetentionPruner.swift */; };
 		A533D7DE25A9EDA30046B7C8 /* ThiefDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D7DD25A9EDA30046B7C8 /* ThiefDto.swift */; };
-		D34D70EC1FA7954DE488ECF9 /* CaptureMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8071EF860D5C85BC85858992 /* CaptureMedia.swift */; };
 		A533D82B25AA11F40046B7C8 /* XPCMail.m in Sources */ = {isa = PBXBuildFile; fileRef = A533D82A25AA11F40046B7C8 /* XPCMail.m */; };
 		A533D82D25AA11F40046B7C8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A533D82C25AA11F40046B7C8 /* main.m */; };
 		A533D83C25AA12110046B7C8 /* XPCMailProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D83B25AA12110046B7C8 /* XPCMailProtocol.swift */; };
@@ -57,9 +68,7 @@
 		A56F1A7E278A29630066CA78 /* DispatchQueue+Debounce.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56F1A7C278A29630066CA78 /* DispatchQueue+Debounce.swift */; };
 		A57305612EE1DCE100C4D0F2 /* MockAppDelegateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905D42A9BD08600647BF8 /* MockAppDelegateModel.swift */; };
 		A57305632EE2DC6700C4D0F2 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = A57305622EE2DC6700C4D0F2 /* Localizable.xcstrings */; };
-		DE6399B5BEBD8DE9012269FE /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 1BDF37F11F45CF42F30BFBDA /* PrivacyInfo.xcprivacy */; };
 		A57305642EE2DC6700C4D0F2 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = A57305622EE2DC6700C4D0F2 /* Localizable.xcstrings */; };
-		8DC6AC6B35C38A5518766155 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 1BDF37F11F45CF42F30BFBDA /* PrivacyInfo.xcprivacy */; };
 		A57905BC2A9534AA00647BF8 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905BB2A9534AA00647BF8 /* Secrets.swift */; };
 		A57905BD2A9534AA00647BF8 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905BB2A9534AA00647BF8 /* Secrets.swift */; };
 		A57905C42A960C8300647BF8 /* AppCommonsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905C02A960B9200647BF8 /* AppCommonsTest.swift */; };
@@ -86,12 +95,7 @@
 		A57905F12A9E52AE00647BF8 /* LoggerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905EF2A9E52AE00647BF8 /* LoggerProtocol.swift */; };
 		A57905F42A9E791D00647BF8 /* LoggerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905F32A9E791D00647BF8 /* LoggerTest.swift */; };
 		A57905F72A9FAB3E00647BF8 /* FileSystemTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905F62A9FAB3E00647BF8 /* FileSystemTest.swift */; };
-		6DD049F94CFA8B56465FC5CE /* RetentionPrunerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2782678C38D2012B3586EB5D /* RetentionPrunerTest.swift */; };
-		C0DE36000000000000000002 /* PluralLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE36000000000000000001 /* PluralLocalization.swift */; };
-		C0DE36000000000000000003 /* PluralLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE36000000000000000001 /* PluralLocalization.swift */; };
-		C0DE36000000000000000005 /* PluralLocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE36000000000000000004 /* PluralLocalizationTests.swift */; };
 		A57905F92A9FAB9E00647BF8 /* MockLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905F82A9FAB9E00647BF8 /* MockLog.swift */; };
-		A4D19EB7EDD325AE986E6960 /* MockCaptureDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDEDAD56CC495F7044C41A0 /* MockCaptureDependencies.swift */; };
 		A57905FB2A9FB0A300647BF8 /* NetworkUtilTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905FA2A9FB0A300647BF8 /* NetworkUtilTests.swift */; };
 		A57905FD2A9FBF5400647BF8 /* SecurityUtilTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57905FC2A9FBF5300647BF8 /* SecurityUtilTest.swift */; };
 		A58C63C12A4C5AF6004DE972 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58C63C02A4C5AF6004DE972 /* MainView.swift */; };
@@ -113,22 +117,15 @@
 		A58FC72F26E2814E007674F6 /* BaseListenerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D79425A5D13000EEA7DD /* BaseListenerProtocol.swift */; };
 		A58FC73026E2814E007674F6 /* USBListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A0788C26B9A78400A7D578 /* USBListener.swift */; };
 		A58FC73126E2814E007674F6 /* FileSystemUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D7D325A9E31F0046B7C8 /* FileSystemUtil.swift */; };
-		F1FA8EB5A85AC5451A8BF811 /* RetentionPruner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF31DBD8F783140FE391FCA /* RetentionPruner.swift */; };
 		A58FC73226E2814E007674F6 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6DBF325796A90009DE750 /* SettingsView.swift */; };
 		A58FC73326E2814E007674F6 /* UserDefault+PropertyWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56D11E026DBEC7D00BEBEC2 /* UserDefault+PropertyWrapper.swift */; };
 		A58FC73426E2814E007674F6 /* ThiefDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D7DD25A9EDA30046B7C8 /* ThiefDto.swift */; };
-		CD60C8D9EC0E41D108E7083B /* CaptureMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8071EF860D5C85BC85858992 /* CaptureMedia.swift */; };
 		A58FC73526E2814E007674F6 /* PowerListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D79E25A5D1AE00EEA7DD /* PowerListener.swift */; };
 		A58FC73626E2814E007674F6 /* TriggerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D78D25A5CD2E00EEA7DD /* TriggerManager.swift */; };
-		C226130C0F029D90E514A3A0 /* RetentionNoticePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A4B9BAD5C90652BB00BE0B /* RetentionNoticePresenter.swift */; };
-		648394149F7F7A14AC34F01C /* RetentionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D53152CC6879994F4B915A /* RetentionManager.swift */; };
-		219B437953D2D0303F447B58 /* PosterFrameExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81568DC9E52A2197D9DCE46 /* PosterFrameExtractor.swift */; };
-		8E4283BEBFFD519EE44B04B2 /* CameraCapturing.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CC60BCD1D394467FE1AC7 /* CameraCapturing.swift */; };
 		A58FC73726E2814E007674F6 /* NSImage+Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5457A8B26C1FB1400386738 /* NSImage+Text.swift */; };
 		A58FC73826E2814E007674F6 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D7A525A5D1EB00EEA7DD /* AppSettings.swift */; };
 		A58FC73926E2814E007674F6 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6DBF125796A90009DE750 /* App.swift */; };
 		A58FC73A26E2814E007674F6 /* ICloudNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C3E73526C1EA7B003D0BF5 /* ICloudNotifier.swift */; };
-		48840F12FFE1A0B720C3AD79 /* MediaAttachmentPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7E1BAF43CF0706B24C1370 /* MediaAttachmentPolicy.swift */; };
 		A58FC73C26E2814E007674F6 /* XPCAuthenticationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54E4A2D26108ED300E7B1D4 /* XPCAuthenticationProtocol.swift */; };
 		A58FC73D26E2814E007674F6 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D78725A5CC3600EEA7DD /* NotificationManager.swift */; };
 		A58FC73E26E2814E007674F6 /* ThiefManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D78125A5CBD300EEA7DD /* ThiefManager.swift */; };
@@ -147,9 +144,6 @@
 		A58FC76326E282C7007674F6 /* MailNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533D80225AA0F1A0046B7C8 /* MailNotifier.swift */; };
 		A5942651283FE287008A38E6 /* PermissionsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5942650283FE287008A38E6 /* PermissionsUtils.swift */; };
 		A5942652283FE287008A38E6 /* PermissionsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5942650283FE287008A38E6 /* PermissionsUtils.swift */; };
-		C0DE37000000000000000002 /* LocationAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE37000000000000000001 /* LocationAuthorizationService.swift */; };
-		C0DE37000000000000000003 /* LocationAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE37000000000000000001 /* LocationAuthorizationService.swift */; };
-		C0DE37000000000000000005 /* MockLocationAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE37000000000000000004 /* MockLocationAuthorizationService.swift */; };
 		A599EB2327AAF9DF003A69B5 /* SecurityAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A599EB2227AAF9DF003A69B5 /* SecurityAlertView.swift */; };
 		A599EB2427AAF9DF003A69B5 /* SecurityAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A599EB2227AAF9DF003A69B5 /* SecurityAlertView.swift */; };
 		A599EB2927AB0B07003A69B5 /* SecurityUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A599EB2827AB0B07003A69B5 /* SecurityUtil.swift */; };
@@ -161,21 +155,6 @@
 		A599EB3427AB1BF0003A69B5 /* policy.html in Resources */ = {isa = PBXBuildFile; fileRef = A599EB3327AB1BF0003A69B5 /* policy.html */; };
 		A599EB3527AB1BF0003A69B5 /* policy.html in Resources */ = {isa = PBXBuildFile; fileRef = A599EB3327AB1BF0003A69B5 /* policy.html */; };
 		A5A0788D26B9A78400A7D578 /* USBListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A0788C26B9A78400A7D578 /* USBListener.swift */; };
-		C0DE29000000000000000002 /* LockGraceGate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE29000000000000000001 /* LockGraceGate.swift */; };
-		C0DE29000000000000000003 /* LockGraceGate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE29000000000000000001 /* LockGraceGate.swift */; };
-		C0DE29000000000000000005 /* DisplayListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE29000000000000000004 /* DisplayListener.swift */; };
-		C0DE29000000000000000006 /* DisplayListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE29000000000000000004 /* DisplayListener.swift */; };
-		C0DE29000000000000000008 /* LockedInputListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE29000000000000000007 /* LockedInputListener.swift */; };
-		C0DE29000000000000000009 /* LockedInputListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE29000000000000000007 /* LockedInputListener.swift */; };
-		C0DE2900000000000000000B /* GeofenceListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE2900000000000000000A /* GeofenceListener.swift */; };
-		C0DE2900000000000000000C /* GeofenceListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE2900000000000000000A /* GeofenceListener.swift */; };
-		C0DE2900000000000000000E /* LockGraceGateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE2900000000000000000D /* LockGraceGateTests.swift */; };
-		C0DE29000000000000000010 /* USBListenerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE2900000000000000000F /* USBListenerTests.swift */; };
-		C0DE29000000000000000012 /* DisplayListenerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE29000000000000000011 /* DisplayListenerTests.swift */; };
-		C0DE29000000000000000014 /* LockedInputListenerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE29000000000000000013 /* LockedInputListenerTests.swift */; };
-		C0DE29000000000000000016 /* GeofenceListenerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE29000000000000000015 /* GeofenceListenerTests.swift */; };
-		C0DE29000000000000000018 /* MockLockDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE29000000000000000017 /* MockLockDetector.swift */; };
-		C0DE2900000000000000001A /* MockLocationMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE29000000000000000019 /* MockLocationMonitor.swift */; };
 		A5A252092A4E0ACE00889F5C /* NSImage+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A252082A4E0ACE00889F5C /* NSImage+Data.swift */; };
 		A5A2520A2A4E0ACE00889F5C /* NSImage+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A252082A4E0ACE00889F5C /* NSImage+Data.swift */; };
 		A5A2520C2A4E0B6900889F5C /* NSImage+SatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A2520B2A4E0B6900889F5C /* NSImage+SatusBar.swift */; };
@@ -227,7 +206,6 @@
 		A5BC810C2A52EB5200C83A42 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BC810B2A52EB5200C83A42 /* SettingsViewModel.swift */; };
 		A5BC810D2A52EB5200C83A42 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BC810B2A52EB5200C83A42 /* SettingsViewModel.swift */; };
 		A5C3E73626C1EA7B003D0BF5 /* ICloudNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C3E73526C1EA7B003D0BF5 /* ICloudNotifier.swift */; };
-		4E21C33AF83747195EAA2DC4 /* MediaAttachmentPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7E1BAF43CF0706B24C1370 /* MediaAttachmentPolicy.swift */; };
 		A5C6DBF225796A90009DE750 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6DBF125796A90009DE750 /* App.swift */; };
 		A5C6DBF425796A90009DE750 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6DBF325796A90009DE750 /* SettingsView.swift */; };
 		A5C6DC1025796A93009DE750 /* ApplicationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C6DC0F25796A93009DE750 /* ApplicationUITests.swift */; };
@@ -251,10 +229,6 @@
 		A5E6D78225A5CBD300EEA7DD /* ThiefManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D78125A5CBD300EEA7DD /* ThiefManager.swift */; };
 		A5E6D78825A5CC3600EEA7DD /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D78725A5CC3600EEA7DD /* NotificationManager.swift */; };
 		A5E6D78E25A5CD2E00EEA7DD /* TriggerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D78D25A5CD2E00EEA7DD /* TriggerManager.swift */; };
-		1A6C19D77826FC68E35EC557 /* RetentionNoticePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A4B9BAD5C90652BB00BE0B /* RetentionNoticePresenter.swift */; };
-		C5937007BCDD9167E29B4D3B /* RetentionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D53152CC6879994F4B915A /* RetentionManager.swift */; };
-		54290CC888505DC2A4247A81 /* PosterFrameExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81568DC9E52A2197D9DCE46 /* PosterFrameExtractor.swift */; };
-		C3E2C8D7DAAC7680B0595704 /* CameraCapturing.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CC60BCD1D394467FE1AC7 /* CameraCapturing.swift */; };
 		A5E6D79525A5D13000EEA7DD /* BaseListenerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D79425A5D13000EEA7DD /* BaseListenerProtocol.swift */; };
 		A5E6D79F25A5D1AE00EEA7DD /* PowerListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D79E25A5D1AE00EEA7DD /* PowerListener.swift */; };
 		A5E6D7A625A5D1EB00EEA7DD /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E6D7A525A5D1EB00EEA7DD /* AppSettings.swift */; };
@@ -262,16 +236,42 @@
 		A5EFE8B926E2B587001FC4EA /* Date+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5EFE8B726E2B587001FC4EA /* Date+Formatter.swift */; };
 		A5F4B5422836C0D1001A2413 /* ExtendedDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F4B5412836C0D1001A2413 /* ExtendedDivider.swift */; };
 		A5F4B5432836C0D1001A2413 /* ExtendedDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F4B5412836C0D1001A2413 /* ExtendedDivider.swift */; };
+		B14038513D6459B6E102918B /* NotificationManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62BA80812F8B85CEF12EF5A /* NotificationManagerTest.swift */; };
+		C0DE29000000000000000002 /* LockGraceGate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE29000000000000000001 /* LockGraceGate.swift */; };
+		C0DE29000000000000000003 /* LockGraceGate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE29000000000000000001 /* LockGraceGate.swift */; };
+		C0DE29000000000000000005 /* DisplayListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE29000000000000000004 /* DisplayListener.swift */; };
+		C0DE29000000000000000006 /* DisplayListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE29000000000000000004 /* DisplayListener.swift */; };
+		C0DE29000000000000000008 /* LockedInputListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE29000000000000000007 /* LockedInputListener.swift */; };
+		C0DE29000000000000000009 /* LockedInputListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE29000000000000000007 /* LockedInputListener.swift */; };
+		C0DE2900000000000000000B /* GeofenceListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE2900000000000000000A /* GeofenceListener.swift */; };
+		C0DE2900000000000000000C /* GeofenceListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE2900000000000000000A /* GeofenceListener.swift */; };
+		C0DE2900000000000000000E /* LockGraceGateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE2900000000000000000D /* LockGraceGateTests.swift */; };
+		C0DE29000000000000000010 /* USBListenerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE2900000000000000000F /* USBListenerTests.swift */; };
+		C0DE29000000000000000012 /* DisplayListenerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE29000000000000000011 /* DisplayListenerTests.swift */; };
+		C0DE29000000000000000014 /* LockedInputListenerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE29000000000000000013 /* LockedInputListenerTests.swift */; };
+		C0DE29000000000000000016 /* GeofenceListenerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE29000000000000000015 /* GeofenceListenerTests.swift */; };
+		C0DE29000000000000000018 /* MockLockDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE29000000000000000017 /* MockLockDetector.swift */; };
+		C0DE2900000000000000001A /* MockLocationMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE29000000000000000019 /* MockLocationMonitor.swift */; };
+		C0DE36000000000000000002 /* PluralLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE36000000000000000001 /* PluralLocalization.swift */; };
+		C0DE36000000000000000003 /* PluralLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE36000000000000000001 /* PluralLocalization.swift */; };
+		C0DE36000000000000000005 /* PluralLocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE36000000000000000004 /* PluralLocalizationTests.swift */; };
+		C0DE37000000000000000002 /* LocationAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE37000000000000000001 /* LocationAuthorizationService.swift */; };
+		C0DE37000000000000000003 /* LocationAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE37000000000000000001 /* LocationAuthorizationService.swift */; };
+		C0DE37000000000000000005 /* MockLocationAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE37000000000000000004 /* MockLocationAuthorizationService.swift */; };
+		C226130C0F029D90E514A3A0 /* RetentionNoticePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A4B9BAD5C90652BB00BE0B /* RetentionNoticePresenter.swift */; };
+		C3E2C8D7DAAC7680B0595704 /* CameraCapturing.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0CC60BCD1D394467FE1AC7 /* CameraCapturing.swift */; };
+		C5937007BCDD9167E29B4D3B /* RetentionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D53152CC6879994F4B915A /* RetentionManager.swift */; };
+		CD60C8D9EC0E41D108E7083B /* CaptureMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8071EF860D5C85BC85858992 /* CaptureMedia.swift */; };
 		D2A137BBFFFA4103A659BA91 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC60C237B024E3BBF8B24A1 /* DesignSystem.swift */; };
+		D34D70EC1FA7954DE488ECF9 /* CaptureMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8071EF860D5C85BC85858992 /* CaptureMedia.swift */; };
+		DE6399B5BEBD8DE9012269FE /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 1BDF37F11F45CF42F30BFBDA /* PrivacyInfo.xcprivacy */; };
+		F1FA8EB5A85AC5451A8BF811 /* RetentionPruner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF31DBD8F783140FE391FCA /* RetentionPruner.swift */; };
 		F2ECF8742C4D4E2400B3518E /* AuthentificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2ECF8732C4D4E2400B3518E /* AuthentificationManager.swift */; };
 		F2ECF8752C4D4E2400B3518E /* AuthentificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2ECF8732C4D4E2400B3518E /* AuthentificationManager.swift */; };
 		F3A0000100000005000000C1 /* ThiefDtoTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0000100000001000000C1 /* ThiefDtoTest.swift */; };
 		F3A0000100000006000000C1 /* DatabaseDtoListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0000100000002000000C1 /* DatabaseDtoListTest.swift */; };
 		F3A0000100000007000000C1 /* AppSettingsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0000100000003000000C1 /* AppSettingsTest.swift */; };
 		F3A0000100000008000000C1 /* TriggerManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0000100000004000000C1 /* TriggerManagerTest.swift */; };
-		B14038513D6459B6E102918B /* NotificationManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62BA80812F8B85CEF12EF5A /* NotificationManagerTest.swift */; };
-		1E2580FEDDAF29FF51C0EA69 /* RetentionManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9BF7A21C7AD87947CBBE7F /* RetentionManagerTest.swift */; };
-		7C04B71B11A24ADDD36AAF55 /* ThiefManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E951AD0F24CEB08DC9472B5 /* ThiefManagerTest.swift */; };
 		F3A000010000000B000000C1 /* InfoViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A000010000000C000000C1 /* InfoViewModelTests.swift */; };
 		F3A000010000000D000000C1 /* FirstLaunchProgressViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A000010000000E000000C1 /* FirstLaunchProgressViewModelTests.swift */; };
 		F3A000010000000F000000C1 /* LastThiefDetectionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0000100000010000000C1 /* LastThiefDetectionViewModelTests.swift */; };
@@ -365,8 +365,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		02D53152CC6879994F4B915A /* RetentionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetentionManager.swift; sourceTree = "<group>"; };
+		1BDF37F11F45CF42F30BFBDA /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		2782678C38D2012B3586EB5D /* RetentionPrunerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetentionPrunerTest.swift; sourceTree = "<group>"; };
+		2E951AD0F24CEB08DC9472B5 /* ThiefManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThiefManagerTest.swift; sourceTree = "<group>"; };
 		4FC60C237B024E3BBF8B24A1 /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
+		5BF31DBD8F783140FE391FCA /* RetentionPruner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetentionPruner.swift; sourceTree = "<group>"; };
+		6DDEDAD56CC495F7044C41A0 /* MockCaptureDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCaptureDependencies.swift; sourceTree = "<group>"; };
 		7231D6808D9A41A3B98349AD /* View+DebugPrintChanges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+DebugPrintChanges.swift"; sourceTree = "<group>"; };
+		8071EF860D5C85BC85858992 /* CaptureMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureMedia.swift; sourceTree = "<group>"; };
 		A5117E46278349C7001EC35F /* XPCAuthentication.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = XPCAuthentication.entitlements; sourceTree = "<group>"; };
 		A5117E47278349C7001EC35F /* XPCPower-non-mas.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "XPCPower-non-mas.entitlements"; sourceTree = "<group>"; };
 		A5117E48278349C7001EC35F /* Lock_Watcher.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Lock_Watcher.entitlements; sourceTree = "<group>"; };
@@ -385,11 +392,7 @@
 		A533D7C625A9D96A0046B7C8 /* WakeUpListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WakeUpListener.swift; sourceTree = "<group>"; };
 		A533D7CC25A9D9E30046B7C8 /* WrongPasswordListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrongPasswordListener.swift; sourceTree = "<group>"; };
 		A533D7D325A9E31F0046B7C8 /* FileSystemUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemUtil.swift; sourceTree = "<group>"; };
-		C0DE36000000000000000001 /* PluralLocalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluralLocalization.swift; sourceTree = "<group>"; };
-		C0DE36000000000000000004 /* PluralLocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluralLocalizationTests.swift; sourceTree = "<group>"; };
-		5BF31DBD8F783140FE391FCA /* RetentionPruner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetentionPruner.swift; sourceTree = "<group>"; };
 		A533D7DD25A9EDA30046B7C8 /* ThiefDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThiefDto.swift; sourceTree = "<group>"; };
-		8071EF860D5C85BC85858992 /* CaptureMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureMedia.swift; sourceTree = "<group>"; };
 		A533D80225AA0F1A0046B7C8 /* MailNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailNotifier.swift; sourceTree = "<group>"; };
 		A533D82625AA11F40046B7C8 /* XPCMail.xpc */ = {isa = PBXFileReference; explicitFileType = "wrapper.xpc-service"; includeInIndex = 0; path = XPCMail.xpc; sourceTree = BUILT_PRODUCTS_DIR; };
 		A533D82925AA11F40046B7C8 /* XPCMail.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XPCMail.h; sourceTree = "<group>"; };
@@ -414,7 +417,6 @@
 		A56D11E026DBEC7D00BEBEC2 /* UserDefault+PropertyWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefault+PropertyWrapper.swift"; sourceTree = "<group>"; };
 		A56F1A7C278A29630066CA78 /* DispatchQueue+Debounce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Debounce.swift"; sourceTree = "<group>"; };
 		A57305622EE2DC6700C4D0F2 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
-		1BDF37F11F45CF42F30BFBDA /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		A57905BB2A9534AA00647BF8 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		A57905C02A960B9200647BF8 /* AppCommonsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCommonsTest.swift; sourceTree = "<group>"; };
 		A57905C32A960C3C00647BF8 /* Lock-WatcherTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Lock-WatcherTests.xctestplan"; sourceTree = "<group>"; };
@@ -438,9 +440,7 @@
 		A57905EF2A9E52AE00647BF8 /* LoggerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerProtocol.swift; sourceTree = "<group>"; };
 		A57905F32A9E791D00647BF8 /* LoggerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerTest.swift; sourceTree = "<group>"; };
 		A57905F62A9FAB3E00647BF8 /* FileSystemTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemTest.swift; sourceTree = "<group>"; };
-		2782678C38D2012B3586EB5D /* RetentionPrunerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetentionPrunerTest.swift; sourceTree = "<group>"; };
 		A57905F82A9FAB9E00647BF8 /* MockLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLog.swift; sourceTree = "<group>"; };
-		6DDEDAD56CC495F7044C41A0 /* MockCaptureDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCaptureDependencies.swift; sourceTree = "<group>"; };
 		A57905FA2A9FB0A300647BF8 /* NetworkUtilTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkUtilTests.swift; sourceTree = "<group>"; };
 		A57905FC2A9FBF5300647BF8 /* SecurityUtilTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityUtilTest.swift; sourceTree = "<group>"; };
 		A58C63C02A4C5AF6004DE972 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -464,24 +464,11 @@
 		A58D76A525A5E4A400EC3792 /* IGRPowerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGRPowerModel.h; sourceTree = "<group>"; };
 		A58FC75326E2814E007674F6 /* Lock-Watcher-non-mas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lock-Watcher-non-mas.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5942650283FE287008A38E6 /* PermissionsUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsUtils.swift; sourceTree = "<group>"; };
-		C0DE37000000000000000001 /* LocationAuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAuthorizationService.swift; sourceTree = "<group>"; };
-		C0DE37000000000000000004 /* MockLocationAuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLocationAuthorizationService.swift; sourceTree = "<group>"; };
 		A599EB2227AAF9DF003A69B5 /* SecurityAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityAlertView.swift; sourceTree = "<group>"; };
 		A599EB2827AB0B07003A69B5 /* SecurityUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityUtil.swift; sourceTree = "<group>"; };
 		A599EB3027AB1259003A69B5 /* ProtectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtectionView.swift; sourceTree = "<group>"; };
 		A599EB3327AB1BF0003A69B5 /* policy.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = policy.html; sourceTree = "<group>"; };
 		A5A0788C26B9A78400A7D578 /* USBListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USBListener.swift; sourceTree = "<group>"; };
-		C0DE29000000000000000001 /* LockGraceGate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockGraceGate.swift; sourceTree = "<group>"; };
-		C0DE29000000000000000004 /* DisplayListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayListener.swift; sourceTree = "<group>"; };
-		C0DE29000000000000000007 /* LockedInputListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockedInputListener.swift; sourceTree = "<group>"; };
-		C0DE2900000000000000000A /* GeofenceListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeofenceListener.swift; sourceTree = "<group>"; };
-		C0DE2900000000000000000D /* LockGraceGateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockGraceGateTests.swift; sourceTree = "<group>"; };
-		C0DE2900000000000000000F /* USBListenerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USBListenerTests.swift; sourceTree = "<group>"; };
-		C0DE29000000000000000011 /* DisplayListenerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayListenerTests.swift; sourceTree = "<group>"; };
-		C0DE29000000000000000013 /* LockedInputListenerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockedInputListenerTests.swift; sourceTree = "<group>"; };
-		C0DE29000000000000000015 /* GeofenceListenerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeofenceListenerTests.swift; sourceTree = "<group>"; };
-		C0DE29000000000000000017 /* MockLockDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLockDetector.swift; sourceTree = "<group>"; };
-		C0DE29000000000000000019 /* MockLocationMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLocationMonitor.swift; sourceTree = "<group>"; };
 		A5A252082A4E0ACE00889F5C /* NSImage+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Data.swift"; sourceTree = "<group>"; };
 		A5A2520B2A4E0B6900889F5C /* NSImage+SatusBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+SatusBar.swift"; sourceTree = "<group>"; };
 		A5A252112A4E18FD00889F5C /* NSApplication+Dock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSApplication+Dock.swift"; sourceTree = "<group>"; };
@@ -512,7 +499,6 @@
 		A5BAB7702AA089D6005A0C88 /* app-no-mas-release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "app-no-mas-release.xcconfig"; sourceTree = "<group>"; };
 		A5BC810B2A52EB5200C83A42 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		A5C3E73526C1EA7B003D0BF5 /* ICloudNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICloudNotifier.swift; sourceTree = "<group>"; };
-		BE7E1BAF43CF0706B24C1370 /* MediaAttachmentPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaAttachmentPolicy.swift; sourceTree = "<group>"; };
 		A5C6DBEE25796A90009DE750 /* Lock-Watcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lock-Watcher.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5C6DBF125796A90009DE750 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		A5C6DBF325796A90009DE750 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -537,30 +523,44 @@
 		A5E6D78125A5CBD300EEA7DD /* ThiefManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThiefManager.swift; sourceTree = "<group>"; };
 		A5E6D78725A5CC3600EEA7DD /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		A5E6D78D25A5CD2E00EEA7DD /* TriggerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerManager.swift; sourceTree = "<group>"; };
-		E3A4B9BAD5C90652BB00BE0B /* RetentionNoticePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetentionNoticePresenter.swift; sourceTree = "<group>"; };
-		02D53152CC6879994F4B915A /* RetentionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetentionManager.swift; sourceTree = "<group>"; };
-		F81568DC9E52A2197D9DCE46 /* PosterFrameExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterFrameExtractor.swift; sourceTree = "<group>"; };
-		FA0CC60BCD1D394467FE1AC7 /* CameraCapturing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraCapturing.swift; sourceTree = "<group>"; };
 		A5E6D79425A5D13000EEA7DD /* BaseListenerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseListenerProtocol.swift; sourceTree = "<group>"; };
 		A5E6D79E25A5D1AE00EEA7DD /* PowerListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerListener.swift; sourceTree = "<group>"; };
 		A5E6D7A525A5D1EB00EEA7DD /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		A5EFE8B726E2B587001FC4EA /* Date+Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Formatter.swift"; sourceTree = "<group>"; };
 		A5F45E882AEAC96800E8B286 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		A5F4B5412836C0D1001A2413 /* ExtendedDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedDivider.swift; sourceTree = "<group>"; };
+		BE7E1BAF43CF0706B24C1370 /* MediaAttachmentPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaAttachmentPolicy.swift; sourceTree = "<group>"; };
+		C0DE29000000000000000001 /* LockGraceGate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockGraceGate.swift; sourceTree = "<group>"; };
+		C0DE29000000000000000004 /* DisplayListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayListener.swift; sourceTree = "<group>"; };
+		C0DE29000000000000000007 /* LockedInputListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockedInputListener.swift; sourceTree = "<group>"; };
+		C0DE2900000000000000000A /* GeofenceListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeofenceListener.swift; sourceTree = "<group>"; };
+		C0DE2900000000000000000D /* LockGraceGateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockGraceGateTests.swift; sourceTree = "<group>"; };
+		C0DE2900000000000000000F /* USBListenerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USBListenerTests.swift; sourceTree = "<group>"; };
+		C0DE29000000000000000011 /* DisplayListenerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayListenerTests.swift; sourceTree = "<group>"; };
+		C0DE29000000000000000013 /* LockedInputListenerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockedInputListenerTests.swift; sourceTree = "<group>"; };
+		C0DE29000000000000000015 /* GeofenceListenerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeofenceListenerTests.swift; sourceTree = "<group>"; };
+		C0DE29000000000000000017 /* MockLockDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLockDetector.swift; sourceTree = "<group>"; };
+		C0DE29000000000000000019 /* MockLocationMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLocationMonitor.swift; sourceTree = "<group>"; };
+		C0DE36000000000000000001 /* PluralLocalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluralLocalization.swift; sourceTree = "<group>"; };
+		C0DE36000000000000000004 /* PluralLocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluralLocalizationTests.swift; sourceTree = "<group>"; };
+		C0DE37000000000000000001 /* LocationAuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAuthorizationService.swift; sourceTree = "<group>"; };
+		C0DE37000000000000000004 /* MockLocationAuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLocationAuthorizationService.swift; sourceTree = "<group>"; };
+		CF9BF7A21C7AD87947CBBE7F /* RetentionManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetentionManagerTest.swift; sourceTree = "<group>"; };
+		E3A4B9BAD5C90652BB00BE0B /* RetentionNoticePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetentionNoticePresenter.swift; sourceTree = "<group>"; };
 		F2ECF8732C4D4E2400B3518E /* AuthentificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthentificationManager.swift; sourceTree = "<group>"; };
 		F3A0000100000001000000C1 /* ThiefDtoTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThiefDtoTest.swift; sourceTree = "<group>"; };
 		F3A0000100000002000000C1 /* DatabaseDtoListTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseDtoListTest.swift; sourceTree = "<group>"; };
 		F3A0000100000003000000C1 /* AppSettingsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsTest.swift; sourceTree = "<group>"; };
 		F3A0000100000004000000C1 /* TriggerManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerManagerTest.swift; sourceTree = "<group>"; };
-		F62BA80812F8B85CEF12EF5A /* NotificationManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManagerTest.swift; sourceTree = "<group>"; };
-		CF9BF7A21C7AD87947CBBE7F /* RetentionManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetentionManagerTest.swift; sourceTree = "<group>"; };
-		2E951AD0F24CEB08DC9472B5 /* ThiefManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThiefManagerTest.swift; sourceTree = "<group>"; };
 		F3A000010000000C000000C1 /* InfoViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewModelTests.swift; sourceTree = "<group>"; };
 		F3A000010000000E000000C1 /* FirstLaunchProgressViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunchProgressViewModelTests.swift; sourceTree = "<group>"; };
 		F3A0000100000010000000C1 /* LastThiefDetectionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastThiefDetectionViewModelTests.swift; sourceTree = "<group>"; };
 		F3A0000100000012000000C1 /* MainViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTests.swift; sourceTree = "<group>"; };
 		F3A0000100000014000000C1 /* SettingsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModelTests.swift; sourceTree = "<group>"; };
 		F3A0000100000016000000C1 /* FirstLaunchViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunchViewModelTests.swift; sourceTree = "<group>"; };
+		F62BA80812F8B85CEF12EF5A /* NotificationManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManagerTest.swift; sourceTree = "<group>"; };
+		F81568DC9E52A2197D9DCE46 /* PosterFrameExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterFrameExtractor.swift; sourceTree = "<group>"; };
+		FA0CC60BCD1D394467FE1AC7 /* CameraCapturing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraCapturing.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -614,15 +614,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		F33D95C6323775ADA235CFEF /* Camera */ = {
-			isa = PBXGroup;
-			children = (
-				F81568DC9E52A2197D9DCE46 /* PosterFrameExtractor.swift */,
-				FA0CC60BCD1D394467FE1AC7 /* CameraCapturing.swift */,
-			);
-			path = Camera;
-			sourceTree = "<group>";
-		};
 		A5117E45278349C7001EC35F /* entitlements */ = {
 			isa = PBXGroup;
 			children = (
@@ -1142,6 +1133,15 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		F33D95C6323775ADA235CFEF /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				F81568DC9E52A2197D9DCE46 /* PosterFrameExtractor.swift */,
+				FA0CC60BCD1D394467FE1AC7 /* CameraCapturing.swift */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
 		F3A0000100000009000000C1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -1326,7 +1326,7 @@
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1220;
 				LastUpgradeCheck = 2700;
-				ORGANIZATIONNAME = "Agnidia";
+				ORGANIZATIONNAME = Agnidia;
 				TargetAttributes = {
 					A533D82525AA11F40046B7C8 = {
 						CreatedOnToolsVersion = 12.3;
@@ -2087,7 +2087,7 @@
 			repositoryURL = "https://github.com/Agnidia/SimpleTracer";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.1;
+				minimumVersion = 0.1.4;
 			};
 		};
 		A58FC72426E2814E007674F6 /* XCRemoteSwiftPackageReference "CameraSnap" */ = {
