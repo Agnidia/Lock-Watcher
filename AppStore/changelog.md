@@ -1,10 +1,11 @@
 # Lock-Watcher — Changelog
 
-## v1.7.2 (Build 1703) — 2026-10-20
+## v1.7.2 (Build 1703) — 2026-10-30
 
 ### Changed
 - Updated the company branding from IGRSoft to Agnidia
 - Updated the company website, support, and privacy policy links
+- Improved compatibility with macOS 27.2
 
 ---
 
