@@ -2,7 +2,7 @@
 //  InfoViewModelTests.swift
 //
 //  Created on 03.01.2026.
-//  Copyright © 2026 IGR Soft. All rights reserved.
+//  Copyright © 2026 Agnidia. All rights reserved.
 //
 
 import SwiftUI
@@ -84,7 +84,7 @@ final class InfoViewModelTests: XCTestCase {
     }
 
     func testLinkUrlIsCorrect() {
-        XCTAssertEqual(sut.linkUrl.absoluteString, "https://igrsoft.com")
+        XCTAssertEqual(sut.linkUrl.absoluteString, "https://agnidia.com")
     }
 
     // MARK: - ViewBuilder Tests

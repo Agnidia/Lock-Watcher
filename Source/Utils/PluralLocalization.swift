@@ -1,8 +1,8 @@
 //
 //  PluralLocalization.swift
 //
-//  Created on 12.10.2026.
-//  Copyright © 2026 IGR Soft. All rights reserved.
+//  Created on 13.10.2026.
+//  Copyright © 2026 Agnidia. All rights reserved.
 //
 
 import Foundation

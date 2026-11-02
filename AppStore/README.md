@@ -146,5 +146,5 @@ The build number on the attached build must match `CURRENT_PROJECT_VERSION` in `
 ## Privacy label
 
 The published label is **Data Not Collected**: captures go only to the user's own iCloud or Dropbox, and
-IGR Soft receives nothing. `Resources/PrivacyInfo.xcprivacy` declares no collected data types to match. Keep the two
+Agnidia receives nothing. `Resources/PrivacyInfo.xcprivacy` declares no collected data types to match. Keep the two
 in step; read the live label with `asc web privacy pull --app 1583462846`.

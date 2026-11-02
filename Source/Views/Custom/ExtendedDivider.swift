@@ -2,7 +2,7 @@
 //  ExtendedDivider.swift
 //
 //  Created on 19.05.2022.
-//  Copyright © 2026 IGR Soft. All rights reserved.
+//  Copyright © 2026 Agnidia. All rights reserved.
 //
 
 import SwiftUI

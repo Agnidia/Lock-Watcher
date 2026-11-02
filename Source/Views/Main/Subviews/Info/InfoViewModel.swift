@@ -2,7 +2,7 @@
 //  InfoViewModel.swift
 //
 //  Created on 04.07.2023.
-//  Copyright © 2026 IGR Soft. All rights reserved.
+//  Copyright © 2026 Agnidia. All rights reserved.
 //
 
 import Observation
@@ -70,5 +70,5 @@ final class InfoViewModel {
     let linkText: String = "© Agnidia 2008 - 2026"
     
     /// The URL corresponding to the link text.
-    let linkUrl: URL = .init(string: "https://igrsoft.com")!
+    let linkUrl: URL = .init(string: "https://agnidia.com")!
 }
