@@ -26,6 +26,9 @@ enum NotifierError: Error, Sendable {
 
     /// Missing required configuration (e.g., mail recipient).
     case missingConfiguration(String)
+
+    /// APNs reported the paired device token invalid or unregistered; the owner must re-pair.
+    case deviceUnregistered
 }
 
 /// Defines the behavior for a notifier.

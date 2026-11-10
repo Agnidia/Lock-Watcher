@@ -368,6 +368,23 @@
         }
       }
     },
+    "AccessibilityKeepFiles" : {
+      "comment" : "How long local capture files are kept",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "How long local capture files are kept"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Як довго зберігаються локальні файли знімків"
+          }
+        }
+      }
+    },
     "AccessibilityKeepLast %d" : {
       "comment" : "Keep last N snapshots",
       "localizations" : {
@@ -472,6 +489,78 @@
         }
       }
     },
+    "AccessibilityLockedInputDelay" : {
+      "comment" : "Delay before the locked-input snapshot",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delay before the locked-input snapshot"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Затримка перед знімком при введенні під час блокування"
+          }
+        }
+      }
+    },
+    "AccessibilityLockedInputDelayValue %d" : {
+      "comment" : "Stepper value; %d is the delay in seconds",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d second"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d seconds"
+                }
+              }
+            }
+          }
+        },
+        "uk" : {
+          "variations" : {
+            "plural" : {
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d секунди"
+                }
+              },
+              "many" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d секунд"
+                }
+              },
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d секунда"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d секунди"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "AccessibilityNoSnapshots" : {
       "comment" : "No snapshots to display",
       "localizations" : {
@@ -523,6 +612,40 @@
         }
       }
     },
+    "AccessibilityOutputSize" : {
+      "comment" : "Capture size for photos and videos",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Capture size for photos and videos"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Розмір фото та відео"
+          }
+        }
+      }
+    },
+    "AccessibilityOutputType" : {
+      "comment" : "Capture a photo or a video",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Capture a photo or a video"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Знімати фото або відео"
+          }
+        }
+      }
+    },
     "AccessibilityPasswordInput" : {
       "comment" : "Password input field",
       "localizations" : {
@@ -570,6 +693,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Вимагати пароль для доступу до Lock-Watcher"
+          }
+        }
+      }
+    },
+    "AccessibilityPushToiPhone" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send alerts to the paired iPhone"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Надсилати сповіщення на під’єднаний iPhone"
           }
         }
       }
@@ -727,6 +866,24 @@
         }
       }
     },
+    "AccessibilitySnapshotDisplayAttach" : {
+      "comment" : "Take snapshot when a display is attached while locked",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Take snapshot when a display is attached while locked"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Зробити знімок при підключенні дисплея під час блокування"
+          }
+        }
+      }
+    },
     "AccessibilitySnapshotGallery" : {
       "comment" : "Gallery of recent snapshots",
       "localizations" : {
@@ -744,6 +901,78 @@
         }
       }
     },
+    "AccessibilitySnapshotLocationChange" : {
+      "comment" : "Take snapshot when the Mac moves while locked",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Take snapshot when the Mac moves while locked"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Зробити знімок, коли Mac переміщується під час блокування"
+          }
+        }
+      }
+    },
+    "AccessibilitySnapshotLockedInput %d" : {
+      "comment" : "Take snapshot on keyboard or mouse input while locked, after N seconds",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Take snapshot on keyboard or mouse input while locked, after %d second"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Take snapshot on keyboard or mouse input while locked, after %d seconds"
+                }
+              }
+            }
+          }
+        },
+        "uk" : {
+          "variations" : {
+            "plural" : {
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Зробити знімок при введенні з клавіатури або миші під час блокування, через %d секунди"
+                }
+              },
+              "many" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Зробити знімок при введенні з клавіатури або миші під час блокування, через %d секунд"
+                }
+              },
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Зробити знімок при введенні з клавіатури або миші під час блокування, через %d секунду"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Зробити знімок при введенні з клавіатури або миші під час блокування, через %d секунди"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "AccessibilitySnapshotLogin" : {
       "comment" : "Take snapshot on login attempt",
       "localizations" : {
@@ -757,6 +986,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Зробити знімок при спробі входу"
+          }
+        }
+      }
+    },
+    "AccessibilitySnapshotQuality" : {
+      "comment" : "Snapshot JPEG quality",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Snapshot JPEG quality"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Якість JPEG знімка"
           }
         }
       }
@@ -863,6 +1109,59 @@
         }
       }
     },
+    "AccessibilityVideoDuration %d" : {
+      "comment" : "Video length in seconds",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Video length %d second"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Video length %d seconds"
+                }
+              }
+            }
+          }
+        },
+        "uk" : {
+          "variations" : {
+            "plural" : {
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Тривалість відео %d секунди"
+                }
+              },
+              "many" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Тривалість відео %d секунд"
+                }
+              },
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Тривалість відео %d секунда"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Тривалість відео %d секунди"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "AccessibilityVisitWebsite" : {
       "comment" : "Visit Agnidia website",
       "localizations" : {
@@ -950,6 +1249,23 @@
       },
       "shouldTranslate" : false
     },
+    "AuthInfo" : {
+      "comment" : "Description was not specified",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "unlock access to database data"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "розблокувати доступ до даних бази даних"
+          }
+        }
+      }
+    },
     "Auth_deviceAuthentificationFailed" : {
       "localizations" : {
         "en" : {
@@ -978,23 +1294,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Неправильний пароль."
-          }
-        }
-      }
-    },
-    "AuthInfo" : {
-      "comment" : "Description was not specified",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "unlock access to database data"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "розблокувати доступ до даних бази даних"
           }
         }
       }
@@ -1094,6 +1393,40 @@
         }
       }
     },
+    "CameraAccessDeniedBody" : {
+      "comment" : "Notification body when camera access is denied",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A trigger fired, but camera access is off. Turn it on in System Settings > Privacy & Security > Camera."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Спрацював тригер, але доступ до камери вимкнено. Увімкніть його в Системні параметри > Приватність і безпека > Камера."
+          }
+        }
+      }
+    },
+    "CameraAccessDeniedTitle" : {
+      "comment" : "Notification title when camera access is denied",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lock-Watcher cannot use the camera"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lock-Watcher не може використати камеру"
+          }
+        }
+      }
+    },
     "Clean" : {
       "comment" : "A button label that, when tapped, cleans all data.",
       "isCommentAutoGenerated" : true,
@@ -1128,11 +1461,6 @@
         }
       }
     },
-    "example.com" : {
-      "comment" : "A label for the traceroute server text field.",
-      "isCommentAutoGenerated" : true,
-      "shouldTranslate" : false
-    },
     "FirstLaunchSetup" : {
       "comment" : "Description was not specified",
       "localizations" : {
@@ -1146,6 +1474,159 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Перше налаштування"
+          }
+        }
+      }
+    },
+    "KeepFiles" : {
+      "comment" : "Label for the retention picker",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keep files"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Зберігати файли"
+          }
+        }
+      }
+    },
+    "KeepFilesAfterUpload" : {
+      "comment" : "Retention period: delete after a confirmed upload",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "None (remove after upload)"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не зберігати (видалити після вивантаження)"
+          }
+        }
+      }
+    },
+    "KeepFilesConfirmButton" : {
+      "comment" : "Destructive confirmation button",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete Older Files"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Видалити старіші файли"
+          }
+        }
+      }
+    },
+    "KeepFilesConfirmMessage %@" : {
+      "comment" : "Confirmation message; %@ is the new retention period",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "With “%@”, local captures older than this period are deleted now. This cannot be undone."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "З параметром «%@» локальні знімки, старіші за цей період, буде видалено зараз. Цю дію не можна скасувати."
+          }
+        }
+      }
+    },
+    "KeepFilesConfirmTitle" : {
+      "comment" : "Title of the confirmation shown when the retention period is shortened",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete older files?"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Видалити старіші файли?"
+          }
+        }
+      }
+    },
+    "KeepFilesFootnote" : {
+      "comment" : "Footnote under the retention picker",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deletes photos, videos and “Save snapshot to disk” copies on this Mac. Copies in iCloud, Dropbox and sent mail, and the images in the history, are kept. “None” deletes files only after iCloud or Dropbox confirms the upload; otherwise it keeps them for 1 week."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Видаляє фото, відео та копії «Зберегти знімок на диск» на цьому Mac. Копії в iCloud, Dropbox і надісланих листах, а також зображення в історії залишаються. «Не зберігати» видаляє файли лише після того, як iCloud або Dropbox підтвердить вивантаження; інакше файли зберігаються 1 тиждень."
+          }
+        }
+      }
+    },
+    "KeepFilesOneMonth" : {
+      "comment" : "Retention period",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 month"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 місяць"
+          }
+        }
+      }
+    },
+    "KeepFilesOneWeek" : {
+      "comment" : "Retention period",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 week"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 тиждень"
+          }
+        }
+      }
+    },
+    "KeepFilesOneYear" : {
+      "comment" : "Retention period",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 year"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 рік"
           }
         }
       }
@@ -1313,6 +1794,92 @@
         }
       }
     },
+    "Original" : {
+      "comment" : "CameraSnap output size: full camera resolution",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Original"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Оригінал"
+          }
+        }
+      }
+    },
+    "OutputSize" : {
+      "comment" : "Label for the capture size picker",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Size"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Розмір"
+          }
+        }
+      }
+    },
+    "OutputType" : {
+      "comment" : "Label for the photo or video picker",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Capture"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Знімати"
+          }
+        }
+      }
+    },
+    "OutputTypePhoto" : {
+      "comment" : "Photo output option",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Photo"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Фото"
+          }
+        }
+      }
+    },
+    "OutputTypeVideo" : {
+      "comment" : "Video output option",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Video"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Відео"
+          }
+        }
+      }
+    },
     "ProtectAccess" : {
       "comment" : "Description was not specified",
       "localizations" : {
@@ -1347,6 +1914,70 @@
         }
       }
     },
+    "PushCameraDenied" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lock-Watcher cannot read the pairing code without camera access. Allow camera access in System Settings."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Без доступу до камери Lock-Watcher не може прочитати код під’єднання. Дозвольте доступ до камери в Системних параметрах."
+          }
+        }
+      }
+    },
+    "PushCameraUnavailable" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The camera is busy or not available. Close other apps that use it and try again."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Камера зайнята або недоступна. Закрийте інші програми, що її використовують, і спробуйте ще раз."
+          }
+        }
+      }
+    },
+    "PushForgetIPhone" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Forget iPhone"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Забути iPhone"
+          }
+        }
+      }
+    },
+    "PushInvalidCode" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This is not a Lock-Watcher pairing code."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Це не код під’єднання Lock-Watcher."
+          }
+        }
+      }
+    },
     "PushLocalNotification" : {
       "comment" : "Description was not specified",
       "localizations" : {
@@ -1364,6 +1995,374 @@
         }
       }
     },
+    "PushNeedsRepair" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The iPhone no longer accepts alerts."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iPhone більше не приймає сповіщення."
+          }
+        }
+      }
+    },
+    "PushNotPaired" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No iPhone paired."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iPhone не під’єднано."
+          }
+        }
+      }
+    },
+    "PushOpenCameraSettings" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open System Settings"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Відкрити Системні параметри"
+          }
+        }
+      }
+    },
+    "PushOwnKeyClear" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove Key"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Видалити ключ"
+          }
+        }
+      }
+    },
+    "PushOwnKeyFootnote" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Only for an iPhone app you build under your own Apple developer team. The key stays in this Mac’s Keychain."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Лише для програми iPhone, яку ви збираєте у власній команді розробника Apple. Ключ зберігається у Зв’язці ключів цього Mac."
+          }
+        }
+      }
+    },
+    "PushOwnKeyID" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Key ID"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ID ключа"
+          }
+        }
+      }
+    },
+    "PushOwnKeyInUse" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your own APNs key is in use."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Використовується ваш власний ключ APNs."
+          }
+        }
+      }
+    },
+    "PushOwnKeyInvalid" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The key, Key ID, Team ID or bundle ID is not valid."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ключ, ID ключа, ID команди або bundle ID недійсні."
+          }
+        }
+      }
+    },
+    "PushOwnKeyPEM" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Private key (.p8 contents)"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Приватний ключ (вміст .p8)"
+          }
+        }
+      }
+    },
+    "PushOwnKeySave" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save Key"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Зберегти ключ"
+          }
+        }
+      }
+    },
+    "PushOwnKeyTitle" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Own APNs key (advanced)"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Власний ключ APNs (додатково)"
+          }
+        }
+      }
+    },
+    "PushOwnTeamID" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Team ID"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ID команди"
+          }
+        }
+      }
+    },
+    "PushOwnTopic" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iPhone app bundle ID"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bundle ID програми для iPhone"
+          }
+        }
+      }
+    },
+    "PushPairIPhone" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pair iPhone…"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Під’єднати iPhone…"
+          }
+        }
+      }
+    },
+    "PushPairInstructions" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Lock-Watcher on your iPhone and hold its pairing code in front of the Mac camera."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Відкрийте Lock-Watcher на iPhone і піднесіть його код під’єднання до камери Mac."
+          }
+        }
+      }
+    },
+    "PushPairTitle" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pair iPhone"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Під’єднання iPhone"
+          }
+        }
+      }
+    },
+    "PushPairedOn %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iPhone paired on %@"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iPhone під’єднано %@"
+          }
+        }
+      }
+    },
+    "PushRepairIPhone" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Re-pair iPhone"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Під’єднати iPhone знову"
+          }
+        }
+      }
+    },
+    "PushSaveFailed" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The pairing could not be saved. Try again."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не вдалося зберегти під’єднання. Спробуйте ще раз."
+          }
+        }
+      }
+    },
+    "PushScanning" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Looking for a pairing code…"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пошук коду під’єднання…"
+          }
+        }
+      }
+    },
+    "PushToiPhone" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Push alerts to iPhone"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сповіщення на iPhone"
+          }
+        }
+      }
+    },
+    "PushToiPhoneHelp" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sends a time-sensitive alert to your paired iPhone through Apple Push Notification service."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Надсилає термінове сповіщення на під’єднаний iPhone через службу Apple Push Notification."
+          }
+        }
+      }
+    },
+    "PushWrongApp" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This code belongs to a different app."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Цей код належить іншій програмі."
+          }
+        }
+      }
+    },
     "Quit" : {
       "comment" : "Description was not specified",
       "localizations" : {
@@ -1371,6 +2370,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Вихід"
+          }
+        }
+      }
+    },
+    "RetentionNoticeBody %@ %@" : {
+      "comment" : "One-time notice; %1$@ is the retention period, %2$@ the first deletion date",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "“Keep files” is set to %1$@. Captures saved before this update will be deleted from this Mac starting %2$@. To change this, open Settings > Options > Keep files."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Параметр «Зберігати файли» має значення «%1$@». Знімки, збережені до цього оновлення, буде видалено з цього Mac, починаючи з %2$@. Щоб змінити це, відкрийте Налаштування > Параметри > Зберігати файли."
+          }
+        }
+      }
+    },
+    "RetentionNoticeTitle" : {
+      "comment" : "Title of the one-time retention notice",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lock-Watcher now deletes old captures"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lock-Watcher тепер видаляє старі знімки"
           }
         }
       }
@@ -1388,108 +2421,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Зберегти знімок на диск"
-          }
-        }
-      }
-    },
-    "SnapshotQuality" : {
-      "comment" : "Label for snapshot quality picker",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Quality"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Якість"
-          }
-        }
-      }
-    },
-    "SnapshotQualityHigh" : {
-      "comment" : "High quality option (75%)",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "High"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Висока"
-          }
-        }
-      }
-    },
-    "SnapshotQualityLow" : {
-      "comment" : "Low quality option (25%)",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Low"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Низька"
-          }
-        }
-      }
-    },
-    "SnapshotQualityMedium" : {
-      "comment" : "Medium quality option (50%)",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Medium"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Середня"
-          }
-        }
-      }
-    },
-    "SnapshotQualityOriginal" : {
-      "comment" : "Original quality option (100%)",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Original"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Оригінал"
-          }
-        }
-      }
-    },
-    "AccessibilitySnapshotQuality" : {
-      "comment" : "Snapshot JPEG quality",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Snapshot JPEG quality"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Якість JPEG знімка"
           }
         }
       }
@@ -1668,6 +2599,114 @@
         }
       }
     },
+    "SnapshotOnDisplayAttach" : {
+      "comment" : "Settings toggle title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Take Snapshot On Display Attach While Locked"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Зробити знімок при підключенні дисплея"
+          }
+        }
+      }
+    },
+    "SnapshotOnLocationChange" : {
+      "comment" : "Settings toggle title",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Take Snapshot On Location Change While Locked"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Зробити знімок при переміщенні Mac"
+          }
+        }
+      }
+    },
+    "SnapshotOnLocationChangeHelp" : {
+      "comment" : "Help text of the location-change toggle",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Takes one snapshot when the Mac moves 500 m or more while locked, also when you carry it locked to a new place. Needs location access."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Робить один знімок, коли Mac переміщується на 500 м або більше під час блокування, також коли ви переносите заблокований Mac в інше місце. Потрібен доступ до геопозиції."
+          }
+        }
+      }
+    },
+    "SnapshotOnLockedInput %d" : {
+      "comment" : "Settings toggle title; %d is the delay in seconds",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Take snapshot on input while locked, after %d second"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Take snapshot on input while locked, after %d seconds"
+                }
+              }
+            }
+          }
+        },
+        "uk" : {
+          "variations" : {
+            "plural" : {
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Зробити знімок при введенні, через %d секунди"
+                }
+              },
+              "many" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Зробити знімок при введенні, через %d секунд"
+                }
+              },
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Зробити знімок при введенні, через %d секунду"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Зробити знімок при введенні, через %d секунди"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "SnapshotOnLogin" : {
       "comment" : "Description was not specified",
       "localizations" : {
@@ -1753,6 +2792,91 @@
         }
       }
     },
+    "SnapshotQuality" : {
+      "comment" : "Label for snapshot quality picker",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quality"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Якість"
+          }
+        }
+      }
+    },
+    "SnapshotQualityHigh" : {
+      "comment" : "High quality option (75%)",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "High"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Висока"
+          }
+        }
+      }
+    },
+    "SnapshotQualityLow" : {
+      "comment" : "Low quality option (25%)",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Low"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Низька"
+          }
+        }
+      }
+    },
+    "SnapshotQualityMedium" : {
+      "comment" : "Medium quality option (50%)",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Medium"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Середня"
+          }
+        }
+      }
+    },
+    "SnapshotQualityOriginal" : {
+      "comment" : "Original quality option (100%)",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Original"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Оригінал"
+          }
+        }
+      }
+    },
     "SuccessTimer %d" : {
       "comment" : "Time until the first-launch window closes",
       "localizations" : {
@@ -1802,23 +2926,6 @@
                 }
               }
             }
-          }
-        }
-      }
-    },
-    "SyncedWithDropbox %@" : {
-      "comment" : "Description was not specified",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sync with Dropbox: %@"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Синхронізовано з Dropbox: %@"
           }
         }
       }
@@ -1874,6 +2981,23 @@
         }
       }
     },
+    "SyncedWithDropbox %@" : {
+      "comment" : "Description was not specified",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sync with Dropbox: %@"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Синхронізовано з Dropbox: %@"
+          }
+        }
+      }
+    },
     "TakeSnapshotAndStart" : {
       "comment" : "Description was not specified",
       "localizations" : {
@@ -1904,6 +3028,60 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Користуйтесь додатком з Меню Бара"
+          }
+        }
+      }
+    },
+    "TriggerType_displayAttached" : {
+      "comment" : "Trigger type shown in the capture notification",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On display attached while locked"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "на підключення дисплея під час блокування"
+          }
+        }
+      }
+    },
+    "TriggerType_locationChanged" : {
+      "comment" : "Trigger type shown in the capture notification",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On location change while locked"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "на зміну місцезнаходження під час блокування"
+          }
+        }
+      }
+    },
+    "TriggerType_lockedInput" : {
+      "comment" : "Trigger type shown in the capture notification",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On input while locked"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "на введення під час блокування"
           }
         }
       }
@@ -1998,62 +3176,6 @@
         }
       }
     },
-    "user@example.com" : {
-      "comment" : "A placeholder text for an email field.",
-      "isCommentAutoGenerated" : true,
-      "shouldTranslate" : false
-    },
-    "OutputType" : {
-      "comment" : "Label for the photo or video picker",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Capture"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Знімати"
-          }
-        }
-      }
-    },
-    "OutputTypePhoto" : {
-      "comment" : "Photo output option",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Photo"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Фото"
-          }
-        }
-      }
-    },
-    "OutputTypeVideo" : {
-      "comment" : "Video output option",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Video"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Відео"
-          }
-        }
-      }
-    },
     "VideoDuration %d" : {
       "comment" : "Video length stepper label",
       "localizations" : {
@@ -2107,689 +3229,15 @@
         }
       }
     },
-    "OutputSize" : {
-      "comment" : "Label for the capture size picker",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Size"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Розмір"
-          }
-        }
-      }
+    "example.com" : {
+      "comment" : "A label for the traceroute server text field.",
+      "isCommentAutoGenerated" : true,
+      "shouldTranslate" : false
     },
-    "Original" : {
-      "comment" : "CameraSnap output size: full camera resolution",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Original"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Оригінал"
-          }
-        }
-      }
-    },
-    "KeepFiles" : {
-      "comment" : "Label for the retention picker",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Keep files"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Зберігати файли"
-          }
-        }
-      }
-    },
-    "KeepFilesOneYear" : {
-      "comment" : "Retention period",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "1 year"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "1 рік"
-          }
-        }
-      }
-    },
-    "KeepFilesOneMonth" : {
-      "comment" : "Retention period",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "1 month"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "1 місяць"
-          }
-        }
-      }
-    },
-    "KeepFilesOneWeek" : {
-      "comment" : "Retention period",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "1 week"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "1 тиждень"
-          }
-        }
-      }
-    },
-    "KeepFilesAfterUpload" : {
-      "comment" : "Retention period: delete after a confirmed upload",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "None (remove after upload)"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Не зберігати (видалити після вивантаження)"
-          }
-        }
-      }
-    },
-    "KeepFilesFootnote" : {
-      "comment" : "Footnote under the retention picker",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Deletes photos, videos and “Save snapshot to disk” copies on this Mac. Copies in iCloud, Dropbox and sent mail, and the images in the history, are kept. “None” deletes files only after iCloud or Dropbox confirms the upload; otherwise it keeps them for 1 week."
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Видаляє фото, відео та копії «Зберегти знімок на диск» на цьому Mac. Копії в iCloud, Dropbox і надісланих листах, а також зображення в історії залишаються. «Не зберігати» видаляє файли лише після того, як iCloud або Dropbox підтвердить вивантаження; інакше файли зберігаються 1 тиждень."
-          }
-        }
-      }
-    },
-    "KeepFilesConfirmTitle" : {
-      "comment" : "Title of the confirmation shown when the retention period is shortened",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Delete older files?"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Видалити старіші файли?"
-          }
-        }
-      }
-    },
-    "KeepFilesConfirmMessage %@" : {
-      "comment" : "Confirmation message; %@ is the new retention period",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "With “%@”, local captures older than this period are deleted now. This cannot be undone."
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "З параметром «%@» локальні знімки, старіші за цей період, буде видалено зараз. Цю дію не можна скасувати."
-          }
-        }
-      }
-    },
-    "KeepFilesConfirmButton" : {
-      "comment" : "Destructive confirmation button",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Delete Older Files"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Видалити старіші файли"
-          }
-        }
-      }
-    },
-    "RetentionNoticeTitle" : {
-      "comment" : "Title of the one-time retention notice",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lock-Watcher now deletes old captures"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lock-Watcher тепер видаляє старі знімки"
-          }
-        }
-      }
-    },
-    "AccessibilityOutputType" : {
-      "comment" : "Capture a photo or a video",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Capture a photo or a video"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Знімати фото або відео"
-          }
-        }
-      }
-    },
-    "AccessibilityVideoDuration %d" : {
-      "comment" : "Video length in seconds",
-      "localizations" : {
-        "en" : {
-          "variations" : {
-            "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Video length %d second"
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Video length %d seconds"
-                }
-              }
-            }
-          }
-        },
-        "uk" : {
-          "variations" : {
-            "plural" : {
-              "few" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Тривалість відео %d секунди"
-                }
-              },
-              "many" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Тривалість відео %d секунд"
-                }
-              },
-              "one" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Тривалість відео %d секунда"
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Тривалість відео %d секунди"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "AccessibilityOutputSize" : {
-      "comment" : "Capture size for photos and videos",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Capture size for photos and videos"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Розмір фото та відео"
-          }
-        }
-      }
-    },
-    "AccessibilityKeepFiles" : {
-      "comment" : "How long local capture files are kept",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "How long local capture files are kept"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Як довго зберігаються локальні файли знімків"
-          }
-        }
-      }
-    },
-    "RetentionNoticeBody %@ %@" : {
-      "comment" : "One-time notice; %1$@ is the retention period, %2$@ the first deletion date",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "“Keep files” is set to %1$@. Captures saved before this update will be deleted from this Mac starting %2$@. To change this, open Settings > Options > Keep files."
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Параметр «Зберігати файли» має значення «%1$@». Знімки, збережені до цього оновлення, буде видалено з цього Mac, починаючи з %2$@. Щоб змінити це, відкрийте Налаштування > Параметри > Зберігати файли."
-          }
-        }
-      }
-    },
-    "CameraAccessDeniedTitle" : {
-      "comment" : "Notification title when camera access is denied",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lock-Watcher cannot use the camera"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lock-Watcher не може використати камеру"
-          }
-        }
-      }
-    },
-    "CameraAccessDeniedBody" : {
-      "comment" : "Notification body when camera access is denied",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "A trigger fired, but camera access is off. Turn it on in System Settings > Privacy & Security > Camera."
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Спрацював тригер, але доступ до камери вимкнено. Увімкніть його в Системні параметри > Приватність і безпека > Камера."
-          }
-        }
-      }
-    },
-    "TriggerType_displayAttached" : {
-      "comment" : "Trigger type shown in the capture notification",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "On display attached while locked"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "на підключення дисплея під час блокування"
-          }
-        }
-      }
-    },
-    "TriggerType_locationChanged" : {
-      "comment" : "Trigger type shown in the capture notification",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "On location change while locked"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "на зміну місцезнаходження під час блокування"
-          }
-        }
-      }
-    },
-    "TriggerType_lockedInput" : {
-      "comment" : "Trigger type shown in the capture notification",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "On input while locked"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "на введення під час блокування"
-          }
-        }
-      }
-    },
-    "SnapshotOnDisplayAttach" : {
-      "comment" : "Settings toggle title",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Take Snapshot On Display Attach While Locked"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Зробити знімок при підключенні дисплея"
-          }
-        }
-      }
-    },
-    "SnapshotOnLocationChange" : {
-      "comment" : "Settings toggle title",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Take Snapshot On Location Change While Locked"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Зробити знімок при переміщенні Mac"
-          }
-        }
-      }
-    },
-    "SnapshotOnLocationChangeHelp" : {
-      "comment" : "Help text of the location-change toggle",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Takes one snapshot when the Mac moves 500 m or more while locked, also when you carry it locked to a new place. Needs location access."
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Робить один знімок, коли Mac переміщується на 500 м або більше під час блокування, також коли ви переносите заблокований Mac в інше місце. Потрібен доступ до геопозиції."
-          }
-        }
-      }
-    },
-    "AccessibilitySnapshotDisplayAttach" : {
-      "comment" : "Take snapshot when a display is attached while locked",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Take snapshot when a display is attached while locked"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Зробити знімок при підключенні дисплея під час блокування"
-          }
-        }
-      }
-    },
-    "AccessibilitySnapshotLocationChange" : {
-      "comment" : "Take snapshot when the Mac moves while locked",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Take snapshot when the Mac moves while locked"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Зробити знімок, коли Mac переміщується під час блокування"
-          }
-        }
-      }
-    },
-    "SnapshotOnLockedInput %d" : {
-      "comment" : "Settings toggle title; %d is the delay in seconds",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "variations" : {
-            "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Take snapshot on input while locked, after %d second"
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Take snapshot on input while locked, after %d seconds"
-                }
-              }
-            }
-          }
-        },
-        "uk" : {
-          "variations" : {
-            "plural" : {
-              "few" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Зробити знімок при введенні, через %d секунди"
-                }
-              },
-              "many" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Зробити знімок при введенні, через %d секунд"
-                }
-              },
-              "one" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Зробити знімок при введенні, через %d секунду"
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Зробити знімок при введенні, через %d секунди"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "AccessibilitySnapshotLockedInput %d" : {
-      "comment" : "Take snapshot on keyboard or mouse input while locked, after N seconds",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "variations" : {
-            "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Take snapshot on keyboard or mouse input while locked, after %d second"
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Take snapshot on keyboard or mouse input while locked, after %d seconds"
-                }
-              }
-            }
-          }
-        },
-        "uk" : {
-          "variations" : {
-            "plural" : {
-              "few" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Зробити знімок при введенні з клавіатури або миші під час блокування, через %d секунди"
-                }
-              },
-              "many" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Зробити знімок при введенні з клавіатури або миші під час блокування, через %d секунд"
-                }
-              },
-              "one" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Зробити знімок при введенні з клавіатури або миші під час блокування, через %d секунду"
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Зробити знімок при введенні з клавіатури або миші під час блокування, через %d секунди"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "AccessibilityLockedInputDelay" : {
-      "comment" : "Delay before the locked-input snapshot",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Delay before the locked-input snapshot"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Затримка перед знімком при введенні під час блокування"
-          }
-        }
-      }
-    },
-    "AccessibilityLockedInputDelayValue %d" : {
-      "comment" : "Stepper value; %d is the delay in seconds",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "variations" : {
-            "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%d second"
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%d seconds"
-                }
-              }
-            }
-          }
-        },
-        "uk" : {
-          "variations" : {
-            "plural" : {
-              "few" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%d секунди"
-                }
-              },
-              "many" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%d секунд"
-                }
-              },
-              "one" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%d секунда"
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%d секунди"
-                }
-              }
-            }
-          }
-        }
-      }
+    "user@example.com" : {
+      "comment" : "A placeholder text for an email field.",
+      "isCommentAutoGenerated" : true,
+      "shouldTranslate" : false
     }
   },
   "version" : "1.1"

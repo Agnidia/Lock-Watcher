@@ -14,6 +14,7 @@ enum NotifierChannel: String, Sendable {
     case iCloud
     case dropbox
     case notification
+    case push
 }
 
 /// The result of one channel's delivery.
@@ -69,6 +70,7 @@ final class NotificationManager: NotificationManagerProtocol, @unchecked Sendabl
     private let iCloudNotifier: any NotifierProtocol
     private let dropboxNotifier: any NotifierProtocol & DropboxNotifierProtocol
     private let notificationNotifier: any NotifierProtocol
+    private let pushNotifier: any NotifierProtocol
 
     // MARK: - initialiser
 
@@ -78,6 +80,7 @@ final class NotificationManager: NotificationManagerProtocol, @unchecked Sendabl
          iCloud: any NotifierProtocol = ICloudNotifier(),
          dropbox: any NotifierProtocol & DropboxNotifierProtocol = DropboxNotifier(),
          notification: any NotifierProtocol = NotificationNotifier(),
+         push: any NotifierProtocol = PushNotifier.live(),
          logger: LogProtocol = Log(category: .notificationManager))
     {
         self.settings = settings
@@ -86,6 +89,7 @@ final class NotificationManager: NotificationManagerProtocol, @unchecked Sendabl
         iCloudNotifier = iCloud
         dropboxNotifier = dropbox
         notificationNotifier = notification
+        pushNotifier = push
 
         mailNotifier.register(with: settings)
         dropboxNotifier.register(with: settings)
@@ -117,6 +121,13 @@ final class NotificationManager: NotificationManagerProtocol, @unchecked Sendabl
             if settings.sync.isUseSnapshotLocalNotification {
                 group.addTask {
                     await self.deliver(thiefDto, via: self.notificationNotifier, channel: .notification, onSuccess: .confirmed)
+                }
+            }
+
+            // APNs 200 means accepted for delivery, not shown on the iPhone.
+            if settings.sync.isSendPushEnable {
+                group.addTask {
+                    await self.deliver(thiefDto, via: self.pushNotifier, channel: .push, onSuccess: .unconfirmed)
                 }
             }
 
@@ -157,6 +168,11 @@ final class NotificationManager: NotificationManagerProtocol, @unchecked Sendabl
         case .authenticationRequired: "authenticationRequired"
         case .emptyData: "emptyData"
         case .missingConfiguration: "missingConfiguration"
+        case .deviceUnregistered: "deviceUnregistered"
         }
     }
 }
+
+// MARK: - Test Info
+
+// @test-file: Tests/Managers/NotificationManagerTest.swift

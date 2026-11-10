@@ -53,7 +53,7 @@ final class AppDelegateModel: AppDelegateModelProtocol {
     }()
 
     /// The settings view model for injection into the settings view.
-    private(set) lazy var settingsViewModel: SettingsViewModel = .init(settings: settings, thiefManager: thiefManager, locationAuthorization: locationAuthorizationService)
+    private(set) lazy var settingsViewModel: SettingsViewModel = .init(settings: settings, thiefManager: thiefManager, locationAuthorization: locationAuthorizationService, push: .live())
 
     /// Represents the status bar item used in the application.
     private lazy var statusBarItem: NSStatusItem = {

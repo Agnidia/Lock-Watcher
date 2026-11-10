@@ -114,6 +114,8 @@ struct SettingsView: View {
                             DropboxView(isDropboxEnable: viewModel.isDropboxEnable, dropboxName: viewModel.dropboxName)
 
                             LocalNotificationView(isLocalNotificationEnable: viewModel.isUseSnapshotLocalNotification)
+
+                            PushSettingsView(isEnabled: viewModel.isSendPushEnable, model: viewModel.push)
                         }
                     }
                     .extended(viewModel.isSyncInfoExpand, titleKey: "SettingsMenuSync")

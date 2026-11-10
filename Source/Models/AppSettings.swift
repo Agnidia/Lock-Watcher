@@ -242,6 +242,25 @@ struct SyncSettings: Codable, Equatable {
     
     /// Determines if a local notification should be used for snapshots.
     var isUseSnapshotLocalNotification: Bool = false
+
+    /// Sends each record as an APNs alert to the paired iPhone.
+    var isSendPushEnable: Bool = false
+}
+
+extension SyncSettings {
+    /// `UserDefault` resets the whole group on any decode error, so v1.7.2 JSON (no push key) must decode with absent or unreadable keys taking defaults.
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let defaults = SyncSettings()
+        isSaveSnapshotToDisk = (try? container.decodeIfPresent(Bool.self, forKey: .isSaveSnapshotToDisk)) ?? defaults.isSaveSnapshotToDisk
+        isSendNotificationToMail = (try? container.decodeIfPresent(Bool.self, forKey: .isSendNotificationToMail)) ?? defaults.isSendNotificationToMail
+        mailRecipient = (try? container.decodeIfPresent(String.self, forKey: .mailRecipient)) ?? defaults.mailRecipient
+        isICloudSyncEnable = (try? container.decodeIfPresent(Bool.self, forKey: .isICloudSyncEnable)) ?? defaults.isICloudSyncEnable
+        isDropboxEnable = (try? container.decodeIfPresent(Bool.self, forKey: .isDropboxEnable)) ?? defaults.isDropboxEnable
+        dropboxName = (try? container.decodeIfPresent(String.self, forKey: .dropboxName)) ?? defaults.dropboxName
+        isUseSnapshotLocalNotification = (try? container.decodeIfPresent(Bool.self, forKey: .isUseSnapshotLocalNotification)) ?? defaults.isUseSnapshotLocalNotification
+        isSendPushEnable = (try? container.decodeIfPresent(Bool.self, forKey: .isSendPushEnable)) ?? defaults.isSendPushEnable
+    }
 }
 
 /// Protocol that outlines the properties and methods that app settings should conform to.

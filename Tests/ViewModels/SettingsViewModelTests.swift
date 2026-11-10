@@ -25,7 +25,7 @@ final class SettingsViewModelTests: XCTestCase {
         mockThiefManager = MockThiefManager()
         mockThiefManager.stubbedDatabaseManager = MockDatabaseManager()
         mockAuthorization = MockLocationAuthorizationService()
-        sut = SettingsViewModel(settings: mockSettings, thiefManager: mockThiefManager, locationAuthorization: mockAuthorization)
+        sut = SettingsViewModel(settings: mockSettings, thiefManager: mockThiefManager, locationAuthorization: mockAuthorization, push: .preview())
     }
 
     override func tearDown() async throws {

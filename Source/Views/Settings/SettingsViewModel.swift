@@ -40,6 +40,9 @@ final class SettingsViewModel: DomainViewConstantProtocol {
     private let locationAuthorization: LocationAuthorizationProviding
 
     @ObservationIgnored
+    let push: PushPairingViewModel
+
+    @ObservationIgnored
     private var authorizationObservation: LocationAuthorizationObservation?
 
     private var authorizationRevision = 0
@@ -299,6 +302,14 @@ final class SettingsViewModel: DomainViewConstantProtocol {
         })
     }
 
+    var isSendPushEnable: Binding<Bool> {
+        Binding<Bool>(get: {
+            self.settings.sync.isSendPushEnable
+        }, set: {
+            self.settings.sync.isSendPushEnable = $0
+        })
+    }
+
     // MARK: - Bindings for Snapshot settings
 
     var snapshotQuality: Binding<SnapshotQuality> {
@@ -393,9 +404,11 @@ final class SettingsViewModel: DomainViewConstantProtocol {
     /// Initializer for the SettingsViewModel.
     init(settings: AppSettingsProtocol,
          thiefManager: ThiefManagerProtocol,
-         locationAuthorization: LocationAuthorizationProviding = LocationAuthorizationService())
+         locationAuthorization: LocationAuthorizationProviding = LocationAuthorizationService(),
+         push: PushPairingViewModel)
     {
         self.settings = settings
+        self.push = push
         self.thiefManager = thiefManager
         self.locationAuthorization = locationAuthorization
 
@@ -458,7 +471,7 @@ final class SettingsViewModel: DomainViewConstantProtocol {
 /// Extension to provide preview instance for the SettingsViewModel.
 extension SettingsViewModel {
     static var preview: SettingsViewModel {
-        SettingsViewModel(settings: AppSettingsPreview(), thiefManager: ThiefManagerPreview())
+        SettingsViewModel(settings: AppSettingsPreview(), thiefManager: ThiefManagerPreview(), push: .preview())
     }
 }
 

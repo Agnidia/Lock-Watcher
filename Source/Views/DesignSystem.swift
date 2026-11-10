@@ -276,6 +276,11 @@ enum AccessibilityID {
         static let dropboxAuthButton = "settings.dropboxAuthButton"
         static let dropboxLogoutButton = "settings.dropboxLogoutButton"
         static let notificationToggle = "settings.notificationToggle"
+        static let pushToggle = "settings.pushToggle"
+        static let pushPairButton = "settings.pushPairButton"
+        static let pushForgetButton = "settings.pushForgetButton"
+        static let pushRepairButton = "settings.pushRepairButton"
+        static let pushPairingSheet = "settings.pushPairingSheet"
     }
 
     // MARK: - First Launch View
@@ -381,6 +386,7 @@ enum AccessibilityLabel {
         static let syncICloud = NSLocalizedString("AccessibilitySyncICloud", comment: "Sync snapshots to iCloud")
         static let syncDropbox = NSLocalizedString("AccessibilitySyncDropbox", comment: "Sync snapshots to Dropbox")
         static let localNotification = NSLocalizedString("AccessibilityLocalNotification", comment: "Show local notifications for snapshots")
+        static let pushToiPhone = NSLocalizedString("AccessibilityPushToiPhone", comment: "Send alerts to the paired iPhone")
     }
 
     // MARK: - First Launch
