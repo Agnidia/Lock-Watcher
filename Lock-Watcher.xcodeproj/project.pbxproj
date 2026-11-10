@@ -278,6 +278,63 @@
 		F3A0000100000011000000C1 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0000100000012000000C1 /* MainViewModelTests.swift */; };
 		F3A0000100000013000000C1 /* SettingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0000100000014000000C1 /* SettingsViewModelTests.swift */; };
 		F3A0000100000015000000C1 /* FirstLaunchViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0000100000016000000C1 /* FirstLaunchViewModelTests.swift */; };
+		C0DE5EED000000000000000D /* APNsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED000000000000000C /* APNsClient.swift */; };
+		C0DE5EED000000000000000E /* APNsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED000000000000000C /* APNsClient.swift */; };
+		C0DE5EED0000000000000010 /* APNsCredentialStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED000000000000000F /* APNsCredentialStore.swift */; };
+		C0DE5EED0000000000000011 /* APNsCredentialStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED000000000000000F /* APNsCredentialStore.swift */; };
+		C0DE5EED0000000000000013 /* NetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED0000000000000012 /* NetworkReachability.swift */; };
+		C0DE5EED0000000000000014 /* NetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED0000000000000012 /* NetworkReachability.swift */; };
+		C0DE5EED0000000000000016 /* PushNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED0000000000000015 /* PushNotifier.swift */; };
+		C0DE5EED0000000000000017 /* PushNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED0000000000000015 /* PushNotifier.swift */; };
+		C0DE5EED0000000000000019 /* AVQRCodeScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED0000000000000018 /* AVQRCodeScanner.swift */; };
+		C0DE5EED000000000000001A /* AVQRCodeScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED0000000000000018 /* AVQRCodeScanner.swift */; };
+		C0DE5EED000000000000001C /* PushPairingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED000000000000001B /* PushPairingViewModel.swift */; };
+		C0DE5EED000000000000001D /* PushPairingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED000000000000001B /* PushPairingViewModel.swift */; };
+		C0DE5EED000000000000001F /* PushPreviewSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED000000000000001E /* PushPreviewSupport.swift */; };
+		C0DE5EED0000000000000020 /* PushPreviewSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED000000000000001E /* PushPreviewSupport.swift */; };
+		C0DE5EED0000000000000022 /* PushSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED0000000000000021 /* PushSettingsView.swift */; };
+		C0DE5EED0000000000000023 /* PushSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED0000000000000021 /* PushSettingsView.swift */; };
+		C0DE5EED0000000000000026 /* APNsClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED0000000000000025 /* APNsClientTest.swift */; };
+		C0DE5EED0000000000000028 /* APNsCredentialStoreTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED0000000000000027 /* APNsCredentialStoreTest.swift */; };
+		C0DE5EED000000000000002A /* PairingPayloadTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED0000000000000029 /* PairingPayloadTest.swift */; };
+		C0DE5EED000000000000002C /* PushNotifierTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED000000000000002B /* PushNotifierTest.swift */; };
+		C0DE5EED000000000000002F /* MockAPNsTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED000000000000002E /* MockAPNsTransport.swift */; };
+		C0DE5EED0000000000000031 /* PushPairingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED0000000000000030 /* PushPairingViewModelTests.swift */; };
+		C0DE5EED0000000000000033 /* APNsEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED0000000000000032 /* APNsEnvironment.swift */; };
+		C0DE5EED0000000000000034 /* APNsEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED0000000000000032 /* APNsEnvironment.swift */; };
+		C0DE5EED0000000000000035 /* APNsEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED0000000000000032 /* APNsEnvironment.swift */; };
+		C0DE5EED0000000000000036 /* APNsEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED0000000000000032 /* APNsEnvironment.swift */; };
+		C0DE5EED0000000000000038 /* PairingPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED0000000000000037 /* PairingPayload.swift */; };
+		C0DE5EED0000000000000039 /* PairingPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED0000000000000037 /* PairingPayload.swift */; };
+		C0DE5EED000000000000003A /* PairingPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED0000000000000037 /* PairingPayload.swift */; };
+		C0DE5EED000000000000003B /* PairingPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED0000000000000037 /* PairingPayload.swift */; };
+		C0DE5EED000000000000003E /* PushAlertPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED000000000000003D /* PushAlertPayload.swift */; };
+		C0DE5EED000000000000003F /* PushAlertPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED000000000000003D /* PushAlertPayload.swift */; };
+		C0DE5EED0000000000000040 /* PushAlertPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED000000000000003D /* PushAlertPayload.swift */; };
+		C0DE5EED0000000000000041 /* PushAlertPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED000000000000003D /* PushAlertPayload.swift */; };
+		C0DE5EED0000000000000045 /* CompanionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED0000000000000044 /* CompanionApp.swift */; };
+		C0DE5EED0000000000000047 /* NotificationReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED0000000000000046 /* NotificationReceiver.swift */; };
+		C0DE5EED000000000000004A /* AlertInbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED0000000000000049 /* AlertInbox.swift */; };
+		C0DE5EED000000000000004B /* AlertInbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED0000000000000049 /* AlertInbox.swift */; };
+		C0DE5EED000000000000004D /* PushRegistrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED000000000000004C /* PushRegistrationModel.swift */; };
+		C0DE5EED000000000000004E /* PushRegistrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED000000000000004C /* PushRegistrationModel.swift */; };
+		C0DE5EED0000000000000050 /* QRCodeRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED000000000000004F /* QRCodeRenderer.swift */; };
+		C0DE5EED0000000000000051 /* QRCodeRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED000000000000004F /* QRCodeRenderer.swift */; };
+		C0DE5EED0000000000000054 /* AlertsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED0000000000000053 /* AlertsView.swift */; };
+		C0DE5EED0000000000000056 /* PairView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED0000000000000055 /* PairView.swift */; };
+		C0DE5EED000000000000005B /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = C0DE5EED000000000000005A /* Localizable.xcstrings */; };
+		C0DE5EED000000000000005D /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = C0DE5EED000000000000005C /* PrivacyInfo.xcprivacy */; };
+		C0DE5EED0000000000000061 /* CompanionCoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED0000000000000060 /* CompanionCoreTests.swift */; };
+		C0DE5EED0000000000000071 /* CloudPhotoLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED0000000000000070 /* CloudPhotoLibrary.swift */; };
+		C0DE5EED0000000000000072 /* CloudPhotoLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED0000000000000070 /* CloudPhotoLibrary.swift */; };
+		C0DE5EED0000000000000074 /* CloudPhotoImageDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED0000000000000073 /* CloudPhotoImageDecoder.swift */; };
+		C0DE5EED0000000000000075 /* CloudPhotoImageDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED0000000000000073 /* CloudPhotoImageDecoder.swift */; };
+		C0DE5EED0000000000000077 /* ICloudPhotoSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED0000000000000076 /* ICloudPhotoSource.swift */; };
+		C0DE5EED00000000000000A8 /* ICloudPhotoSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED0000000000000076 /* ICloudPhotoSource.swift */; };
+		C0DE5EED0000000000000079 /* PhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED0000000000000078 /* PhotosView.swift */; };
+		C0DE5EED000000000000007B /* PhotoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED000000000000007A /* PhotoDetailView.swift */; };
+		C0DE5EED000000000000007D /* CompanionFixturePhotos.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED000000000000007C /* CompanionFixturePhotos.swift */; };
+		C0DE5EED000000000000007F /* CloudPhotoLibraryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE5EED000000000000007E /* CloudPhotoLibraryTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -561,6 +618,48 @@
 		F62BA80812F8B85CEF12EF5A /* NotificationManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManagerTest.swift; sourceTree = "<group>"; };
 		F81568DC9E52A2197D9DCE46 /* PosterFrameExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterFrameExtractor.swift; sourceTree = "<group>"; };
 		FA0CC60BCD1D394467FE1AC7 /* CameraCapturing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraCapturing.swift; sourceTree = "<group>"; };
+		C0DE5EED000000000000000C /* APNsClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APNsClient.swift; sourceTree = "<group>"; };
+		C0DE5EED000000000000000F /* APNsCredentialStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APNsCredentialStore.swift; sourceTree = "<group>"; };
+		C0DE5EED0000000000000012 /* NetworkReachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkReachability.swift; sourceTree = "<group>"; };
+		C0DE5EED0000000000000015 /* PushNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotifier.swift; sourceTree = "<group>"; };
+		C0DE5EED0000000000000018 /* AVQRCodeScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVQRCodeScanner.swift; sourceTree = "<group>"; };
+		C0DE5EED000000000000001B /* PushPairingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushPairingViewModel.swift; sourceTree = "<group>"; };
+		C0DE5EED000000000000001E /* PushPreviewSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushPreviewSupport.swift; sourceTree = "<group>"; };
+		C0DE5EED0000000000000021 /* PushSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushSettingsView.swift; sourceTree = "<group>"; };
+		C0DE5EED0000000000000025 /* APNsClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APNsClientTest.swift; sourceTree = "<group>"; };
+		C0DE5EED0000000000000027 /* APNsCredentialStoreTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APNsCredentialStoreTest.swift; sourceTree = "<group>"; };
+		C0DE5EED0000000000000029 /* PairingPayloadTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairingPayloadTest.swift; sourceTree = "<group>"; };
+		C0DE5EED000000000000002B /* PushNotifierTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotifierTest.swift; sourceTree = "<group>"; };
+		C0DE5EED000000000000002E /* MockAPNsTransport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPNsTransport.swift; sourceTree = "<group>"; };
+		C0DE5EED0000000000000030 /* PushPairingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushPairingViewModelTests.swift; sourceTree = "<group>"; };
+		C0DE5EED0000000000000032 /* APNsEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APNsEnvironment.swift; sourceTree = "<group>"; };
+		C0DE5EED0000000000000037 /* PairingPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairingPayload.swift; sourceTree = "<group>"; };
+		C0DE5EED000000000000003D /* PushAlertPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushAlertPayload.swift; sourceTree = "<group>"; };
+		C0DE5EED0000000000000044 /* CompanionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanionApp.swift; sourceTree = "<group>"; };
+		C0DE5EED0000000000000046 /* NotificationReceiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationReceiver.swift; sourceTree = "<group>"; };
+		C0DE5EED0000000000000049 /* AlertInbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertInbox.swift; sourceTree = "<group>"; };
+		C0DE5EED000000000000004C /* PushRegistrationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushRegistrationModel.swift; sourceTree = "<group>"; };
+		C0DE5EED000000000000004F /* QRCodeRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeRenderer.swift; sourceTree = "<group>"; };
+		C0DE5EED0000000000000053 /* AlertsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsView.swift; sourceTree = "<group>"; };
+		C0DE5EED0000000000000055 /* PairView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairView.swift; sourceTree = "<group>"; };
+		C0DE5EED0000000000000058 /* Companion.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Companion.entitlements; sourceTree = "<group>"; };
+		C0DE5EED0000000000000059 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C0DE5EED000000000000005A /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		C0DE5EED000000000000005C /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		C0DE5EED0000000000000060 /* CompanionCoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanionCoreTests.swift; sourceTree = "<group>"; };
+		C0DE5EED0000000000000070 /* CloudPhotoLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudPhotoLibrary.swift; sourceTree = "<group>"; };
+		C0DE5EED0000000000000073 /* CloudPhotoImageDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudPhotoImageDecoder.swift; sourceTree = "<group>"; };
+		C0DE5EED0000000000000076 /* ICloudPhotoSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICloudPhotoSource.swift; sourceTree = "<group>"; };
+		C0DE5EED0000000000000078 /* PhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosView.swift; sourceTree = "<group>"; };
+		C0DE5EED000000000000007A /* PhotoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailView.swift; sourceTree = "<group>"; };
+		C0DE5EED000000000000007C /* CompanionFixturePhotos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanionFixturePhotos.swift; sourceTree = "<group>"; };
+		C0DE5EED000000000000007E /* CloudPhotoLibraryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudPhotoLibraryTests.swift; sourceTree = "<group>"; };
+		C0DE5EED0000000000000063 /* companion.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = companion.xcconfig; sourceTree = "<group>"; };
+		C0DE5EED0000000000000064 /* companion-debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "companion-debug.xcconfig"; sourceTree = "<group>"; };
+		C0DE5EED0000000000000065 /* companion-release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "companion-release.xcconfig"; sourceTree = "<group>"; };
+		C0DE5EED0000000000000066 /* companion-tests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "companion-tests.xcconfig"; sourceTree = "<group>"; };
+		C0DE5EED0000000000000007 /* Lock-Watcher-Companion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lock-Watcher-Companion.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C0DE5EED000000000000000B /* Lock-WatcherCompanionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Lock-WatcherCompanionTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -611,6 +710,16 @@
 			files = (
 			);
 		};
+		C0DE5EED0000000000000004 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+			);
+		};
+		C0DE5EED0000000000000009 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+			);
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -648,6 +757,9 @@
 		A533D7D225A9E23F0046B7C8 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				C0DE5EED000000000000000C /* APNsClient.swift */,
+				C0DE5EED000000000000000F /* APNsCredentialStore.swift */,
+				C0DE5EED0000000000000012 /* NetworkReachability.swift */,
 				A533D7D325A9E31F0046B7C8 /* FileSystemUtil.swift */,
 				C0DE36000000000000000001 /* PluralLocalization.swift */,
 				5BF31DBD8F783140FE391FCA /* RetentionPruner.swift */,
@@ -663,6 +775,7 @@
 		A533D80125AA0EF00046B7C8 /* Notifiers */ = {
 			isa = PBXGroup;
 			children = (
+				C0DE5EED0000000000000015 /* PushNotifier.swift */,
 				A533D80225AA0F1A0046B7C8 /* MailNotifier.swift */,
 				A5C3E73526C1EA7B003D0BF5 /* ICloudNotifier.swift */,
 				BE7E1BAF43CF0706B24C1370 /* MediaAttachmentPolicy.swift */,
@@ -733,6 +846,7 @@
 		A57905BE2A95FA3800647BF8 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
+				C0DE5EED0000000000000024 /* Push */,
 				A5AA31DE2778D5BF00A064B6 /* DetectSnapshotViews.swift */,
 				A5A565842A549B7700D7E030 /* LaunchAtLoginView.swift */,
 				A599EB3027AB1259003A69B5 /* ProtectionView.swift */,
@@ -753,6 +867,7 @@
 		A57905C52A96143700647BF8 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				C0DE5EED000000000000002E /* MockAPNsTransport.swift */,
 				A57905C62A96145300647BF8 /* MockThiefManager.swift */,
 				A57905C82A9614C900647BF8 /* MockDatabaseManager.swift */,
 				A57905CA2A96159E00647BF8 /* MockCoordinator.swift */,
@@ -814,6 +929,9 @@
 		A57905F52A9FAB2D00647BF8 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				C0DE5EED0000000000000025 /* APNsClientTest.swift */,
+				C0DE5EED0000000000000027 /* APNsCredentialStoreTest.swift */,
+				C0DE5EED0000000000000029 /* PairingPayloadTest.swift */,
 				A57905F62A9FAB3E00647BF8 /* FileSystemTest.swift */,
 				2782678C38D2012B3586EB5D /* RetentionPrunerTest.swift */,
 				C0DE36000000000000000004 /* PluralLocalizationTests.swift */,
@@ -827,6 +945,7 @@
 		A58C63C62A4CBCA0004DE972 /* Configurations */ = {
 			isa = PBXGroup;
 			children = (
+				C0DE5EED0000000000000067 /* companion */,
 				A5BAB76D2AA089D6005A0C88 /* app-nomas */,
 				A58C63C72A4CBCA0004DE972 /* app */,
 				A58C63CB2A4CBCA0004DE972 /* tests */,
@@ -993,6 +1112,9 @@
 		A5C6DBE525796A90009DE750 = {
 			isa = PBXGroup;
 			children = (
+				C0DE5EED0000000000000043 /* Shared */,
+				C0DE5EED000000000000005F /* Companion */,
+				C0DE5EED0000000000000062 /* CompanionTests */,
 				A5F45E882AEAC96800E8B286 /* README.md */,
 				A58C63C62A4CBCA0004DE972 /* Configurations */,
 				A5C6DBF025796A90009DE750 /* Source */,
@@ -1010,6 +1132,8 @@
 		A5C6DBEF25796A90009DE750 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				C0DE5EED0000000000000007 /* Lock-Watcher-Companion.app */,
+				C0DE5EED000000000000000B /* Lock-WatcherCompanionTests.xctest */,
 				A5C6DBEE25796A90009DE750 /* Lock-Watcher.app */,
 				A5C6DC0025796A93009DE750 /* Lock-WatcherTests.xctest */,
 				A5C6DC0B25796A93009DE750 /* Lock-WatcherUITests.xctest */,
@@ -1041,6 +1165,7 @@
 		A5C6DC0325796A93009DE750 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				C0DE5EED000000000000002D /* Notifiers */,
 				F3A0000100000017000000C1 /* ViewModels */,
 				F3A0000100000009000000C1 /* Models */,
 				F3A000010000000A000000C1 /* Managers */,
@@ -1166,6 +1291,7 @@
 		F3A0000100000017000000C1 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				C0DE5EED0000000000000030 /* PushPairingViewModelTests.swift */,
 				F3A000010000000C000000C1 /* InfoViewModelTests.swift */,
 				F3A000010000000E000000C1 /* FirstLaunchProgressViewModelTests.swift */,
 				F3A0000100000010000000C1 /* LastThiefDetectionViewModelTests.swift */,
@@ -1174,6 +1300,127 @@
 				F3A0000100000016000000C1 /* FirstLaunchViewModelTests.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		C0DE5EED0000000000000024 /* Push */ = {
+			isa = PBXGroup;
+			children = (
+				C0DE5EED0000000000000018 /* AVQRCodeScanner.swift */,
+				C0DE5EED000000000000001B /* PushPairingViewModel.swift */,
+				C0DE5EED000000000000001E /* PushPreviewSupport.swift */,
+				C0DE5EED0000000000000021 /* PushSettingsView.swift */,
+			);
+			path = Push;
+			sourceTree = "<group>";
+		};
+		C0DE5EED000000000000002D /* Notifiers */ = {
+			isa = PBXGroup;
+			children = (
+				C0DE5EED000000000000002B /* PushNotifierTest.swift */,
+			);
+			path = Notifiers;
+			sourceTree = "<group>";
+		};
+		C0DE5EED000000000000003C /* Pairing */ = {
+			isa = PBXGroup;
+			children = (
+				C0DE5EED0000000000000032 /* APNsEnvironment.swift */,
+				C0DE5EED0000000000000037 /* PairingPayload.swift */,
+			);
+			path = Pairing;
+			sourceTree = "<group>";
+		};
+		C0DE5EED0000000000000042 /* Push */ = {
+			isa = PBXGroup;
+			children = (
+				C0DE5EED000000000000003D /* PushAlertPayload.swift */,
+			);
+			path = Push;
+			sourceTree = "<group>";
+		};
+		C0DE5EED0000000000000043 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				C0DE5EED000000000000003C /* Pairing */,
+				C0DE5EED0000000000000042 /* Push */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		C0DE5EED0000000000000048 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				C0DE5EED0000000000000044 /* CompanionApp.swift */,
+				C0DE5EED000000000000007C /* CompanionFixturePhotos.swift */,
+				C0DE5EED0000000000000046 /* NotificationReceiver.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		C0DE5EED0000000000000052 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				C0DE5EED0000000000000049 /* AlertInbox.swift */,
+				C0DE5EED0000000000000073 /* CloudPhotoImageDecoder.swift */,
+				C0DE5EED0000000000000070 /* CloudPhotoLibrary.swift */,
+				C0DE5EED0000000000000076 /* ICloudPhotoSource.swift */,
+				C0DE5EED000000000000004C /* PushRegistrationModel.swift */,
+				C0DE5EED000000000000004F /* QRCodeRenderer.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		C0DE5EED0000000000000057 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C0DE5EED0000000000000053 /* AlertsView.swift */,
+				C0DE5EED0000000000000055 /* PairView.swift */,
+				C0DE5EED000000000000007A /* PhotoDetailView.swift */,
+				C0DE5EED0000000000000078 /* PhotosView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C0DE5EED000000000000005E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C0DE5EED0000000000000058 /* Companion.entitlements */,
+				C0DE5EED0000000000000059 /* Info.plist */,
+				C0DE5EED000000000000005A /* Localizable.xcstrings */,
+				C0DE5EED000000000000005C /* PrivacyInfo.xcprivacy */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		C0DE5EED000000000000005F /* Companion */ = {
+			isa = PBXGroup;
+			children = (
+				C0DE5EED0000000000000048 /* App */,
+				C0DE5EED0000000000000052 /* Core */,
+				C0DE5EED0000000000000057 /* Views */,
+				C0DE5EED000000000000005E /* Resources */,
+			);
+			path = Companion;
+			sourceTree = "<group>";
+		};
+		C0DE5EED0000000000000062 /* CompanionTests */ = {
+			isa = PBXGroup;
+			children = (
+				C0DE5EED000000000000007E /* CloudPhotoLibraryTests.swift */,
+				C0DE5EED0000000000000060 /* CompanionCoreTests.swift */,
+			);
+			path = CompanionTests;
+			sourceTree = "<group>";
+		};
+		C0DE5EED0000000000000067 /* companion */ = {
+			isa = PBXGroup;
+			children = (
+				C0DE5EED0000000000000063 /* companion.xcconfig */,
+				C0DE5EED0000000000000064 /* companion-debug.xcconfig */,
+				C0DE5EED0000000000000065 /* companion-release.xcconfig */,
+				C0DE5EED0000000000000066 /* companion-tests.xcconfig */,
+			);
+			path = companion;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1317,6 +1564,35 @@
 			productReference = A5E6D75225A5BB6B00EEA7DD /* XPCPower.xpc */;
 			productType = "com.apple.product-type.xpc-service";
 		};
+		C0DE5EED0000000000000001 /* Lock-Watcher-Companion */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C0DE5EED0000000000000006 /* Build configuration list for PBXNativeTarget "Lock-Watcher-Companion" */;
+			buildPhases = (
+				C0DE5EED0000000000000003 /* Sources */,
+				C0DE5EED0000000000000004 /* Frameworks */,
+				C0DE5EED0000000000000005 /* Resources */,
+			);
+			buildRules = (
+			);
+			name = "Lock-Watcher-Companion";
+			productName = "Lock-Watcher-Companion";
+			productReference = C0DE5EED0000000000000007 /* Lock-Watcher-Companion.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C0DE5EED0000000000000002 /* Lock-WatcherCompanionTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C0DE5EED000000000000000A /* Build configuration list for PBXNativeTarget "Lock-WatcherCompanionTests" */;
+			buildPhases = (
+				C0DE5EED0000000000000008 /* Sources */,
+				C0DE5EED0000000000000009 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			name = "Lock-WatcherCompanionTests";
+			productName = "Lock-WatcherCompanionTests";
+			productReference = C0DE5EED000000000000000B /* Lock-WatcherCompanionTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1328,6 +1604,12 @@
 				LastUpgradeCheck = 2700;
 				ORGANIZATIONNAME = Agnidia;
 				TargetAttributes = {
+					C0DE5EED0000000000000001 = {
+						CreatedOnToolsVersion = 27.2;
+					};
+					C0DE5EED0000000000000002 = {
+						CreatedOnToolsVersion = 27.2;
+					};
 					A533D82525AA11F40046B7C8 = {
 						CreatedOnToolsVersion = 12.3;
 						LastSwiftMigration = 1230;
@@ -1376,6 +1658,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				C0DE5EED0000000000000001 /* Lock-Watcher-Companion */,
+				C0DE5EED0000000000000002 /* Lock-WatcherCompanionTests */,
 				A5C6DBED25796A90009DE750 /* Lock-Watcher */,
 				A58FC71E26E2814E007674F6 /* Lock-Watcher-non-mas */,
 				A54E4A1626108E9600E7B1D4 /* XPCAuthentication */,
@@ -1438,6 +1722,13 @@
 			files = (
 			);
 		};
+		C0DE5EED0000000000000005 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+				C0DE5EED000000000000005B /* Localizable.xcstrings in Resources */,
+				C0DE5EED000000000000005D /* PrivacyInfo.xcprivacy in Resources */,
+			);
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1460,6 +1751,17 @@
 		A58FC72B26E2814E007674F6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			files = (
+				C0DE5EED000000000000000E /* APNsClient.swift in Sources */,
+				C0DE5EED0000000000000011 /* APNsCredentialStore.swift in Sources */,
+				C0DE5EED0000000000000014 /* NetworkReachability.swift in Sources */,
+				C0DE5EED0000000000000017 /* PushNotifier.swift in Sources */,
+				C0DE5EED000000000000001A /* AVQRCodeScanner.swift in Sources */,
+				C0DE5EED000000000000001D /* PushPairingViewModel.swift in Sources */,
+				C0DE5EED0000000000000020 /* PushPreviewSupport.swift in Sources */,
+				C0DE5EED0000000000000023 /* PushSettingsView.swift in Sources */,
+				C0DE5EED0000000000000034 /* APNsEnvironment.swift in Sources */,
+				C0DE5EED0000000000000039 /* PairingPayload.swift in Sources */,
+				C0DE5EED000000000000003F /* PushAlertPayload.swift in Sources */,
 				A58FC72C26E2814E007674F6 /* DatabaseDto.swift in Sources */,
 				A599EB2427AAF9DF003A69B5 /* SecurityAlertView.swift in Sources */,
 				A5D23E3127A1DFAE001C0370 /* FirstLaunchView.swift in Sources */,
@@ -1557,6 +1859,17 @@
 		A5C6DBEA25796A90009DE750 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			files = (
+				C0DE5EED000000000000000D /* APNsClient.swift in Sources */,
+				C0DE5EED0000000000000010 /* APNsCredentialStore.swift in Sources */,
+				C0DE5EED0000000000000013 /* NetworkReachability.swift in Sources */,
+				C0DE5EED0000000000000016 /* PushNotifier.swift in Sources */,
+				C0DE5EED0000000000000019 /* AVQRCodeScanner.swift in Sources */,
+				C0DE5EED000000000000001C /* PushPairingViewModel.swift in Sources */,
+				C0DE5EED000000000000001F /* PushPreviewSupport.swift in Sources */,
+				C0DE5EED0000000000000022 /* PushSettingsView.swift in Sources */,
+				C0DE5EED0000000000000033 /* APNsEnvironment.swift in Sources */,
+				C0DE5EED0000000000000038 /* PairingPayload.swift in Sources */,
+				C0DE5EED000000000000003E /* PushAlertPayload.swift in Sources */,
 				A519998626DA4BFB00F482BC /* DatabaseDto.swift in Sources */,
 				A599EB2327AAF9DF003A69B5 /* SecurityAlertView.swift in Sources */,
 				A5D23E3027A1DFAE001C0370 /* FirstLaunchView.swift in Sources */,
@@ -1654,6 +1967,12 @@
 		A5C6DBFC25796A93009DE750 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			files = (
+				C0DE5EED0000000000000026 /* APNsClientTest.swift in Sources */,
+				C0DE5EED0000000000000028 /* APNsCredentialStoreTest.swift in Sources */,
+				C0DE5EED000000000000002A /* PairingPayloadTest.swift in Sources */,
+				C0DE5EED000000000000002C /* PushNotifierTest.swift in Sources */,
+				C0DE5EED000000000000002F /* MockAPNsTransport.swift in Sources */,
+				C0DE5EED0000000000000031 /* PushPairingViewModelTests.swift in Sources */,
 				F3A0000100000005000000C1 /* ThiefDtoTest.swift in Sources */,
 				F3A0000100000006000000C1 /* DatabaseDtoListTest.swift in Sources */,
 				F3A0000100000007000000C1 /* AppSettingsTest.swift in Sources */,
@@ -1714,6 +2033,43 @@
 				A5E6D75925A5BB6C00EEA7DD /* main.m in Sources */,
 				A5E6D75725A5BB6C00EEA7DD /* XPCPower.m in Sources */,
 				A5E6D76F25A5BC8B00EEA7DD /* XPCPowerProtocol.swift in Sources */,
+			);
+		};
+		C0DE5EED0000000000000003 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+				C0DE5EED0000000000000035 /* APNsEnvironment.swift in Sources */,
+				C0DE5EED000000000000003A /* PairingPayload.swift in Sources */,
+				C0DE5EED0000000000000040 /* PushAlertPayload.swift in Sources */,
+				C0DE5EED0000000000000045 /* CompanionApp.swift in Sources */,
+				C0DE5EED0000000000000047 /* NotificationReceiver.swift in Sources */,
+				C0DE5EED000000000000004A /* AlertInbox.swift in Sources */,
+				C0DE5EED000000000000004D /* PushRegistrationModel.swift in Sources */,
+				C0DE5EED0000000000000050 /* QRCodeRenderer.swift in Sources */,
+				C0DE5EED0000000000000054 /* AlertsView.swift in Sources */,
+				C0DE5EED0000000000000056 /* PairView.swift in Sources */,
+				C0DE5EED000000000000007B /* PhotoDetailView.swift in Sources */,
+				C0DE5EED0000000000000079 /* PhotosView.swift in Sources */,
+				C0DE5EED0000000000000074 /* CloudPhotoImageDecoder.swift in Sources */,
+				C0DE5EED0000000000000071 /* CloudPhotoLibrary.swift in Sources */,
+				C0DE5EED0000000000000077 /* ICloudPhotoSource.swift in Sources */,
+				C0DE5EED000000000000007D /* CompanionFixturePhotos.swift in Sources */,
+			);
+		};
+		C0DE5EED0000000000000008 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+				C0DE5EED0000000000000036 /* APNsEnvironment.swift in Sources */,
+				C0DE5EED000000000000003B /* PairingPayload.swift in Sources */,
+				C0DE5EED0000000000000041 /* PushAlertPayload.swift in Sources */,
+				C0DE5EED000000000000004B /* AlertInbox.swift in Sources */,
+				C0DE5EED000000000000004E /* PushRegistrationModel.swift in Sources */,
+				C0DE5EED0000000000000051 /* QRCodeRenderer.swift in Sources */,
+				C0DE5EED0000000000000075 /* CloudPhotoImageDecoder.swift in Sources */,
+				C0DE5EED0000000000000072 /* CloudPhotoLibrary.swift in Sources */,
+				C0DE5EED00000000000000A8 /* ICloudPhotoSource.swift in Sources */,
+				C0DE5EED0000000000000061 /* CompanionCoreTests.swift in Sources */,
+				C0DE5EED000000000000007F /* CloudPhotoLibraryTests.swift in Sources */,
 			);
 		};
 /* End PBXSourcesBuildPhase section */
@@ -1980,6 +2336,48 @@
 			};
 			name = Release;
 		};
+		C0DE5EED0000000000000068 /* Debug configuration for PBXNativeTarget "Lock-Watcher-Companion" */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C0DE5EED0000000000000064 /* companion-debug.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		C0DE5EED0000000000000069 /* Release configuration for PBXNativeTarget "Lock-Watcher-Companion" */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C0DE5EED0000000000000065 /* companion-release.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		C0DE5EED000000000000006A /* Release-non-mas configuration for PBXNativeTarget "Lock-Watcher-Companion" */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C0DE5EED0000000000000065 /* companion-release.xcconfig */;
+			buildSettings = {
+			};
+			name = "Release-non-mas";
+		};
+		C0DE5EED000000000000006B /* Debug configuration for PBXNativeTarget "Lock-WatcherCompanionTests" */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C0DE5EED0000000000000066 /* companion-tests.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		C0DE5EED000000000000006C /* Release configuration for PBXNativeTarget "Lock-WatcherCompanionTests" */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C0DE5EED0000000000000066 /* companion-tests.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		C0DE5EED000000000000006D /* Release-non-mas configuration for PBXNativeTarget "Lock-WatcherCompanionTests" */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C0DE5EED0000000000000066 /* companion-tests.xcconfig */;
+			buildSettings = {
+			};
+			name = "Release-non-mas";
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2052,6 +2450,24 @@
 				A5E6D75F25A5BB6C00EEA7DD /* Debug configuration for PBXNativeTarget "XPCPower" */,
 				A5E6D76025A5BB6C00EEA7DD /* Release configuration for PBXNativeTarget "XPCPower" */,
 				A58FC75F26E2826D007674F6 /* Release-non-mas configuration for PBXNativeTarget "XPCPower" */,
+			);
+			defaultConfigurationName = Release;
+		};
+		C0DE5EED0000000000000006 /* Build configuration list for PBXNativeTarget "Lock-Watcher-Companion" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C0DE5EED0000000000000068 /* Debug configuration for PBXNativeTarget "Lock-Watcher-Companion" */,
+				C0DE5EED0000000000000069 /* Release configuration for PBXNativeTarget "Lock-Watcher-Companion" */,
+				C0DE5EED000000000000006A /* Release-non-mas configuration for PBXNativeTarget "Lock-Watcher-Companion" */,
+			);
+			defaultConfigurationName = Release;
+		};
+		C0DE5EED000000000000000A /* Build configuration list for PBXNativeTarget "Lock-WatcherCompanionTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C0DE5EED000000000000006B /* Debug configuration for PBXNativeTarget "Lock-WatcherCompanionTests" */,
+				C0DE5EED000000000000006C /* Release configuration for PBXNativeTarget "Lock-WatcherCompanionTests" */,
+				C0DE5EED000000000000006D /* Release-non-mas configuration for PBXNativeTarget "Lock-WatcherCompanionTests" */,
 			);
 			defaultConfigurationName = Release;
 		};

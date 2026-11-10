@@ -1,0 +1,4 @@
+#include "../debug.xcconfig"
+#include "companion.xcconfig"
+
+APS_ENVIRONMENT = development

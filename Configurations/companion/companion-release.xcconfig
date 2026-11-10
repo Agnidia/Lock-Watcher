@@ -1,0 +1,4 @@
+#include "../release.xcconfig"
+#include "companion.xcconfig"
+
+APS_ENVIRONMENT = production

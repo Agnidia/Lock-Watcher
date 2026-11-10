@@ -10,7 +10,10 @@
 // https://help.apple.com/xcode/#/dev745c5c974
 
 //User-Defined
-APP_NAME = Lock-Watcher
+MAS_APP_NAME = Lock-Watcher
+APP_NAME = $(MAS_APP_NAME)
+// The iOS companion shares the MAS bundle ID (universal purchase, same iCloud container); it is also the APNs topic.
+COMPANION_BUNDLE_ID = $(APP_DOMAIN).$(MAS_APP_NAME)
 APP_DOMAIN = com.igrsoft
 MTL_FAST_MATH = YES
 APP_DROPBOX = db-wg60852o20nf6eh
