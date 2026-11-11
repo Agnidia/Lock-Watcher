@@ -20,22 +20,22 @@ import UserNotifications
 @MainActor
 protocol ThiefManagerProtocol: Sendable {
     func detectedTrigger() async -> Bool
-
+    
     func restartWatching()
-
+    
     var databaseManager: any DatabaseManagerProtocol { get }
-
+    
     func setupLocationManager(enable: Bool)
-
+    
     func showSnapshot(identifier: String)
-
+    
     func completeDropboxAuthWith(url: URL) async -> String
-
+    
     var dropboxUserNameUpdates: AsyncStream<String> { get }
-
+    
     /// Cleans all data: resets database and app settings to defaults.
     func cleanAll()
-
+    
     /// Re-runs retention after the "Keep files" setting changed; returns at once.
     func applyRetentionPolicy()
 }
@@ -54,7 +54,7 @@ struct ThiefManagerDependencies {
     var installsNotificationDelegate: Bool
     var debugCaptureDelay: Duration
     var cameraAccessNotice: any CameraAccessNoticePresenting
-
+    
     @MainActor
     static func live(settings: AppSettingsProtocol) -> ThiefManagerDependencies {
         let camera = CameraSnapCamera()
@@ -91,13 +91,13 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
     // MARK: - Typealiases
     
     typealias WatchBlock = Commons.ThiefClosure
-
+    
     /// What the camera produced for one trigger, before it is stored.
     private enum CapturedMedia {
         case photo(NSImage)
         case video(movie: URL, poster: NSImage?)
     }
-
+    
     // MARK: - Dependency injection
     
     private var triggerManager: TriggerManagerProtocol
@@ -109,32 +109,32 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
     private(set) var settings: AppSettingsProtocol
     
     private var logger: LogProtocol
-
+    
     private let camera: any CameraCapturing
-
+    
     private let posterExtractor: any PosterFrameExtracting
-
+    
     private let retention: any RetentionManaging
-
+    
     private let isImageCaptureDebug: Bool
-
+    
     private let debugCaptureDelay: Duration
-
+    
     private let cameraAccessNotice: any CameraAccessNoticePresenting
-
+    
     /// The denial notice is posted once per launch, not on every trigger.
     private var hasReportedCameraAccessDenied = false
-
+    
     // MARK: - Variables
     
     private var lastThiefDetection: TriggerType = .setup
-
+    
     /// True while a trigger owns the camera; covers taking the photo or recording plus its poster, not sending.
     private var isCameraBusy = false
-
+    
     /// Triggers waiting for the camera, resumed one at a time as it is handed over.
     private var cameraWaiters: [CheckedContinuation<Void, Never>] = []
-
+    
     /// One still is queued per busy period; further triggers in that period are coalesced.
     private var isStillQueued = false
     
@@ -152,10 +152,10 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
     ///
     private(set) var locationManager = CLLocationManager()
     private var coordinate: CLLocationCoordinate2D?
-
+    
     /// AsyncStream for Dropbox username updates
     private var dropboxUserNameContinuation: AsyncStream<String>.Continuation?
-
+    
     /// Provides an AsyncStream of Dropbox username updates
     var dropboxUserNameUpdates: AsyncStream<String> {
         AsyncStream { continuation in
@@ -198,7 +198,7 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
         if dependencies.installsNotificationDelegate {
             UNUserNotificationCenter.current().delegate = self
         }
-
+        
         let retention = retention
         Task {
             await retention.applicationDidLaunch()
@@ -229,23 +229,23 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
     func restartWatching() {
         startWatching(watchBlock)
     }
-
+    
     /// Detects and processes any triggers.
     func detectedTrigger() async -> Bool {
         await detectedTrigger(for: lastThiefDetection)
     }
-
+    
     /// Captures and processes one incident; returns false when nothing was captured or the trigger was coalesced.
     func detectedTrigger(for type: TriggerType) async -> Bool {
         logger.debug("Detected triggered action: \(type.rawValue)")
-
+        
         if isImageCaptureDebug {
             guard let image = NSImage(systemSymbolName: "swift", accessibilityDescription: nil) else { return false }
             await processCapture(.photo(image), triggerType: .debug, date: Date())
             try? await Task.sleep(for: debugCaptureDelay)
             return true
         }
-
+        
         guard !camera.isAccessDenied else {
             logger.error("Camera access is denied; trigger \(type.rawValue) captured nothing")
             if !hasReportedCameraAccessDenied {
@@ -254,7 +254,7 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
             }
             return false
         }
-
+        
         let stillOnly: Bool
         if isCameraBusy {
             guard !isStillQueued else {
@@ -269,19 +269,19 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
             isCameraBusy = true
             stillOnly = false
         }
-
+        
         let captured: CapturedMedia? = if stillOnly || settings.snapshot.outputType == .photo {
             await capturePhoto()
         } else {
             await captureVideo()
         }
         releaseCamera()
-
+        
         guard let captured else {
             logger.error("Camera returned nothing for trigger \(type.rawValue)")
             return false
         }
-
+        
         // Taken after the camera is released, so a queued still never shares a date (ThiefDto equality) with the record before it.
         await processCapture(captured, triggerType: type, date: Date())
         return true
@@ -292,43 +292,43 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
         guard let filePath = databaseManager.latestImages.first(where: { Date.defaultFormat.string(from: $0.date) == identifier })?.path else {
             return
         }
-
+        
         guard FileManager.default.fileExists(atPath: filePath.path) else {
             logger.info("The file of the selected record is no longer on disk")
             return
         }
-
+        
         NSWorkspace.shared.open(filePath)
     }
-
+    
     /// Cleans all data: resets database and app settings to defaults.
     func cleanAll() {
         databaseManager.cleanAll()
         settings.resetToDefaults()
         restartWatching()
     }
-
+    
     func applyRetentionPolicy() {
         let retention = retention
         Task {
             await retention.retentionSettingChanged()
         }
     }
-
+    
     // MARK: - private
-
+    
     private var captureConfiguration: CaptureConfiguration {
         CaptureConfiguration(imageSize: settings.snapshot.outputSize,
                              videoSize: settings.snapshot.outputSize,
                              isSaveToFile: settings.sync.isSaveSnapshotToDisk)
     }
-
+    
     private func waitForCamera() async {
         await withCheckedContinuation { continuation in
             cameraWaiters.append(continuation)
         }
     }
-
+    
     /// Hands the camera to the next waiter instead of freeing it, so a new trigger cannot overtake a queued one.
     private func releaseCamera() {
         if cameraWaiters.isEmpty {
@@ -337,23 +337,23 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
             cameraWaiters.removeFirst().resume()
         }
     }
-
+    
     private func capturePhoto() async -> CapturedMedia? {
         await camera.capturePhoto(captureConfiguration).map { .photo($0) }
     }
-
+    
     private func captureVideo() async -> CapturedMedia? {
         let seconds = settings.snapshot.videoDuration
         guard SnapshotSettings.videoDurationRange.contains(seconds) else {
             logger.error("Video duration \(seconds) s is outside \(SnapshotSettings.videoDurationRange); taking a photo instead")
             return await capturePhoto()
         }
-
+        
         guard let movieURL = fileSystemUtil.movieURL(forKey: camera.fileKey(for: Date())) else {
             logger.error("Incident folder unavailable for the video; taking a photo instead")
             return await capturePhoto()
         }
-
+        
         switch await camera.recordVideo(seconds: seconds, to: movieURL, captureConfiguration) {
         case .success(let movie):
             if let poster = await posterExtractor.posterImage(from: movie) {
@@ -366,7 +366,7 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
             return await capturePhoto()
         }
     }
-
+    
     /// Every case falls back to a photo; no `default:`, so a new CameraSnap case fails the build.
     private func recover(from error: CameraSnapVideoError) async {
         switch error {
@@ -382,11 +382,11 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
         case .finalizationFailed: logVideoFailure("finalizationFailed")
         }
     }
-
+    
     private func logVideoFailure(_ reason: String) {
         logger.error("Video recording failed: \(reason); taking a photo instead")
     }
-
+    
     /// Bounded by CameraSnap's own worst case for a 5 s clip (3 × duration + 2 s, plus warm-up).
     private func waitUntilCameraStopsRecording() async {
         let deadline = ContinuousClock.now + .seconds(20)
@@ -394,7 +394,7 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
             try? await Task.sleep(for: .milliseconds(100))
         }
     }
-
+    
     /// Stores the capture, sends it, records it, and runs retention.
     private func processCapture(_ captured: CapturedMedia, triggerType: TriggerType, date: Date) async {
         let snapshot: NSImage?
@@ -417,13 +417,13 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
             filePath = poster.flatMap { fileSystemUtil.store(image: $0, forKey: movie.deletingPathExtension().lastPathComponent, quality: quality) }
             videoURL = movie
         }
-
+        
         let ipAddress: String? = if settings.options.addIPAddressToSnapshot {
-            networkUtil.getIFAddresses()
+            await networkUtil.getIFAddresses()
         } else {
             nil
         }
-
+        
         let traceRoute: String? = if settings.options.addTraceRouteToSnapshot {
             await withCheckedContinuation { continuation in
                 networkUtil.getTraceRoute(host: settings.options.traceRouteServer) { traceRouteLog in
@@ -433,7 +433,7 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
         } else {
             nil
         }
-
+        
         let dto = ThiefDto(
             triggerType: triggerType,
             coordinate: coordinate,
@@ -445,11 +445,11 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
             compressionFactor: quality,
             date: date
         )
-
+        
         let report = await notificationManager.send(dto)
         _ = databaseManager.send(dto)
         await retention.incidentRecorded(dto, report: report)
-
+        
         watchBlock(dto)
     }
     
@@ -463,7 +463,7 @@ final class ThiefManager: NSObject, ThiefManagerProtocol {
     
     private func triggered(_ type: TriggerType) {
         guard type != .setup else { return }
-
+        
         lastThiefDetection = type
         Task {
             _ = await detectedTrigger(for: type)
@@ -491,18 +491,12 @@ extension ThiefManager: @MainActor CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        var statusName = "Unknown"
-        switch status {
-        case .restricted:
-            statusName = "restricted"
-        case .denied:
-            statusName = "denied"
-        case .authorized:
-            statusName = "authorised"
-        case .notDetermined:
-            statusName = "not yet determined"
-        default:
-            break
+        let statusName = switch status {
+        case .restricted: "restricted"
+        case .denied: "denied"
+        case .authorized: "authorised"
+        case .notDetermined: "not yet determined"
+        default: "Unknown"
         }
         
         logger.debug("location manager auth status changed to: \(statusName)")
@@ -526,24 +520,24 @@ final class ThiefManagerPreview: ThiefManagerProtocol {
             continuation.finish()
         }
     }
-
+    
     func completeDropboxAuthWith(url: URL) async -> String {
         ""
     }
-
+    
     func showSnapshot(identifier: String) {}
-
+    
     func setupLocationManager(enable: Bool) {}
-
+    
     func detectedTrigger() async -> Bool {
         true
     }
-
+    
     func restartWatching() {}
-
+    
     func cleanAll() {}
-
+    
     func applyRetentionPolicy() {}
-
+    
     var databaseManager: any DatabaseManagerProtocol = DatabaseManager(settings: AppSettingsPreview())
 }

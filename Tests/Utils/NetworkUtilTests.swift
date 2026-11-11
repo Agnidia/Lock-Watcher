@@ -25,8 +25,8 @@ final class NetworkUtilTests: XCTestCase {
     }
 
     /// Test local network interface addresses (does not require network)
-    func testGetIFAddresses() {
-        let ipAddress = networkUtil.getIFAddresses()
+    func testGetIFAddresses() async {
+        let ipAddress = await networkUtil.getIFAddresses()
 
         XCTAssertFalse(ipAddress.isEmpty, "The IP Address should be not empty")
         XCTAssertNil(mockLogger.errorMessage, "No error log should be generated when fetching IP Address successfully.")
