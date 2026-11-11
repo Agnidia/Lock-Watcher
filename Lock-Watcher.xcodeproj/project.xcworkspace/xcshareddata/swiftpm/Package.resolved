@@ -1,5 +1,5 @@
 {
-  "originHash" : "695ecf8803ca758e3a1cd838e3a48b342eb7ae7975043cdd1cb51ebfaf75c126",
+  "originHash" : "30505718d419fa7d5f53c93b5b434b2901f02fea6610f92e83dcc7e3cc0a2bae",
   "pins" : [
     {
       "identity" : "camerasnap",
@@ -8,6 +8,15 @@
       "state" : {
         "revision" : "16dc3cc45bd7a310dc5aa54cd19012b7171c820c",
         "version" : "0.3.1"
+      }
+    },
+    {
+      "identity" : "customizedaboutview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Agnidia/CustomizedAboutView.git",
+      "state" : {
+        "revision" : "fd2ca8f420e45d4818e49271b1936ea8474e01ed",
+        "version" : "1.1.0"
       }
     },
     {

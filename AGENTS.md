@@ -229,7 +229,7 @@ The iOS companion has one target and no Non-MAS variant. Its setup and key handl
 
 | Setting | Value |
 |---------|-------|
-| Platform | macOS 14.1+ |
+| Platform | macOS 15.0+ |
 | Localization | English (en), Ukrainian (uk) |
 | Storage | EasyStash (encrypted local storage) |
 | Cloud | iCloud (CloudKit), Dropbox SDK |

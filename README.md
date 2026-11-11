@@ -69,7 +69,7 @@ Each capture includes:
 
 - **Language**: Swift 6.4
 - **UI Framework**: SwiftUI with AppKit integration
-- **Minimum Platform**: macOS 14.1+
+- **Minimum Platform**: macOS 15.0+
 - **Architecture**: MVVM + Coordinator pattern
 - **Concurrency**: Swift 6 strict concurrency
 - **Storage**: EasyStash (encrypted local storage)
@@ -80,7 +80,7 @@ Each capture includes:
 
 ## Requirements
 
-- **macOS**: 14.1 or later
+- **macOS**: 15.0 or later
 - **Hardware**: Mac with built-in or external camera
 - **Xcode**: 27+ (for development)
 - **Swift**: 6.4

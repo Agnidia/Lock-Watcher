@@ -56,6 +56,12 @@
       "version": {
         "up-to-next-major-version": "2.0.0",
       },
+    }, {
+      "kind": "remote",
+      "repository": "https://github.com/Agnidia/CustomizedAboutView.git",
+      "version": {
+        "up-to-next-major-version": "1.1.0",
+      },
     },
   ],
   "files": [
@@ -510,6 +516,12 @@
                 "Lock-Watcher-non-mas/compile-sources",
               ],
             }, {
+              "path": "CompanionPromptManager.swift",
+              "target-membership": [
+                "Lock-Watcher/compile-sources",
+                "Lock-Watcher-non-mas/compile-sources",
+              ],
+            }, {
               "kind": "group",
               "path": "Camera",
               "children": [
@@ -534,7 +546,7 @@
                 "Lock-Watcher-non-mas/compile-sources",
               ],
             }, {
-              "path": "AuthentificationManager.swift",
+              "path": "AuthenticationManager.swift",
               "target-membership": [
                 "Lock-Watcher/compile-sources",
                 "Lock-Watcher-non-mas/compile-sources",
@@ -925,10 +937,22 @@
                         "Lock-Watcher/compile-sources",
                         "Lock-Watcher-non-mas/compile-sources",
                       ],
+                    }, {
+                      "path": "SettingsAboutView.swift",
+                      "target-membership": [
+                        "Lock-Watcher/compile-sources",
+                        "Lock-Watcher-non-mas/compile-sources",
+                      ],
                     },
                   ],
                 }, {
                   "path": "SettingsDomain.swift",
+                  "target-membership": [
+                    "Lock-Watcher/compile-sources",
+                    "Lock-Watcher-non-mas/compile-sources",
+                  ],
+                }, {
+                  "path": "SettingsPage.swift",
                   "target-membership": [
                     "Lock-Watcher/compile-sources",
                     "Lock-Watcher-non-mas/compile-sources",
@@ -1126,6 +1150,7 @@
             { "path": "TriggerManagerTest.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
             { "path": "NotificationManagerTest.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
             { "path": "RetentionManagerTest.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
+            { "path": "CompanionPromptManagerTest.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
             { "path": "ThiefManagerTest.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
           ],
         }, {
@@ -1265,6 +1290,9 @@
           "build-phase": { "build-phase": "frameworks" },
         },
       ],
+      "build-settings": {
+        "ENABLE_MODULE_VERIFIER": "YES",
+      },
     }, {
       "name": "Lock-WatcherCompanionTests",
       "id": "C0DE5EED0000000000000002",
@@ -1279,6 +1307,9 @@
         "compile-sources",
         "frameworks",
       ],
+      "build-settings": {
+        "ENABLE_MODULE_VERIFIER": "YES",
+      },
     }, {
       "name": "Lock-Watcher",
       "id": "A5C6DBED25796A90009DE750",
@@ -1307,6 +1338,10 @@
         {
           "package": "CameraSnap",
           "product-name": "CameraSnap",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
+          "package": "CustomizedAboutView",
+          "product-name": "CustomizedAboutView",
           "build-phase": { "build-phase": "frameworks" },
         }, {
           "package": "EasyStash",
@@ -1360,6 +1395,10 @@
         {
           "package": "CameraSnap",
           "product-name": "CameraSnap",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
+          "package": "CustomizedAboutView",
+          "product-name": "CustomizedAboutView",
           "build-phase": { "build-phase": "frameworks" },
         }, {
           "package": "EasyStash",
@@ -1512,9 +1551,6 @@
       },
     },
   ],
-  "build-settings": {
-    "DEVELOPMENT_TEAM": "DMP42GVPJ3",
-  },
-  "last-upgrade": "27.0",
+  "last-upgrade": "27.2",
   "last-swift-update": "12.2",
 }
