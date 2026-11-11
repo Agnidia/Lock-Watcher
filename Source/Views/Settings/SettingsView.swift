@@ -86,7 +86,7 @@ struct SettingsView: View {
 
                         TraceRouteToSnapshotView(isAddTraceRouteToSnapshot: viewModel.addTraceRouteToSnapshot, traceRouteServer: viewModel.traceRouteServer)
 
-                        SaveSnapshotToDiskView(isSaveSnapshotToDisk: viewModel.isSaveSnapshotToDisk)
+                        SaveSnapshotToDiskView(isSaveSnapshotToDisk: viewModel.isSaveSnapshotToDisk, browse: viewModel.openLocalFolder)
 
                         SnapshotOutputTypeView(outputType: viewModel.snapshotOutputType)
                         if viewModel.showsVideoDuration {
@@ -109,7 +109,7 @@ struct SettingsView: View {
                             if AppSettings.isMASBuild == false {
                                 SendNotificationToMailView(isSendNotificationToMail: viewModel.isSendNotificationToMail, mailRecipient: viewModel.mailRecipient)
                             }
-                            ICloudSyncView(isICloudSyncEnable: viewModel.isICloudSyncEnable)
+                            ICloudSyncView(isICloudSyncEnable: viewModel.isICloudSyncEnable, browse: { Task { await viewModel.openICloudFolder() } })
 
                             DropboxView(isDropboxEnable: viewModel.isDropboxEnable, dropboxName: viewModel.dropboxName)
 

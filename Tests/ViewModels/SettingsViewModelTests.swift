@@ -610,6 +610,69 @@ final class SettingsViewModelTests: XCTestCase {
 
         XCTAssertEqual(mockSettings.sync.dropboxName, "UpdatedUser")
     }
+
+    // MARK: - Browse Folder Tests
+
+    private func makeSUT(folders: MockFolderOpener) -> SettingsViewModel {
+        SettingsViewModel(settings: mockSettings, thiefManager: mockThiefManager, locationAuthorization: mockAuthorization, push: .preview(), folders: folders)
+    }
+
+    func testOpenLocalFolderRevealsLocalFolder() {
+        let folders = MockFolderOpener(local: URL(fileURLWithPath: "/tmp/local"), iCloud: nil)
+
+        makeSUT(folders: folders).openLocalFolder()
+
+        XCTAssertEqual(folders.revealed, [URL(fileURLWithPath: "/tmp/local")])
+    }
+
+    func testOpenLocalFolderDoesNothingWithoutFolder() {
+        let folders = MockFolderOpener(local: nil, iCloud: nil)
+
+        makeSUT(folders: folders).openLocalFolder()
+
+        XCTAssertTrue(folders.revealed.isEmpty)
+    }
+
+    func testOpenICloudFolderRevealsICloudFolder() async {
+        let folders = MockFolderOpener(local: nil, iCloud: URL(fileURLWithPath: "/tmp/icloud"))
+
+        await makeSUT(folders: folders).openICloudFolder()
+
+        XCTAssertEqual(folders.revealed, [URL(fileURLWithPath: "/tmp/icloud")])
+    }
+
+    func testOpenICloudFolderDoesNothingWhenSignedOut() async {
+        let folders = MockFolderOpener(local: URL(fileURLWithPath: "/tmp/local"), iCloud: nil)
+
+        await makeSUT(folders: folders).openICloudFolder()
+
+        XCTAssertTrue(folders.revealed.isEmpty)
+    }
+}
+
+/// `revealed` changes on the main actor only, through `reveal`.
+private final class MockFolderOpener: FolderOpening, @unchecked Sendable {
+    private let local: URL?
+    private let iCloud: URL?
+    private(set) var revealed: [URL] = []
+
+    init(local: URL?, iCloud: URL?) {
+        self.local = local
+        self.iCloud = iCloud
+    }
+
+    func localFolder() -> URL? {
+        local
+    }
+
+    func iCloudFolder() -> URL? {
+        iCloud
+    }
+
+    @MainActor
+    func reveal(_ url: URL) {
+        revealed.append(url)
+    }
 }
 
 // MARK: - Source Info

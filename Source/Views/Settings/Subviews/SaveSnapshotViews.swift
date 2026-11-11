@@ -136,14 +136,22 @@ struct TraceRouteToSnapshotView: View {
 /// A view component that allows the user to toggle whether to save the snapshot to disk.
 struct SaveSnapshotToDiskView: View {
     @Binding var isSaveSnapshotToDisk: Bool
+    let browse: () -> Void
 
     var body: some View {
-        Toggle(isOn: $isSaveSnapshotToDisk) {
-            Text("SaveSnapshotToDisk")
+        HStack(spacing: DesignSystem.Spacing.sm) {
+            Toggle(isOn: $isSaveSnapshotToDisk) {
+                Text("SaveSnapshotToDisk")
+            }
+            .accessibilityIdentifier(AccessibilityID.Settings.saveToDiskToggle)
+            .accessibilityLabel(AccessibilityLabel.Settings.saveToDisk)
+            .accessibilityHint(AccessibilityHint.Settings.toggleHint)
+
+            Button("Browse", action: browse)
+                .help("BrowseLocalFolderHelp")
+                .accessibilityIdentifier(AccessibilityID.Settings.browseLocalButton)
+                .accessibilityLabel(Text("BrowseLocalFolderHelp"))
         }
-        .accessibilityIdentifier(AccessibilityID.Settings.saveToDiskToggle)
-        .accessibilityLabel(AccessibilityLabel.Settings.saveToDisk)
-        .accessibilityHint(AccessibilityHint.Settings.toggleHint)
     }
 }
 
@@ -261,16 +269,29 @@ struct KeepFilesView: View {
 /// A view component that allows the user to toggle iCloud synchronization.
 struct ICloudSyncView: View {
     @Binding var isICloudSyncEnable: Bool
+    /// Settings passes it; the first-launch screen leaves it out and shows no Browse button.
+    var browse: (() -> Void)?
 
     var body: some View {
-        Toggle(isOn: $isICloudSyncEnable) {
-            Text("SyncWithiCloud")
+        let isSignedOut = FileManager.default.ubiquityIdentityToken == nil
+        HStack(spacing: DesignSystem.Spacing.sm) {
+            Toggle(isOn: $isICloudSyncEnable) {
+                Text("SyncWithiCloud")
+            }
+            .disabled(isSignedOut)
+            .help("SyncWithiCloudHelp")
+            .accessibilityIdentifier(AccessibilityID.Settings.iCloudToggle)
+            .accessibilityLabel(AccessibilityLabel.Settings.syncICloud)
+            .accessibilityHint(AccessibilityHint.Settings.toggleHint)
+
+            if let browse {
+                Button("Browse", action: browse)
+                    .disabled(isSignedOut)
+                    .help(isSignedOut ? "SyncWithiCloudHelp" : "BrowseICloudFolderHelp")
+                    .accessibilityIdentifier(AccessibilityID.Settings.browseICloudButton)
+                    .accessibilityLabel(Text("BrowseICloudFolderHelp"))
+            }
         }
-        .disabled(FileManager.default.ubiquityIdentityToken == nil)
-        .help("SyncWithiCloudHelp")
-        .accessibilityIdentifier(AccessibilityID.Settings.iCloudToggle)
-        .accessibilityLabel(AccessibilityLabel.Settings.syncICloud)
-        .accessibilityHint(AccessibilityHint.Settings.toggleHint)
     }
 }
 

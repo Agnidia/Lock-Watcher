@@ -43,6 +43,9 @@ final class SettingsViewModel: DomainViewConstantProtocol {
     let push: PushPairingViewModel
 
     @ObservationIgnored
+    private let folders: any FolderOpening
+
+    @ObservationIgnored
     private var authorizationObservation: LocationAuthorizationObservation?
 
     private var authorizationRevision = 0
@@ -405,10 +408,12 @@ final class SettingsViewModel: DomainViewConstantProtocol {
     init(settings: AppSettingsProtocol,
          thiefManager: ThiefManagerProtocol,
          locationAuthorization: LocationAuthorizationProviding = LocationAuthorizationService(),
-         push: PushPairingViewModel)
+         push: PushPairingViewModel,
+         folders: any FolderOpening = FinderFolderOpener())
     {
         self.settings = settings
         self.push = push
+        self.folders = folders
         self.thiefManager = thiefManager
         self.locationAuthorization = locationAuthorization
 
@@ -456,6 +461,19 @@ final class SettingsViewModel: DomainViewConstantProtocol {
         thiefManager.setupLocationManager(enable: enable)
     }
 
+    /// Shows the folder of locally saved incidents in Finder.
+    func openLocalFolder() {
+        guard let url = folders.localFolder() else { return }
+        folders.reveal(url)
+    }
+
+    /// Shows the iCloud Documents folder in Finder; resolving the container can block, so it runs off the main actor.
+    func openICloudFolder() async {
+        let folders = folders
+        guard let url = await Task.detached(operation: { folders.iCloudFolder() }).value else { return }
+        folders.reveal(url)
+    }
+
     /// Observes any updates to the Dropbox user's name and updates the setting accordingly.
     private func watchDropboxUserNameUpdate() {
         Task { [weak self] in
@@ -465,6 +483,38 @@ final class SettingsViewModel: DomainViewConstantProtocol {
                 settings.sync.dropboxName = name
             }
         }
+    }
+}
+
+/// Where the incident files live, and how to show a folder to the user.
+protocol FolderOpening: Sendable {
+    /// The local incident folder, created when missing.
+    func localFolder() -> URL?
+    /// The iCloud Documents folder, created when missing; nil when iCloud is unavailable. Blocking: call off the main thread.
+    func iCloudFolder() -> URL?
+    @MainActor
+    func reveal(_ url: URL)
+}
+
+struct FinderFolderOpener: FolderOpening {
+    func localFolder() -> URL? {
+        FileSystemUtil().incidentDirectory.flatMap(Self.created)
+    }
+
+    func iCloudFolder() -> URL? {
+        FileManager.default.url(forUbiquityContainerIdentifier: nil)
+            .map { $0.appendingPathComponent("Documents") }
+            .flatMap(Self.created)
+    }
+
+    @MainActor
+    func reveal(_ url: URL) {
+        NSWorkspace.shared.open(url)
+    }
+
+    private static func created(_ url: URL) -> URL? {
+        try? FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
+        return url
     }
 }
 
