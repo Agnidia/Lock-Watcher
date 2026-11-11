@@ -1,7 +1,7 @@
 //
 //  PushSettingsView.swift
 //
-//  Created on 10.11.2026.
+//  Created on 11.11.2026.
 //  Copyright © 2026 Agnidia. All rights reserved.
 //
 
@@ -25,7 +25,7 @@ struct PushSettingsView: View {
 
             PushPairingStatusView(phase: PushBlockPhase.make(isEnabled: isEnabled, pairing: model.pairing), model: model)
 
-            if isEnabled {
+            if isEnabled, !AppSettings.isMASBuild {
                 OwnAPNsKeyView(model: model)
             }
         }

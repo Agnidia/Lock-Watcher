@@ -1,13 +1,15 @@
 //
 //  AVQRCodeScanner.swift
 //
-//  Created on 10.11.2026.
+//  Created on 11.11.2026.
 //  Copyright © 2026 Agnidia. All rights reserved.
 //
 
 import AppKit
 import AVFoundation
+import os
 import SwiftUI
+import Vision
 
 enum QRScannerError: Error, Sendable {
     case cameraUnavailable
@@ -24,6 +26,7 @@ protocol QRCodeScanning: Sendable {
 
 /// Owns the capture session on its own serial queue, because `startRunning` and `stopRunning` block and must stay off the main thread.
 actor AVQRCodeScanner: QRCodeScanning {
+    private static let log = Logger(subsystem: "com.igrsoft.Lock-Watcher", category: "qr-scanner")
     private let queue = DispatchSerialQueue(label: "com.igrsoft.Lock-Watcher.qr-scanner")
 
     nonisolated var unownedExecutor: UnownedSerialExecutor {
@@ -32,8 +35,8 @@ actor AVQRCodeScanner: QRCodeScanning {
 
     /// Shared with the preview layer only; `AVCaptureVideoPreviewLayer` may attach to a session that another queue drives.
     private nonisolated(unsafe) let session = AVCaptureSession()
-    private let output = AVCaptureMetadataOutput()
-    private var delegate: MetadataDelegate?
+    private let output = AVCaptureVideoDataOutput()
+    private var delegate: FrameDelegate?
     private var isConfigured = false
 
     func codes() throws -> AsyncStream<String> {
@@ -42,9 +45,9 @@ actor AVQRCodeScanner: QRCodeScanning {
         }
         delegate?.continuation.finish()
         let (stream, continuation) = AsyncStream<String>.makeStream(bufferingPolicy: .bufferingNewest(4))
-        let delegate = MetadataDelegate(continuation: continuation)
+        let delegate = FrameDelegate(continuation: continuation)
         self.delegate = delegate
-        output.setMetadataObjectsDelegate(delegate, queue: queue)
+        output.setSampleBufferDelegate(delegate, queue: queue)
         if !session.isRunning {
             session.startRunning()
         }
@@ -52,7 +55,7 @@ actor AVQRCodeScanner: QRCodeScanning {
     }
 
     func stop() {
-        output.setMetadataObjectsDelegate(nil, queue: nil)
+        output.setSampleBufferDelegate(nil, queue: nil)
         delegate?.continuation.finish()
         delegate = nil
         if session.isRunning {
@@ -69,35 +72,54 @@ actor AVQRCodeScanner: QRCodeScanning {
 
     /// A busy or missing camera (CameraSnap may hold it) throws instead of crashing.
     private func configure() throws {
-        guard let device = AVCaptureDevice.default(for: .video), let input = try? AVCaptureDeviceInput(device: device) else {
+        guard let device = AVCaptureDevice.default(for: .video) else {
+            Self.log.error("QR scanner: no video device")
+            throw QRScannerError.cameraUnavailable
+        }
+        let input: AVCaptureDeviceInput
+        do {
+            input = try AVCaptureDeviceInput(device: device)
+        } catch {
+            Self.log.error("QR scanner: input failed, code \((error as NSError).code, privacy: .public)")
             throw QRScannerError.cameraUnavailable
         }
         session.beginConfiguration()
         defer { session.commitConfiguration() }
         guard session.canAddInput(input), session.canAddOutput(output) else {
+            Self.log.error("QR scanner: session rejected input or output")
             throw QRScannerError.cameraUnavailable
         }
         session.addInput(input)
         session.addOutput(output)
-        guard output.availableMetadataObjectTypes.contains(.qr) else {
-            throw QRScannerError.cameraUnavailable
-        }
-        output.metadataObjectTypes = [.qr]
+        output.alwaysDiscardsLateVideoFrames = true
         isConfigured = true
     }
 }
 
-/// AVFoundation calls it on the scanner queue only.
-private final class MetadataDelegate: NSObject, AVCaptureMetadataOutputObjectsDelegate, @unchecked Sendable {
+/// Decodes frames with Vision because `AVCaptureMetadataOutput` offers no QR type on some Macs. AVFoundation calls it on the scanner queue only.
+private final class FrameDelegate: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, @unchecked Sendable {
+    /// Decoding every frame wastes battery; a QR held in front of the camera stays long enough for a few reads per second.
+    private static let minInterval: TimeInterval = 0.25
+
     let continuation: AsyncStream<String>.Continuation
+    private var lastScan = Date.distantPast
 
     init(continuation: AsyncStream<String>.Continuation) {
         self.continuation = continuation
     }
 
-    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-        for case let code as AVMetadataMachineReadableCodeObject in metadataObjects {
-            if let value = code.stringValue {
+    func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+        let now = Date()
+        guard now.timeIntervalSince(lastScan) >= Self.minInterval,
+              let pixels = CMSampleBufferGetImageBuffer(sampleBuffer)
+        else { return }
+        lastScan = now
+
+        let request = VNDetectBarcodesRequest()
+        request.symbologies = [.qr]
+        guard (try? VNImageRequestHandler(cvPixelBuffer: pixels).perform([request])) != nil else { return }
+        for case let barcode in request.results ?? [] {
+            if let value = barcode.payloadStringValue {
                 continuation.yield(value)
             }
         }
