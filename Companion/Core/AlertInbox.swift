@@ -1,7 +1,7 @@
 //
 //  AlertInbox.swift
 //
-//  Created on 10.11.2026.
+//  Created on 11.11.2026.
 //  Copyright © 2026 Agnidia. All rights reserved.
 //
 
@@ -9,7 +9,7 @@ import Foundation
 import Observation
 import os
 
-struct ReceivedAlert: Codable, Sendable, Equatable, Identifiable {
+struct ReceivedAlert: Codable, Sendable, Equatable, Hashable, Identifiable {
     /// The notification request identifier; the dedupe key.
     let id: String
     let title: String
@@ -19,6 +19,30 @@ struct ReceivedAlert: Codable, Sendable, Equatable, Identifiable {
     let latitude: Double?
     let longitude: Double?
     let ip: String?
+    /// Detail-view fields. Optional, so alerts stored before they existed still decode.
+    var traceRoute: String?
+    var fileName: String?
+    var mediaKind: String?
+    var host: String?
+    var timeZoneID: String?
+
+    init(id: String, title: String, body: String, trigger: String?, date: Date, latitude: Double?, longitude: Double?, ip: String?,
+         traceRoute: String? = nil, fileName: String? = nil, mediaKind: String? = nil, host: String? = nil, timeZoneID: String? = nil)
+    {
+        self.id = id
+        self.title = title
+        self.body = body
+        self.trigger = trigger
+        self.date = date
+        self.latitude = latitude
+        self.longitude = longitude
+        self.ip = ip
+        self.traceRoute = traceRoute
+        self.fileName = fileName
+        self.mediaKind = mediaKind
+        self.host = host
+        self.timeZoneID = timeZoneID
+    }
 
     /// Prefers the shared payload; falls back to the visible notification text when the body is not ours.
     static func parse(identifier: String, userInfo: [AnyHashable: Any], title: String, body: String, deliveredAt: Date) -> ReceivedAlert {
@@ -30,7 +54,12 @@ struct ReceivedAlert: Codable, Sendable, Equatable, Identifiable {
                              date: payload.map { Date(timeIntervalSince1970: TimeInterval($0.date)) } ?? deliveredAt,
                              latitude: payload?.lat,
                              longitude: payload?.lon,
-                             ip: payload?.ip)
+                             ip: payload?.ip,
+                             traceRoute: payload?.trace,
+                             fileName: payload?.file,
+                             mediaKind: payload?.media,
+                             host: payload?.host,
+                             timeZoneID: payload?.tz)
     }
 
     static func decodePayload(_ userInfo: [AnyHashable: Any]) -> PushAlertPayload? {
@@ -98,7 +127,9 @@ final class InMemoryAlertStore: AlertPersisting, @unchecked Sendable {
 @MainActor
 @Observable
 final class AlertInbox {
+    /// Stored and shown for Pro; storage never shrinks when Pro lapses, so renewing brings the history back.
     static let capacity = 100
+    static let freeVisibleLimit = 10
 
     private(set) var alerts: [ReceivedAlert]
 
@@ -114,6 +145,14 @@ final class AlertInbox {
             alerts = []
             isHistoryUnread = true
         }
+    }
+
+    func visibleAlerts(isPro: Bool) -> [ReceivedAlert] {
+        isPro ? alerts : Array(alerts.prefix(Self.freeVisibleLimit))
+    }
+
+    func hiddenCount(isPro: Bool) -> Int {
+        alerts.count - visibleAlerts(isPro: isPro).count
     }
 
     /// Retries unread history first; every activation calls this, so the first one after an unlock merges history before any write.

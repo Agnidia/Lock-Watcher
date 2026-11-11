@@ -1,7 +1,7 @@
 //
 //  PhotosView.swift
 //
-//  Created on 10.11.2026.
+//  Created on 11.11.2026.
 //  Copyright © 2026 Agnidia. All rights reserved.
 //
 
@@ -9,6 +9,8 @@ import SwiftUI
 
 struct PhotosView: View {
     let library: CloudPhotoLibrary
+    let isPro: Bool
+    let showPro: () -> Void
 
     private static let columns = [GridItem(.adaptive(minimum: 100), spacing: 2)]
 
@@ -20,7 +22,7 @@ struct PhotosView: View {
             .refreshable { await library.refresh() }
             .navigationTitle("TabPhotos")
             .navigationDestination(for: CloudPhoto.self) { photo in
-                PhotoDetailView(photo: photo, library: library)
+                PhotoDetailView(photo: photo, library: library, isPro: isPro, showPro: showPro)
             }
         }
     }

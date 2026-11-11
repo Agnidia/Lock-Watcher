@@ -1,7 +1,7 @@
 //
 //  CompanionFixturePhotos.swift
 //
-//  Created on 10.11.2026.
+//  Created on 11.11.2026.
 //  Copyright © 2026 Agnidia. All rights reserved.
 //
 
@@ -64,9 +64,9 @@
     extension CompanionFixture {
         var photoMode: FixturePhotoSource.Mode {
             switch self {
-            case .photos: .photos
+            case .photos, .proDetail: .photos
             case .photosUnavailable: .unavailable
-            case .ready, .denied, .alerts: .empty
+            case .ready, .denied, .alerts, .alertsMany, .pro, .proOffers, .proDetailBare: .empty
             }
         }
     }

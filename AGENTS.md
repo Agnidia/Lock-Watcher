@@ -97,8 +97,8 @@ swiftformat . && xcodebuild test -project Lock-Watcher.xcodeproj -scheme Lock-Wa
 
 ### iOS Companion and Shared Code
 
-- **`Companion/`** - iOS 17 SwiftUI companion app: pairing QR, alert inbox, read-only Photos viewer
-- **`Shared/`** - Foundation-only codecs used by the Mac and the companion (PairingPayload, APNsEnvironment, PushAlertPayload)
+- **`Companion/`** - iOS 17 SwiftUI companion app: pairing QR, alert inbox (Pro: alert detail view, 100-alert history), read-only Photos viewer, Pro purchases (SKHelper)
+- **`Shared/`** - Foundation-only codecs used by the Mac and the companion (PairingPayload, APNsEnvironment, PushAlertPayload; every payload key after `date` is optional so Mac and companion versions interoperate)
 - **`Configurations/companion/`** - Companion build configs (`APS_ENVIRONMENT` per configuration)
 
 ### XPC Services

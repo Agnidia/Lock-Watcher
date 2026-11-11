@@ -134,6 +134,8 @@ Code constants apply without a setting:
 | Drain of queued alerts after the network returns | 30 s | `Source/Notifiers/PushNotifier.swift` |
 | Request timeout | 15 s | `Source/Utils/APNsClient.swift` |
 | Payload size cap | 4096 bytes | `Shared/Push/PushAlertPayload.swift` |
+| Payload target size (the trace route is trimmed to fit) | 3800 bytes | `Shared/Push/PushAlertPayload.swift` |
+| Trace route length | 3000 characters at most | `Shared/Push/PushAlertPayload.swift` |
 | Alert body length | 178 characters | `Shared/Push/PushAlertPayload.swift` |
 | Photo file cap | 50 MB | `Companion/Core/CloudPhotoLibrary.swift` |
 | Photo pixel cap | 32,000,000 pixels | `Companion/Core/CloudPhotoImageDecoder.swift` |
@@ -198,10 +200,15 @@ Save an own key on the Mac, or pair a TestFlight or App Store build. Those build
 
 Old builds that hold a revoked key fail with a 403 from APNs. The app shows that failure as `rejected(403, reason)`. The app has no update prompt for this case yet.
 
+### Alert detail (Pro)
+
+A Pro user taps an alert to open its detail: the trigger and the Mac name, the time on the phone and on the Mac, a map with the coordinates, the IP address, the trace route, and the photo of the capture. A card appears only when the alert carries its data. The photo comes from the iCloud folder and is matched by file name. A free account sees a lock on each row, and a tap opens the Pro tab.
+
 ### Privacy and security
 
 - Alerts cross Apple's APNs servers over TLS. The payload is not end-to-end encrypted.
-- The payload carries the trigger name, the time, and the latitude, longitude and IP address when the capture recorded them.
+- The payload carries the trigger name, the time, the time zone and the name of the Mac, and the latitude, longitude, IP address and trace route when the capture recorded them. It also carries the file name and kind (photo or video) of the capture, never its bytes. The Mac name can contain a person's name.
+- The companion shows the extra fields in the alert detail view, which is part of Pro. The map in that view loads Apple Maps tiles.
 - The Mac outbox lives in memory only. It holds 20 alerts for one hour. Alerts queued at quit are lost.
 - The iPhone stores alert history with complete file protection. A failed load never overwrites unread history.
 - The companion accepts any payload on its topic. The pairing carries no secret yet.

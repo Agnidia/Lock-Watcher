@@ -1,5 +1,5 @@
 {
-  "originHash" : "70aa3eda334690f2df24af2483de7eac3148d2e33cfb2cffb1646683a753a637",
+  "originHash" : "695ecf8803ca758e3a1cd838e3a48b342eb7ae7975043cdd1cb51ebfaf75c126",
   "pins" : [
     {
       "identity" : "camerasnap",
@@ -53,6 +53,15 @@
       "state" : {
         "revision" : "cb01f6991d4694424fa846b94764a60b0d8de59b",
         "version" : "0.1.4"
+      }
+    },
+    {
+      "identity" : "skhelper",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/russell-archer/SKHelper",
+      "state" : {
+        "revision" : "87e3d2dd0494279121621d79a380a7726f184bdf",
+        "version" : "2.0.0"
       }
     },
     {
