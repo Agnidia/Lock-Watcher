@@ -1,7 +1,7 @@
 //
 //  PushNotifierTest.swift
 //
-//  Created on 10.11.2026.
+//  Created on 11.11.2026.
 //  Copyright © 2026 Agnidia. All rights reserved.
 //
 
@@ -61,13 +61,18 @@ final class PushNotifierTest: XCTestCase {
     func testWorstCasePayloadHasExactKeysAndFitsAPNsLimit() throws {
         let longest = try XCTUnwrap(triggers.max { $0.name.count < $1.name.count })
 
-        let data = try PushNotifier.payload(for: fullDto(longest))
+        let data = try PushNotifier.payload(for: fullDto(longest), host: "Test Mac", timeZone: XCTUnwrap(TimeZone(identifier: "Europe/Kyiv")))
 
         let object = try XCTUnwrap(JSONSerialization.jsonObject(with: data) as? [String: Any])
         let aps = try XCTUnwrap(object["aps"] as? [String: Any])
         let alert = try XCTUnwrap(aps["alert"] as? [String: String])
-        XCTAssertLessThanOrEqual(data.count, 4096)
-        XCTAssertEqual(Set(object.keys), ["aps", "trigger", "date", "lat", "lon", "ip"])
+        XCTAssertLessThanOrEqual(data.count, PushAlertPayload.targetBytes)
+        XCTAssertEqual(Set(object.keys), ["aps", "trigger", "date", "lat", "lon", "ip", "trace", "file", "media", "host", "tz"])
+        XCTAssertEqual(object["file"] as? String, "capture.jpeg")
+        XCTAssertEqual(object["media"] as? String, "photo")
+        XCTAssertEqual(object["host"] as? String, "Test Mac")
+        XCTAssertEqual(object["tz"] as? String, "Europe/Kyiv")
+        XCTAssertTrue((object["trace"] as? String)?.hasPrefix("hop 10.0.0.1 ") == true)
         XCTAssertEqual(Set(aps.keys), ["alert", "sound", "interruption-level", "thread-id"])
         XCTAssertEqual(alert["title"], "Lock-Watcher")
         XCTAssertEqual(alert["body"]?.hasPrefix(longest.name + " · "), true)
@@ -82,11 +87,55 @@ final class PushNotifierTest: XCTestCase {
         XCTAssertEqual(try JSONDecoder().decode(PushAlertPayload.self, from: data).trigger, longest.rawValue)
     }
 
-    func testDisabledLocationAndIPAreOmitted() throws {
-        let data = try PushNotifier.payload(for: ThiefDto(triggerType: .onWakeUp))
+    func testDisabledLocationIPAndTraceAreOmitted() throws {
+        let data = try PushNotifier.payload(for: ThiefDto(triggerType: .onWakeUp), host: nil, timeZone: XCTUnwrap(TimeZone(identifier: "UTC")))
 
         let object = try XCTUnwrap(JSONSerialization.jsonObject(with: data) as? [String: Any])
-        XCTAssertEqual(Set(object.keys), ["aps", "trigger", "date"])
+        XCTAssertEqual(Set(object.keys), ["aps", "trigger", "date", "tz"])
+    }
+
+    func testVideoWinsOverItsPosterStill() throws {
+        let dto = ThiefDto(triggerType: .onWakeUp,
+                           filePath: URL(fileURLWithPath: "/tmp/poster.jpeg"),
+                           videoURL: URL(fileURLWithPath: "/tmp/clip.mov"))
+
+        let payload = try JSONDecoder().decode(PushAlertPayload.self, from: PushNotifier.payload(for: dto, host: nil))
+
+        XCTAssertEqual(payload.file, "clip.mov")
+        XCTAssertEqual(payload.media, PushAlertPayload.videoMedia)
+    }
+
+    func testHugeTraceIsTrimmedSoTheAlertIsNeverDropped() throws {
+        let trace = String(repeating: "hop \"10.0.0.1\"\n", count: 5000)
+
+        let payload = PushAlertPayload(trigger: "x", body: "b", date: Date(), latitude: 1, longitude: 2, ip: "203.0.113.7", trace: trace, host: String(repeating: "m", count: 500))
+
+        let data = try payload.encoded()
+        XCTAssertLessThanOrEqual(data.count, PushAlertPayload.targetBytes)
+        XCTAssertTrue(try trace.hasPrefix(XCTUnwrap(payload.trace)))
+        XCTAssertEqual(payload.host?.count, PushAlertPayload.maxHostLength)
+    }
+
+    func testMultibyteTraceIsTrimmedOnACharacterBoundary() throws {
+        let trace = String(repeating: "👩‍👩‍👧‍👦й", count: 2000)
+
+        let payload = PushAlertPayload(trigger: "x", body: "b", date: Date(), latitude: nil, longitude: nil, ip: nil, trace: trace)
+
+        let kept = try XCTUnwrap(payload.trace)
+        XCTAssertTrue(trace.hasPrefix(kept))
+        XCTAssertLessThanOrEqual(try payload.encoded().count, PushAlertPayload.targetBytes)
+        XCTAssertEqual(try JSONDecoder().decode(PushAlertPayload.self, from: payload.encoded()), payload)
+    }
+
+    func testPayloadWithoutTheNewKeysStillDecodes() throws {
+        let old = #"{"aps":{"alert":{"title":"Lock-Watcher","body":"x"},"sound":"default","interruption-level":"time-sensitive","thread-id":"lockwatcher"},"trigger":"onWakeUp","date":1758372720}"#
+
+        let payload = try JSONDecoder().decode(PushAlertPayload.self, from: Data(old.utf8))
+
+        XCTAssertNil(payload.trace)
+        XCTAssertNil(payload.file)
+        XCTAssertNil(payload.host)
+        XCTAssertNil(payload.tz)
     }
 
     func testBodyIsCapped() {

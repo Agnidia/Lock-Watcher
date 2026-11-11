@@ -1,7 +1,7 @@
 //
 //  PushNotifier.swift
 //
-//  Created on 10.11.2026.
+//  Created on 11.11.2026.
 //  Copyright © 2026 Agnidia. All rights reserved.
 //
 
@@ -138,16 +138,23 @@ final class PushNotifier: NotifierProtocol, Sendable {
         }
     }
 
-    static func payload(for thiefDto: ThiefDto) throws -> Data {
+    /// The captured file keeps its name in the iCloud folder, so `file` lets the companion find the photo; a video wins over its poster still.
+    static func payload(for thiefDto: ThiefDto, host: String? = Host.current().localizedName, timeZone: TimeZone = .current) throws -> Data {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.dateFormat = "HH:mm"
+        let captured = thiefDto.videoURL ?? thiefDto.filePath
         let alert = PushAlertPayload(trigger: thiefDto.triggerType.rawValue,
                                      body: "\(thiefDto.triggerType.name) · \(formatter.string(from: thiefDto.date))",
                                      date: thiefDto.date,
                                      latitude: thiefDto.coordinate?.latitude,
                                      longitude: thiefDto.coordinate?.longitude,
-                                     ip: thiefDto.ipAddress)
+                                     ip: thiefDto.ipAddress,
+                                     trace: thiefDto.traceRoute,
+                                     file: captured?.lastPathComponent,
+                                     media: captured.map { _ in thiefDto.videoURL == nil ? PushAlertPayload.photoMedia : PushAlertPayload.videoMedia },
+                                     host: host,
+                                     timeZone: timeZone.identifier)
         do {
             return try alert.encoded()
         } catch {
