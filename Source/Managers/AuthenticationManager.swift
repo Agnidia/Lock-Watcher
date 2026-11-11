@@ -1,5 +1,5 @@
 //
-//  AuthentificationManager.swift
+//  AuthenticationManager.swift
 //
 //  Created on 21.07.2024.
 //  Copyright © 2026 Agnidia. All rights reserved.
@@ -8,12 +8,12 @@
 import AppKit
 import LocalAuthentication
 
-final class AuthentificationManager: @unchecked Sendable {
+final class AuthenticationManager: @unchecked Sendable {
     private let securityUtil: SecurityUtilProtocol
     private let logger: LogProtocol
     
     private var isUnlocked = false
-    private let autolockInterval: TimeInterval = 900
+    private let autoLockInterval: TimeInterval = 900
     
     init(logger: LogProtocol, securityUtil: SecurityUtilProtocol) {
         self.logger = logger
@@ -35,7 +35,7 @@ final class AuthentificationManager: @unchecked Sendable {
             isUnlocked = try await authenticateWithPassword()
         }
         if isUnlocked {
-            lockAfter(autolockInterval)
+            lockAfter(autoLockInterval)
         }
         return isUnlocked
     }
@@ -58,7 +58,7 @@ final class AuthentificationManager: @unchecked Sendable {
                 if securityUtil.isValid(password: inputTextField.stringValue) {
                     return true
                 } else {
-                    throw Failure.passwordAuthentificationFailed
+                    throw Failure.passwordAuthenticationFailed
                 }
             } else {
                 return false
@@ -76,25 +76,25 @@ final class AuthentificationManager: @unchecked Sendable {
                 logger.error(String(describing: error))
                 throw error
             } else {
-                logger.error(String(describing: Failure.localAuthentificationFailed.description))
-                throw Failure.localAuthentificationFailed
+                logger.error(String(describing: Failure.localAuthenticationFailed.description))
+                throw Failure.localAuthenticationFailed
             }
         }
         return try await withCheckedThrowingContinuation { continuation in
-            context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: authentificationReason) { success, authenticationError in
+            context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: authenticationReason) { success, authenticationError in
                 if success {
                     continuation.resume(returning: true)
                 } else if let error = authenticationError as? LAError, error.code == LAError.userCancel {
                     continuation.resume(returning: false)
                 } else {
-                    continuation.resume(throwing: authenticationError ?? Failure.localAuthentificationFailed)
+                    continuation.resume(throwing: authenticationError ?? Failure.localAuthenticationFailed)
                 }
             }
         }
     }
     
     private func lockAfter(_ interval: TimeInterval) {
-        Timer.scheduledTimer(withTimeInterval: autolockInterval, repeats: false, block: resetUnlock)
+        Timer.scheduledTimer(withTimeInterval: autoLockInterval, repeats: false, block: resetUnlock)
     }
     
     @Sendable
@@ -102,7 +102,7 @@ final class AuthentificationManager: @unchecked Sendable {
         isUnlocked = false
     }
     
-    private var authentificationReason: String {
+    private var authenticationReason: String {
         NSLocalizedString("AuthInfo", comment: "")
     }
     
@@ -111,30 +111,30 @@ final class AuthentificationManager: @unchecked Sendable {
             .deviceOwnerAuthentication
         } else {
             if settings.biometrics, settings.watch {
-                .deviceOwnerAuthenticationWithBiometricsOrWatch
+                LAPolicy.deviceOwnerAuthenticationWithBiometricsOrCompanion
             } else if settings.biometrics {
-                .deviceOwnerAuthenticationWithBiometrics
+                LAPolicy.deviceOwnerAuthenticationWithBiometrics
             } else if settings.watch {
-                .deviceOwnerAuthenticationWithWatch
+                LAPolicy.deviceOwnerAuthenticationWithCompanion
             } else {
                 nil
             }
         }
     }
-    }
+}
 
-extension AuthentificationManager {
+extension AuthenticationManager {
     enum Failure: Error, CustomStringConvertible {
-        case localAuthentificationFailed
-        case passwordAuthentificationFailed
+        case localAuthenticationFailed
+        case passwordAuthenticationFailed
         
         var description: String {
             switch self {
-            case .localAuthentificationFailed:
-                NSLocalizedString("Auth_deviceAuthentificationFailed", comment: "")
-            case .passwordAuthentificationFailed:
-                NSLocalizedString("Auth_passwordAuthentificationFailed", comment: "")
+            case .localAuthenticationFailed:
+                NSLocalizedString("Auth_deviceAuthenticationFailed", comment: "")
+            case .passwordAuthenticationFailed:
+                NSLocalizedString("Auth_passwordAuthenticationFailed", comment: "")
             }
         }
-            }
     }
+}
