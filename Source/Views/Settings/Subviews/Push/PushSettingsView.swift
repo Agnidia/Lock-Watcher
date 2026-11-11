@@ -13,25 +13,50 @@ struct PushSettingsView: View {
     @Binding var isEnabled: Bool
     @Bindable var model: PushPairingViewModel
 
+    /// The toggle, the pairing status row and the advanced key row. The task and the sheet sit on the toggle so they run once.
     var body: some View {
-        VStack(alignment: .leading, spacing: DesignSystem.Spacing.sm) {
-            Toggle(isOn: $isEnabled) {
-                Text("PushToiPhone")
-            }
-            .help("PushToiPhoneHelp")
-            .accessibilityIdentifier(AccessibilityID.Settings.pushToggle)
-            .accessibilityLabel(AccessibilityLabel.Settings.pushToiPhone)
-            .accessibilityHint(AccessibilityHint.Settings.toggleHint)
-
-            PushPairingStatusView(phase: PushBlockPhase.make(isEnabled: isEnabled, pairing: model.pairing), model: model)
-
-            if isEnabled, !AppSettings.isMASBuild {
-                OwnAPNsKeyView(model: model)
-            }
+        Toggle(isOn: $isEnabled) {
+            Text("PushToiPhone")
         }
+        .help("PushToiPhoneHelp")
+        .accessibilityIdentifier(AccessibilityID.Settings.pushToggle)
+        .accessibilityLabel(AccessibilityLabel.Settings.pushToiPhone)
+        .accessibilityHint(AccessibilityHint.Settings.toggleHint)
         .task { await model.refresh() }
         .sheet(isPresented: $model.isPairingSheetPresented) {
             PushPairingSheet(model: model)
+        }
+
+        PushPairingStatusView(phase: PushBlockPhase.make(isEnabled: isEnabled, pairing: model.pairing), model: model)
+
+        if isEnabled, !AppSettings.isMASBuild {
+            OwnAPNsKeyView(model: model)
+        }
+    }
+}
+
+/// What the iPhone companion is and where to get it. The companion shares the Mac app's App Store record (universal purchase), so one link serves both.
+struct CompanionDownloadView: View {
+    static let storeURL = URL(string: "https://apps.apple.com/app/lock-watcher/id1583462846")!
+
+    @Environment(\.openURL) private var openURL
+
+    var body: some View {
+        LabeledContent {
+            Button {
+                openURL(Self.storeURL)
+            } label: {
+                Label("CompanionDownload", systemImage: "arrow.down.app")
+            }
+            .accessibilityIdentifier(AccessibilityID.Settings.companionDownloadButton)
+        } label: {
+            VStack(alignment: .leading, spacing: DesignSystem.Spacing.xs) {
+                Text("CompanionInfoTitle")
+                Text("CompanionInfoMessage")
+                    .font(DesignSystem.Typography.footnote)
+                    .foregroundStyle(DesignSystem.Colors.secondaryText)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
         }
     }
 }
@@ -45,28 +70,28 @@ struct PushPairingStatusView: View {
         case .disabled:
             EmptyView()
         case .unpaired:
-            HStack(spacing: DesignSystem.Spacing.sm) {
-                Text("PushNotPaired")
-                    .font(DesignSystem.Typography.footnote)
-                    .foregroundStyle(DesignSystem.Colors.secondaryText)
+            LabeledContent {
                 Button("PushPairIPhone", action: model.startPairing)
                     .accessibilityIdentifier(AccessibilityID.Settings.pushPairButton)
+            } label: {
+                Text("PushNotPaired")
+                    .foregroundStyle(DesignSystem.Colors.secondaryText)
             }
         case .paired(_, let pairedAt):
-            HStack(spacing: DesignSystem.Spacing.sm) {
-                Label(String(format: NSLocalizedString("PushPairedOn %@", comment: ""), pairedAt.formatted(date: .abbreviated, time: .shortened)),
-                      systemImage: "iphone")
-                    .font(DesignSystem.Typography.footnote)
+            LabeledContent {
                 Button("PushForgetIPhone", role: .destructive, action: model.forget)
                     .accessibilityIdentifier(AccessibilityID.Settings.pushForgetButton)
+            } label: {
+                Label(String(format: NSLocalizedString("PushPairedOn %@", comment: ""), pairedAt.formatted(date: .abbreviated, time: .shortened)),
+                      systemImage: "iphone")
             }
         case .needsRepair:
-            HStack(spacing: DesignSystem.Spacing.sm) {
-                Label("PushNeedsRepair", systemImage: "exclamationmark.triangle.fill")
-                    .font(DesignSystem.Typography.footnote)
-                    .foregroundStyle(.orange)
+            LabeledContent {
                 Button("PushRepairIPhone", action: model.startPairing)
                     .accessibilityIdentifier(AccessibilityID.Settings.pushRepairButton)
+            } label: {
+                Label("PushNeedsRepair", systemImage: "exclamationmark.triangle.fill")
+                    .foregroundStyle(.orange)
             }
         }
     }

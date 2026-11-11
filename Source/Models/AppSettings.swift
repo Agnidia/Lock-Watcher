@@ -109,17 +109,11 @@ struct RetentionSettings: Codable, Equatable {
 /// Represents UI settings to manage and store the state of user interface elements.
 ///
 struct UISettings: Codable, Equatable {
-    /// Determines if the security information section is expanded.
-    var isSecurityInfoExpand: Bool = true
-    
-    /// Determines if the snapshot information section is expanded.
-    var isSnapshotInfoExpand: Bool = false
-    
-    /// Determines if the options information section is expanded.
-    var isOptionsInfoExpand: Bool = false
-    
-    /// Determines if the sync information section is expanded.
-    var isSyncInfoExpand: Bool = true
+    /// Raw value of the settings page the user left open last; optional so a stored `ui` block without it still decodes.
+    var lastSettingsPage: String?
+
+    /// When the one-time invitation to get the iPhone companion was shown; optional so a stored `ui` block without it still decodes.
+    var companionPromptShownAt: Date?
 }
 
 /// Represents the options/settings related to the application's behavior.

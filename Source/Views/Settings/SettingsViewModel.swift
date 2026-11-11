@@ -62,15 +62,15 @@ final class SettingsViewModel: DomainViewConstantProtocol {
     
     // MARK: - Bindings for UI settings
     
-    /// Binding for expanding or collapsing security info section.
-    var isSecurityInfoExpand: Binding<Bool> {
-        Binding<Bool>(get: {
-            self.settings.ui.isSecurityInfoExpand
+    /// The settings page shown in the detail pane; an unknown stored value falls back to the first page.
+    var selectedPage: Binding<SettingsPage> {
+        Binding<SettingsPage>(get: {
+            self.settings.ui.lastSettingsPage.flatMap(SettingsPage.init(rawValue:)) ?? .capture
         }, set: {
-            self.settings.ui.isSecurityInfoExpand = $0
+            self.settings.ui.lastSettingsPage = $0.rawValue
         })
     }
-    
+
     /// Binding for toggling app protection.
     var isProtected: Binding<Bool> {
         Binding<Bool>(get: {
@@ -89,15 +89,6 @@ final class SettingsViewModel: DomainViewConstantProtocol {
                 settings.options.authSettings = $0
             }
         )
-    }
-    
-    /// Binding for expanding or collapsing snapshot info section.
-    var isSnapshotInfoExpand: Binding<Bool> {
-        Binding<Bool>(get: {
-            self.settings.ui.isSnapshotInfoExpand
-        }, set: {
-            self.settings.ui.isSnapshotInfoExpand = $0
-        })
     }
     
     // MARK: - Bindings for Trigger settings
@@ -183,15 +174,6 @@ final class SettingsViewModel: DomainViewConstantProtocol {
     
     // MARK: - Bindings for Options settings
     
-    /// Binding for expanding or collapsing options info section.
-    var isOptionsInfoExpand: Binding<Bool> {
-        Binding<Bool>(get: {
-            self.settings.ui.isOptionsInfoExpand
-        }, set: {
-            self.settings.ui.isOptionsInfoExpand = $0
-        })
-    }
-    
     /// Number of actions to keep in history.
     var keepLastActionsCount: Binding<Int> {
         Binding<Int>(get: {
@@ -243,15 +225,6 @@ final class SettingsViewModel: DomainViewConstantProtocol {
             self.settings.sync.isSaveSnapshotToDisk
         }, set: {
             self.settings.sync.isSaveSnapshotToDisk = $0
-        })
-    }
-    
-    /// Binding for expanding or collapsing sync info section.
-    var isSyncInfoExpand: Binding<Bool> {
-        Binding<Bool>(get: {
-            self.settings.ui.isSyncInfoExpand
-        }, set: {
-            self.settings.ui.isSyncInfoExpand = $0
         })
     }
     

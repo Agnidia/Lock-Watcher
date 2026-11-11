@@ -56,50 +56,24 @@ final class SettingsViewModelTests: XCTestCase {
 
     // MARK: - UI Bindings Tests
 
-    func testIsSecurityInfoExpandBindingReads() {
-        mockSettings.ui.isSecurityInfoExpand = true
-        XCTAssertTrue(sut.isSecurityInfoExpand.wrappedValue)
-
-        mockSettings.ui.isSecurityInfoExpand = false
-        XCTAssertFalse(sut.isSecurityInfoExpand.wrappedValue)
+    func testSelectedPageDefaultsToCapture() {
+        mockSettings.ui.lastSettingsPage = nil
+        XCTAssertEqual(sut.selectedPage.wrappedValue, .capture)
     }
 
-    func testIsSecurityInfoExpandBindingWrites() {
-        sut.isSecurityInfoExpand.wrappedValue = false
-        XCTAssertFalse(mockSettings.ui.isSecurityInfoExpand)
-
-        sut.isSecurityInfoExpand.wrappedValue = true
-        XCTAssertTrue(mockSettings.ui.isSecurityInfoExpand)
+    func testSelectedPageFallsBackForUnknownValue() {
+        mockSettings.ui.lastSettingsPage = "removed-page"
+        XCTAssertEqual(sut.selectedPage.wrappedValue, .capture)
     }
 
-    func testIsSnapshotInfoExpandBindingReads() {
-        mockSettings.ui.isSnapshotInfoExpand = true
-        XCTAssertTrue(sut.isSnapshotInfoExpand.wrappedValue)
+    func testSelectedPageReadsStoredValue() {
+        mockSettings.ui.lastSettingsPage = SettingsPage.sync.rawValue
+        XCTAssertEqual(sut.selectedPage.wrappedValue, .sync)
     }
 
-    func testIsSnapshotInfoExpandBindingWrites() {
-        sut.isSnapshotInfoExpand.wrappedValue = true
-        XCTAssertTrue(mockSettings.ui.isSnapshotInfoExpand)
-    }
-
-    func testIsOptionsInfoExpandBindingReads() {
-        mockSettings.ui.isOptionsInfoExpand = true
-        XCTAssertTrue(sut.isOptionsInfoExpand.wrappedValue)
-    }
-
-    func testIsOptionsInfoExpandBindingWrites() {
-        sut.isOptionsInfoExpand.wrappedValue = true
-        XCTAssertTrue(mockSettings.ui.isOptionsInfoExpand)
-    }
-
-    func testIsSyncInfoExpandBindingReads() {
-        mockSettings.ui.isSyncInfoExpand = true
-        XCTAssertTrue(sut.isSyncInfoExpand.wrappedValue)
-    }
-
-    func testIsSyncInfoExpandBindingWrites() {
-        sut.isSyncInfoExpand.wrappedValue = false
-        XCTAssertFalse(mockSettings.ui.isSyncInfoExpand)
+    func testSelectedPageWritesRawValue() {
+        sut.selectedPage.wrappedValue = .options
+        XCTAssertEqual(mockSettings.ui.lastSettingsPage, SettingsPage.options.rawValue)
     }
 
     // MARK: - Protection Bindings Tests

@@ -300,6 +300,60 @@
         }
       }
     },
+    "AccessibilityHintOpenCompanion" : {
+      "comment" : "Opens the App Store in the browser",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opens the App Store page in your browser"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Відкриває сторінку App Store у браузері"
+          }
+        }
+      }
+    },
+    "AccessibilityOpenCompanion" : {
+      "comment" : "Open the iPhone companion in the App Store",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get the iPhone app"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отримати застосунок для iPhone"
+          }
+        }
+      }
+    },
+    "ButtonCompanion" : {
+      "comment" : "Main window link to the iPhone companion in the App Store",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download iPhone App"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Завантажити застосунок для iPhone"
+          }
+        }
+      }
+    },
     "AccessibilityHintTapToOpen" : {
       "comment" : "Double-tap to open in Preview",
       "localizations" : {
@@ -1250,7 +1304,7 @@
       },
       "shouldTranslate" : false
     },
-    "Auth_deviceAuthentificationFailed" : {
+    "Auth_deviceAuthenticationFailed" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1261,12 +1315,12 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Помилка автентифікації користувача за допомогою біометрії або Apple Watch"
+            "value" : "User authentication with biometry or Apple Watch failed."
           }
         }
       }
     },
-    "Auth_passwordAuthentificationFailed" : {
+    "Auth_passwordAuthenticationFailed" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1277,7 +1331,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Неправильний пароль."
+            "value" : "Password is wrong."
           }
         }
       }
@@ -1487,6 +1541,114 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Очистити"
+          }
+        }
+      }
+    },
+    "CompanionDownload" : {
+      "comment" : "Button that opens the companion app in the App Store",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Завантажити"
+          }
+        }
+      }
+    },
+    "CompanionPromptBody" : {
+      "comment" : "Body of the one-time alert that invites the owner to get the iPhone companion",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Install the Lock Watcher companion on your iPhone, then open Settings > Notifications and scan the pairing code to receive alerts there."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Встановіть застосунок Lock Watcher на iPhone, потім відкрийте Налаштування > Сповіщення і скануйте код під’єднання, щоб отримувати сповіщення там."
+          }
+        }
+      }
+    },
+    "CompanionPromptLater" : {
+      "comment" : "Button that dismisses the one-time companion invitation",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not Now"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не зараз"
+          }
+        }
+      }
+    },
+    "CompanionPromptTitle" : {
+      "comment" : "Title of the one-time alert that invites the owner to get the iPhone companion",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get alerts on your iPhone"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отримуйте сповіщення на iPhone"
+          }
+        }
+      }
+    },
+    "CompanionInfoMessage" : {
+      "comment" : "Explains the iPhone companion app in the notification settings",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Install the Lock Watcher companion on your iPhone, then pair it to receive alerts there. Pro adds alert details, photo zoom and share, and a longer history."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Встановіть застосунок Lock Watcher на iPhone і під’єднайте його, щоб отримувати сповіщення. Pro додає деталі сповіщень, збільшення та поширення фото і довшу історію."
+          }
+        }
+      }
+    },
+    "CompanionInfoTitle" : {
+      "comment" : "Title of the iPhone companion app row in the notification settings",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lock Watcher for iPhone"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lock Watcher для iPhone"
           }
         }
       }
@@ -1892,13 +2054,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Capture"
+            "value" : "Type"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Знімати"
+            "value" : "Тип"
           }
         }
       }
@@ -2499,6 +2661,78 @@
         }
       }
     },
+    "SettingsMailRecipient" : {
+      "comment" : "Label of the settings row that holds the email recipient",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recipient"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Одержувач"
+          }
+        }
+      }
+    },
+    "SettingsMenuAbout" : {
+      "comment" : "Settings sidebar page with app information and other apps",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Про програму"
+          }
+        }
+      }
+    },
+    "SettingsMenuCapture" : {
+      "comment" : "Settings sidebar page for photo or video type, quality and size",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Capture"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Захоплення"
+          }
+        }
+      }
+    },
+    "SettingsMenuNotifications" : {
+      "comment" : "Settings sidebar page for local and iPhone push notifications",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifications"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сповіщення"
+          }
+        }
+      }
+    },
     "SettingsMenuOptions" : {
       "comment" : "Description was not specified",
       "extractionState" : "migrated",
@@ -2542,13 +2776,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Snapshot"
+            "value" : "Triggers"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Знімки"
+            "value" : "Тригери"
           }
         }
       }
@@ -2567,6 +2801,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Синхронізація"
+          }
+        }
+      }
+    },
+    "SettingsTraceRouteServer" : {
+      "comment" : "Label of the settings row that holds the trace route server",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Server"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сервер"
           }
         }
       }
@@ -2706,6 +2958,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Робить один знімок, коли Mac переміщується на 500 м або більше під час блокування, також коли ви переносите заблокований Mac в інше місце. Потрібен доступ до геопозиції."
+          }
+        }
+      }
+    },
+    "SnapshotOnLockedInput" : {
+      "comment" : "Title of the locked-input trigger toggle; the delay is a separate row",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Take snapshot on input while locked"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Знімати при введенні, коли заблоковано"
           }
         }
       }
@@ -2983,23 +3253,6 @@
                 }
               }
             }
-          }
-        }
-      }
-    },
-    "SyncedWithDropbox %@" : {
-      "comment" : "Description was not specified",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sync with Dropbox: %@"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Синхронізовано з Dropbox: %@"
           }
         }
       }

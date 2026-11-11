@@ -20,21 +20,23 @@ struct ProtectionView: View {
 
     var securityUtil: SecurityUtilProtocol
 
-    /// The body of the view, containing a toggle to enable/disable protection, a secure field for password input, and a button to set the password.
+    /// Three form rows: the protection toggle, the password field with its Set button, and the biometry toggle.
     var body: some View {
-        VStack(alignment: .leading, spacing: DesignSystem.Spacing.sm) {
-            HStack(spacing: DesignSystem.Spacing.sm) {
-                // A toggle that allows the user to enable or disable protection.
-                Toggle(isOn: $isProtectionEnable) {
-                    Text("ProtectAccess")
-                }
-                .accessibilityIdentifier(AccessibilityID.Settings.protectionToggle)
-                .accessibilityLabel(AccessibilityLabel.Settings.protectAccess)
-                .accessibilityHint(AccessibilityHint.Settings.toggleHint)
+        // A toggle that allows the user to enable or disable protection.
+        Toggle(isOn: $isProtectionEnable) {
+            Text("ProtectAccess")
+        }
+        .accessibilityIdentifier(AccessibilityID.Settings.protectionToggle)
+        .accessibilityLabel(AccessibilityLabel.Settings.protectAccess)
+        .accessibilityHint(AccessibilityHint.Settings.toggleHint)
 
+        LabeledContent("ProtectPassword") {
+            HStack(spacing: DesignSystem.Spacing.sm) {
                 // A secure field that allows the user to input a password.
                 SecureField("ProtectPassword", text: $password)
+                    .labelsHidden()
                     .textFieldStyle(.roundedBorder)
+                    .frame(maxWidth: 200)
                     // Disable password input if protection is turned off.
                     .disabled(isProtectionEnable == false || authSettings == .biometricsOrWatch)
                     .accessibilityIdentifier(AccessibilityID.Settings.passwordField)
@@ -52,14 +54,15 @@ struct ProtectionView: View {
                 .accessibilityIdentifier(AccessibilityID.Settings.setPasswordButton)
                 .accessibilityLabel(AccessibilityLabel.Settings.setPassword)
             }
-            Toggle(isOn: biometryToggle) {
-                Text("BiometryAllowed")
-            }
-            .disabled(!isProtectionEnable)
-            .accessibilityIdentifier(AccessibilityID.Settings.biometryToggle)
-            .accessibilityLabel(AccessibilityLabel.Settings.biometryAllowed)
-            .accessibilityHint(AccessibilityHint.Settings.toggleHint)
         }
+
+        Toggle(isOn: biometryToggle) {
+            Text("BiometryAllowed")
+        }
+        .disabled(!isProtectionEnable)
+        .accessibilityIdentifier(AccessibilityID.Settings.biometryToggle)
+        .accessibilityLabel(AccessibilityLabel.Settings.biometryAllowed)
+        .accessibilityHint(AccessibilityHint.Settings.toggleHint)
     }
 
     private var biometryToggle: Binding<Bool> {

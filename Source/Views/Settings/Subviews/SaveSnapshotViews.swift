@@ -48,18 +48,20 @@ struct SendNotificationToMailView: View {
     @Binding var mailRecipient: String
 
     var body: some View {
-        HStack(spacing: DesignSystem.Spacing.sm) {
-            Toggle(isOn: $isSendNotificationToMail) {
-                Text("SendToMail")
-            }
-            .accessibilityIdentifier(AccessibilityID.Settings.emailToggle)
-            .accessibilityLabel(AccessibilityLabel.Settings.sendEmail)
-            .accessibilityHint(AccessibilityHint.Settings.toggleHint)
-
-            TextField("user@example.com", text: $mailRecipient)
-                .disabled(isSendNotificationToMail == false)
-                .accessibilityIdentifier(AccessibilityID.Settings.emailField)
+        Toggle(isOn: $isSendNotificationToMail) {
+            Text("SendToMail")
         }
+        .accessibilityIdentifier(AccessibilityID.Settings.emailToggle)
+        .accessibilityLabel(AccessibilityLabel.Settings.sendEmail)
+        .accessibilityHint(AccessibilityHint.Settings.toggleHint)
+
+        LabeledContent("SettingsMailRecipient") {
+            TextField("SettingsMailRecipient", text: $mailRecipient, prompt: Text("user@example.com"))
+                .labelsHidden()
+                .multilineTextAlignment(.trailing)
+        }
+        .disabled(isSendNotificationToMail == false)
+        .accessibilityIdentifier(AccessibilityID.Settings.emailField)
     }
 }
 
@@ -118,18 +120,20 @@ struct TraceRouteToSnapshotView: View {
     @Binding var traceRouteServer: String
 
     var body: some View {
-        HStack(spacing: DesignSystem.Spacing.sm) {
-            Toggle(isOn: $isAddTraceRouteToSnapshot) {
-                Text("AddTraceRoute")
-            }
-            .accessibilityIdentifier(AccessibilityID.Settings.traceRouteToggle)
-            .accessibilityLabel(AccessibilityLabel.Settings.addTraceRoute)
-            .accessibilityHint(AccessibilityHint.Settings.toggleHint)
-
-            TextField("example.com", text: $traceRouteServer)
-                .disabled(isAddTraceRouteToSnapshot == false)
-                .accessibilityIdentifier(AccessibilityID.Settings.traceRouteServerField)
+        Toggle(isOn: $isAddTraceRouteToSnapshot) {
+            Text("AddTraceRoute")
         }
+        .accessibilityIdentifier(AccessibilityID.Settings.traceRouteToggle)
+        .accessibilityLabel(AccessibilityLabel.Settings.addTraceRoute)
+        .accessibilityHint(AccessibilityHint.Settings.toggleHint)
+
+        LabeledContent("SettingsTraceRouteServer") {
+            TextField("SettingsTraceRouteServer", text: $traceRouteServer, prompt: Text("example.com"))
+                .labelsHidden()
+                .multilineTextAlignment(.trailing)
+        }
+        .disabled(isAddTraceRouteToSnapshot == false)
+        .accessibilityIdentifier(AccessibilityID.Settings.traceRouteServerField)
     }
 }
 
@@ -140,17 +144,19 @@ struct SaveSnapshotToDiskView: View {
 
     var body: some View {
         HStack(spacing: DesignSystem.Spacing.sm) {
-            Toggle(isOn: $isSaveSnapshotToDisk) {
-                Text("SaveSnapshotToDisk")
-            }
-            .accessibilityIdentifier(AccessibilityID.Settings.saveToDiskToggle)
-            .accessibilityLabel(AccessibilityLabel.Settings.saveToDisk)
-            .accessibilityHint(AccessibilityHint.Settings.toggleHint)
-
+            Text("SaveSnapshotToDisk")
+            Spacer()
             Button("Browse", action: browse)
                 .help("BrowseLocalFolderHelp")
                 .accessibilityIdentifier(AccessibilityID.Settings.browseLocalButton)
                 .accessibilityLabel(Text("BrowseLocalFolderHelp"))
+            Toggle(isOn: $isSaveSnapshotToDisk) {
+                Text("SaveSnapshotToDisk")
+            }
+            .labelsHidden()
+            .accessibilityIdentifier(AccessibilityID.Settings.saveToDiskToggle)
+            .accessibilityLabel(AccessibilityLabel.Settings.saveToDisk)
+            .accessibilityHint(AccessibilityHint.Settings.toggleHint)
         }
     }
 }
@@ -230,25 +236,18 @@ struct KeepFilesView: View {
     let confirm: (RetentionPeriod) -> Void
     let cancel: () -> Void
 
+    /// The footnote is the footer of the form section that holds this row.
     var body: some View {
-        VStack(alignment: .leading, spacing: DesignSystem.Spacing.xs) {
-            Picker(selection: $keepFiles) {
-                ForEach(RetentionPeriod.allCases, id: \.self) { period in
-                    Text(period.title).tag(period)
-                }
-            } label: {
-                Text("KeepFiles")
+        Picker(selection: $keepFiles) {
+            ForEach(RetentionPeriod.allCases, id: \.self) { period in
+                Text(period.title).tag(period)
             }
-            .pickerStyle(.menu)
-            .accessibilityIdentifier(AccessibilityID.Settings.keepFilesPicker)
-            .accessibilityLabel(AccessibilityLabel.Settings.keepFiles)
-
-            Text("KeepFilesFootnote")
-                .font(DesignSystem.Typography.footnote)
-                .foregroundStyle(DesignSystem.Colors.secondaryText)
-                .fixedSize(horizontal: false, vertical: true)
-                .accessibilityIdentifier(AccessibilityID.Settings.keepFilesFootnote)
+        } label: {
+            Text("KeepFiles")
         }
+        .pickerStyle(.menu)
+        .accessibilityIdentifier(AccessibilityID.Settings.keepFilesPicker)
+        .accessibilityLabel(AccessibilityLabel.Settings.keepFiles)
         .alert("KeepFilesConfirmTitle", isPresented: isConfirming, presenting: pendingKeepFiles) { period in
             Button("KeepFilesConfirmButton", role: .destructive) { confirm(period) }
             Button("ButtonCancel", role: .cancel, action: cancel)
@@ -275,15 +274,9 @@ struct ICloudSyncView: View {
     var body: some View {
         let isSignedOut = FileManager.default.ubiquityIdentityToken == nil
         HStack(spacing: DesignSystem.Spacing.sm) {
-            Toggle(isOn: $isICloudSyncEnable) {
-                Text("SyncWithiCloud")
-            }
-            .disabled(isSignedOut)
-            .help("SyncWithiCloudHelp")
-            .accessibilityIdentifier(AccessibilityID.Settings.iCloudToggle)
-            .accessibilityLabel(AccessibilityLabel.Settings.syncICloud)
-            .accessibilityHint(AccessibilityHint.Settings.toggleHint)
-
+            Text("SyncWithiCloud")
+                .foregroundStyle(isSignedOut ? DesignSystem.Colors.secondaryText : .primary)
+            Spacer()
             if let browse {
                 Button("Browse", action: browse)
                     .disabled(isSignedOut)
@@ -291,6 +284,15 @@ struct ICloudSyncView: View {
                     .accessibilityIdentifier(AccessibilityID.Settings.browseICloudButton)
                     .accessibilityLabel(Text("BrowseICloudFolderHelp"))
             }
+            Toggle(isOn: $isICloudSyncEnable) {
+                Text("SyncWithiCloud")
+            }
+            .labelsHidden()
+            .disabled(isSignedOut)
+            .help("SyncWithiCloudHelp")
+            .accessibilityIdentifier(AccessibilityID.Settings.iCloudToggle)
+            .accessibilityLabel(AccessibilityLabel.Settings.syncICloud)
+            .accessibilityHint(AccessibilityHint.Settings.toggleHint)
         }
     }
 }
@@ -303,34 +305,37 @@ struct DropboxView: View {
 
     var body: some View {
         HStack(spacing: DesignSystem.Spacing.sm) {
-            if dropboxName.isEmpty == false {
-                Toggle(isOn: $isDropboxEnable) {
-                    Text(String(format: NSLocalizedString("SyncedWithDropbox %@", comment: ""), dropboxName))
+            // The account name sits under the title, so a long name wraps instead of crowding the button.
+            VStack(alignment: .leading, spacing: DesignSystem.Spacing.xs) {
+                Text("SyncWithDropbox")
+                if dropboxName.isEmpty == false {
+                    Text(dropboxName)
+                        .font(DesignSystem.Typography.footnote)
+                        .foregroundStyle(DesignSystem.Colors.secondaryText)
                 }
-                .accessibilityIdentifier(AccessibilityID.Settings.dropboxToggle)
-                .accessibilityLabel(AccessibilityLabel.Settings.syncDropbox)
-
+            }
+            Spacer()
+            if dropboxName.isEmpty == false {
                 Button("Logout") {
                     DropboxNotifier.logout()
                     dropboxName = ""
                 }
                 .disabled(isDropboxEnable == false)
                 .accessibilityIdentifier(AccessibilityID.Settings.dropboxLogoutButton)
-
             } else {
-                Toggle(isOn: $isDropboxEnable) {
-                    Text("SyncWithDropbox")
-                }
-                .accessibilityIdentifier(AccessibilityID.Settings.dropboxToggle)
-                .accessibilityLabel(AccessibilityLabel.Settings.syncDropbox)
-                .accessibilityHint(AccessibilityHint.Settings.toggleHint)
-
                 Button("Authorize") {
                     DropboxNotifier.authorize(on: NSViewController())
                 }
                 .disabled(isDropboxEnable == false)
                 .accessibilityIdentifier(AccessibilityID.Settings.dropboxAuthButton)
             }
+            Toggle(isOn: $isDropboxEnable) {
+                Text("SyncWithDropbox")
+            }
+            .labelsHidden()
+            .accessibilityIdentifier(AccessibilityID.Settings.dropboxToggle)
+            .accessibilityLabel(AccessibilityLabel.Settings.syncDropbox)
+            .accessibilityHint(AccessibilityHint.Settings.toggleHint)
         }
     }
 }
