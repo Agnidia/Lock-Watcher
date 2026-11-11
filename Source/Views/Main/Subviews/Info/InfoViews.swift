@@ -31,11 +31,17 @@ struct InfoView: View {
                         .accessibilityIdentifier(AccessibilityID.Info.cleanButton)
                 }
 
+                // Opens the App Store page of the iPhone companion.
+                Link(destination: viewModel.companionUrl, label: viewModel.companionTitle)
+                    .accessibilityIdentifier(AccessibilityID.Info.companionButton)
+                    .accessibilityLabel(AccessibilityLabel.Info.openCompanion)
+                    .accessibilityHint(AccessibilityHint.Info.openCompanion)
+
                 // Button to open the application's settings.
                 SettingsLink(label: viewModel.openSettingsTitle)
                     .accessibilityIdentifier(AccessibilityID.Info.openSettingsButton)
                     .accessibilityLabel(AccessibilityLabel.Info.openSettings)
-                
+
                 // Button to quit the application.
                 Button(action: viewModel.quitApp, label: viewModel.quitAppTitle)
                     .accessibilityIdentifier(AccessibilityID.Info.quitButton)
