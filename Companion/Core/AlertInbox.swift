@@ -128,8 +128,8 @@ final class InMemoryAlertStore: AlertPersisting, @unchecked Sendable {
 @Observable
 final class AlertInbox {
     /// Stored and shown for Pro; storage never shrinks when Pro lapses, so renewing brings the history back.
-    static let capacity = 100
-    static let freeVisibleLimit = 10
+    static let capacity = 999
+    static let freeVisibleLimit = 3
 
     private(set) var alerts: [ReceivedAlert]
 

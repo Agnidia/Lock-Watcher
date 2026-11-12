@@ -882,13 +882,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your last 100 alerts and their details are available."
+            "value" : "Your last 999 alerts and their details are available."
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Доступні ваші останні 100 сповіщень та їхні подробиці."
+            "value" : "Доступні ваші останні 999 сповіщень та їхні подробиці."
           }
         }
       }
@@ -1186,13 +1186,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Last 100 alerts, with every detail"
+            "value" : "Full detail info, photo tools\nand a huge history"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Останні 100 сповіщень з усіма подробицями"
+            "value" : "Повна інформація, робота із фото\nта величезна історія"
           }
         }
       }

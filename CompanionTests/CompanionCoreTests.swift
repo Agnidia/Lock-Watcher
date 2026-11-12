@@ -70,16 +70,17 @@ final class AlertInboxTests: XCTestCase {
         XCTAssertEqual(sut.alerts.last?.id, "30")
     }
 
-    func testFreeShowsOnlyTheNewestTenAlerts() {
+    func testFreeShowsOnlyTheNewestThreeAlerts() {
         let sut = AlertInbox(store: InMemoryAlertStore())
 
         sut.ingest((0 ..< 25).map { alert("\($0)", at: TimeInterval($0)) })
 
         let visible = sut.visibleAlerts(isPro: false)
-        XCTAssertEqual(visible.count, AlertInbox.freeVisibleLimit)
+        XCTAssertEqual(AlertInbox.freeVisibleLimit, 3)
+        XCTAssertEqual(visible.count, 3)
         XCTAssertEqual(visible.first?.id, "24")
-        XCTAssertEqual(visible.last?.id, "15")
-        XCTAssertEqual(sut.hiddenCount(isPro: false), 15)
+        XCTAssertEqual(visible.last?.id, "22")
+        XCTAssertEqual(sut.hiddenCount(isPro: false), 22)
     }
 
     func testProShowsEveryStoredAlert() {

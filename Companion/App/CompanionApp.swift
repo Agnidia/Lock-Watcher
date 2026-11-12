@@ -29,7 +29,7 @@ enum CompanionFixture: String {
     case ready
     case denied
     case alerts
-    /// Fifteen alerts on a free account: the list stops at ten and offers the upgrade.
+    /// Fifteen alerts on a free account: the list stops at three and offers the upgrade.
     case alertsMany
     /// The same fifteen alerts with Pro active.
     case pro
@@ -248,12 +248,12 @@ struct CompanionRootView: View {
         }
     }
 
-    /// A tab bar renders icons as templates and ignores `foregroundStyle`; an always-original image keeps its colour, so only this tab turns green.
+    /// A tab bar renders icons as templates and ignores `foregroundStyle`; an always-original image keeps its colour, so only this tab takes the app icon's blue.
     private var proTabIcon: Image {
         guard container.pro.isPro,
-              let green = UIImage(systemName: "star.fill")?.withTintColor(.systemGreen, renderingMode: .alwaysOriginal)
+              let tinted = UIImage(systemName: "star.fill")?.withTintColor(ProTint.uiColor, renderingMode: .alwaysOriginal)
         else { return Image(systemName: "star") }
-        return Image(uiImage: green)
+        return Image(uiImage: tinted)
     }
 }
 

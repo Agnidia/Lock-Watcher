@@ -10,7 +10,7 @@
       "internalID" : "6833466206",
       "localizations" : [
         {
-          "description" : "Full 100-alert history on iPhone, one-time purchase",
+          "description" : "Full 999-alert history on iPhone, one-time purchase",
           "displayName" : "Pro Lifetime",
           "locale" : "en_US"
         }
@@ -45,7 +45,7 @@
           "introductoryOffer" : null,
           "localizations" : [
             {
-              "description" : "Full 100-alert history on iPhone",
+              "description" : "Full 999-alert history on iPhone",
               "displayName" : "Pro Yearly",
               "locale" : "en_US"
             }
@@ -73,7 +73,7 @@
           "introductoryOffer" : null,
           "localizations" : [
             {
-              "description" : "Full 100-alert history on iPhone",
+              "description" : "Full 999-alert history on iPhone",
               "displayName" : "Pro Monthly",
               "locale" : "en_US"
             }

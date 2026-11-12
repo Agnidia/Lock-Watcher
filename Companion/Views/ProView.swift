@@ -8,6 +8,14 @@
 import StoreKit
 import SwiftUI
 
+/// The blue of the app icon's gradient start (display P3), shared by the Pro tab and its icon.
+enum ProTint {
+    private static let components = (red: 0.23926, green: 0.54102, blue: 0.77637)
+
+    static let color = Color(.displayP3, red: components.red, green: components.green, blue: components.blue)
+    static let uiColor = UIColor(displayP3Red: components.red, green: components.green, blue: components.blue, alpha: 1)
+}
+
 struct ProView: View {
     private static let termsURL = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")
     private static let privacyURL = URL(string: "https://agnidia.com/info/app/lockwatcher/policy.html")
@@ -62,18 +70,11 @@ struct ProView: View {
 private struct ProHero: View {
     let isActive: Bool
 
-    @ScaledMetric(relativeTo: .largeTitle) private var badgeSize = 60.0
-
     var body: some View {
         VStack(spacing: 8) {
-            Image(systemName: isActive ? "checkmark.seal.fill" : "star.fill")
-                .font(.system(size: badgeSize * 0.44, weight: .semibold))
-                .foregroundStyle(.white)
-                .frame(width: badgeSize, height: badgeSize)
-                .background(Circle().fill(Color.green.gradient))
-                .accessibilityHidden(true)
             Text(isActive ? "ProActiveTitle" : "ProTitle")
-                .font(.title2.bold())
+                .font(.largeTitle.bold())
+                .multilineTextAlignment(.center)
                 .accessibilityAddTraits(.isHeader)
             Text(isActive ? "ProActiveMessage" : "ProPromise")
                 .font(.subheadline)
@@ -95,17 +96,19 @@ private struct ProComparisonCard: View {
 
     private struct Row: Identifiable {
         let id: String
+        let symbol: String
         let title: LocalizedStringKey
         let free: Cell
         let pro: Cell
     }
 
     private static let rows = [
-        Row(id: "alerts", title: "ProRowAlerts", free: .included, pro: .included),
-        Row(id: "photos", title: "ProRowPhotos", free: .included, pro: .included),
-        Row(id: "details", title: "ProRowDetails", free: .notIncluded, pro: .included),
-        Row(id: "photoTools", title: "ProRowPhotoTools", free: .notIncluded, pro: .included),
-        Row(id: "history", title: "ProRowHistory", free: .value(AlertInbox.freeVisibleLimit), pro: .value(AlertInbox.capacity))
+        Row(id: "alerts", symbol: "bell.fill", title: "ProRowAlerts", free: .included, pro: .included),
+        Row(id: "photos", symbol: "photo.on.rectangle", title: "ProRowPhotos", free: .included, pro: .included),
+        Row(id: "details", symbol: "map.fill", title: "ProRowDetails", free: .notIncluded, pro: .included),
+        Row(id: "photoTools", symbol: "plus.magnifyingglass", title: "ProRowPhotoTools", free: .notIncluded, pro: .included),
+        Row(id: "history", symbol: "clock.arrow.circlepath", title: "ProRowHistory",
+            free: .value(AlertInbox.freeVisibleLimit), pro: .value(AlertInbox.capacity))
     ]
 
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
@@ -137,9 +140,12 @@ private struct ProComparisonCard: View {
             Divider()
             ForEach(Self.rows) { row in
                 GridRow {
-                    Text(row.title)
-                        .font(.subheadline)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                    HStack(spacing: 10) {
+                        featureIcon(row.symbol)
+                        Text(row.title)
+                            .font(.subheadline)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     cell(row.free, isPro: false)
                     cell(row.pro, isPro: true)
                 }
@@ -152,8 +158,11 @@ private struct ProComparisonCard: View {
         VStack(alignment: .leading, spacing: 16) {
             ForEach(Self.rows) { row in
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(row.title)
-                        .font(.headline)
+                    HStack(spacing: 10) {
+                        featureIcon(row.symbol)
+                        Text(row.title)
+                            .font(.headline)
+                    }
                     HStack {
                         Text("ProCompareFree")
                             .foregroundStyle(.secondary)
@@ -171,13 +180,22 @@ private struct ProComparisonCard: View {
         }
     }
 
+    /// A fixed-width frame keeps the titles aligned although the symbols differ in width.
+    private func featureIcon(_ symbol: String) -> some View {
+        Image(systemName: symbol)
+            .font(.subheadline)
+            .foregroundStyle(ProTint.color)
+            .frame(width: 24)
+            .accessibilityHidden(true)
+    }
+
     @ViewBuilder
     private func cell(_ cell: Cell, isPro: Bool) -> some View {
         switch cell {
         case .included:
             Image(systemName: "checkmark")
                 .font(.subheadline.bold())
-                .foregroundStyle(isPro ? Color.green : Color.secondary)
+                .foregroundStyle(isPro ? ProTint.color : Color.secondary)
                 .accessibilityLabel(Text("ProIncluded"))
         case .notIncluded:
             Image(systemName: "minus")
@@ -253,10 +271,6 @@ private struct PlanCard: View {
     var body: some View {
         Button(action: select) {
             HStack(spacing: 12) {
-                Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
-                    .imageScale(.large)
-                    .foregroundStyle(isSelected ? Color.green : Color.secondary)
-                    .accessibilityHidden(true)
                 VStack(alignment: .leading, spacing: 4) {
                     HStack(spacing: 8) {
                         Text(plan.title)
@@ -267,7 +281,7 @@ private struct PlanCard: View {
                                 .foregroundStyle(.primary)
                                 .padding(.horizontal, 8)
                                 .padding(.vertical, 2)
-                                .background(Capsule().fill(Color.green.opacity(0.25)))
+                                .background(Capsule().fill(ProTint.color.opacity(0.25)))
                         }
                     }
                     detail
@@ -281,7 +295,7 @@ private struct PlanCard: View {
             .padding(16)
             .frame(maxWidth: .infinity, minHeight: 56, alignment: .leading)
             .background(RoundedRectangle(cornerRadius: 16).fill(Color(.secondarySystemGroupedBackground)))
-            .overlay(RoundedRectangle(cornerRadius: 16).strokeBorder(isSelected ? Color.green : Color.clear, lineWidth: 2))
+            .overlay(RoundedRectangle(cornerRadius: 16).strokeBorder(isSelected ? ProTint.color : Color.clear, lineWidth: 2))
             .contentShape(RoundedRectangle(cornerRadius: 16))
         }
         .buttonStyle(.plain)
@@ -334,7 +348,7 @@ private struct ProPurchaseBar: View {
                 .frame(maxWidth: .infinity, minHeight: 40)
             }
             .buttonStyle(.borderedProminent)
-            .tint(.green)
+            .tint(ProTint.color)
             .controlSize(.large)
             .disabled(store.isPurchasing)
         }
@@ -368,6 +382,7 @@ private struct ProActiveView: View {
     var body: some View {
         VStack(spacing: 24) {
             ProHero(isActive: true)
+            ProComparisonCard()
             VStack(spacing: 12) {
                 HStack {
                     Text("ProPlanLabel")
