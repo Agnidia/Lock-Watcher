@@ -17,7 +17,7 @@ enum ProTint {
 }
 
 struct ProView: View {
-    private static let termsURL = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")
+    private static let termsURL = URL(string: "https://agnidia.com/info/app/lockwatcher/terms.html")
     private static let privacyURL = URL(string: "https://agnidia.com/info/app/lockwatcher/policy.html")
 
     let store: ProStore
