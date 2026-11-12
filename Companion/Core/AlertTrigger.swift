@@ -7,20 +7,8 @@
 
 import Foundation
 
-/// The trigger names the Mac sends (`TriggerType.rawValue`); a value from a newer Mac is not listed and falls back to the alert text.
-enum AlertTrigger: String, CaseIterable, Sendable {
-    case setup
-    case onWakeUp
-    case onWrongPassword
-    case onBatteryPower
-    case onACPower
-    case usbConnected
-    case logedIn
-    case displayAttached
-    case locationChanged
-    case lockedInput
-    case debug
-
+/// The cases are shared with the Mac in `Shared/Push/AlertTriggerCases.swift`; a value from a newer Mac is not listed and falls back to the alert text.
+extension AlertTrigger {
     static let fallbackSymbol = "bell"
 
     /// The string-catalog key of the localized name.
