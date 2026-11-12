@@ -143,6 +143,14 @@ struct QRScannerPreview: NSViewRepresentable {
     func updateNSView(_ nsView: NSView, context: Context) {}
 }
 
+#if DEBUG
+    // The stub has no camera, so the preview shows the empty scanner surface.
+    #Preview("QR scanner") {
+        QRScannerPreview(scanner: StubQRCodeScanner())
+            .frame(width: 320, height: 240)
+    }
+#endif
+
 // MARK: - Test Info
 
 // @test-file: Tests/ViewModels/PushPairingViewModelTests.swift

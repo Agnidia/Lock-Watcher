@@ -31,6 +31,8 @@ struct SettingsAboutView: View {
     }
 }
 
-#Preview("About") {
-    SettingsAboutView()
-}
+#if DEBUG
+    #Preview("About") {
+        SettingsAboutView()
+    }
+#endif

@@ -1,7 +1,7 @@
 //
 //  PushPairingViewModel.swift
 //
-//  Created on 10.11.2026.
+//  Created on 11.11.2026.
 //  Copyright © 2026 Agnidia. All rights reserved.
 //
 
@@ -251,6 +251,9 @@ extension PushPairingViewModel {
         #if DEBUG
             if let fixture = ProcessInfo.processInfo.environment["LW_PUSH_FIXTURE"].flatMap(PushPairingFixture.init(rawValue:)) {
                 return preview(fixture)
+            }
+            if PreviewMode.isEnabled {
+                return preview(.paired)
             }
         #endif
         let store = APNsCredentialStore()

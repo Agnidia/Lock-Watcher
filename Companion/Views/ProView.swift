@@ -11,7 +11,7 @@ import SwiftUI
 /// The blue of the app icon's gradient start (display P3), shared by the Pro tab and its icon.
 enum ProTint {
     private static let components = (red: 0.23926, green: 0.54102, blue: 0.77637)
-
+    
     static let color = Color(.displayP3, red: components.red, green: components.green, blue: components.blue)
     static let uiColor = UIColor(displayP3Red: components.red, green: components.green, blue: components.blue, alpha: 1)
 }
@@ -19,18 +19,18 @@ enum ProTint {
 struct ProView: View {
     private static let termsURL = URL(string: "https://agnidia.com/info/app/lockwatcher/terms.html")
     private static let privacyURL = URL(string: "https://agnidia.com/info/app/lockwatcher/policy.html")
-
+    
     let store: ProStore
-
+    
     @State private var isManagingSubscription = false
-
+    
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
-
+    
     /// A sticky bar would cover a third of the screen at accessibility sizes, so the button then scrolls with the content.
     private var usesStickyBar: Bool {
         !dynamicTypeSize.isAccessibilitySize
     }
-
+    
     var body: some View {
         ScrollView {
             VStack(spacing: 16) {
@@ -69,7 +69,7 @@ struct ProView: View {
 
 private struct ProHero: View {
     let isActive: Bool
-
+    
     var body: some View {
         VStack(spacing: 8) {
             Text(isActive ? "ProActiveTitle" : "ProTitle")
@@ -93,7 +93,7 @@ private struct ProComparisonCard: View {
         case notIncluded
         case value(Int)
     }
-
+    
     private struct Row: Identifiable {
         let id: String
         let symbol: String
@@ -101,18 +101,18 @@ private struct ProComparisonCard: View {
         let free: Cell
         let pro: Cell
     }
-
+    
     private static let rows = [
         Row(id: "alerts", symbol: "bell.fill", title: "ProRowAlerts", free: .included, pro: .included),
         Row(id: "photos", symbol: "photo.on.rectangle", title: "ProRowPhotos", free: .included, pro: .included),
         Row(id: "details", symbol: "map.fill", title: "ProRowDetails", free: .notIncluded, pro: .included),
-        Row(id: "photoTools", symbol: "plus.magnifyingglass", title: "ProRowPhotoTools", free: .notIncluded, pro: .included),
+        Row(id: "photoTools", symbol: "arrow.up.left.and.arrow.down.right.rectangle", title: "ProRowPhotoTools", free: .notIncluded, pro: .included),
         Row(id: "history", symbol: "clock.arrow.circlepath", title: "ProRowHistory",
             free: .value(AlertInbox.freeVisibleLimit), pro: .value(AlertInbox.capacity))
     ]
-
+    
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
-
+    
     var body: some View {
         Group {
             if dynamicTypeSize.isAccessibilitySize {
@@ -126,7 +126,7 @@ private struct ProComparisonCard: View {
         .background(RoundedRectangle(cornerRadius: 16).fill(Color(.secondarySystemGroupedBackground)))
         .accessibilityElement(children: .contain)
     }
-
+    
     private var table: some View {
         Grid(alignment: .center, horizontalSpacing: 16, verticalSpacing: 8) {
             GridRow {
@@ -140,19 +140,19 @@ private struct ProComparisonCard: View {
             Divider()
             ForEach(Self.rows) { row in
                 GridRow {
-                    HStack(spacing: 10) {
+                    HStack(alignment: .top, spacing: 10) {
                         featureIcon(row.symbol)
                         Text(row.title)
                             .font(.subheadline)
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .frame(maxWidth: .infinity, alignment: .topLeading)
                     cell(row.free, isPro: false)
                     cell(row.pro, isPro: true)
                 }
             }
         }
     }
-
+    
     /// One block per feature, because three columns do not fit at accessibility text sizes.
     private var stacked: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -179,16 +179,16 @@ private struct ProComparisonCard: View {
             }
         }
     }
-
+    
     /// A fixed-width frame keeps the titles aligned although the symbols differ in width.
     private func featureIcon(_ symbol: String) -> some View {
         Image(systemName: symbol)
             .font(.subheadline)
             .foregroundStyle(ProTint.color)
-            .frame(width: 24)
+            .frame(width: 16)
             .accessibilityHidden(true)
     }
-
+    
     @ViewBuilder
     private func cell(_ cell: Cell, isPro: Bool) -> some View {
         switch cell {
@@ -218,11 +218,11 @@ private struct ProPlanPicker: View {
         ProPlan(id: "placeholder.2", kind: .month, title: "Pro Monthly", price: "$0.00", monthlyEquivalent: nil, savingsPercent: nil),
         ProPlan(id: "placeholder.3", kind: .lifetime, title: "Pro Lifetime", price: "$0.00", monthlyEquivalent: nil, savingsPercent: nil)
     ]
-
+    
     let store: ProStore
-
+    
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
-
+    
     var body: some View {
         VStack(spacing: 12) {
             if !store.plans.isEmpty {
@@ -244,7 +244,7 @@ private struct ProPlanPicker: View {
         }
         .animation(reduceMotion ? nil : .snappy, value: store.selectedPlanID)
     }
-
+    
     private var unavailable: some View {
         VStack(spacing: 12) {
             Text("ProUnavailable")
@@ -267,7 +267,7 @@ private struct PlanCard: View {
     let plan: ProPlan
     let isSelected: Bool
     let select: () -> Void
-
+    
     var body: some View {
         Button(action: select) {
             HStack(spacing: 12) {
@@ -302,7 +302,7 @@ private struct PlanCard: View {
         .accessibilityElement(children: .combine)
         .accessibilityAddTraits(isSelected ? .isSelected : [])
     }
-
+    
     @ViewBuilder
     private var detail: some View {
         switch plan.kind {
@@ -324,7 +324,7 @@ private struct PlanCard: View {
 
 private struct ProPurchaseBar: View {
     let store: ProStore
-
+    
     var body: some View {
         VStack(spacing: 4) {
             if store.purchaseFailed {
@@ -344,7 +344,7 @@ private struct ProPurchaseBar: View {
                     }
                 }
                 .font(.headline)
-                .foregroundStyle(.black)
+                .foregroundStyle(.white)
                 .frame(maxWidth: .infinity, minHeight: 40)
             }
             .buttonStyle(.borderedProminent)
@@ -356,7 +356,7 @@ private struct ProPurchaseBar: View {
         .padding(.vertical, 8)
         .background(.bar)
     }
-
+    
     @ViewBuilder
     private var title: some View {
         if let plan = store.selectedPlan {
@@ -374,11 +374,11 @@ private struct ProPurchaseBar: View {
 private struct ProActiveView: View {
     let store: ProStore
     let manage: () -> Void
-
+    
     private var isLifetime: Bool {
         store.activeProductId == ProProduct.lifetime
     }
-
+    
     var body: some View {
         VStack(spacing: 24) {
             ProHero(isActive: true)
@@ -414,7 +414,7 @@ private struct ProActiveView: View {
             .frame(minHeight: 44)
         }
     }
-
+    
     @ViewBuilder
     private var planName: some View {
         switch store.activeProductId {
@@ -433,7 +433,7 @@ private struct ProFooter: View {
     /// Free accounts get the renewal note and the restore link; Pro accounts have Restore in their own card.
     let isFree: Bool
     let restore: () -> Void
-
+    
     var body: some View {
         VStack(spacing: 4) {
             if isFree {
@@ -449,7 +449,7 @@ private struct ProFooter: View {
             .font(.footnote)
         }
     }
-
+    
     @ViewBuilder
     private var links: some View {
         if isFree {
@@ -466,6 +466,16 @@ private struct ProFooter: View {
         }
     }
 }
+
+#if DEBUG
+#Preview("Free, offers") {
+    ProView(store: PreviewModels.pro(active: false))
+}
+
+#Preview("Pro active") {
+    ProView(store: PreviewModels.pro(active: true))
+}
+#endif
 
 // MARK: - Test Info
 

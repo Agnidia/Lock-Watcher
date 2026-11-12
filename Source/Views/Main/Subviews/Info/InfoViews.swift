@@ -60,10 +60,12 @@ struct InfoView: View {
     }
 }
 
-#Preview("Info Collapsed") {
-    InfoView(isInfoExtended: false).environment(InfoViewModel(thiefManager: ThiefManagerPreview()))
-}
+#if DEBUG
+    #Preview("Info Collapsed") {
+        InfoView(isInfoExtended: false).environment(InfoViewModel(thiefManager: ThiefManagerPreview()))
+    }
 
-#Preview("Info Extended") {
-    InfoView(isInfoExtended: true).environment(InfoViewModel(thiefManager: ThiefManagerPreview()))
-}
+    #Preview("Info Extended") {
+        InfoView(isInfoExtended: true).environment(InfoViewModel(thiefManager: ThiefManagerPreview()))
+    }
+#endif

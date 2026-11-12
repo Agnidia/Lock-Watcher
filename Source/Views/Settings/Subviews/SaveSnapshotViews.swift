@@ -354,6 +354,59 @@ struct LocalNotificationView: View {
     }
 }
 
+#if DEBUG
+    #Preview("Save snapshot rows") {
+        @Previewable @State var keepLast = 10
+        @Previewable @State var sendMail = true
+        @Previewable @State var mailRecipient = "owner@example.com"
+        @Previewable @State var addLocation = false
+        @Previewable @State var addIPAddress = true
+        @Previewable @State var addTraceRoute = true
+        @Previewable @State var traceRouteServer = "example.com"
+        @Previewable @State var saveToDisk = true
+        @Previewable @State var quality = SnapshotQuality.medium
+        @Previewable @State var outputType = CaptureOutputType.video
+        @Previewable @State var videoDuration = 5
+        @Previewable @State var outputSize = CameraSnapConfiguration.OutputSize.allCases[0]
+        @Previewable @State var keepFiles = RetentionPeriod.oneMonth
+        @Previewable @State var iCloud = true
+        @Previewable @State var dropbox = true
+        @Previewable @State var dropboxName = "owner@example.com"
+        @Previewable @State var localNotification = true
+
+        Form {
+            Section {
+                KeepLastCountView(keepLastActionsCount: $keepLast)
+                SendNotificationToMailView(isSendNotificationToMail: $sendMail, mailRecipient: $mailRecipient)
+                AddLocationToSnapshotView(addLocationToSnapshot: $addLocation) { completion in completion(true) }
+                AddIPAddressToSnapshotView(addIPAddressToSnapshot: $addIPAddress)
+                TraceRouteToSnapshotView(isAddTraceRouteToSnapshot: $addTraceRoute, traceRouteServer: $traceRouteServer)
+                SaveSnapshotToDiskView(isSaveSnapshotToDisk: $saveToDisk, browse: {})
+                SnapshotQualityView(snapshotQuality: $quality)
+                SnapshotOutputTypeView(outputType: $outputType)
+                VideoDurationView(videoDuration: $videoDuration)
+                SnapshotOutputSizeView(outputSize: $outputSize)
+                KeepFilesView(keepFiles: $keepFiles, pendingKeepFiles: nil, confirm: { _ in }, cancel: {})
+                ICloudSyncView(isICloudSyncEnable: $iCloud, browse: {})
+                DropboxView(isDropboxEnable: $dropbox, dropboxName: $dropboxName)
+                LocalNotificationView(isLocalNotificationEnable: $localNotification)
+            }
+        }
+        .formStyle(.grouped)
+        .frame(width: 480)
+    }
+
+    #Preview("Keep files confirmation") {
+        @Previewable @State var keepFiles = RetentionPeriod.oneYear
+
+        Form {
+            KeepFilesView(keepFiles: $keepFiles, pendingKeepFiles: .oneWeek, confirm: { _ in }, cancel: {})
+        }
+        .formStyle(.grouped)
+        .frame(width: 480)
+    }
+#endif
+
 // MARK: - Test Info
 
 // @test-file: Tests/Utils/PluralLocalizationTests.swift

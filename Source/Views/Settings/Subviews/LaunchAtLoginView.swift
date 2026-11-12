@@ -18,6 +18,8 @@ struct LaunchAtLoginView: View {
     }
 }
 
-#Preview("Launch At Login") {
-    LaunchAtLoginView()
-}
+#if DEBUG
+    #Preview("Launch At Login") {
+        LaunchAtLoginView()
+    }
+#endif

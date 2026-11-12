@@ -492,11 +492,13 @@ struct FinderFolderOpener: FolderOpening {
 }
 
 /// Extension to provide preview instance for the SettingsViewModel.
-extension SettingsViewModel {
-    static var preview: SettingsViewModel {
-        SettingsViewModel(settings: AppSettingsPreview(), thiefManager: ThiefManagerPreview(), push: .preview())
+#if DEBUG
+    extension SettingsViewModel {
+        static var preview: SettingsViewModel {
+            SettingsViewModel(settings: AppSettingsPreview(), thiefManager: ThiefManagerPreview(), push: .preview())
+        }
     }
-}
+#endif
 
 // MARK: - Test Info
 

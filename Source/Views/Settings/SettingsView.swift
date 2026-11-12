@@ -234,10 +234,12 @@ private struct SettingsSidebarIcon: View {
     }
 }
 
-#Preview("Settings View") {
-    SettingsView()
-        .environment(SettingsViewModel.preview)
-}
+#if DEBUG
+    #Preview("Settings View") {
+        SettingsView()
+            .environment(SettingsViewModel.preview)
+    }
+#endif
 
 // MARK: - Test Info
 

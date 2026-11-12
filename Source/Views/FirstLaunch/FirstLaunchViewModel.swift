@@ -198,9 +198,11 @@ final class FirstLaunchViewModel: DomainViewConstantProtocol {
 
 // @test-file: Tests/ViewModels/FirstLaunchViewModelTests.swift
 
-/// Provides a preview version of the `FirstLaunchViewModel`.
-extension FirstLaunchViewModel {
-    static var preview: FirstLaunchViewModel {
-        FirstLaunchViewModel(settings: AppSettingsPreview(), thiefManager: ThiefManagerPreview(), closeClosure: {})
+#if DEBUG
+    /// Provides a preview version of the `FirstLaunchViewModel`.
+    extension FirstLaunchViewModel {
+        static var preview: FirstLaunchViewModel {
+            FirstLaunchViewModel(settings: AppSettingsPreview(), thiefManager: ThiefManagerPreview(), closeClosure: {})
+        }
     }
-}
+#endif

@@ -61,7 +61,9 @@ struct FirstLaunchView: View {
     }
 }
 
-#Preview("First Launch") {
-    FirstLaunchView()
-        .environment(FirstLaunchViewModel.preview)
-}
+#if DEBUG
+    #Preview("First Launch") {
+        FirstLaunchView()
+            .environment(FirstLaunchViewModel.preview)
+    }
+#endif

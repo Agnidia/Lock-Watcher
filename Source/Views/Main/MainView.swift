@@ -36,6 +36,8 @@ struct MainView: View {
     }
 }
 
-#Preview("Main View") {
-    MainView(viewModel: MainViewModel.preview)
-}
+#if DEBUG
+    #Preview("Main View") {
+        MainView(viewModel: MainViewModel.preview)
+    }
+#endif

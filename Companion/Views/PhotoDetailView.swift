@@ -141,6 +141,20 @@ private final class ZoomScrollView: UIScrollView, UIScrollViewDelegate {
     }
 }
 
+#if DEBUG
+    #Preview("Pro") {
+        NavigationStack {
+            PhotoDetailView(photo: FixturePhotoSource.photos()[0], library: PreviewModels.photos(), isPro: true, showPro: {})
+        }
+    }
+
+    #Preview("Free") {
+        NavigationStack {
+            PhotoDetailView(photo: FixturePhotoSource.photos()[0], library: PreviewModels.photos(), isPro: false, showPro: {})
+        }
+    }
+#endif
+
 // MARK: - Test Info
 
 // @test-file: CompanionTests/CloudPhotoLibraryTests.swift

@@ -13,23 +13,37 @@ import UIKit
 struct AlertDetailView: View {
     let alert: ReceivedAlert
     let library: CloudPhotoLibrary
-
+    
     @State private var copiedCount = 0
-
+#if DEBUG
+    @Environment(\.scrollsDetailToEnd) private var scrollsToEnd
+#endif
+    
     var body: some View {
-        ScrollView {
-            VStack(spacing: 16) {
-                AlertHeader(alert: alert)
-                AlertWhenCard(alert: alert)
-                AlertWhereCard(alert: alert, copy: copy)
-                if alert.ip != nil || alert.traceRoute != nil {
-                    AlertNetworkCard(alert: alert, copy: copy)
+        ScrollViewReader { proxy in
+            ScrollView {
+                VStack(spacing: 16) {
+                    AlertHeader(alert: alert)
+                    AlertWhenCard(alert: alert)
+                    AlertWhereCard(alert: alert, copy: copy)
+                    if alert.ip != nil || alert.traceRoute != nil {
+                        AlertNetworkCard(alert: alert, copy: copy)
+                    }
+                    if alert.mediaKind != nil {
+                        AlertCaptureCard(alert: alert, library: library)
+                    }
+                    Color.clear.frame(height: 1).id(Self.endAnchor)
                 }
-                if alert.mediaKind != nil {
-                    AlertCaptureCard(alert: alert, library: library)
+                .padding(16)
+            }
+#if DEBUG
+            .task {
+                if scrollsToEnd {
+                    try? await Task.sleep(for: .seconds(3))
+                    proxy.scrollTo(Self.endAnchor, anchor: .bottom)
                 }
             }
-            .padding(16)
+#endif
         }
         .background(Color(.systemGroupedBackground))
         .navigationTitle("AlertDetailTitle")
@@ -43,7 +57,9 @@ struct AlertDetailView: View {
         }
         .sensoryFeedback(.success, trigger: copiedCount)
     }
-
+    
+    private static let endAnchor = "alert-detail-end"
+    
     private func copy(_ text: String) {
         UIPasteboard.general.string = text
         copiedCount += 1
@@ -55,7 +71,7 @@ struct AlertDetailView: View {
 private struct DetailCard<Content: View>: View {
     let title: LocalizedStringKey
     @ViewBuilder let content: Content
-
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text(title)
@@ -74,9 +90,9 @@ private struct DetailCard<Content: View>: View {
 private struct CopyButton: View {
     let title: LocalizedStringKey
     let action: () -> Void
-
+    
     @State private var showsCopied = false
-
+    
     var body: some View {
         Button {
             action()
@@ -84,6 +100,8 @@ private struct CopyButton: View {
         } label: {
             Label(showsCopied ? "AlertCopied" : title, systemImage: showsCopied ? "checkmark" : "doc.on.doc")
                 .frame(minHeight: 44)
+                .padding(.horizontal, 12)
+                .foregroundStyle(Color.Text.copy)
         }
         .buttonStyle(.bordered)
         .task(id: showsCopied) {
@@ -96,20 +114,20 @@ private struct CopyButton: View {
 
 private struct AlertHeader: View {
     let alert: ReceivedAlert
-
-    @ScaledMetric(relativeTo: .title) private var badge = 56.0
-
+    
+    @ScaledMetric(relativeTo: .title) private var badge = 64.0
+    
     private var trigger: AlertTrigger? {
         AlertTrigger(alert: alert)
     }
-
+    
     var body: some View {
         VStack(spacing: 8) {
             Image(systemName: trigger?.symbol ?? AlertTrigger.fallbackSymbol)
-                .font(.title)
-                .foregroundStyle(.tint)
+                .font(.largeTitle)
+                .foregroundStyle(Color.State.info)
                 .frame(width: badge, height: badge)
-                .background(.tint.opacity(0.15), in: Circle())
+                .background(Color.State.info.opacity(0.15), in: Circle())
                 .accessibilityHidden(true)
             if let trigger {
                 Text(LocalizedStringKey(trigger.titleKey))
@@ -127,7 +145,7 @@ private struct AlertHeader: View {
             }
         }
         .frame(maxWidth: .infinity)
-        .padding(.vertical, 8)
+        .padding(.bottom, 8)
         .accessibilityElement(children: .combine)
         .accessibilityAddTraits(.isHeader)
     }
@@ -135,7 +153,7 @@ private struct AlertHeader: View {
 
 private struct AlertWhenCard: View {
     let alert: ReceivedAlert
-
+    
     var body: some View {
         DetailCard(title: "AlertWhen") {
             VStack(alignment: .leading, spacing: 4) {
@@ -164,9 +182,9 @@ private struct AlertWhenCard: View {
 private struct AlertWhereCard: View {
     let alert: ReceivedAlert
     let copy: (String) -> Void
-
+    
     @Environment(\.openURL) private var openURL
-
+    
     var body: some View {
         DetailCard(title: "AlertWhere") {
             if let latitude = alert.latitude, let longitude = alert.longitude {
@@ -191,7 +209,7 @@ private struct AlertWhereCard: View {
             }
         }
     }
-
+    
     @ViewBuilder
     private func actions(latitude: Double, longitude: Double, text: String) -> some View {
         if let url = AlertFormat.mapsURL(latitude: latitude, longitude: longitude) {
@@ -200,6 +218,7 @@ private struct AlertWhereCard: View {
             } label: {
                 Label("AlertOpenInMaps", systemImage: "map")
                     .frame(minHeight: 44)
+                    .padding(.horizontal, 12)
             }
             .buttonStyle(.borderedProminent)
         }
@@ -210,11 +229,11 @@ private struct AlertWhereCard: View {
 private struct AlertNetworkCard: View {
     let alert: ReceivedAlert
     let copy: (String) -> Void
-
+    
     @State private var showsFullTrace = false
-
+    
     private static let collapsedLines = 5
-
+    
     var body: some View {
         DetailCard(title: "AlertNetwork") {
             if let ip = alert.ip {
@@ -257,12 +276,12 @@ private struct AlertNetworkCard: View {
 private struct AlertCaptureCard: View {
     let alert: ReceivedAlert
     let library: CloudPhotoLibrary
-
+    
     private var photo: CloudPhoto? {
         guard case .loaded(let photos) = library.phase else { return nil }
         return photos.first { $0.id == alert.fileName }
     }
-
+    
     var body: some View {
         DetailCard(title: "AlertCapture") {
             if alert.mediaKind == PushAlertPayload.videoMedia {
@@ -284,7 +303,7 @@ private struct AlertCaptureCard: View {
             }
         }
     }
-
+    
     @ViewBuilder
     private var missing: some View {
         switch library.phase {
@@ -310,9 +329,9 @@ private struct AlertCaptureCard: View {
 private struct CapturePhoto: View {
     let photo: CloudPhoto
     let library: CloudPhotoLibrary
-
+    
     @State private var state: CloudPhotoImageState = .loading
-
+    
     var body: some View {
         Color.secondary.opacity(0.15)
             .aspectRatio(4 / 3, contentMode: .fit)
@@ -328,7 +347,7 @@ private struct CapturePhoto: View {
                 }
             }
     }
-
+    
     @ViewBuilder
     private var image: some View {
         switch state {
@@ -344,6 +363,45 @@ private struct CapturePhoto: View {
         }
     }
 }
+
+#if DEBUG
+#Preview("USB connected") {
+    let library = PreviewModels.photos()
+    NavigationStack {
+        AlertDetailView(alert: PreviewModels.alert(.usbConnected), library: library)
+    }
+    .task { await library.refresh() }
+}
+
+#Preview("Locked input, video") {
+    let library = PreviewModels.photos()
+    NavigationStack {
+        AlertDetailView(alert: PreviewModels.alert(.lockedInput), library: library)
+    }
+    .task { await library.refresh() }
+}
+
+#Preview("Setup, no location") {
+    NavigationStack {
+        AlertDetailView(alert: PreviewModels.alert(.setup), library: PreviewModels.photos())
+    }
+}
+
+#Preview("Bare") {
+    NavigationStack {
+        AlertDetailView(alert: PreviewAlerts.bare(), library: PreviewModels.photos())
+    }
+}
+
+#Preview("Scrolled to end") {
+    let library = PreviewModels.photos()
+    NavigationStack {
+        AlertDetailView(alert: PreviewModels.alert(.onWakeUp), library: library)
+    }
+    .environment(\.scrollsDetailToEnd, true)
+    .task { await library.refresh() }
+}
+#endif
 
 // MARK: - Test Info
 

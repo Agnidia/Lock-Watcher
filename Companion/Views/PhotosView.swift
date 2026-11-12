@@ -11,11 +11,12 @@ struct PhotosView: View {
     let library: CloudPhotoLibrary
     let isPro: Bool
     let showPro: () -> Void
+    @Binding var path: NavigationPath
 
     private static let columns = [GridItem(.adaptive(minimum: 100), spacing: 2)]
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             ScrollView {
                 content
             }
@@ -101,6 +102,31 @@ struct PhotoThumbnail: View {
         }
     }
 }
+
+#if DEBUG
+    #Preview("Grid") {
+        let library = PreviewModels.photos()
+        PhotosView(library: library, isPro: true, showPro: {}, path: .constant(NavigationPath()))
+            .task { await library.refresh() }
+    }
+
+    #Preview("Empty") {
+        let library = PreviewModels.photos(mode: .empty)
+        PhotosView(library: library, isPro: true, showPro: {}, path: .constant(NavigationPath()))
+            .task { await library.refresh() }
+    }
+
+    #Preview("Unavailable") {
+        let library = PreviewModels.photos(mode: .unavailable)
+        PhotosView(library: library, isPro: true, showPro: {}, path: .constant(NavigationPath()))
+            .task { await library.refresh() }
+    }
+
+    #Preview("Thumbnail") {
+        PhotoThumbnail(photo: FixturePhotoSource.photos()[0], library: PreviewModels.photos())
+            .frame(width: 120)
+    }
+#endif
 
 // MARK: - Test Info
 

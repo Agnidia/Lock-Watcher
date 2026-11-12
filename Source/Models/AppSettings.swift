@@ -339,36 +339,38 @@ final class AppSettings: AppSettingsProtocol {
     }
 }
 
-/// class for Preview
-///
-final class AppSettingsPreview: AppSettingsProtocol {
-    static let isMASBuild: Bool = true
+#if DEBUG
+    /// class for Preview
+    ///
+    final class AppSettingsPreview: AppSettingsProtocol {
+        static let isMASBuild: Bool = true
 
-    static let isImageCaptureDebug: Bool = true
+        static let isImageCaptureDebug: Bool = true
 
-    static let firstLaunchSuccessCount: Int = 15
+        static let firstLaunchSuccessCount: Int = 15
 
-    var options: OptionsSettings = .init()
+        var options: OptionsSettings = .init()
 
-    var triggers: TriggerSettings = .init()
+        var triggers: TriggerSettings = .init()
 
-    var sync: SyncSettings = .init()
+        var sync: SyncSettings = .init()
 
-    var snapshot: SnapshotSettings = .init()
+        var snapshot: SnapshotSettings = .init()
 
-    var retention: RetentionSettings = .init()
+        var retention: RetentionSettings = .init()
 
-    var ui: UISettings = .init()
+        var ui: UISettings = .init()
 
-    func resetToDefaults() {
-        options = OptionsSettings()
-        triggers = TriggerSettings()
-        sync = SyncSettings()
-        snapshot = SnapshotSettings()
-        retention = retention.resettingPreference()
-        ui = UISettings()
+        func resetToDefaults() {
+            options = OptionsSettings()
+            triggers = TriggerSettings()
+            sync = SyncSettings()
+            snapshot = SnapshotSettings()
+            retention = retention.resettingPreference()
+            ui = UISettings()
+        }
     }
-}
+#endif
 
 // MARK: - Test Info
 

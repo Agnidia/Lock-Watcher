@@ -14,7 +14,7 @@ struct PairView: View {
     var body: some View {
         VStack(spacing: 20) {
             Text("PairTitle")
-                .font(.title2.bold())
+                .font(.title.bold())
             content
         }
         .padding()
@@ -58,6 +58,18 @@ struct PairView: View {
         }
     }
 }
+
+#if DEBUG
+    #Preview("Paired") {
+        PairView(model: PreviewModels.registration(paired: true))
+    }
+
+    #Preview("Unpaired") {
+        let model = PreviewModels.registration(paired: false)
+        PairView(model: model)
+            .task { await model.start() }
+    }
+#endif
 
 // MARK: - Test Info
 

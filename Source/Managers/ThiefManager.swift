@@ -55,6 +55,16 @@ struct ThiefManagerDependencies {
     var debugCaptureDelay: Duration
     var cameraAccessNotice: any CameraAccessNoticePresenting
     
+    /// With `LW_PREVIEW=1` (DEBUG) the history is the in-memory preview persons, so the real storage is neither read nor written.
+    private static func makeDatabaseManager(settings: AppSettingsProtocol) -> any DatabaseManagerProtocol {
+        #if DEBUG
+            if PreviewMode.isEnabled {
+                return DatabaseManagerPreview()
+            }
+        #endif
+        return DatabaseManager(settings: settings)
+    }
+
     @MainActor
     static func live(settings: AppSettingsProtocol) -> ThiefManagerDependencies {
         let camera = CameraSnapCamera()
@@ -68,7 +78,7 @@ struct ThiefManagerDependencies {
         }
         return ThiefManagerDependencies(camera: camera,
                                         notificationManager: NotificationManager(settings: settings),
-                                        databaseManager: DatabaseManager(settings: settings),
+                                        databaseManager: makeDatabaseManager(settings: settings),
                                         fileSystemUtil: fileSystemUtil,
                                         networkUtil: NetworkUtil(),
                                         posterExtractor: AVPosterFrameExtractor(),
@@ -511,33 +521,35 @@ extension ThiefManager: @MainActor UNUserNotificationCenterDelegate {
     }
 }
 
-/// Preview implementation of `ThiefManagerProtocol` for SwiftUI previews.
-@MainActor
-final class ThiefManagerPreview: ThiefManagerProtocol {
-    var dropboxUserNameUpdates: AsyncStream<String> {
-        AsyncStream { continuation in
-            continuation.yield("")
-            continuation.finish()
+#if DEBUG
+    /// Preview implementation of `ThiefManagerProtocol` for SwiftUI previews.
+    @MainActor
+    final class ThiefManagerPreview: ThiefManagerProtocol {
+        var dropboxUserNameUpdates: AsyncStream<String> {
+            AsyncStream { continuation in
+                continuation.yield("")
+                continuation.finish()
+            }
         }
+    
+        func completeDropboxAuthWith(url: URL) async -> String {
+            ""
+        }
+    
+        func showSnapshot(identifier: String) {}
+    
+        func setupLocationManager(enable: Bool) {}
+    
+        func detectedTrigger() async -> Bool {
+            true
+        }
+    
+        func restartWatching() {}
+    
+        func cleanAll() {}
+    
+        func applyRetentionPolicy() {}
+    
+        var databaseManager: any DatabaseManagerProtocol = DatabaseManagerPreview()
     }
-    
-    func completeDropboxAuthWith(url: URL) async -> String {
-        ""
-    }
-    
-    func showSnapshot(identifier: String) {}
-    
-    func setupLocationManager(enable: Bool) {}
-    
-    func detectedTrigger() async -> Bool {
-        true
-    }
-    
-    func restartWatching() {}
-    
-    func cleanAll() {}
-    
-    func applyRetentionPolicy() {}
-    
-    var databaseManager: any DatabaseManagerProtocol = DatabaseManager(settings: AppSettingsPreview())
-}
+#endif

@@ -77,10 +77,12 @@ struct ProtectionView: View {
     }
 }
 
-#Preview("Protection Enabled") {
-    ProtectionView(isProtectionEnable: .constant(true), authSettings: .constant(.biometricsOrWatch), securityUtil: SecurityUtil.preview)
-}
+#if DEBUG
+    #Preview("Protection Enabled") {
+        ProtectionView(isProtectionEnable: .constant(true), authSettings: .constant(.biometricsOrWatch), securityUtil: SecurityUtil.preview)
+    }
 
-#Preview("Protection Disabled") {
-    ProtectionView(isProtectionEnable: .constant(false), authSettings: .constant(.biometricsOrWatch), securityUtil: SecurityUtil.preview)
-}
+    #Preview("Protection Disabled") {
+        ProtectionView(isProtectionEnable: .constant(false), authSettings: .constant(.biometricsOrWatch), securityUtil: SecurityUtil.preview)
+    }
+#endif

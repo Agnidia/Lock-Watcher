@@ -144,6 +144,35 @@ struct UseSnapshotOnLockedInputView: View {
     }
 }
 
+#if DEBUG
+    #Preview("Detect snapshot rows") {
+        @Previewable @State var onWakeUp = true
+        @Previewable @State var onLogin = true
+        @Previewable @State var onWrongPassword = false
+        @Previewable @State var onBattery = true
+        @Previewable @State var onUSB = false
+        @Previewable @State var onDisplayAttach = true
+        @Previewable @State var onLocationChange = false
+        @Previewable @State var onLockedInput = true
+        @Previewable @State var lockedInputDelay = 3
+
+        Form {
+            Section {
+                UseSnapshotOnWakeUpView(isUseSnapshotOnWakeUp: $onWakeUp)
+                UseSnapshotOnLoginView(isUseSnapshotOnLogin: $onLogin)
+                UseSnapshotOnWrongPasswordView(isUseSnapshotOnWrongPassword: $onWrongPassword)
+                UseSnapshotOnSwitchToBatteryPowerView(isUseSnapshotOnSwitchToBatteryPower: $onBattery)
+                UseSnapshotOnUSBMountView(isUseSnapshotOnUSBMount: $onUSB)
+                UseSnapshotOnDisplayAttachView(isUseSnapshotOnDisplayAttach: $onDisplayAttach)
+                UseSnapshotOnLocationChangeView(isUseSnapshotOnLocationChange: $onLocationChange)
+                UseSnapshotOnLockedInputView(isUseSnapshotOnLockedInput: $onLockedInput, lockedInputDelay: $lockedInputDelay)
+            }
+        }
+        .formStyle(.grouped)
+        .frame(width: 480)
+    }
+#endif
+
 // MARK: - Test Info
 
 // @test-file: Tests/Utils/PluralLocalizationTests.swift

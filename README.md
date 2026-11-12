@@ -215,6 +215,42 @@ A Pro user taps an alert to open its detail: the trigger and the Mac name, the t
 - The Mac binary embeds the key. Anyone who extracts it can send APNs alerts to this topic. The owner accepted this risk in the security review of this feature.
 - The Photos tab reads the owner's iCloud Documents container and does not write to it. The caps in the constants table apply.
 
+### Companion launch variables (DEBUG only)
+
+`LW_PREVIEW=1` is the one switch for both apps (Debug builds only; `true`, `yes` and `on` also work):
+
+| App | What `LW_PREVIEW=1` does |
+|---|---|
+| Companion | Pro on, one alert per trigger, the 11 preview persons as photos. A `LW_COMPANION_*` variable below still overrides any part |
+| macOS | The popover history is the in-memory preview persons (the real `Thiefs` storage is not read or written, so live captures are not kept), and Settings → Notifications shows a paired iPhone unless `LW_PUSH_FIXTURE` picks another state |
+
+A Debug build of the companion reads these variables and replaces the live inbox, iCloud photos and StoreKit with preview data (the preview persons in `Resources/Preview Content`). Release builds ignore them and contain none of this code. Every companion view also has a DEBUG-only `#Preview`, built from the same preview data. Set them in the scheme (Run → Arguments → Environment Variables) or pass `SIMCTL_CHILD_<NAME>=…` to `xcrun simctl launch`.
+
+| Variable | Values | Effect |
+|---|---|---|
+| `LW_COMPANION_FIXTURE` | `alerts`, `alertsMany`, `pro`, `triggers`, `proTriggers`, `detail.<trigger>[.bottom]`, `proDetailBare`, `photos`, `proPhotos`, `photoDetail`, `photosUnavailable`, `pair`, `ready`, `denied`, `proOffers` | Base preset; the variables below change one part of it |
+| `LW_COMPANION_PRO` | `1`, `0` | Pro on or off |
+| `LW_COMPANION_TAB` | `alerts`, `photos`, `pair`, `pro` | Tab shown at launch |
+| `LW_COMPANION_TRIGGERS` | `all`, `none`, or trigger names separated by commas | Which alerts the inbox holds |
+| `LW_COMPANION_ALERT_COUNT` | a number | Number of alerts; the chosen triggers repeat when it is larger |
+| `LW_COMPANION_OPEN_ALERT` | a trigger name | Opens that alert's detail |
+| `LW_COMPANION_SCROLL_BOTTOM` | `1` | Scrolls the opened detail to its last card |
+| `LW_COMPANION_PHOTOS` | `all`, `none`, `unavailable`, or a number | Photo grid; a number above 11 repeats the persons |
+| `LW_COMPANION_OPEN_PHOTO` | a photo index | Opens that photo on the Photos tab |
+| `LW_COMPANION_PUSH` | `ready`, `denied` | Notification permission and the pairing QR code |
+| `LW_COMPANION_PLANS` | `1` | Shows the three made-up Pro plans |
+| `LW_COMPANION_FORCE_PRO` | `1` | Keeps the live alerts and photos and only unlocks Pro |
+| `LW_PREVIEW` | `1` | Preview data, as in the table above; a preset in `LW_COMPANION_FIXTURE` replaces the default |
+
+Trigger names are the `AlertTrigger` raw values: `setup`, `onWakeUp`, `onWrongPassword`, `onBatteryPower`, `onACPower`, `usbConnected`, `logedIn`, `displayAttached`, `locationChanged`, `lockedInput`, `debug`.
+
+```bash
+SIMCTL_CHILD_LW_COMPANION_PRO=1 SIMCTL_CHILD_LW_COMPANION_TRIGGERS=lockedInput,onWakeUp SIMCTL_CHILD_LW_COMPANION_ALERT_COUNT=5 \
+  xcrun simctl launch booted com.igrsoft.Lock-Watcher
+```
+
+The Mac app has one equivalent, `LW_PUSH_FIXTURE` (`unpaired`, `paired`, `needsRepair`, `cameraDenied`, `invalidCode`), for the Push settings states (Debug only).
+
 ### Examples
 
 Run the companion tests on an iOS Simulator. Replace `<simulator-udid>` with a simulator ID from `xcrun simctl list devices`.

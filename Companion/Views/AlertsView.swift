@@ -91,6 +91,26 @@ struct AlertRow: View {
     }
 }
 
+#if DEBUG
+    #Preview("Free, 3 alerts") {
+        AlertsView(inbox: PreviewModels.inbox(PreviewAlerts.all()), photos: PreviewModels.photos(), isPro: false, showPro: {}, path: .constant(NavigationPath()))
+    }
+
+    #Preview("Pro, every trigger") {
+        AlertsView(inbox: PreviewModels.inbox(PreviewAlerts.all()), photos: PreviewModels.photos(), isPro: true, showPro: {}, path: .constant(NavigationPath()))
+    }
+
+    #Preview("Empty") {
+        AlertsView(inbox: PreviewModels.inbox([]), photos: PreviewModels.photos(), isPro: true, showPro: {}, path: .constant(NavigationPath()))
+    }
+
+    #Preview("Rows") {
+        List(PreviewAlerts.all()) { alert in
+            AlertRow(alert: alert)
+        }
+    }
+#endif
+
 // MARK: - Test Info
 
 // @test-file: CompanionTests/CompanionCoreTests.swift

@@ -215,9 +215,49 @@ struct OwnAPNsKeyView: View {
     }
 }
 
-#Preview("Push block") {
-    PushSettingsGallery()
-}
+#if DEBUG
+    #Preview("Push block") {
+        PushSettingsGallery()
+    }
+
+    #Preview("Companion download") {
+        Form {
+            CompanionDownloadView()
+        }
+        .formStyle(.grouped)
+        .frame(width: 480)
+    }
+
+    #Preview("Pairing status") {
+        let model = PushPairingViewModel.preview()
+        let phases: [PushBlockPhase] = [
+            .disabled,
+            .unpaired,
+            .paired(environment: .sandbox, pairedAt: Date(timeIntervalSince1970: 1_793_000_000)),
+            .needsRepair,
+        ]
+
+        Form {
+            ForEach(Array(phases.enumerated()), id: \.offset) { _, phase in
+                PushPairingStatusView(phase: phase, model: model)
+            }
+        }
+        .formStyle(.grouped)
+        .frame(width: 480)
+    }
+
+    #Preview("Pairing sheet") {
+        PushPairingSheet(model: .preview(.unpaired))
+    }
+
+    #Preview("Own APNs key") {
+        Form {
+            OwnAPNsKeyView(model: .preview())
+        }
+        .formStyle(.grouped)
+        .frame(width: 480)
+    }
+#endif
 
 // MARK: - Test Info
 
