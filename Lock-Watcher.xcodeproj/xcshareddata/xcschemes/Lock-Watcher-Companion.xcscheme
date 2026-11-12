@@ -64,7 +64,12 @@
          <EnvironmentVariable
             key = "LW_COMPANION_FORCE_PRO"
             value = "1"
-            isEnabled = "NO">
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "LW_PREVIEW"
+            value = "1"
+            isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>
       <StoreKitConfigurationFileReference

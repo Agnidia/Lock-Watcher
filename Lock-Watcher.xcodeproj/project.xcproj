@@ -2,9 +2,9 @@
   "organization": "Agnidia",
   "default-configuration": "Release",
   "configurations": [
-    { "name": "Debug", "file": "Configurations/debug.xcconfig" },
-    { "name": "Release", "file": "Configurations/release.xcconfig" },
-    { "name": "Release-non-mas", "file": "Configurations/app/app-release.xcconfig" },
+    { "name": "Debug", "file": { "anchor": "Configurations", "relative-path": "debug.xcconfig" } },
+    { "name": "Release", "file": { "anchor": "Configurations", "relative-path": "release.xcconfig" } },
+    { "name": "Release-non-mas", "file": { "anchor": "Configurations", "relative-path": "app/app-release.xcconfig" } },
   ],
   "localizations": {
     "development": "en",
@@ -65,933 +65,52 @@
     },
   ],
   "files": [
+    { "kind": "folder", "path": "Shared", "target-membership": [ "Lock-Watcher", "Lock-Watcher-Companion", "Lock-Watcher-non-mas", "Lock-WatcherCompanionTests" ] },
     {
-      "kind": "group",
-      "path": "Shared",
-      "children": [
-        {
-          "kind": "group",
-          "path": "Pairing",
-          "children": [
-            {
-              "path": "APNsEnvironment.swift",
-              "target-membership": [
-                "Lock-Watcher-Companion/compile-sources",
-                "Lock-WatcherCompanionTests/compile-sources",
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "PairingPayload.swift",
-              "target-membership": [
-                "Lock-Watcher-Companion/compile-sources",
-                "Lock-WatcherCompanionTests/compile-sources",
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            },
-          ],
-        }, {
-          "kind": "group",
-          "path": "Push",
-          "children": [
-            {
-              "path": "PushAlertPayload.swift",
-              "target-membership": [
-                "Lock-Watcher-Companion/compile-sources",
-                "Lock-WatcherCompanionTests/compile-sources",
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            },
-          ],
-        },
-      ],
-    }, {
-      "kind": "group",
+      "kind": "folder",
       "path": "Companion",
-      "children": [
+      "target-membership": [
+        "Lock-Watcher-Companion",
+      ],
+      "membership-exceptions": [
         {
-          "kind": "group",
-          "path": "App",
-          "children": [
-            { "path": "CompanionApp.swift", "target-membership": [ "Lock-Watcher-Companion/compile-sources" ] },
-            { "path": "CompanionFixturePhotos.swift", "target-membership": [ "Lock-Watcher-Companion/compile-sources" ] },
-            { "path": "NotificationReceiver.swift", "target-membership": [ "Lock-Watcher-Companion/compile-sources" ] },
+          "target": "Lock-Watcher-Companion",
+          "exclusions": [
+            "Resources/Companion.storekit",
+            "Resources/Info.plist",
           ],
         }, {
-          "kind": "group",
-          "path": "Core",
-          "children": [
-            {
-              "path": "AlertInbox.swift",
-              "target-membership": [
-                "Lock-Watcher-Companion/compile-sources",
-                "Lock-WatcherCompanionTests/compile-sources",
-              ],
-            }, {
-              "path": "CloudPhotoImageDecoder.swift",
-              "target-membership": [
-                "Lock-Watcher-Companion/compile-sources",
-                "Lock-WatcherCompanionTests/compile-sources",
-              ],
-            }, {
-              "path": "CloudPhotoLibrary.swift",
-              "target-membership": [
-                "Lock-Watcher-Companion/compile-sources",
-                "Lock-WatcherCompanionTests/compile-sources",
-              ],
-            }, {
-              "path": "ICloudPhotoSource.swift",
-              "target-membership": [
-                "Lock-Watcher-Companion/compile-sources",
-                "Lock-WatcherCompanionTests/compile-sources",
-              ],
-            }, {
-              "path": "AlertTrigger.swift",
-              "target-membership": [
-                "Lock-Watcher-Companion/compile-sources",
-                "Lock-WatcherCompanionTests/compile-sources",
-              ],
-            }, {
-              "path": "ProEntitlement.swift",
-              "target-membership": [
-                "Lock-Watcher-Companion/compile-sources",
-                "Lock-WatcherCompanionTests/compile-sources",
-              ],
-            },
-            { "path": "ProStore.swift", "target-membership": [ "Lock-Watcher-Companion/compile-sources" ] },
-            {
-              "path": "PushRegistrationModel.swift",
-              "target-membership": [
-                "Lock-Watcher-Companion/compile-sources",
-                "Lock-WatcherCompanionTests/compile-sources",
-              ],
-            }, {
-              "path": "QRCodeRenderer.swift",
-              "target-membership": [
-                "Lock-Watcher-Companion/compile-sources",
-                "Lock-WatcherCompanionTests/compile-sources",
-              ],
-            },
-          ],
-        }, {
-          "kind": "group",
-          "path": "Views",
-          "children": [
-            { "path": "AlertsView.swift", "target-membership": [ "Lock-Watcher-Companion/compile-sources" ] },
-            { "path": "PairView.swift", "target-membership": [ "Lock-Watcher-Companion/compile-sources" ] },
-            { "path": "PhotoDetailView.swift", "target-membership": [ "Lock-Watcher-Companion/compile-sources" ] },
-            { "path": "AlertDetailView.swift", "target-membership": [ "Lock-Watcher-Companion/compile-sources" ] },
-            { "path": "ProView.swift", "target-membership": [ "Lock-Watcher-Companion/compile-sources" ] },
-            { "path": "PhotosView.swift", "target-membership": [ "Lock-Watcher-Companion/compile-sources" ] },
-          ],
-        }, {
-          "kind": "group",
-          "path": "Resources",
-          "children": [
-            { "path": "Companion.entitlements" },
-            { "path": "Companion.storekit" },
-            { "path": "Info.plist" },
-            { "path": "Localizable.xcstrings", "target-membership": [ "Lock-Watcher-Companion/resources" ] },
-            { "path": "Products.plist", "target-membership": [ "Lock-Watcher-Companion/resources" ] },
-            { "path": "PrivacyInfo.xcprivacy", "target-membership": [ "Lock-Watcher-Companion/resources" ] },
+          "target": "Lock-WatcherCompanionTests",
+          "inclusions": [
+            "Core/AlertInbox.swift",
+            "Core/AlertTrigger.swift",
+            "Core/CloudPhotoImageDecoder.swift",
+            "Core/CloudPhotoLibrary.swift",
+            "Core/ICloudPhotoSource.swift",
+            "Core/ProEntitlement.swift",
+            "Core/PushRegistrationModel.swift",
+            "Core/QRCodeRenderer.swift",
+            "Preview/PreviewAlerts.swift",
           ],
         },
-      ],
-    }, {
-      "kind": "group",
-      "path": "CompanionTests",
-      "children": [
-        { "path": "CloudPhotoLibraryTests.swift", "target-membership": [ "Lock-WatcherCompanionTests/compile-sources" ] },
-        { "path": "CompanionCoreTests.swift", "target-membership": [ "Lock-WatcherCompanionTests/compile-sources" ] },
       ],
     },
+    { "kind": "folder", "path": "CompanionTests", "target-membership": [ "Lock-WatcherCompanionTests" ] },
     { "path": "README.md" },
+    { "kind": "folder", "path": "Configurations" },
+    { "kind": "folder", "path": "Source", "target-membership": [ "Lock-Watcher", "Lock-Watcher-non-mas" ] },
     {
-      "kind": "group",
-      "path": "Configurations",
-      "children": [
-        {
-          "kind": "group",
-          "path": "companion",
-          "children": [
-            { "path": "companion.xcconfig" },
-            { "path": "companion-debug.xcconfig" },
-            { "path": "companion-release.xcconfig" },
-            { "path": "companion-tests.xcconfig" },
-          ],
-        }, {
-          "kind": "group",
-          "path": "app-nomas",
-          "children": [
-            { "path": "app-no-mas.xcconfig" },
-            { "path": "app-no-mas-debug.xcconfig" },
-            { "path": "app-no-mas-release.xcconfig" },
-          ],
-        }, {
-          "kind": "group",
-          "path": "app",
-          "children": [
-            { "path": "app.xcconfig", "encoding": "utf8" },
-            { "path": "app-debug.xcconfig", "encoding": "utf8" },
-            { "path": "app-release.xcconfig", "encoding": "utf8" },
-          ],
-        }, {
-          "kind": "group",
-          "path": "tests",
-          "children": [
-            { "path": "test-release.xcconfig", "encoding": "utf8" },
-            { "path": "uitest-debug.xcconfig", "encoding": "utf8" },
-            { "path": "uitest.xcconfig", "encoding": "utf8" },
-            { "path": "test.xcconfig", "encoding": "utf8" },
-            { "path": "uitest-release.xcconfig", "encoding": "utf8" },
-            { "path": "test-debug.xcconfig", "encoding": "utf8" },
-          ],
-        },
-        { "path": "debug.xcconfig", "encoding": "utf8" },
-        { "path": "release.xcconfig", "encoding": "utf8" },
-        { "path": "base.xcconfig", "encoding": "utf8" },
-      ],
-    }, {
-      "kind": "group",
-      "path": "Source",
-      "children": [
-        {
-          "kind": "group",
-          "path": "Application",
-          "children": [
-            {
-              "path": "App.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "AppCommons.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "AppDelegate.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "AppDelegateModel.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "Secrets.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            },
-          ],
-        }, {
-          "kind": "group",
-          "path": "Coordinator",
-          "children": [
-            {
-              "path": "MainCoordinator.swift",
-              "encoding": "utf8",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "BaseCoordinatorProtocol.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            },
-          ],
-        }, {
-          "kind": "group",
-          "path": "Extensions",
-          "children": [
-            {
-              "path": "Date+Formatter.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "DispatchQueue+Debounce.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "NSApplication+Dock.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "NSApplication+Settings.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "NSImage+Data.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "NSImage+SatusBar.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "NSImage+Text.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "String+Regex.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "UserDefault+PropertyWrapper.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "View+ApplyIf.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "View+DebugPrintChanges.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "View+OpenWindow.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "CLLocationCoordinate2D+Sendable.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            },
-          ],
-        }, {
-          "kind": "group",
-          "path": "Listeners",
-          "children": [
-            {
-              "path": "BaseListenerProtocol.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "LoginListener.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "PowerListener.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "USBListener.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "LockGraceGate.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "DisplayListener.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "LockedInputListener.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "GeofenceListener.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "WakeUpListener.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "WrongPasswordListener.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            },
-          ],
-        }, {
-          "kind": "group",
-          "path": "Logger",
-          "children": [
-            {
-              "path": "Logger.swift",
-              "encoding": "utf8",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "LoggerProtocol.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            },
-          ],
-        }, {
-          "kind": "group",
-          "path": "Managers",
-          "children": [
-            {
-              "path": "ThiefManager.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "NotificationManager.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "TriggerManager.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "RetentionNoticePresenter.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "RetentionManager.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "CompanionPromptManager.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "kind": "group",
-              "path": "Camera",
-              "children": [
-                {
-                  "path": "PosterFrameExtractor.swift",
-                  "target-membership": [
-                    "Lock-Watcher/compile-sources",
-                    "Lock-Watcher-non-mas/compile-sources",
-                  ],
-                }, {
-                  "path": "CameraCapturing.swift",
-                  "target-membership": [
-                    "Lock-Watcher/compile-sources",
-                    "Lock-Watcher-non-mas/compile-sources",
-                  ],
-                },
-              ],
-            }, {
-              "path": "DatabaseManager.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "AuthenticationManager.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "MacOSLockDetectManager.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            },
-          ],
-        }, {
-          "kind": "group",
-          "path": "Models",
-          "children": [
-            {
-              "path": "AppSettings.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "ThiefDto.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "CaptureMedia.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "DatabaseDto.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "DatabaseDtoList.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            },
-          ],
-        }, {
-          "kind": "group",
-          "path": "Notifiers",
-          "children": [
-            {
-              "path": "PushNotifier.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "MailNotifier.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "ICloudNotifier.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "MediaAttachmentPolicy.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "DropboxNotifier.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "NotificationNotifier.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "NotifierProtocol.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            },
-          ],
-        }, {
-          "kind": "group",
-          "path": "Utils",
-          "children": [
-            {
-              "path": "APNsClient.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "APNsCredentialStore.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "NetworkReachability.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "FileSystemUtil.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "PluralLocalization.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "RetentionPruner.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "NetworkUtil.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "SecurityUtil.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "DeviceUtil.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "PermissionsUtils.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "LocationAuthorizationService.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            },
-          ],
-        }, {
-          "kind": "group",
-          "path": "Views",
-          "children": [
-            {
-              "kind": "group",
-              "path": "Custom",
-              "children": [
-                {
-                  "path": "ExtendedDivider.swift",
-                  "target-membership": [
-                    "Lock-Watcher/compile-sources",
-                    "Lock-Watcher-non-mas/compile-sources",
-                  ],
-                }, {
-                  "path": "SecurityAlertView.swift",
-                  "target-membership": [
-                    "Lock-Watcher/compile-sources",
-                    "Lock-Watcher-non-mas/compile-sources",
-                  ],
-                },
-              ],
-            }, {
-              "kind": "group",
-              "path": "FirstLaunch",
-              "children": [
-                {
-                  "path": "FirstLaunchDomain.swift",
-                  "target-membership": [
-                    "Lock-Watcher/compile-sources",
-                    "Lock-Watcher-non-mas/compile-sources",
-                  ],
-                }, {
-                  "kind": "group",
-                  "path": "Subviews",
-                  "children": [
-                    {
-                      "kind": "group",
-                      "path": "FirstLaunchOptions",
-                      "children": [
-                        {
-                          "path": "FirstLaunchOptionsViewModel.swift",
-                          "target-membership": [
-                            "Lock-Watcher/compile-sources",
-                            "Lock-Watcher-non-mas/compile-sources",
-                          ],
-                        }, {
-                          "path": "FirstLaunchOptionsView.swift",
-                          "target-membership": [
-                            "Lock-Watcher/compile-sources",
-                            "Lock-Watcher-non-mas/compile-sources",
-                          ],
-                        },
-                      ],
-                    }, {
-                      "path": "FirstLaunchProgressView.swift",
-                      "target-membership": [
-                        "Lock-Watcher/compile-sources",
-                        "Lock-Watcher-non-mas/compile-sources",
-                      ],
-                    }, {
-                      "path": "FirstLaunchFaultViews.swift",
-                      "target-membership": [
-                        "Lock-Watcher/compile-sources",
-                        "Lock-Watcher-non-mas/compile-sources",
-                      ],
-                    }, {
-                      "path": "FirstLaunchSuccessView.swift",
-                      "target-membership": [
-                        "Lock-Watcher/compile-sources",
-                        "Lock-Watcher-non-mas/compile-sources",
-                      ],
-                    },
-                  ],
-                }, {
-                  "path": "FirstLaunchProgressViewModel.swift",
-                  "target-membership": [
-                    "Lock-Watcher/compile-sources",
-                    "Lock-Watcher-non-mas/compile-sources",
-                  ],
-                }, {
-                  "path": "FirstLaunchView.swift",
-                  "target-membership": [
-                    "Lock-Watcher/compile-sources",
-                    "Lock-Watcher-non-mas/compile-sources",
-                  ],
-                }, {
-                  "path": "FirstLaunchViewModel.swift",
-                  "target-membership": [
-                    "Lock-Watcher/compile-sources",
-                    "Lock-Watcher-non-mas/compile-sources",
-                  ],
-                },
-              ],
-            }, {
-              "kind": "group",
-              "path": "Main",
-              "children": [
-                {
-                  "kind": "group",
-                  "path": "Subviews",
-                  "children": [
-                    {
-                      "kind": "group",
-                      "path": "LastThiefDetection",
-                      "children": [
-                        {
-                          "path": "LastThiefDetectionViewModel.swift",
-                          "target-membership": [
-                            "Lock-Watcher/compile-sources",
-                            "Lock-Watcher-non-mas/compile-sources",
-                          ],
-                        }, {
-                          "path": "LastThiefDetectionView.swift",
-                          "target-membership": [
-                            "Lock-Watcher/compile-sources",
-                            "Lock-Watcher-non-mas/compile-sources",
-                          ],
-                        },
-                      ],
-                    }, {
-                      "kind": "group",
-                      "path": "Info",
-                      "children": [
-                        {
-                          "path": "InfoViews.swift",
-                          "target-membership": [
-                            "Lock-Watcher/compile-sources",
-                            "Lock-Watcher-non-mas/compile-sources",
-                          ],
-                        }, {
-                          "path": "InfoViewModel.swift",
-                          "target-membership": [
-                            "Lock-Watcher/compile-sources",
-                            "Lock-Watcher-non-mas/compile-sources",
-                          ],
-                        },
-                      ],
-                    },
-                  ],
-                }, {
-                  "path": "MainView.swift",
-                  "target-membership": [
-                    "Lock-Watcher/compile-sources",
-                    "Lock-Watcher-non-mas/compile-sources",
-                  ],
-                }, {
-                  "path": "MainViewModel.swift",
-                  "target-membership": [
-                    "Lock-Watcher/compile-sources",
-                    "Lock-Watcher-non-mas/compile-sources",
-                  ],
-                }, {
-                  "path": "MainDomain.swift",
-                  "target-membership": [
-                    "Lock-Watcher/compile-sources",
-                    "Lock-Watcher-non-mas/compile-sources",
-                  ],
-                },
-              ],
-            }, {
-              "kind": "group",
-              "path": "Settings",
-              "children": [
-                {
-                  "kind": "group",
-                  "path": "Subviews",
-                  "children": [
-                    {
-                      "kind": "group",
-                      "path": "Push",
-                      "children": [
-                        {
-                          "path": "AVQRCodeScanner.swift",
-                          "target-membership": [
-                            "Lock-Watcher/compile-sources",
-                            "Lock-Watcher-non-mas/compile-sources",
-                          ],
-                        }, {
-                          "path": "PushPairingViewModel.swift",
-                          "target-membership": [
-                            "Lock-Watcher/compile-sources",
-                            "Lock-Watcher-non-mas/compile-sources",
-                          ],
-                        }, {
-                          "path": "PushPreviewSupport.swift",
-                          "target-membership": [
-                            "Lock-Watcher/compile-sources",
-                            "Lock-Watcher-non-mas/compile-sources",
-                          ],
-                        }, {
-                          "path": "PushSettingsView.swift",
-                          "target-membership": [
-                            "Lock-Watcher/compile-sources",
-                            "Lock-Watcher-non-mas/compile-sources",
-                          ],
-                        },
-                      ],
-                    }, {
-                      "path": "DetectSnapshotViews.swift",
-                      "target-membership": [
-                        "Lock-Watcher/compile-sources",
-                        "Lock-Watcher-non-mas/compile-sources",
-                      ],
-                    }, {
-                      "path": "LaunchAtLoginView.swift",
-                      "target-membership": [
-                        "Lock-Watcher/compile-sources",
-                        "Lock-Watcher-non-mas/compile-sources",
-                      ],
-                    }, {
-                      "path": "ProtectionView.swift",
-                      "target-membership": [
-                        "Lock-Watcher/compile-sources",
-                        "Lock-Watcher-non-mas/compile-sources",
-                      ],
-                    }, {
-                      "path": "SaveSnapshotViews.swift",
-                      "target-membership": [
-                        "Lock-Watcher/compile-sources",
-                        "Lock-Watcher-non-mas/compile-sources",
-                      ],
-                    }, {
-                      "path": "SettingsAboutView.swift",
-                      "target-membership": [
-                        "Lock-Watcher/compile-sources",
-                        "Lock-Watcher-non-mas/compile-sources",
-                      ],
-                    },
-                  ],
-                }, {
-                  "path": "SettingsDomain.swift",
-                  "target-membership": [
-                    "Lock-Watcher/compile-sources",
-                    "Lock-Watcher-non-mas/compile-sources",
-                  ],
-                }, {
-                  "path": "SettingsPage.swift",
-                  "target-membership": [
-                    "Lock-Watcher/compile-sources",
-                    "Lock-Watcher-non-mas/compile-sources",
-                  ],
-                }, {
-                  "path": "SettingsView.swift",
-                  "target-membership": [
-                    "Lock-Watcher/compile-sources",
-                    "Lock-Watcher-non-mas/compile-sources",
-                  ],
-                }, {
-                  "path": "SettingsViewModel.swift",
-                  "target-membership": [
-                    "Lock-Watcher/compile-sources",
-                    "Lock-Watcher-non-mas/compile-sources",
-                  ],
-                },
-              ],
-            }, {
-              "path": "DesignSystem.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            }, {
-              "path": "ViewProtocols.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            },
-          ],
-        },
-      ],
-    }, {
       "kind": "group",
       "path": "Resources",
       "children": [
         {
+          "path": "Colors.xcassets",
+          "target-membership": [
+            "Lock-Watcher-Companion/resources",
+            "Lock-Watcher/resources",
+            "Lock-Watcher-non-mas/resources",
+          ],
+        }, {
           "path": "icon.icon",
           "target-membership": [
             "Lock-Watcher-Companion/resources",
@@ -1011,6 +130,7 @@
             {
               "path": "Preview Assets.xcassets",
               "target-membership": [
+                "Lock-Watcher-Companion/resources",
                 "Lock-Watcher/resources",
                 "Lock-Watcher-non-mas/resources",
               ],
@@ -1058,18 +178,26 @@
         { "path": "Info.plist", "encoding": "utf8" },
       ],
     }, {
-      "kind": "group",
+      "kind": "folder",
       "path": "XPCAuthentication",
-      "children": [
-        { "path": "Info.plist" },
-        { "path": "main.swift", "encoding": "utf8", "target-membership": [ "XPCAuthentication/compile-sources" ] },
-        { "path": "XPCAuthentication.swift", "encoding": "utf8", "target-membership": [ "XPCAuthentication/compile-sources" ] },
+      "target-membership": [
+        "XPCAuthentication",
+      ],
+      "membership-exceptions": [
         {
-          "path": "XPCAuthenticationProtocol.swift",
-          "target-membership": [
-            "Lock-Watcher/compile-sources",
-            "Lock-Watcher-non-mas/compile-sources",
-            "XPCAuthentication/compile-sources",
+          "target": "Lock-Watcher",
+          "inclusions": [
+            "XPCAuthenticationProtocol.swift",
+          ],
+        }, {
+          "target": "Lock-Watcher-non-mas",
+          "inclusions": [
+            "XPCAuthenticationProtocol.swift",
+          ],
+        }, {
+          "target": "XPCAuthentication",
+          "exclusions": [
+            "Info.plist",
           ],
         },
       ],
@@ -1093,154 +221,65 @@
         { "path": "XPCMail-Bridging-Header.h" },
       ],
     }, {
-      "kind": "group",
+      "kind": "folder",
       "path": "XPCPower",
-      "children": [
-        { "path": "IGRPowerModel.h" },
-        { "path": "Info.plist" },
-        { "path": "main.m", "target-membership": [ "XPCPower/compile-sources" ] },
-        { "path": "XPCPower-Bridging-Header.h" },
-        { "path": "XPCPower.h" },
-        { "path": "XPCPower.m", "target-membership": [ "XPCPower/compile-sources" ] },
+      "membership-exceptions": [
         {
-          "path": "XPCPowerProtocol.swift",
-          "target-membership": [
-            "Lock-Watcher/compile-sources",
-            "Lock-Watcher-non-mas/compile-sources",
-            "XPCPower/compile-sources",
+          "target": "Lock-Watcher",
+          "inclusions": [
+            "XPCPowerProtocol.swift",
+          ],
+        }, {
+          "target": "Lock-Watcher-non-mas",
+          "inclusions": [
+            "XPCPowerProtocol.swift",
+          ],
+        }, {
+          "target": "XPCPower",
+          "inclusions": [
+            "XPCPower.m",
+            "XPCPowerProtocol.swift",
+            "main.m",
           ],
         },
       ],
     },
     { "path": "Lock-WatcherTests.xctestplan" },
     {
-      "kind": "group",
+      "kind": "folder",
       "path": "Tests",
-      "children": [
+      "target-membership": [
+        "Lock-WatcherTests",
+      ],
+      "membership-exceptions": [
         {
-          "kind": "group",
-          "path": "Notifiers",
-          "children": [
-            { "path": "PushNotifierTest.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
+          "target": "Lock-Watcher",
+          "inclusions": [
+            "Coordinator/MainCoordinatorTest.swift",
           ],
         }, {
-          "kind": "group",
-          "path": "ViewModels",
-          "children": [
-            { "path": "PushPairingViewModelTests.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "InfoViewModelTests.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "FirstLaunchProgressViewModelTests.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "LastThiefDetectionViewModelTests.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "MainViewModelTests.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "SettingsViewModelTests.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "FirstLaunchViewModelTests.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
+          "target": "Lock-Watcher-non-mas",
+          "inclusions": [
+            "Coordinator/MainCoordinatorTest.swift",
           ],
         }, {
-          "kind": "group",
-          "path": "Models",
-          "children": [
-            { "path": "ThiefDtoTest.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "DatabaseDtoListTest.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "AppSettingsTest.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-          ],
-        }, {
-          "kind": "group",
-          "path": "Managers",
-          "children": [
-            { "path": "TriggerManagerTest.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "NotificationManagerTest.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "RetentionManagerTest.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "CompanionPromptManagerTest.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "ThiefManagerTest.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-          ],
-        }, {
-          "kind": "group",
-          "path": "Utils",
-          "children": [
-            { "path": "APNsClientTest.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "APNsCredentialStoreTest.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "PairingPayloadTest.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "FileSystemTest.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "RetentionPrunerTest.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "PluralLocalizationTests.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "NetworkUtilTests.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "SecurityUtilTest.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "DeviceUtilTests.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-          ],
-        }, {
-          "kind": "group",
-          "path": "Logger",
-          "children": [
-            { "path": "LoggerTest.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-          ],
-        }, {
-          "kind": "group",
-          "path": "Listeners",
-          "children": [
-            { "path": "ListenerProtocolTest.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "LockGraceGateTests.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "USBListenerTests.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "DisplayListenerTests.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "LockedInputListenerTests.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "GeofenceListenerTests.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-          ],
-        }, {
-          "kind": "group",
-          "path": "Extensions",
-          "children": [
-            { "path": "DateFormatterTest.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "DispatchQueueDebounceTest.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "NSImageDataTest.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "NSImageSatusBarTest.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "NSImageTextTest.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "StringRegexTest.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "UserDefaultPropertyWrapperTest.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-          ],
-        }, {
-          "kind": "group",
-          "path": "Coordinator",
-          "children": [
-            {
-              "path": "MainCoordinatorTest.swift",
-              "target-membership": [
-                "Lock-Watcher/compile-sources",
-                "Lock-Watcher-non-mas/compile-sources",
-              ],
-            },
-          ],
-        }, {
-          "kind": "group",
-          "path": "Mocks",
-          "children": [
-            { "path": "MockAPNsTransport.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "MockThiefManager.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "MockDatabaseManager.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "MockCoordinator.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "MockAppDelegateModel.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "MockListener.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "MockLocationAuthorizationService.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "MockLockDetector.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "MockLocationMonitor.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "MockLog.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "MockCaptureDependencies.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "MockDeviceUtil.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-          ],
-        }, {
-          "kind": "group",
-          "path": "Application",
-          "children": [
-            { "path": "AppCommonsTest.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
-            { "path": "MainAppTest.swift", "target-membership": [ "Lock-WatcherTests/compile-sources" ] },
+          "target": "Lock-WatcherTests",
+          "exclusions": [
+            "Coordinator/MainCoordinatorTest.swift",
+            "Info.plist",
           ],
         },
-        { "path": "Info.plist" },
       ],
     }, {
-      "kind": "group",
+      "kind": "folder",
       "path": "UITests",
-      "children": [
-        { "path": "ApplicationUITests.swift", "target-membership": [ "Lock-WatcherUITests/compile-sources" ] },
-        { "path": "Info.plist" },
+      "membership-exceptions": [
+        {
+          "target": "Lock-WatcherUITests",
+          "inclusions": [
+            "ApplicationUITests.swift",
+          ],
+        },
       ],
     }, {
       "kind": "group",
@@ -1274,9 +313,9 @@
       "product": "Products/Lock-Watcher-Companion.app",
       "product-type": "application",
       "specialized-configurations": [
-        { "name": "Debug", "file": "Configurations/companion/companion-debug.xcconfig" },
-        { "name": "Release", "file": "Configurations/companion/companion-release.xcconfig" },
-        { "name": "Release-non-mas", "file": "Configurations/companion/companion-release.xcconfig" },
+        { "name": "Debug", "file": { "anchor": "Configurations", "relative-path": "companion/companion-debug.xcconfig" } },
+        { "name": "Release", "file": { "anchor": "Configurations", "relative-path": "companion/companion-release.xcconfig" } },
+        { "name": "Release-non-mas", "file": { "anchor": "Configurations", "relative-path": "companion/companion-release.xcconfig" } },
       ],
       "build-phases": [
         "compile-sources",
@@ -1299,9 +338,9 @@
       "product": "Products/Lock-WatcherCompanionTests.xctest",
       "product-type": "bundle.unit-test",
       "specialized-configurations": [
-        { "name": "Debug", "file": "Configurations/companion/companion-tests.xcconfig" },
-        { "name": "Release", "file": "Configurations/companion/companion-tests.xcconfig" },
-        { "name": "Release-non-mas", "file": "Configurations/companion/companion-tests.xcconfig" },
+        { "name": "Debug", "file": { "anchor": "Configurations", "relative-path": "companion/companion-tests.xcconfig" } },
+        { "name": "Release", "file": { "anchor": "Configurations", "relative-path": "companion/companion-tests.xcconfig" } },
+        { "name": "Release-non-mas", "file": { "anchor": "Configurations", "relative-path": "companion/companion-tests.xcconfig" } },
       ],
       "build-phases": [
         "compile-sources",
@@ -1316,9 +355,9 @@
       "product": "Products/Lock-Watcher.app",
       "product-type": "application",
       "specialized-configurations": [
-        { "name": "Debug", "file": "Configurations/app/app-debug.xcconfig" },
-        { "name": "Release", "file": "Configurations/app/app-release.xcconfig" },
-        { "name": "Release-non-mas", "file": "Configurations/app/app-release.xcconfig" },
+        { "name": "Debug", "file": { "anchor": "Configurations", "relative-path": "app/app-debug.xcconfig" } },
+        { "name": "Release", "file": { "anchor": "Configurations", "relative-path": "app/app-release.xcconfig" } },
+        { "name": "Release-non-mas", "file": { "anchor": "Configurations", "relative-path": "app/app-release.xcconfig" } },
       ],
       "dependencies": [
         "XPCPower",
@@ -1371,9 +410,9 @@
       "product": "Products/Lock-Watcher-non-mas.app",
       "product-type": "application",
       "specialized-configurations": [
-        { "name": "Debug", "file": "Configurations/app-nomas/app-no-mas-debug.xcconfig" },
-        { "name": "Release", "file": "Configurations/app-nomas/app-no-mas-release.xcconfig" },
-        { "name": "Release-non-mas", "file": "Configurations/app-nomas/app-no-mas-release.xcconfig" },
+        { "name": "Debug", "file": { "anchor": "Configurations", "relative-path": "app-nomas/app-no-mas-debug.xcconfig" } },
+        { "name": "Release", "file": { "anchor": "Configurations", "relative-path": "app-nomas/app-no-mas-release.xcconfig" } },
+        { "name": "Release-non-mas", "file": { "anchor": "Configurations", "relative-path": "app-nomas/app-no-mas-release.xcconfig" } },
       ],
       "dependencies": [
         "XPCPower",
@@ -1429,9 +468,9 @@
       "product-type": "xpc-service",
       "last-swift-migration": "12.4",
       "specialized-configurations": [
-        { "name": "Debug", "file": "Configurations/debug.xcconfig" },
-        { "name": "Release", "file": "Configurations/release.xcconfig" },
-        { "name": "Release-non-mas", "file": "Configurations/release.xcconfig" },
+        { "name": "Debug", "file": { "anchor": "Configurations", "relative-path": "debug.xcconfig" } },
+        { "name": "Release", "file": { "anchor": "Configurations", "relative-path": "release.xcconfig" } },
+        { "name": "Release-non-mas", "file": { "anchor": "Configurations", "relative-path": "release.xcconfig" } },
       ],
       "build-phases": [
         "compile-sources",
@@ -1453,9 +492,9 @@
       "product-type": "xpc-service",
       "last-swift-migration": "12.3",
       "specialized-configurations": [
-        { "name": "Debug", "file": "Configurations/debug.xcconfig" },
-        { "name": "Release", "file": "Configurations/release.xcconfig" },
-        { "name": "Release-non-mas", "file": "Configurations/release.xcconfig" },
+        { "name": "Debug", "file": { "anchor": "Configurations", "relative-path": "debug.xcconfig" } },
+        { "name": "Release", "file": { "anchor": "Configurations", "relative-path": "release.xcconfig" } },
+        { "name": "Release-non-mas", "file": { "anchor": "Configurations", "relative-path": "release.xcconfig" } },
       ],
       "build-phases": [
         "compile-sources",
@@ -1478,9 +517,9 @@
       "product-type": "xpc-service",
       "last-swift-migration": "12.3",
       "specialized-configurations": [
-        { "name": "Debug", "file": "Configurations/debug.xcconfig" },
-        { "name": "Release", "file": "Configurations/release.xcconfig" },
-        { "name": "Release-non-mas", "file": "Configurations/release.xcconfig" },
+        { "name": "Debug", "file": { "anchor": "Configurations", "relative-path": "debug.xcconfig" } },
+        { "name": "Release", "file": { "anchor": "Configurations", "relative-path": "release.xcconfig" } },
+        { "name": "Release-non-mas", "file": { "anchor": "Configurations", "relative-path": "release.xcconfig" } },
       ],
       "build-phases": [
         "resources",
@@ -1514,9 +553,9 @@
       "product-type": "bundle.unit-test",
       "test-host-target": "Lock-Watcher",
       "specialized-configurations": [
-        { "name": "Debug", "file": "Configurations/tests/test-debug.xcconfig" },
-        { "name": "Release", "file": "Configurations/tests/test-release.xcconfig" },
-        { "name": "Release-non-mas", "file": "Configurations/tests/test-release.xcconfig" },
+        { "name": "Debug", "file": { "anchor": "Configurations", "relative-path": "tests/test-debug.xcconfig" } },
+        { "name": "Release", "file": { "anchor": "Configurations", "relative-path": "tests/test-release.xcconfig" } },
+        { "name": "Release-non-mas", "file": { "anchor": "Configurations", "relative-path": "tests/test-release.xcconfig" } },
       ],
       "dependencies": [
         "Lock-Watcher",
@@ -1533,9 +572,9 @@
       "product-type": "bundle.ui-testing",
       "test-host-target": "Lock-Watcher",
       "specialized-configurations": [
-        { "name": "Debug", "file": "Configurations/tests/uitest-debug.xcconfig" },
-        { "name": "Release", "file": "Configurations/tests/uitest-release.xcconfig" },
-        { "name": "Release-non-mas", "file": "Configurations/tests/uitest-release.xcconfig" },
+        { "name": "Debug", "file": { "anchor": "Configurations", "relative-path": "tests/uitest-debug.xcconfig" } },
+        { "name": "Release", "file": { "anchor": "Configurations", "relative-path": "tests/uitest-release.xcconfig" } },
+        { "name": "Release-non-mas", "file": { "anchor": "Configurations", "relative-path": "tests/uitest-release.xcconfig" } },
       ],
       "dependencies": [
         "Lock-Watcher",
