@@ -9,21 +9,8 @@ import AppKit
 import CoreLocation
 import Foundation
 
-/// An enumeration that defines all the trigger types available in the application.
-///
-public enum TriggerType: String, Sendable {
-    case setup
-    case onWakeUp
-    case onWrongPassword
-    case onBatteryPower
-    case onACPower
-    case usbConnected
-    case logedIn
-    case displayAttached
-    case locationChanged
-    case lockedInput
-    case debug
-}
+/// The trigger types available in the application; the cases live in `Shared/Push/AlertTriggerCases.swift` because the push payload carries their raw values.
+public typealias TriggerType = AlertTrigger
 
 extension TriggerType {
     /// Provides a localized name for each trigger type.

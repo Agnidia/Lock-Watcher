@@ -149,7 +149,7 @@ final class DatabaseManager: DatabaseManagerProtocol {
         init(personCount: Int = 6) {
             let now = Date()
             latestImages = (0 ..< personCount).compactMap { index in
-                guard let tiff = NSImage(named: "Persons/person-\(index)")?.tiffRepresentation,
+                guard let tiff = NSImage(named: PreviewPersons.assetName(index))?.tiffRepresentation,
                       let jpeg = NSBitmapImageRep(data: tiff)?.representation(using: .jpeg, properties: [.compressionFactor: 0.8])
                 else { return nil }
                 return DatabaseDto(date: now.addingTimeInterval(-Double(index) * 1800), data: jpeg)

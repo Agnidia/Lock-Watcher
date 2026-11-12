@@ -24,9 +24,8 @@ final class ICloudNotifier: NotifierProtocol, Sendable {
 
     // MARK: - Variables
 
-    /// Name of the iCloud directory where images are saved.
-    /// Default is "Documents".
-    private let documentsFolderName = "Documents"
+    /// Name of the iCloud directory where images are saved; the companion lists the same folder.
+    private let documentsFolderName = CloudCaptureContract.folderName
 
     // MARK: - Initializer
 

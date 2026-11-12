@@ -38,7 +38,7 @@ protocol CloudPhotoSource: Sendable {
 }
 
 enum CloudPhotoCatalog {
-    static let stillExtensions: Set<String> = ["jpeg", "jpg", "png", "heic"]
+    static let stillExtensions = CloudCaptureContract.stillExtensions
     /// Far above any snapshot the Mac uploads. A larger file is refused before it is downloaded, possibly over cellular, or read.
     static let maxFileBytes = 50 * 1024 * 1024
 
