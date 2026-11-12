@@ -1,0 +1,8 @@
+Lock-Watcher v1.6.0 adds video capture:
+
+- Choose a photo or a silent 1–5 second video for each detection
+- Choose the output size: Original, 1/2, or 1/4
+- New "Keep files" setting removes old local captures after 1 year, 1 month, 1 week, or right after upload
+- Videos are delivered to iCloud, Dropbox and notifications
+- A notification tells you when camera access is denied
+- Stability and performance improvements

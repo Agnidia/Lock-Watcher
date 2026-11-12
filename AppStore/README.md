@@ -8,13 +8,17 @@ Credentials and the private publishing guide are outside this repo, in
 | Path | Content | Managed with |
 |---|---|---|
 | `metadata/app-info/<locale>.json` | Name, subtitle, privacy policy URL | `asc metadata` |
-| `metadata/version/<version>/<locale>.json` | Description, keywords, promotional text, What's New, support and marketing URLs | `asc metadata` |
+| `metadata/version/<version>/<locale>.json` | Description, keywords, promotional text, support and marketing URLs; shared by macOS and iOS, no `whatsNew` key | `asc metadata` |
+| `whats-new/<macos\|ios>/<version>/<locale>.txt` | Release notes per platform, so each platform updates on its own schedule | `asc localizations update` |
 | `screenshots/<locale>/APP_DESKTOP/` | Mac screenshots (2880×1800 PNG, no alpha), one set per locale, uploaded in file-name order | `asc screenshots` |
+| `screenshots/<locale>/APP_IPHONE_69/` | iPhone 6.9" screenshots (1320×2868 PNG, no alpha) | `asc screenshots` |
 | `screenshots/<locale>/raw/` | Plain window captures the slides are built from; never uploaded | `screenshots/tools/capture.sh` |
 | `screenshots/tools/` | Scripts that capture the app and compose the slides | see [Screenshots](#screenshots) |
 | `changelog.md` | Release history | by hand |
 
-Locales: `en-US`, `uk`. App ID: `1583462846`. Platform: `MAC_OS`.
+Locales: `en-US`, `uk`. App ID: `1583462846`. Platforms: `MAC_OS` (Lock-Watcher) and `IOS` (Lock-Watcher
+Companion). Both ship under bundle ID `com.igrsoft.Lock-Watcher` as one universal-purchase app record; the
+Pro in-app purchases belong to the iOS companion.
 
 ## Character limits
 
@@ -112,19 +116,25 @@ slightly soft under close zoom and reads cleanly at App Store size.
 
 ## Publish a new version
 
-From the repo root, with `<v>` the marketing version (for example `1.7.0`):
+From the repo root, with `<v>` the marketing version (for example `2.0.0`), `<P>` the platform (`MAC_OS` or `IOS`)
+and `<p>` its folder name (`macos` or `ios`). Run the steps once per platform that ships in this release.
 
 1. Create the version in App Store Connect if it does not exist:
-   `asc versions create --app 1583462846 --version <v> --platform MAC_OS`
-2. Start the local files from the live listing, then edit them:
-   `asc metadata pull --app 1583462846 --version <v> --platform MAC_OS --dir AppStore/metadata`
+   `asc versions create --app 1583462846 --version <v> --platform <P>`
+2. Pull into a temporary directory, never into `AppStore/metadata`, so the live What's New of one platform cannot
+   overwrite the shared files:
+   `asc metadata pull --app 1583462846 --version <v> --platform <P> --dir "$TMPDIR/asc-pull"`
 3. Validate, then review what would change:
    ```
    asc metadata validate --dir AppStore/metadata
-   asc metadata plan --app 1583462846 --version <v> --platform MAC_OS --dir AppStore/metadata
+   asc metadata plan --app 1583462846 --version <v> --platform <P> --dir AppStore/metadata
    ```
-4. Apply after review:
-   `asc metadata apply --app 1583462846 --version <v> --platform MAC_OS --dir AppStore/metadata --confirm`
+4. Apply after review, then set the platform's release notes:
+   ```
+   asc metadata apply --app 1583462846 --version <v> --platform <P> --dir AppStore/metadata --confirm
+   asc localizations update --app 1583462846 --version <v> --platform <P> --locale en-US --whats-new @file:AppStore/whats-new/<p>/<v>/en-US.txt
+   asc localizations update --app 1583462846 --version <v> --platform <P> --locale uk --whats-new @file:AppStore/whats-new/<p>/<v>/uk.txt
+   ```
 5. Screenshots, when they change. Upload one locale at a time, with `--path` on that locale's `APP_DESKTOP` folder.
    Never fan out over `AppStore/screenshots`: in that mode `asc` needs every folder directly under `--path` to be a
    locale, and it would scan `raw/` too. `tools/` is not a locale, so a fan-out upload fails.
@@ -134,17 +144,35 @@ From the repo root, with `<v>` the marketing version (for example `1.7.0`):
    asc screenshots upload --app 1583462846 --version <v> --platform MAC_OS --locale en-US --path AppStore/screenshots/en-US/APP_DESKTOP --device-type APP_DESKTOP --replace --confirm
    asc screenshots upload --app 1583462846 --version <v> --platform MAC_OS --locale uk --path AppStore/screenshots/uk/APP_DESKTOP --device-type APP_DESKTOP --replace --confirm
    ```
+   The same pattern with `--platform IOS` and `--device-type APP_IPHONE_69` uploads the iPhone sets.
 6. Check readiness, attach the build and submit:
    ```
    asc status --app 1583462846
    asc validate --app 1583462846 --version-id <VERSION_ID>
-   asc review submit --app 1583462846 --version <v> --build-number <build> --confirm
+   asc review submit --app 1583462846 --version <v> --build-number <build> --platform <P> --confirm
    ```
 
 The build number on the attached build must match `CURRENT_PROJECT_VERSION` in `Configurations/base.xcconfig`.
 
+The first version of a platform has no What's New field (App Store Connect answers `whatsNew cannot be edited`),
+so `whats-new/ios/` starts with the first iOS update after 2.0.0 and the 2.0.0 iOS description carries the intro.
+
 ## Privacy label
 
-The published label is **Data Not Collected**: captures go only to the user's own iCloud or Dropbox, and
-Agnidia receives nothing. `Resources/PrivacyInfo.xcprivacy` declares no collected data types to match. Keep the two
-in step; read the live label with `asc web privacy pull --app 1583462846`.
+The label is **Data Not Collected**: captures go only to the user's own iCloud or Dropbox, and Agnidia receives
+nothing. Push alerts go from the Mac to the owner's iPhone through Apple's APNs; Agnidia runs no server and
+keeps no copy. `Resources/PrivacyInfo.xcprivacy` and `Companion/Resources/PrivacyInfo.xcprivacy` declare no
+collected data types to match. The listing description discloses that alerts are not end-to-end encrypted. Keep
+the label, the manifests and the hosted privacy policy in step; read the live label with
+`asc web privacy pull --app 1583462846`.
+
+## App Review notes
+
+Paste into the review notes of both platform versions (App Store Connect → App Review Information):
+
+> Lock-Watcher is a macOS menu bar app. The iOS Lock-Watcher Companion shows push alerts from a paired Mac.
+> No account or sign-in is needed. To test the iPhone app alone: open it, grant notification permission, and use
+> the Alerts, Photos and Pro tabs. The Pair tab shows a QR code that the Mac scans. Pro (alert detail and 999-alert
+> history) is sold as `com.igrsoft.LockWatcher.pro.lifetime`, `.month` and `.year`; open the Pro tab to purchase
+> or restore. On the Mac the camera is used only to capture photos or silent video of whoever touches the locked
+> Mac, and to scan the pairing QR code; location is used only for geofence and snapshot metadata. No microphone.
