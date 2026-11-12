@@ -44,9 +44,11 @@ struct FirstLaunchSuccessView: View {
     }
 }
 
-#Preview("Success View") {
-    FirstLaunchSuccessView(successCountDown: 5, frameSize: CGSize(width: 400, height: 300))
-}
+#if DEBUG
+    #Preview("Success View") {
+        FirstLaunchSuccessView(successCountDown: 5, frameSize: CGSize(width: 400, height: 300))
+    }
+#endif
 
 // MARK: - Test Info
 

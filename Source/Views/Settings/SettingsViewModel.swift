@@ -40,6 +40,12 @@ final class SettingsViewModel: DomainViewConstantProtocol {
     private let locationAuthorization: LocationAuthorizationProviding
 
     @ObservationIgnored
+    let push: PushPairingViewModel
+
+    @ObservationIgnored
+    private let folders: any FolderOpening
+
+    @ObservationIgnored
     private var authorizationObservation: LocationAuthorizationObservation?
 
     private var authorizationRevision = 0
@@ -56,15 +62,15 @@ final class SettingsViewModel: DomainViewConstantProtocol {
     
     // MARK: - Bindings for UI settings
     
-    /// Binding for expanding or collapsing security info section.
-    var isSecurityInfoExpand: Binding<Bool> {
-        Binding<Bool>(get: {
-            self.settings.ui.isSecurityInfoExpand
+    /// The settings page shown in the detail pane; an unknown stored value falls back to the first page.
+    var selectedPage: Binding<SettingsPage> {
+        Binding<SettingsPage>(get: {
+            self.settings.ui.lastSettingsPage.flatMap(SettingsPage.init(rawValue:)) ?? .capture
         }, set: {
-            self.settings.ui.isSecurityInfoExpand = $0
+            self.settings.ui.lastSettingsPage = $0.rawValue
         })
     }
-    
+
     /// Binding for toggling app protection.
     var isProtected: Binding<Bool> {
         Binding<Bool>(get: {
@@ -83,15 +89,6 @@ final class SettingsViewModel: DomainViewConstantProtocol {
                 settings.options.authSettings = $0
             }
         )
-    }
-    
-    /// Binding for expanding or collapsing snapshot info section.
-    var isSnapshotInfoExpand: Binding<Bool> {
-        Binding<Bool>(get: {
-            self.settings.ui.isSnapshotInfoExpand
-        }, set: {
-            self.settings.ui.isSnapshotInfoExpand = $0
-        })
     }
     
     // MARK: - Bindings for Trigger settings
@@ -177,15 +174,6 @@ final class SettingsViewModel: DomainViewConstantProtocol {
     
     // MARK: - Bindings for Options settings
     
-    /// Binding for expanding or collapsing options info section.
-    var isOptionsInfoExpand: Binding<Bool> {
-        Binding<Bool>(get: {
-            self.settings.ui.isOptionsInfoExpand
-        }, set: {
-            self.settings.ui.isOptionsInfoExpand = $0
-        })
-    }
-    
     /// Number of actions to keep in history.
     var keepLastActionsCount: Binding<Int> {
         Binding<Int>(get: {
@@ -240,15 +228,6 @@ final class SettingsViewModel: DomainViewConstantProtocol {
         })
     }
     
-    /// Binding for expanding or collapsing sync info section.
-    var isSyncInfoExpand: Binding<Bool> {
-        Binding<Bool>(get: {
-            self.settings.ui.isSyncInfoExpand
-        }, set: {
-            self.settings.ui.isSyncInfoExpand = $0
-        })
-    }
-    
     /// Binding for sending notifications to mail.
     var isSendNotificationToMail: Binding<Bool> {
         Binding<Bool>(get: {
@@ -296,6 +275,14 @@ final class SettingsViewModel: DomainViewConstantProtocol {
             self.settings.sync.isUseSnapshotLocalNotification
         }, set: {
             self.settings.sync.isUseSnapshotLocalNotification = $0
+        })
+    }
+
+    var isSendPushEnable: Binding<Bool> {
+        Binding<Bool>(get: {
+            self.settings.sync.isSendPushEnable
+        }, set: {
+            self.settings.sync.isSendPushEnable = $0
         })
     }
 
@@ -393,9 +380,13 @@ final class SettingsViewModel: DomainViewConstantProtocol {
     /// Initializer for the SettingsViewModel.
     init(settings: AppSettingsProtocol,
          thiefManager: ThiefManagerProtocol,
-         locationAuthorization: LocationAuthorizationProviding = LocationAuthorizationService())
+         locationAuthorization: LocationAuthorizationProviding = LocationAuthorizationService(),
+         push: PushPairingViewModel,
+         folders: any FolderOpening = FinderFolderOpener())
     {
         self.settings = settings
+        self.push = push
+        self.folders = folders
         self.thiefManager = thiefManager
         self.locationAuthorization = locationAuthorization
 
@@ -443,6 +434,19 @@ final class SettingsViewModel: DomainViewConstantProtocol {
         thiefManager.setupLocationManager(enable: enable)
     }
 
+    /// Shows the folder of locally saved incidents in Finder.
+    func openLocalFolder() {
+        guard let url = folders.localFolder() else { return }
+        folders.reveal(url)
+    }
+
+    /// Shows the iCloud Documents folder in Finder; resolving the container can block, so it runs off the main actor.
+    func openICloudFolder() async {
+        let folders = folders
+        guard let url = await Task.detached(operation: { folders.iCloudFolder() }).value else { return }
+        folders.reveal(url)
+    }
+
     /// Observes any updates to the Dropbox user's name and updates the setting accordingly.
     private func watchDropboxUserNameUpdate() {
         Task { [weak self] in
@@ -455,12 +459,46 @@ final class SettingsViewModel: DomainViewConstantProtocol {
     }
 }
 
-/// Extension to provide preview instance for the SettingsViewModel.
-extension SettingsViewModel {
-    static var preview: SettingsViewModel {
-        SettingsViewModel(settings: AppSettingsPreview(), thiefManager: ThiefManagerPreview())
+/// Where the incident files live, and how to show a folder to the user.
+protocol FolderOpening: Sendable {
+    /// The local incident folder, created when missing.
+    func localFolder() -> URL?
+    /// The iCloud Documents folder, created when missing; nil when iCloud is unavailable. Blocking: call off the main thread.
+    func iCloudFolder() -> URL?
+    @MainActor
+    func reveal(_ url: URL)
+}
+
+struct FinderFolderOpener: FolderOpening {
+    func localFolder() -> URL? {
+        FileSystemUtil().incidentDirectory.flatMap(Self.created)
+    }
+
+    func iCloudFolder() -> URL? {
+        FileManager.default.url(forUbiquityContainerIdentifier: nil)
+            .map { $0.appendingPathComponent("Documents") }
+            .flatMap(Self.created)
+    }
+
+    @MainActor
+    func reveal(_ url: URL) {
+        NSWorkspace.shared.open(url)
+    }
+
+    private static func created(_ url: URL) -> URL? {
+        try? FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
+        return url
     }
 }
+
+/// Extension to provide preview instance for the SettingsViewModel.
+#if DEBUG
+    extension SettingsViewModel {
+        static var preview: SettingsViewModel {
+            SettingsViewModel(settings: AppSettingsPreview(), thiefManager: ThiefManagerPreview(), push: .preview())
+        }
+    }
+#endif
 
 // MARK: - Test Info
 

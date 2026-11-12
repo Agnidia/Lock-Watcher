@@ -1,0 +1,7 @@
+#include "../release.xcconfig"
+#include "companion.xcconfig"
+
+APS_ENVIRONMENT = production
+
+// Preview persons are for DEBUG previews and screenshots only; DEVELOPMENT_ASSET_PATHS alone still compiled them into this build.
+EXCLUDED_SOURCE_FILE_NAMES = "Preview Assets.xcassets"

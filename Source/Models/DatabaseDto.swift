@@ -46,6 +46,15 @@ public final class DatabaseDto: Codable, Identifiable {
         path = try container.decodeIfPresent(URL.self, forKey: .path)
     }
     
+    #if DEBUG
+        /// Builds a row from ready image data, for previews.
+        init(date: Date, data: Data, path: URL? = nil) {
+            self.date = date
+            self.data = data
+            self.path = path
+        }
+    #endif
+
     /// Fails when the record has no still, because history rows need image data; `path` prefers the movie.
     init?(with thiefDto: ThiefDto) {
         guard let snapshot = thiefDto.snapshot else { return nil }

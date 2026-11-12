@@ -111,32 +111,67 @@ struct UseSnapshotOnLocationChangeView: View {
     }
 }
 
-/// A toggle for taking a snapshot on keyboard or mouse input while the Mac is locked.
+/// A toggle for taking a snapshot on keyboard or mouse input while the Mac is locked, and the delay row under it.
+/// Two form rows, so the caller attaches modifiers to a row, not to the pair.
 @MainActor
 struct UseSnapshotOnLockedInputView: View {
     @Binding var isUseSnapshotOnLockedInput: Bool
     @Binding var lockedInputDelay: Int
 
     var body: some View {
-        HStack(spacing: DesignSystem.Spacing.sm) {
-            Toggle(isOn: $isUseSnapshotOnLockedInput) {
-                StableCountLabel(key: "SnapshotOnLockedInput %d", count: lockedInputDelay, range: TriggerSettings.lockedInputDelayRange)
-            }
-            .accessibilityIdentifier(AccessibilityID.Settings.lockedInputToggle)
-            .accessibilityLabel(AccessibilityLabel.Settings.snapshotOnLockedInput(lockedInputDelay))
-            .accessibilityHint(AccessibilityHint.Settings.toggleHint)
-
-            Stepper(value: $lockedInputDelay, in: TriggerSettings.lockedInputDelayRange) {
-                EmptyView()
-            }
-            .labelsHidden()
-            .disabled(!isUseSnapshotOnLockedInput)
-            .accessibilityIdentifier(AccessibilityID.Settings.lockedInputDelayStepper)
-            .accessibilityLabel(AccessibilityLabel.Settings.lockedInputDelay)
-            .accessibilityValue(PluralLocalization.string("AccessibilityLockedInputDelayValue %d", count: lockedInputDelay))
+        Toggle(isOn: $isUseSnapshotOnLockedInput) {
+            // The delay has its own row below, so the title carries no count.
+            Text("SnapshotOnLockedInput")
         }
+        .accessibilityIdentifier(AccessibilityID.Settings.lockedInputToggle)
+        .accessibilityLabel(AccessibilityLabel.Settings.snapshotOnLockedInput(lockedInputDelay))
+        .accessibilityHint(AccessibilityHint.Settings.toggleHint)
+
+        let delayValue = PluralLocalization.string("AccessibilityLockedInputDelayValue %d", count: lockedInputDelay)
+        LabeledContent(AccessibilityLabel.Settings.lockedInputDelay) {
+            HStack(spacing: DesignSystem.Spacing.sm) {
+                Text(delayValue)
+                    .foregroundStyle(DesignSystem.Colors.secondaryText)
+                Stepper(value: $lockedInputDelay, in: TriggerSettings.lockedInputDelayRange) {
+                    EmptyView()
+                }
+                .labelsHidden()
+            }
+        }
+        .disabled(!isUseSnapshotOnLockedInput)
+        .accessibilityIdentifier(AccessibilityID.Settings.lockedInputDelayStepper)
+        .accessibilityValue(delayValue)
     }
 }
+
+#if DEBUG
+    #Preview("Detect snapshot rows") {
+        @Previewable @State var onWakeUp = true
+        @Previewable @State var onLogin = true
+        @Previewable @State var onWrongPassword = false
+        @Previewable @State var onBattery = true
+        @Previewable @State var onUSB = false
+        @Previewable @State var onDisplayAttach = true
+        @Previewable @State var onLocationChange = false
+        @Previewable @State var onLockedInput = true
+        @Previewable @State var lockedInputDelay = 3
+
+        Form {
+            Section {
+                UseSnapshotOnWakeUpView(isUseSnapshotOnWakeUp: $onWakeUp)
+                UseSnapshotOnLoginView(isUseSnapshotOnLogin: $onLogin)
+                UseSnapshotOnWrongPasswordView(isUseSnapshotOnWrongPassword: $onWrongPassword)
+                UseSnapshotOnSwitchToBatteryPowerView(isUseSnapshotOnSwitchToBatteryPower: $onBattery)
+                UseSnapshotOnUSBMountView(isUseSnapshotOnUSBMount: $onUSB)
+                UseSnapshotOnDisplayAttachView(isUseSnapshotOnDisplayAttach: $onDisplayAttach)
+                UseSnapshotOnLocationChangeView(isUseSnapshotOnLocationChange: $onLocationChange)
+                UseSnapshotOnLockedInputView(isUseSnapshotOnLockedInput: $onLockedInput, lockedInputDelay: $lockedInputDelay)
+            }
+        }
+        .formStyle(.grouped)
+        .frame(width: 480)
+    }
+#endif
 
 // MARK: - Test Info
 

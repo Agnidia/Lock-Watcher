@@ -1,0 +1,13 @@
+//
+//  companion-tests.xcconfig
+//  Hostless logic tests: the bundle compiles Shared/ and Companion/Core directly.
+//
+
+#include "companion-debug.xcconfig"
+
+PRODUCT_BUNDLE_IDENTIFIER = $(COMPANION_BUNDLE_ID)Tests
+CODE_SIGN_ENTITLEMENTS =
+INFOPLIST_FILE =
+GENERATE_INFOPLIST_FILE = YES
+LD_RUNPATH_SEARCH_PATHS = @loader_path/Frameworks @executable_path/Frameworks
+SWIFT_EMIT_LOC_STRINGS = NO

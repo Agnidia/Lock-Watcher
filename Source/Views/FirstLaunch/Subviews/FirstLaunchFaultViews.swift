@@ -40,6 +40,8 @@ struct FirstLaunchFaultViews: View {
     }
 }
 
-#Preview("Fault View") {
-    FirstLaunchFaultViews(isHidden: .constant(false), frameSize: CGSize(width: 400, height: 300))
-}
+#if DEBUG
+    #Preview("Fault View") {
+        FirstLaunchFaultViews(isHidden: .constant(false), frameSize: CGSize(width: 400, height: 300))
+    }
+#endif

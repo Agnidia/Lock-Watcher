@@ -109,17 +109,11 @@ struct RetentionSettings: Codable, Equatable {
 /// Represents UI settings to manage and store the state of user interface elements.
 ///
 struct UISettings: Codable, Equatable {
-    /// Determines if the security information section is expanded.
-    var isSecurityInfoExpand: Bool = true
-    
-    /// Determines if the snapshot information section is expanded.
-    var isSnapshotInfoExpand: Bool = false
-    
-    /// Determines if the options information section is expanded.
-    var isOptionsInfoExpand: Bool = false
-    
-    /// Determines if the sync information section is expanded.
-    var isSyncInfoExpand: Bool = true
+    /// Raw value of the settings page the user left open last; optional so a stored `ui` block without it still decodes.
+    var lastSettingsPage: String?
+
+    /// When the one-time invitation to get the iPhone companion was shown; optional so a stored `ui` block without it still decodes.
+    var companionPromptShownAt: Date?
 }
 
 /// Represents the options/settings related to the application's behavior.
@@ -242,6 +236,25 @@ struct SyncSettings: Codable, Equatable {
     
     /// Determines if a local notification should be used for snapshots.
     var isUseSnapshotLocalNotification: Bool = false
+
+    /// Sends each record as an APNs alert to the paired iPhone.
+    var isSendPushEnable: Bool = false
+}
+
+extension SyncSettings {
+    /// `UserDefault` resets the whole group on any decode error, so v1.7.2 JSON (no push key) must decode with absent or unreadable keys taking defaults.
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let defaults = SyncSettings()
+        isSaveSnapshotToDisk = (try? container.decodeIfPresent(Bool.self, forKey: .isSaveSnapshotToDisk)) ?? defaults.isSaveSnapshotToDisk
+        isSendNotificationToMail = (try? container.decodeIfPresent(Bool.self, forKey: .isSendNotificationToMail)) ?? defaults.isSendNotificationToMail
+        mailRecipient = (try? container.decodeIfPresent(String.self, forKey: .mailRecipient)) ?? defaults.mailRecipient
+        isICloudSyncEnable = (try? container.decodeIfPresent(Bool.self, forKey: .isICloudSyncEnable)) ?? defaults.isICloudSyncEnable
+        isDropboxEnable = (try? container.decodeIfPresent(Bool.self, forKey: .isDropboxEnable)) ?? defaults.isDropboxEnable
+        dropboxName = (try? container.decodeIfPresent(String.self, forKey: .dropboxName)) ?? defaults.dropboxName
+        isUseSnapshotLocalNotification = (try? container.decodeIfPresent(Bool.self, forKey: .isUseSnapshotLocalNotification)) ?? defaults.isUseSnapshotLocalNotification
+        isSendPushEnable = (try? container.decodeIfPresent(Bool.self, forKey: .isSendPushEnable)) ?? defaults.isSendPushEnable
+    }
 }
 
 /// Protocol that outlines the properties and methods that app settings should conform to.
@@ -326,36 +339,38 @@ final class AppSettings: AppSettingsProtocol {
     }
 }
 
-/// class for Preview
-///
-final class AppSettingsPreview: AppSettingsProtocol {
-    static let isMASBuild: Bool = true
+#if DEBUG
+    /// class for Preview
+    ///
+    final class AppSettingsPreview: AppSettingsProtocol {
+        static let isMASBuild: Bool = true
 
-    static let isImageCaptureDebug: Bool = true
+        static let isImageCaptureDebug: Bool = true
 
-    static let firstLaunchSuccessCount: Int = 15
+        static let firstLaunchSuccessCount: Int = 15
 
-    var options: OptionsSettings = .init()
+        var options: OptionsSettings = .init()
 
-    var triggers: TriggerSettings = .init()
+        var triggers: TriggerSettings = .init()
 
-    var sync: SyncSettings = .init()
+        var sync: SyncSettings = .init()
 
-    var snapshot: SnapshotSettings = .init()
+        var snapshot: SnapshotSettings = .init()
 
-    var retention: RetentionSettings = .init()
+        var retention: RetentionSettings = .init()
 
-    var ui: UISettings = .init()
+        var ui: UISettings = .init()
 
-    func resetToDefaults() {
-        options = OptionsSettings()
-        triggers = TriggerSettings()
-        sync = SyncSettings()
-        snapshot = SnapshotSettings()
-        retention = retention.resettingPreference()
-        ui = UISettings()
+        func resetToDefaults() {
+            options = OptionsSettings()
+            triggers = TriggerSettings()
+            sync = SyncSettings()
+            snapshot = SnapshotSettings()
+            retention = retention.resettingPreference()
+            ui = UISettings()
+        }
     }
-}
+#endif
 
 // MARK: - Test Info
 

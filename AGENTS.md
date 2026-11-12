@@ -58,6 +58,8 @@ swiftformat .
 # Run tests
 xcodebuild test -project Lock-Watcher.xcodeproj -scheme Lock-Watcher -destination 'platform=macOS'
 
+# iOS companion and push tests: README.md § iPhone Push Alerts (scheme Lock-Watcher-Companion)
+
 # Reset app permissions (development)
 tccutil reset All com.igrsoft.Lock-Watcher
 ```
@@ -87,9 +89,17 @@ swiftformat . && xcodebuild test -project Lock-Watcher.xcodeproj -scheme Lock-Wa
   - WrongPasswordListener (Non-MAS only)
 - **`Source/Notifiers/`** - Output channels
   - ICloudNotifier, DropboxNotifier, NotificationNotifier
+  - PushNotifier (APNs to the paired iPhone, gated by `isSendPushEnable`)
   - MailNotifier (Non-MAS only)
+- **`Source/Utils/`** - APNsClient (HTTP/2, JWT), APNsCredentialStore (Keychain, embedded and own keys), NetworkReachability
 - **`Source/Views/`** - SwiftUI interface (Settings, Main, FirstLaunch)
 - **`Source/Models/`** - Data structures (ThiefDto, AppSettings)
+
+### iOS Companion and Shared Code
+
+- **`Companion/`** - iOS 17 SwiftUI companion app: pairing QR, alert inbox (Pro: alert detail view, 999-alert history), read-only Photos viewer, Pro purchases (SKHelper)
+- **`Shared/`** - Foundation-only codecs used by the Mac and the companion (PairingPayload, APNsEnvironment, PushAlertPayload; every payload key after `date` is optional so Mac and companion versions interoperate)
+- **`Configurations/companion/`** - Companion build configs (`APS_ENVIRONMENT` per configuration)
 
 ### XPC Services
 
@@ -139,6 +149,8 @@ rg -n "Sendable" Source/
 | Mail Notifier | No | Yes |
 | XPCMail Service | No | Yes |
 
+The iOS companion has one target and no Non-MAS variant. Its setup and key handling are in README.md § iPhone Push Alerts.
+
 ### Conditional Compilation
 
 ```swift
@@ -165,6 +177,7 @@ rg -n "Sendable" Source/
 - **NEVER** log sensitive data (use Logger with privacy levels)
 - Use Keychain for credential storage (via AuthentificationManager)
 - Configuration via `.xcconfig` files
+- APNs `.p8` keys come from Xcode Cloud secrets only; key handling and the rotation runbook are in README.md § iPhone Push Alerts
 
 ### Safe Operations
 
@@ -216,10 +229,11 @@ rg -n "Sendable" Source/
 
 | Setting | Value |
 |---------|-------|
-| Platform | macOS 14.1+ |
+| Platform | macOS 15.0+ |
 | Localization | English (en), Ukrainian (uk) |
 | Storage | EasyStash (encrypted local storage) |
 | Cloud | iCloud (CloudKit), Dropbox SDK |
 | Camera | CameraSnap library (0.3.1+, photo or H.264 video) |
 | Privacy Manifest | PrivacyInfo.xcprivacy (NSPrivacyAccessedAPICategoryFileTimestamp C617.1, NSPrivacyAccessedAPICategoryUserDefaults CA92.1) |
 | Auto-Launch | LaunchAtLogin |
+| iOS companion | iOS 17.0+, bundle ID com.igrsoft.Lock-Watcher (same as MAS, by design) |

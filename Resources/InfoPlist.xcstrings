@@ -1,24 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "CFBundleDisplayName" : {
-      "comment" : "Bundle display name",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Lock-Watcher"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lock Watcher"
-          }
-        }
-      }
-    },
     "CFBundleName" : {
       "comment" : "Bundle name",
       "localizations" : {
@@ -42,13 +24,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Detect persone who is trying get access to your user"
+            "value" : "Capture whoever tries to access your Mac, and scan the pairing QR code of your iPhone"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Зробити знімок людини, яка намагається отримати доступ до вашого користувача"
+            "value" : "Знімати того, хто намагається отримати доступ до вашого Mac, і сканувати QR-код сполучення з iPhone"
           }
         }
       }

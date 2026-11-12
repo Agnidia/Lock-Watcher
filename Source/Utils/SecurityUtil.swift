@@ -94,8 +94,10 @@ public final class SecurityUtil: SecurityUtilProtocol, @unchecked Sendable {
     }
 }
 
-extension SecurityUtil {
-    static var preview: SecurityUtil {
-        SecurityUtil(keychainId: "preview", soul: "preview", appKey: "preview")
+#if DEBUG
+    extension SecurityUtil {
+        static var preview: SecurityUtil {
+            SecurityUtil(keychainId: "preview", soul: "preview", appKey: "preview")
+        }
     }
-}
+#endif

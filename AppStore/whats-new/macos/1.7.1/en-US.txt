@@ -1,0 +1,5 @@
+Lock-Watcher v1.7.1 includes reliability and interface fixes:
+
+- Correct singular and plural formatting in localized text
+- Synchronize the geofence authorization state with macOS permission changes
+- Keep settings steppers aligned when their values change

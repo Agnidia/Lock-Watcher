@@ -143,7 +143,9 @@ struct LastThiefDetectionView: View {
     }
 }
 
-#Preview("Last Thief Detection") {
-    LastThiefDetectionView()
-        .environment(LastThiefDetectionViewModel(databaseManager: DatabaseManagerPreview()))
-}
+#if DEBUG
+    #Preview("Last Thief Detection") {
+        LastThiefDetectionView()
+            .environment(LastThiefDetectionViewModel(databaseManager: DatabaseManagerPreview()))
+    }
+#endif

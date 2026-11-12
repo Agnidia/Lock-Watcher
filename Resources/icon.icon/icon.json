@@ -28,9 +28,19 @@
               "value" : "screen"
             }
           ],
-          "fill" : {
-            "solid" : "display-p3:0.18213,0.42261,0.70703,1.00000"
-          },
+          "fill-specializations" : [
+            {
+              "value" : {
+                "solid" : "display-p3:0.18213,0.42261,0.70703,1.00000"
+              }
+            },
+            {
+              "appearance" : "dark",
+              "value" : {
+                "solid" : "srgb:0.92143,0.92145,0.92144,1.00000"
+              }
+            }
+          ],
           "glass" : false,
           "image-name" : "lines.svg",
           "name" : "lines",

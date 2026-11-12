@@ -141,21 +141,35 @@ final class DatabaseManager: DatabaseManagerProtocol {
     }
 }
 
-/// A mock version of `DatabaseManager` mainly for previewing or testing purposes.
-final class DatabaseManagerPreview: DatabaseManagerProtocol {
-    func send(_ thiefDto: ThiefDto) -> DatabaseDtoList {
-        .empty
+#if DEBUG
+    import AppKit
+
+    /// A mock version of `DatabaseManager` for previews, filled with the preview persons from the asset catalog.
+    final class DatabaseManagerPreview: DatabaseManagerProtocol {
+        init(personCount: Int = 6) {
+            let now = Date()
+            latestImages = (0 ..< personCount).compactMap { index in
+                guard let tiff = NSImage(named: "Persons/person-\(index)")?.tiffRepresentation,
+                      let jpeg = NSBitmapImageRep(data: tiff)?.representation(using: .jpeg, properties: [.compressionFactor: 0.8])
+                else { return nil }
+                return DatabaseDto(date: now.addingTimeInterval(-Double(index) * 1800), data: jpeg)
+            }
+        }
+
+        func send(_ thiefDto: ThiefDto) -> DatabaseDtoList {
+            .empty
+        }
+
+        func remove(_ dto: DatabaseDto) -> DatabaseDtoList {
+            .empty
+        }
+
+        func cleanAll() {}
+
+        @Published private(set) var latestImages: [DatabaseDto]
+
+        var latestImagesPublisher: Published<[DatabaseDto]>.Publisher {
+            $latestImages
+        }
     }
-
-    func remove(_ dto: DatabaseDto) -> DatabaseDtoList {
-        .empty
-    }
-
-    func cleanAll() {}
-
-    @Published private(set) var latestImages: [DatabaseDto] = .init()
-
-    var latestImagesPublisher: Published<[DatabaseDto]>.Publisher {
-        $latestImages
-    }
-}
+#endif

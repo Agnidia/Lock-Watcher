@@ -16,11 +16,11 @@ final class MainCoordinator: BaseCoordinatorProtocol {
     /// Configuration settings for the application.
     private var settings: AppSettingsProtocol
     
-    private let authManager: AuthentificationManager
+    private let authManager: AuthenticationManager
     
     /// Likely manages data or tasks related to unauthorized access.
     private var thiefManager: ThiefManagerProtocol
-
+    
     private let locationAuthorization: LocationAuthorizationProviding
     
     // MARK: - Variables
@@ -38,10 +38,10 @@ final class MainCoordinator: BaseCoordinatorProtocol {
         popover.behavior = .transient
         popover.animates = false
         popover.contentViewController = NSViewController()
-        let root = MainView().environment(mainViewModel)
+        let root = MainView(viewModel: mainViewModel)
         let hostingView = NSHostingView(rootView: root)
         popover.contentViewController?.view = hostingView
-
+        
         return popover
     }()
     

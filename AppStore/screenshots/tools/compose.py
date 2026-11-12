@@ -1,7 +1,7 @@
 """Builds the App Store slides from the raw window captures.
 
 Reads AppStore/screenshots/<locale>/raw/*.png and writes AppStore/screenshots/<locale>/APP_DESKTOP/NN.png.
-usage: python3 compose.py [outdir]   (outdir replaces AppStore/screenshots for a dry run)
+usage: [LOCALES="en-US uk"] python3 compose.py [outdir]   (outdir replaces AppStore/screenshots for a dry run; LOCALES limits the run)
 Needs Pillow and the system SF Pro font (/System/Library/Fonts/SFNS.ttf).
 """
 import itertools
@@ -24,17 +24,17 @@ LEFT, GAP_TEXT, GAP_WINDOWS = 170, 80, 44
 SLIDES = {
     "en-US": [
         (["menu-popover"], "Catch Whoever Touches Your Mac", "A photo or short video, taken silently"),
-        (["settings-snapshot"], "Triggers That Work While Locked", "Display, location, keyboard and mouse"),
-        (["settings-options"], "Photo or Short Video", "Choose quality, size and how long to keep files"),
-        (["settings-sync"], "Straight to Your Own Cloud", "iCloud, Dropbox and notifications"),
-        (["settings-options", "settings-sync"], "Set It and Forget It", "One toggle per trigger, all in one window"),
+        (["settings-capture"], "Photo or Short Video", "Choose the type, quality and size"),
+        (["settings-triggers"], "Triggers That Work While Locked", "Wake-up, login, USB and keyboard input"),
+        (["settings-sync"], "Straight to Your Own Cloud", "iCloud, Dropbox and saved files"),
+        (["settings-notifications"], "Alerts on Your iPhone", "Pair once, get every capture as a push"),
     ],
     "uk": [
         (["menu-popover"], "Побачте, хто чіпав ваш Mac", "Фото або коротке відео — тихо й миттєво"),
-        (["settings-snapshot"], "Працює, поки Mac заблоковано", "Дисплей, переміщення, клавіатура та миша"),
-        (["settings-options"], "Фото або коротке відео", "Якість, розмір і термін зберігання — на ваш вибір"),
-        (["settings-sync"], "Одразу у вашу хмару", "iCloud, Dropbox і сповіщення"),
-        (["settings-options", "settings-sync"], "Налаштуйте й забудьте", "Один перемикач на тригер, усе в одному вікні"),
+        (["settings-capture"], "Фото або коротке відео", "Тип, якість і розмір — на ваш вибір"),
+        (["settings-triggers"], "Працює, поки Mac заблоковано", "Пробудження, вхід, USB і введення з клавіатури"),
+        (["settings-sync"], "Одразу у вашу хмару", "iCloud, Dropbox і збережені файли"),
+        (["settings-notifications"], "Сповіщення на iPhone", "Один раз сполучіть — і отримуйте кожен знімок"),
     ],
 }
 
@@ -164,6 +164,9 @@ def compose(locale, number, names, headline, sub):
 
 
 if __name__ == "__main__":
+    wanted = os.environ.get("LOCALES", "").split()
     for locale, slides in SLIDES.items():
+        if wanted and locale not in wanted:
+            continue
         for number, (names, headline, sub) in enumerate(slides, 1):
             compose(locale, number, names, headline, sub)

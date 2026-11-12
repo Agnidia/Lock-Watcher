@@ -10,7 +10,10 @@
 // https://help.apple.com/xcode/#/dev745c5c974
 
 //User-Defined
-APP_NAME = Lock-Watcher
+MAS_APP_NAME = Lock-Watcher
+APP_NAME = $(MAS_APP_NAME)
+// The iOS companion shares the MAS bundle ID (universal purchase, same iCloud container); it is also the APNs topic.
+COMPANION_BUNDLE_ID = $(APP_DOMAIN).$(MAS_APP_NAME)
 APP_DOMAIN = com.igrsoft
 MTL_FAST_MATH = YES
 APP_DROPBOX = db-wg60852o20nf6eh
@@ -18,7 +21,7 @@ APP_DROPBOX = db-wg60852o20nf6eh
 //Architectures
 SUPPORTED_PLATFORMS = macosx
 SDKROOT = auto
-MACOSX_DEPLOYMENT_TARGET = 14.1
+MACOSX_DEPLOYMENT_TARGET = 15.0
 
 //Build Options
 ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES
@@ -49,8 +52,8 @@ DEVELOPMENT_TEAM = DMP42GVPJ3
 CODE_SIGN_IDENTITY = Apple Development
 
 //Versioning
-CURRENT_PROJECT_VERSION = 1703
-MARKETING_VERSION = 1.7.2
+CURRENT_PROJECT_VERSION = 2000
+MARKETING_VERSION = 2.0.0
 
 //Apple Clang - Code Generation
 GCC_NO_COMMON_BLOCKS = YES

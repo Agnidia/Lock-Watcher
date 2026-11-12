@@ -12,42 +12,32 @@ import XCTest
 
 final class UISettingsTests: XCTestCase {
     func testUISettingsDefaultValues() {
-        let settings = UISettings()
-
-        XCTAssertTrue(settings.isSecurityInfoExpand)
-        XCTAssertFalse(settings.isSnapshotInfoExpand)
-        XCTAssertFalse(settings.isOptionsInfoExpand)
-        XCTAssertTrue(settings.isSyncInfoExpand)
+        XCTAssertNil(UISettings().lastSettingsPage)
     }
 
     func testUISettingsCustomValues() {
         var settings = UISettings()
-        settings.isSecurityInfoExpand = false
-        settings.isSnapshotInfoExpand = true
-        settings.isOptionsInfoExpand = true
-        settings.isSyncInfoExpand = false
+        settings.lastSettingsPage = "options"
 
-        XCTAssertFalse(settings.isSecurityInfoExpand)
-        XCTAssertTrue(settings.isSnapshotInfoExpand)
-        XCTAssertTrue(settings.isOptionsInfoExpand)
-        XCTAssertFalse(settings.isSyncInfoExpand)
+        XCTAssertEqual(settings.lastSettingsPage, "options")
     }
 
     func testUISettingsCodable() throws {
         var original = UISettings()
-        original.isSecurityInfoExpand = false
-        original.isSnapshotInfoExpand = true
+        original.lastSettingsPage = "sync"
 
-        let encoder = JSONEncoder()
-        let data = try encoder.encode(original)
+        let data = try JSONEncoder().encode(original)
+        let decoded = try JSONDecoder().decode(UISettings.self, from: data)
 
-        let decoder = JSONDecoder()
-        let decoded = try decoder.decode(UISettings.self, from: data)
+        XCTAssertEqual(decoded.lastSettingsPage, original.lastSettingsPage)
+    }
 
-        XCTAssertEqual(decoded.isSecurityInfoExpand, original.isSecurityInfoExpand)
-        XCTAssertEqual(decoded.isSnapshotInfoExpand, original.isSnapshotInfoExpand)
-        XCTAssertEqual(decoded.isOptionsInfoExpand, original.isOptionsInfoExpand)
-        XCTAssertEqual(decoded.isSyncInfoExpand, original.isSyncInfoExpand)
+    func testUISettingsDecodesStoredBlockFromBeforeTheSidebar() throws {
+        let stored = Data(#"{"isSecurityInfoExpand":true,"isSnapshotInfoExpand":false,"isOptionsInfoExpand":false,"isSyncInfoExpand":true}"#.utf8)
+
+        let decoded = try JSONDecoder().decode(UISettings.self, from: stored)
+
+        XCTAssertNil(decoded.lastSettingsPage)
     }
 }
 
@@ -438,7 +428,7 @@ final class AppSettingsProtocolTests: XCTestCase {
         XCTAssertFalse(settings.sync.isICloudSyncEnable)
 
         // UI
-        XCTAssertTrue(settings.ui.isSecurityInfoExpand)
+        XCTAssertNil(settings.ui.lastSettingsPage)
     }
 
     func testAppSettingsPreviewMutation() {
@@ -447,12 +437,12 @@ final class AppSettingsProtocolTests: XCTestCase {
         settings.options.isFirstLaunch = false
         settings.triggers.isUseSnapshotOnWakeUp = false
         settings.sync.isICloudSyncEnable = true
-        settings.ui.isSecurityInfoExpand = false
+        settings.ui.lastSettingsPage = "sync"
 
         XCTAssertFalse(settings.options.isFirstLaunch)
         XCTAssertFalse(settings.triggers.isUseSnapshotOnWakeUp)
         XCTAssertTrue(settings.sync.isICloudSyncEnable)
-        XCTAssertFalse(settings.ui.isSecurityInfoExpand)
+        XCTAssertEqual(settings.ui.lastSettingsPage, "sync")
     }
 }
 

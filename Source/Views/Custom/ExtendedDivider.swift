@@ -110,10 +110,12 @@ struct ExtendedDivider: View {
     }
 }
 
-#Preview("Extended") {
-    ExtendedDivider(isExtended: .constant(true))
-}
+#if DEBUG
+    #Preview("Extended") {
+        ExtendedDivider(isExtended: .constant(true))
+    }
 
-#Preview("Collapsed") {
-    ExtendedDivider(isExtended: .constant(false))
-}
+    #Preview("Collapsed") {
+        ExtendedDivider(isExtended: .constant(false))
+    }
+#endif

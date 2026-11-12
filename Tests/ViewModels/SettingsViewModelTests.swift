@@ -25,7 +25,7 @@ final class SettingsViewModelTests: XCTestCase {
         mockThiefManager = MockThiefManager()
         mockThiefManager.stubbedDatabaseManager = MockDatabaseManager()
         mockAuthorization = MockLocationAuthorizationService()
-        sut = SettingsViewModel(settings: mockSettings, thiefManager: mockThiefManager, locationAuthorization: mockAuthorization)
+        sut = SettingsViewModel(settings: mockSettings, thiefManager: mockThiefManager, locationAuthorization: mockAuthorization, push: .preview())
     }
 
     override func tearDown() async throws {
@@ -56,50 +56,24 @@ final class SettingsViewModelTests: XCTestCase {
 
     // MARK: - UI Bindings Tests
 
-    func testIsSecurityInfoExpandBindingReads() {
-        mockSettings.ui.isSecurityInfoExpand = true
-        XCTAssertTrue(sut.isSecurityInfoExpand.wrappedValue)
-
-        mockSettings.ui.isSecurityInfoExpand = false
-        XCTAssertFalse(sut.isSecurityInfoExpand.wrappedValue)
+    func testSelectedPageDefaultsToCapture() {
+        mockSettings.ui.lastSettingsPage = nil
+        XCTAssertEqual(sut.selectedPage.wrappedValue, .capture)
     }
 
-    func testIsSecurityInfoExpandBindingWrites() {
-        sut.isSecurityInfoExpand.wrappedValue = false
-        XCTAssertFalse(mockSettings.ui.isSecurityInfoExpand)
-
-        sut.isSecurityInfoExpand.wrappedValue = true
-        XCTAssertTrue(mockSettings.ui.isSecurityInfoExpand)
+    func testSelectedPageFallsBackForUnknownValue() {
+        mockSettings.ui.lastSettingsPage = "removed-page"
+        XCTAssertEqual(sut.selectedPage.wrappedValue, .capture)
     }
 
-    func testIsSnapshotInfoExpandBindingReads() {
-        mockSettings.ui.isSnapshotInfoExpand = true
-        XCTAssertTrue(sut.isSnapshotInfoExpand.wrappedValue)
+    func testSelectedPageReadsStoredValue() {
+        mockSettings.ui.lastSettingsPage = SettingsPage.sync.rawValue
+        XCTAssertEqual(sut.selectedPage.wrappedValue, .sync)
     }
 
-    func testIsSnapshotInfoExpandBindingWrites() {
-        sut.isSnapshotInfoExpand.wrappedValue = true
-        XCTAssertTrue(mockSettings.ui.isSnapshotInfoExpand)
-    }
-
-    func testIsOptionsInfoExpandBindingReads() {
-        mockSettings.ui.isOptionsInfoExpand = true
-        XCTAssertTrue(sut.isOptionsInfoExpand.wrappedValue)
-    }
-
-    func testIsOptionsInfoExpandBindingWrites() {
-        sut.isOptionsInfoExpand.wrappedValue = true
-        XCTAssertTrue(mockSettings.ui.isOptionsInfoExpand)
-    }
-
-    func testIsSyncInfoExpandBindingReads() {
-        mockSettings.ui.isSyncInfoExpand = true
-        XCTAssertTrue(sut.isSyncInfoExpand.wrappedValue)
-    }
-
-    func testIsSyncInfoExpandBindingWrites() {
-        sut.isSyncInfoExpand.wrappedValue = false
-        XCTAssertFalse(mockSettings.ui.isSyncInfoExpand)
+    func testSelectedPageWritesRawValue() {
+        sut.selectedPage.wrappedValue = .options
+        XCTAssertEqual(mockSettings.ui.lastSettingsPage, SettingsPage.options.rawValue)
     }
 
     // MARK: - Protection Bindings Tests
@@ -609,6 +583,69 @@ final class SettingsViewModelTests: XCTestCase {
         try await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
 
         XCTAssertEqual(mockSettings.sync.dropboxName, "UpdatedUser")
+    }
+
+    // MARK: - Browse Folder Tests
+
+    private func makeSUT(folders: MockFolderOpener) -> SettingsViewModel {
+        SettingsViewModel(settings: mockSettings, thiefManager: mockThiefManager, locationAuthorization: mockAuthorization, push: .preview(), folders: folders)
+    }
+
+    func testOpenLocalFolderRevealsLocalFolder() {
+        let folders = MockFolderOpener(local: URL(fileURLWithPath: "/tmp/local"), iCloud: nil)
+
+        makeSUT(folders: folders).openLocalFolder()
+
+        XCTAssertEqual(folders.revealed, [URL(fileURLWithPath: "/tmp/local")])
+    }
+
+    func testOpenLocalFolderDoesNothingWithoutFolder() {
+        let folders = MockFolderOpener(local: nil, iCloud: nil)
+
+        makeSUT(folders: folders).openLocalFolder()
+
+        XCTAssertTrue(folders.revealed.isEmpty)
+    }
+
+    func testOpenICloudFolderRevealsICloudFolder() async {
+        let folders = MockFolderOpener(local: nil, iCloud: URL(fileURLWithPath: "/tmp/icloud"))
+
+        await makeSUT(folders: folders).openICloudFolder()
+
+        XCTAssertEqual(folders.revealed, [URL(fileURLWithPath: "/tmp/icloud")])
+    }
+
+    func testOpenICloudFolderDoesNothingWhenSignedOut() async {
+        let folders = MockFolderOpener(local: URL(fileURLWithPath: "/tmp/local"), iCloud: nil)
+
+        await makeSUT(folders: folders).openICloudFolder()
+
+        XCTAssertTrue(folders.revealed.isEmpty)
+    }
+}
+
+/// `revealed` changes on the main actor only, through `reveal`.
+private final class MockFolderOpener: FolderOpening, @unchecked Sendable {
+    private let local: URL?
+    private let iCloud: URL?
+    private(set) var revealed: [URL] = []
+
+    init(local: URL?, iCloud: URL?) {
+        self.local = local
+        self.iCloud = iCloud
+    }
+
+    func localFolder() -> URL? {
+        local
+    }
+
+    func iCloudFolder() -> URL? {
+        iCloud
+    }
+
+    @MainActor
+    func reveal(_ url: URL) {
+        revealed.append(url)
     }
 }
 

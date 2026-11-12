@@ -1,0 +1,4 @@
+Lock-Watcher v1.7.2 updates the app's company branding:
+
+- Replaces IGRSoft branding with Agnidia
+- Updates the company website, support, and privacy policy links

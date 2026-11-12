@@ -1,5 +1,18 @@
 # Lock-Watcher — Changelog
 
+## v2.0.0 (Build 1704)
+
+### New
+- Push alerts to a paired iPhone through Apple Push Notification service (off by default)
+- Lock-Watcher Companion for iPhone (iOS 17+): pairing QR code, alert inbox, read-only Photos viewer from iCloud Drive
+- Lock-Watcher Pro in the Companion: alert detail (map, IP address, trace route, photo) and a 999-alert history; free keeps 3 alerts
+- Redesigned Settings window with a sidebar, a Push page and an About page
+
+### Changed
+- Minimum macOS is now 15.0
+
+---
+
 ## v1.7.2 (Build 1703) — 2026-10-30
 
 ### Changed
