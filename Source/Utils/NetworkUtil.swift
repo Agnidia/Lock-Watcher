@@ -12,7 +12,7 @@ import SimpleTracer
 protocol NetworkUtilProtocol {
     /// Fetches the device's public IP address.
     /// - Returns: The public IP address or an empty string if fetching fails.
-    func getIFAddresses() -> String
+    nonisolated(nonsending) func getIFAddresses() async -> String
     
     /// Executes a trace route to the specified host.
     /// - Parameters:
@@ -51,16 +51,19 @@ public final class NetworkUtil: NetworkUtilProtocol {
     /// Fetch the device's public IP address from ipify.org.
     ///
     /// - Returns: The public IP address or an empty string if fetching fails.
-    func getIFAddresses() -> String {
-        var publicIP = ""
-        do {
-            try publicIP = String(contentsOf: URL(string: "https://api.ipify.org")!, encoding: .utf8)
-            publicIP = publicIP.trimmingCharacters(in: CharacterSet.whitespaces)
-        } catch {
-            logger.error("Network Error: \(error.localizedDescription)")
+    nonisolated(nonsending) func getIFAddresses() async -> String {
+        guard let url = URL(string: "https://api.ipify.org") else {
+            logger.error("Network Error: Invalid URL")
+            return ""
         }
         
-        return publicIP
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            return String(decoding: data, as: UTF8.self).trimmingCharacters(in: .whitespacesAndNewlines)
+        } catch {
+            logger.error("Network Error: \(error.localizedDescription)")
+            return ""
+        }
     }
     
     /// Executes a trace route to the specified host and returns the result.

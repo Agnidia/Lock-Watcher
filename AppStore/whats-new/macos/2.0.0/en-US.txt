@@ -1,0 +1,6 @@
+Lock-Watcher v2.0.0 sends your captures to your iPhone:
+
+- New: push alerts to a paired iPhone (off by default)
+- Pair with the free Lock-Watcher Companion by scanning its QR code
+- Redesigned Settings window with a sidebar, a Push page and an About page
+- Requires macOS 15 or later

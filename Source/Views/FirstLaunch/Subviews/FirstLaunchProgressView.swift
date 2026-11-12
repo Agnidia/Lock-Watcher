@@ -25,7 +25,9 @@ struct FirstLaunchProgressView: View {
     }
 }
 
-#Preview("Progress View") {
-    FirstLaunchProgressView()
-        .environment(FirstLaunchProgressViewModel.preview)
-}
+#if DEBUG
+    #Preview("Progress View") {
+        FirstLaunchProgressView()
+            .environment(FirstLaunchProgressViewModel.preview)
+    }
+#endif

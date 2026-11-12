@@ -1,0 +1,9 @@
+Lock-Watcher v1.7.0 adds triggers that fire only while your Mac is locked:
+
+- Display attached while locked
+- Location change while locked: the Mac moved 500 m or more since you last unlocked it
+- Keyboard or mouse input while locked, after a delay you set from 0 to 10 seconds; a repeated attempt is captured again 30 seconds after a capture
+- The new triggers are off by default
+- The USB trigger now ignores disk images, network shares, and internal volumes; physical external drives still trigger
+- Your saved settings carry over
+- Ukrainian localization completed and corrected

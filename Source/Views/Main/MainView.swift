@@ -10,8 +10,8 @@ import SwiftUI
 /// A SwiftUI view that represents the main content of the application.
 struct MainView: View {
     /// The view model injected via environment.
-    @Environment(MainViewModel.self) var viewModel
-
+    @State var viewModel: MainViewModel
+    
     /// The body content of the `MainView`.
     var body: some View {
         let _ = Self.logViewChanges()
@@ -20,7 +20,7 @@ struct MainView: View {
             VStack(alignment: .leading) {
                 LastThiefDetectionView()
                     .environment(viewModel.lastThiefDetectionViewModel)
-
+                
                 InfoView()
                     .environment(viewModel.infoViewModel)
             }
@@ -36,7 +36,8 @@ struct MainView: View {
     }
 }
 
-#Preview("Main View") {
-    MainView()
-        .environment(MainViewModel.preview)
-}
+#if DEBUG
+    #Preview("Main View") {
+        MainView(viewModel: MainViewModel.preview)
+    }
+#endif

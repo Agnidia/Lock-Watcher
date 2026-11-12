@@ -53,7 +53,10 @@ final class AppDelegateModel: AppDelegateModelProtocol {
     }()
 
     /// The settings view model for injection into the settings view.
-    private(set) lazy var settingsViewModel: SettingsViewModel = .init(settings: settings, thiefManager: thiefManager, locationAuthorization: locationAuthorizationService)
+    private(set) lazy var settingsViewModel: SettingsViewModel = .init(settings: settings, thiefManager: thiefManager, locationAuthorization: locationAuthorizationService, push: .live())
+
+    /// Invites the owner once to install and pair the iPhone companion.
+    private lazy var companionPrompt = CompanionPromptManager(settings: settings, store: APNsCredentialStore(), presenter: CompanionPromptPresenter())
 
     /// Represents the status bar item used in the application.
     private lazy var statusBarItem: NSStatusItem = {
@@ -72,6 +75,11 @@ final class AppDelegateModel: AppDelegateModelProtocol {
         applyTheme()
 
         coordinator.displayFirstLaunchWindowIfNeed { [weak self] in self?.coordinator.displayMainWindow() }
+
+        // A unit-test host must not show UI or touch the Keychain.
+        if !LaunchEnvironment.isHostingTests {
+            companionPrompt.applicationDidLaunch()
+        }
 
         if let response = localNotification.userInfo?[NSApplication.launchUserNotificationUserInfoKey] as? UNNotificationResponse {
             thiefManager.showSnapshot(identifier: response.notification.request.identifier)

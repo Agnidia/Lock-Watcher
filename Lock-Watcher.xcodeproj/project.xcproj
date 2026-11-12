@@ -1,0 +1,595 @@
+{
+  "organization": "Agnidia",
+  "default-configuration": "Release",
+  "configurations": [
+    { "name": "Debug", "file": { "anchor": "Configurations", "relative-path": "debug.xcconfig" } },
+    { "name": "Release", "file": { "anchor": "Configurations", "relative-path": "release.xcconfig" } },
+    { "name": "Release-non-mas", "file": { "anchor": "Configurations", "relative-path": "app/app-release.xcconfig" } },
+  ],
+  "localizations": {
+    "development": "en",
+    "supported": [
+      "Base",
+      "uk",
+    ],
+  },
+  "packages": [
+    {
+      "kind": "remote",
+      "repository": "https://github.com/Agnidia/CameraSnap.git",
+      "version": {
+        "up-to-next-major-version": "0.3.1",
+      },
+    }, {
+      "kind": "remote",
+      "repository": "https://github.com/sindresorhus/LaunchAtLogin-Modern",
+      "version": {
+        "up-to-next-major-version": "1.1.0",
+      },
+    }, {
+      "kind": "remote",
+      "repository": "https://github.com/dropbox/SwiftyDropbox.git",
+      "version": {
+        "up-to-next-major-version": "10.2.4",
+      },
+    }, {
+      "kind": "remote",
+      "repository": "https://github.com/onmyway133/EasyStash",
+      "version": {
+        "up-to-next-major-version": "1.1.9",
+      },
+    }, {
+      "kind": "remote",
+      "repository": "https://github.com/kishikawakatsumi/KeychainAccess",
+      "version": {
+        "up-to-next-major-version": "4.2.2",
+      },
+    }, {
+      "kind": "remote",
+      "repository": "https://github.com/Agnidia/SimpleTracer",
+      "version": {
+        "up-to-next-major-version": "0.1.4",
+      },
+    }, {
+      "kind": "remote",
+      "repository": "https://github.com/russell-archer/SKHelper",
+      "version": {
+        "up-to-next-major-version": "2.0.0",
+      },
+    }, {
+      "kind": "remote",
+      "repository": "https://github.com/Agnidia/CustomizedAboutView.git",
+      "version": {
+        "up-to-next-major-version": "1.1.0",
+      },
+    },
+  ],
+  "files": [
+    { "kind": "folder", "path": "Shared", "target-membership": [ "Lock-Watcher", "Lock-Watcher-Companion", "Lock-Watcher-non-mas", "Lock-WatcherCompanionTests" ] },
+    {
+      "kind": "folder",
+      "path": "Companion",
+      "target-membership": [
+        "Lock-Watcher-Companion",
+      ],
+      "membership-exceptions": [
+        {
+          "target": "Lock-Watcher-Companion",
+          "exclusions": [
+            "Resources/Companion.storekit",
+            "Resources/Info.plist",
+          ],
+        }, {
+          "target": "Lock-WatcherCompanionTests",
+          "inclusions": [
+            "Core/AlertInbox.swift",
+            "Core/AlertTrigger.swift",
+            "Core/CloudPhotoImageDecoder.swift",
+            "Core/CloudPhotoLibrary.swift",
+            "Core/ICloudPhotoSource.swift",
+            "Core/ProEntitlement.swift",
+            "Core/PushRegistrationModel.swift",
+            "Core/QRCodeRenderer.swift",
+            "Preview/PreviewAlerts.swift",
+          ],
+        },
+      ],
+    },
+    { "kind": "folder", "path": "CompanionTests", "target-membership": [ "Lock-WatcherCompanionTests" ] },
+    { "path": "README.md" },
+    { "kind": "folder", "path": "Configurations" },
+    { "kind": "folder", "path": "Source", "target-membership": [ "Lock-Watcher", "Lock-Watcher-non-mas" ] },
+    {
+      "kind": "group",
+      "path": "Resources",
+      "children": [
+        {
+          "path": "Colors.xcassets",
+          "target-membership": [
+            "Lock-Watcher-Companion/resources",
+            "Lock-Watcher/resources",
+            "Lock-Watcher-non-mas/resources",
+          ],
+        }, {
+          "path": "icon.icon",
+          "target-membership": [
+            "Lock-Watcher-Companion/resources",
+            "Lock-Watcher/resources",
+            "Lock-Watcher-non-mas/resources",
+          ],
+        }, {
+          "path": "InfoPlist.xcstrings",
+          "target-membership": [
+            "Lock-Watcher/resources",
+            "Lock-Watcher-non-mas/resources",
+          ],
+        }, {
+          "kind": "group",
+          "path": "Preview Content",
+          "children": [
+            {
+              "path": "Preview Assets.xcassets",
+              "target-membership": [
+                "Lock-Watcher-Companion/resources",
+                "Lock-Watcher/resources",
+                "Lock-Watcher-non-mas/resources",
+              ],
+            },
+          ],
+        }, {
+          "path": "policy.html",
+          "encoding": "utf8",
+          "target-membership": [
+            "Lock-Watcher/resources",
+            "Lock-Watcher-non-mas/resources",
+          ],
+        }, {
+          "kind": "group",
+          "path": "entitlements",
+          "children": [
+            { "path": "XPCAuthentication.entitlements", "encoding": "utf8" },
+            { "path": "XPCPower-non-mas.entitlements", "encoding": "utf8" },
+            { "path": "Lock_Watcher.entitlements", "encoding": "utf8" },
+            { "path": "Lock_Watcher-non-mas.entitlements", "encoding": "utf8" },
+            { "path": "XPCMail-non-mas.entitlements", "encoding": "utf8" },
+            { "path": "XPCMail.entitlements", "encoding": "utf8" },
+            { "path": "XPCPower.entitlements", "encoding": "utf8" },
+            { "path": "XPCAuthentication-non-mas.entitlements", "encoding": "utf8" },
+          ],
+        }, {
+          "path": "Localizable.xcstrings",
+          "target-membership": [
+            "Lock-Watcher/resources",
+            "Lock-Watcher-non-mas/resources",
+          ],
+        }, {
+          "path": "PrivacyInfo.xcprivacy",
+          "target-membership": [
+            "Lock-Watcher/resources",
+            "Lock-Watcher-non-mas/resources",
+          ],
+        }, {
+          "path": "Assets.xcassets",
+          "target-membership": [
+            "Lock-Watcher/resources",
+            "Lock-Watcher-non-mas/resources",
+          ],
+        },
+        { "path": "Info.plist", "encoding": "utf8" },
+      ],
+    }, {
+      "kind": "folder",
+      "path": "XPCAuthentication",
+      "target-membership": [
+        "XPCAuthentication",
+      ],
+      "membership-exceptions": [
+        {
+          "target": "Lock-Watcher",
+          "inclusions": [
+            "XPCAuthenticationProtocol.swift",
+          ],
+        }, {
+          "target": "Lock-Watcher-non-mas",
+          "inclusions": [
+            "XPCAuthenticationProtocol.swift",
+          ],
+        }, {
+          "target": "XPCAuthentication",
+          "exclusions": [
+            "Info.plist",
+          ],
+        },
+      ],
+    }, {
+      "kind": "group",
+      "path": "XPCMail",
+      "children": [
+        { "path": "/System/Applications/Mail.app", "target-membership": [ "XPCMail/resources" ] },
+        { "path": "XPCMail.h" },
+        { "path": "XPCMail.m", "target-membership": [ "XPCMail/compile-sources" ] },
+        { "path": "main.m", "target-membership": [ "XPCMail/compile-sources" ] },
+        { "path": "Info.plist" },
+        {
+          "path": "XPCMailProtocol.swift",
+          "target-membership": [
+            "Lock-Watcher/compile-sources",
+            "Lock-Watcher-non-mas/compile-sources",
+            "XPCMail/compile-sources",
+          ],
+        },
+        { "path": "XPCMail-Bridging-Header.h" },
+      ],
+    }, {
+      "kind": "folder",
+      "path": "XPCPower",
+      "membership-exceptions": [
+        {
+          "target": "Lock-Watcher",
+          "inclusions": [
+            "XPCPowerProtocol.swift",
+          ],
+        }, {
+          "target": "Lock-Watcher-non-mas",
+          "inclusions": [
+            "XPCPowerProtocol.swift",
+          ],
+        }, {
+          "target": "XPCPower",
+          "inclusions": [
+            "XPCPower.m",
+            "XPCPowerProtocol.swift",
+            "main.m",
+          ],
+        },
+      ],
+    },
+    { "path": "Lock-WatcherTests.xctestplan" },
+    {
+      "kind": "folder",
+      "path": "Tests",
+      "target-membership": [
+        "Lock-WatcherTests",
+      ],
+      "membership-exceptions": [
+        {
+          "target": "Lock-Watcher",
+          "inclusions": [
+            "Coordinator/MainCoordinatorTest.swift",
+          ],
+        }, {
+          "target": "Lock-Watcher-non-mas",
+          "inclusions": [
+            "Coordinator/MainCoordinatorTest.swift",
+          ],
+        }, {
+          "target": "Lock-WatcherTests",
+          "exclusions": [
+            "Coordinator/MainCoordinatorTest.swift",
+            "Info.plist",
+          ],
+        },
+      ],
+    }, {
+      "kind": "folder",
+      "path": "UITests",
+      "membership-exceptions": [
+        {
+          "target": "Lock-WatcherUITests",
+          "inclusions": [
+            "ApplicationUITests.swift",
+          ],
+        },
+      ],
+    }, {
+      "kind": "group",
+      "name": "Products",
+      "children": [
+        { "path": "<PRODUCTS>/Lock-Watcher-Companion.app", "id": "C0DE5EED0000000000000007", "type": "wrapper.application", "index": false },
+        { "path": "<PRODUCTS>/Lock-WatcherCompanionTests.xctest", "id": "C0DE5EED000000000000000B", "type": "wrapper.cfbundle", "index": false },
+        { "path": "<PRODUCTS>/Lock-Watcher.app", "id": "A5C6DBEE25796A90009DE750", "type": "wrapper.application", "index": false },
+        { "path": "<PRODUCTS>/Lock-WatcherTests.xctest", "id": "A5C6DC0025796A93009DE750", "type": "wrapper.cfbundle", "index": false },
+        { "path": "<PRODUCTS>/Lock-WatcherUITests.xctest", "id": "A5C6DC0B25796A93009DE750", "type": "wrapper.cfbundle", "index": false },
+        {
+          "path": "<PRODUCTS>/XPCPower.xpc",
+          "id": "A5E6D75225A5BB6B00EEA7DD",
+          "type": "wrapper.xpc-service",
+          "index": false,
+          "target-membership": [
+            { "build-phase": "Lock-Watcher/copy/Embed XPC Services", "header-preservation": "remove-on-copy" },
+            { "build-phase": "Lock-Watcher-non-mas/copy/Embed XPC Services", "header-preservation": "remove-on-copy" },
+          ],
+        },
+        { "path": "<PRODUCTS>/XPCMail.xpc", "id": "A533D82625AA11F40046B7C8", "type": "wrapper.xpc-service", "index": false, "target-membership": [ { "build-phase": "Lock-Watcher-non-mas/copy/Embed XPC Services", "header-preservation": "remove-on-copy" } ] },
+        { "path": "<PRODUCTS>/XPCAuthentication.xpc", "id": "A54E4A1726108E9600E7B1D4", "type": "wrapper.xpc-service", "index": false, "target-membership": [ { "build-phase": "Lock-Watcher-non-mas/copy/Embed XPC Services", "header-preservation": "remove-on-copy" } ] },
+        { "path": "<PRODUCTS>/Lock-Watcher-non-mas.app", "id": "A58FC75326E2814E007674F6", "type": "wrapper.application", "index": false },
+      ],
+    },
+  ],
+  "targets": [
+    {
+      "name": "Lock-Watcher-Companion",
+      "id": "C0DE5EED0000000000000001",
+      "product": "Products/Lock-Watcher-Companion.app",
+      "product-type": "application",
+      "specialized-configurations": [
+        { "name": "Debug", "file": { "anchor": "Configurations", "relative-path": "companion/companion-debug.xcconfig" } },
+        { "name": "Release", "file": { "anchor": "Configurations", "relative-path": "companion/companion-release.xcconfig" } },
+        { "name": "Release-non-mas", "file": { "anchor": "Configurations", "relative-path": "companion/companion-release.xcconfig" } },
+      ],
+      "build-phases": [
+        "compile-sources",
+        "frameworks",
+        "resources",
+      ],
+      "package-product-members": [
+        {
+          "package": "SKHelper",
+          "product-name": "SKHelperCore",
+          "build-phase": { "build-phase": "frameworks" },
+        },
+      ],
+      "build-settings": {
+        "ENABLE_MODULE_VERIFIER": "YES",
+      },
+    }, {
+      "name": "Lock-WatcherCompanionTests",
+      "id": "C0DE5EED0000000000000002",
+      "product": "Products/Lock-WatcherCompanionTests.xctest",
+      "product-type": "bundle.unit-test",
+      "specialized-configurations": [
+        { "name": "Debug", "file": { "anchor": "Configurations", "relative-path": "companion/companion-tests.xcconfig" } },
+        { "name": "Release", "file": { "anchor": "Configurations", "relative-path": "companion/companion-tests.xcconfig" } },
+        { "name": "Release-non-mas", "file": { "anchor": "Configurations", "relative-path": "companion/companion-tests.xcconfig" } },
+      ],
+      "build-phases": [
+        "compile-sources",
+        "frameworks",
+      ],
+      "build-settings": {
+        "ENABLE_MODULE_VERIFIER": "YES",
+      },
+    }, {
+      "name": "Lock-Watcher",
+      "id": "A5C6DBED25796A90009DE750",
+      "product": "Products/Lock-Watcher.app",
+      "product-type": "application",
+      "specialized-configurations": [
+        { "name": "Debug", "file": { "anchor": "Configurations", "relative-path": "app/app-debug.xcconfig" } },
+        { "name": "Release", "file": { "anchor": "Configurations", "relative-path": "app/app-release.xcconfig" } },
+        { "name": "Release-non-mas", "file": { "anchor": "Configurations", "relative-path": "app/app-release.xcconfig" } },
+      ],
+      "dependencies": [
+        "XPCPower",
+      ],
+      "build-phases": [
+        "compile-sources",
+        "frameworks",
+        "resources",
+        {
+          "kind": "copy",
+          "name": "Embed XPC Services",
+          "bundle-base-path": "build-products-directory",
+          "relative-path": "$(CONTENTS_FOLDER_PATH)/XPCServices",
+        },
+      ],
+      "package-product-members": [
+        {
+          "package": "CameraSnap",
+          "product-name": "CameraSnap",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
+          "package": "CustomizedAboutView",
+          "product-name": "CustomizedAboutView",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
+          "package": "EasyStash",
+          "product-name": "EasyStash",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
+          "package": "KeychainAccess",
+          "product-name": "KeychainAccess",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
+          "package": "LaunchAtLogin-Modern",
+          "product-name": "LaunchAtLogin",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
+          "package": "SimpleTracer",
+          "product-name": "SimpleTracer",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
+          "package": "SwiftyDropbox",
+          "product-name": "SwiftyDropbox",
+          "build-phase": { "build-phase": "frameworks" },
+        },
+      ],
+    }, {
+      "name": "Lock-Watcher-non-mas",
+      "id": "A58FC71E26E2814E007674F6",
+      "product": "Products/Lock-Watcher-non-mas.app",
+      "product-type": "application",
+      "specialized-configurations": [
+        { "name": "Debug", "file": { "anchor": "Configurations", "relative-path": "app-nomas/app-no-mas-debug.xcconfig" } },
+        { "name": "Release", "file": { "anchor": "Configurations", "relative-path": "app-nomas/app-no-mas-release.xcconfig" } },
+        { "name": "Release-non-mas", "file": { "anchor": "Configurations", "relative-path": "app-nomas/app-no-mas-release.xcconfig" } },
+      ],
+      "dependencies": [
+        "XPCPower",
+        "XPCAuthentication",
+        "XPCMail",
+      ],
+      "build-phases": [
+        "compile-sources",
+        "frameworks",
+        "resources",
+        {
+          "kind": "copy",
+          "name": "Embed XPC Services",
+          "bundle-base-path": "build-products-directory",
+          "relative-path": "$(CONTENTS_FOLDER_PATH)/XPCServices",
+        },
+      ],
+      "package-product-members": [
+        {
+          "package": "CameraSnap",
+          "product-name": "CameraSnap",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
+          "package": "CustomizedAboutView",
+          "product-name": "CustomizedAboutView",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
+          "package": "EasyStash",
+          "product-name": "EasyStash",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
+          "package": "KeychainAccess",
+          "product-name": "KeychainAccess",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
+          "package": "LaunchAtLogin-Modern",
+          "product-name": "LaunchAtLogin",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
+          "package": "SimpleTracer",
+          "product-name": "SimpleTracer",
+          "build-phase": { "build-phase": "frameworks" },
+        }, {
+          "package": "SwiftyDropbox",
+          "product-name": "SwiftyDropbox",
+          "build-phase": { "build-phase": "frameworks" },
+        },
+      ],
+    }, {
+      "name": "XPCAuthentication",
+      "id": "A54E4A1626108E9600E7B1D4",
+      "product": "Products/XPCAuthentication.xpc",
+      "product-type": "xpc-service",
+      "last-swift-migration": "12.4",
+      "specialized-configurations": [
+        { "name": "Debug", "file": { "anchor": "Configurations", "relative-path": "debug.xcconfig" } },
+        { "name": "Release", "file": { "anchor": "Configurations", "relative-path": "release.xcconfig" } },
+        { "name": "Release-non-mas", "file": { "anchor": "Configurations", "relative-path": "release.xcconfig" } },
+      ],
+      "build-phases": [
+        "compile-sources",
+        "frameworks",
+        "resources",
+      ],
+      "build-settings": {
+        "CODE_SIGN_ENTITLEMENTS": "Resources/entitlements/XPCAuthentication-non-mas.entitlements",
+        "ENABLE_APP_SANDBOX": "YES",
+        "ENABLE_HARDENED_RUNTIME": "YES",
+        "ENABLE_USER_SELECTED_FILES": "readonly",
+        "INFOPLIST_FILE": "XPCAuthentication/Info.plist",
+        "PRODUCT_BUNDLE_IDENTIFIER": "com.igrsoft.XPCAuthentication",
+      },
+    }, {
+      "name": "XPCPower",
+      "id": "A5E6D75125A5BB6B00EEA7DD",
+      "product": "Products/XPCPower.xpc",
+      "product-type": "xpc-service",
+      "last-swift-migration": "12.3",
+      "specialized-configurations": [
+        { "name": "Debug", "file": { "anchor": "Configurations", "relative-path": "debug.xcconfig" } },
+        { "name": "Release", "file": { "anchor": "Configurations", "relative-path": "release.xcconfig" } },
+        { "name": "Release-non-mas", "file": { "anchor": "Configurations", "relative-path": "release.xcconfig" } },
+      ],
+      "build-phases": [
+        "compile-sources",
+        "frameworks",
+        "resources",
+      ],
+      "build-settings": {
+        "CODE_SIGN_ENTITLEMENTS[config=Debug]": "Resources/entitlements/XPCPower.entitlements",
+        "CODE_SIGN_ENTITLEMENTS[config=Release-non-mas]": "Resources/entitlements/XPCPower-non-mas.entitlements",
+        "CODE_SIGN_ENTITLEMENTS[config=Release]": "Resources/entitlements/XPCPower.entitlements",
+        "ENABLE_HARDENED_RUNTIME": "YES",
+        "INFOPLIST_FILE": "XPCPower/Info.plist",
+        "PRODUCT_BUNDLE_IDENTIFIER": "com.igrsoft.XPCPower",
+        "SWIFT_OBJC_BRIDGING_HEADER": "XPCPower/XPCPower-Bridging-Header.h",
+      },
+    }, {
+      "name": "XPCMail",
+      "id": "A533D82525AA11F40046B7C8",
+      "product": "Products/XPCMail.xpc",
+      "product-type": "xpc-service",
+      "last-swift-migration": "12.3",
+      "specialized-configurations": [
+        { "name": "Debug", "file": { "anchor": "Configurations", "relative-path": "debug.xcconfig" } },
+        { "name": "Release", "file": { "anchor": "Configurations", "relative-path": "release.xcconfig" } },
+        { "name": "Release-non-mas", "file": { "anchor": "Configurations", "relative-path": "release.xcconfig" } },
+      ],
+      "build-phases": [
+        "resources",
+        "compile-sources",
+        "frameworks",
+      ],
+      "build-rules": [
+        {
+          "processor": "com.apple.compilers.proxy.script",
+          "file-type": "pattern.proxy",
+          "file-patterns": "*.app",
+          "output-files": [
+            "$(DERIVED_FILES_DIR)/$(INPUT_FILE_BASE).h",
+          ],
+          "script": "sdef \"$INPUT_FILE_PATH\" | sdp -fh -o \"$DERIVED_FILES_DIR\" --basename \"$INPUT_FILE_BASE\" --bundleid `defaults read \"$INPUT_FILE_PATH/Contents/Info\" CFBundleIdentifier`\n",
+        },
+      ],
+      "build-settings": {
+        "AUTOMATION_APPLE_EVENTS": "YES",
+        "CODE_SIGN_ENTITLEMENTS": "Resources/entitlements/XPCMail-non-mas.entitlements",
+        "ENABLE_APP_SANDBOX": "YES",
+        "ENABLE_HARDENED_RUNTIME": "YES",
+        "INFOPLIST_FILE": "XPCMail/Info.plist",
+        "PRODUCT_BUNDLE_IDENTIFIER": "com.igrsoft.XPCMail",
+        "SWIFT_OBJC_BRIDGING_HEADER": "XPCMail/XPCMail-Bridging-Header.h",
+      },
+    }, {
+      "name": "Lock-WatcherTests",
+      "id": "A5C6DBFF25796A93009DE750",
+      "product": "Products/Lock-WatcherTests.xctest",
+      "product-type": "bundle.unit-test",
+      "test-host-target": "Lock-Watcher",
+      "specialized-configurations": [
+        { "name": "Debug", "file": { "anchor": "Configurations", "relative-path": "tests/test-debug.xcconfig" } },
+        { "name": "Release", "file": { "anchor": "Configurations", "relative-path": "tests/test-release.xcconfig" } },
+        { "name": "Release-non-mas", "file": { "anchor": "Configurations", "relative-path": "tests/test-release.xcconfig" } },
+      ],
+      "dependencies": [
+        "Lock-Watcher",
+      ],
+      "build-phases": [
+        "compile-sources",
+        "frameworks",
+        "resources",
+      ],
+    }, {
+      "name": "Lock-WatcherUITests",
+      "id": "A5C6DC0A25796A93009DE750",
+      "product": "Products/Lock-WatcherUITests.xctest",
+      "product-type": "bundle.ui-testing",
+      "test-host-target": "Lock-Watcher",
+      "specialized-configurations": [
+        { "name": "Debug", "file": { "anchor": "Configurations", "relative-path": "tests/uitest-debug.xcconfig" } },
+        { "name": "Release", "file": { "anchor": "Configurations", "relative-path": "tests/uitest-release.xcconfig" } },
+        { "name": "Release-non-mas", "file": { "anchor": "Configurations", "relative-path": "tests/uitest-release.xcconfig" } },
+      ],
+      "dependencies": [
+        "Lock-Watcher",
+      ],
+      "build-phases": [
+        "compile-sources",
+        "frameworks",
+        "resources",
+      ],
+      "build-settings": {
+        "INFOPLIST_KEY_ITSAppUsesNonExemptEncryption": "NO",
+        "INFOPLIST_KEY_LSApplicationCategoryType": "public.app-category.utilities",
+      },
+    },
+  ],
+  "last-upgrade": "27.2",
+  "last-swift-update": "12.2",
+}

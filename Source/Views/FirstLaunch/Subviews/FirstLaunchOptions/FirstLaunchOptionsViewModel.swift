@@ -60,8 +60,10 @@ final class FirstLaunchOptionsViewModel {
 
 // @test-file: Tests/ViewModels/FirstLaunchViewModelTests.swift
 
-extension FirstLaunchOptionsViewModel {
-    static var preview: FirstLaunchOptionsViewModel {
-        FirstLaunchOptionsViewModel(settings: AppSettingsPreview())
+#if DEBUG
+    extension FirstLaunchOptionsViewModel {
+        static var preview: FirstLaunchOptionsViewModel {
+            FirstLaunchOptionsViewModel(settings: AppSettingsPreview())
+        }
     }
-}
+#endif

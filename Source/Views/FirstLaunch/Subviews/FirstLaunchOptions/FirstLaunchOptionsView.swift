@@ -27,10 +27,12 @@ struct FirstLaunchOptionsView: View {
     }
 }
 
-#Preview("Options View") {
-    FirstLaunchOptionsView()
-        .environment(FirstLaunchOptionsViewModel.preview)
-}
+#if DEBUG
+    #Preview("Options View") {
+        FirstLaunchOptionsView()
+            .environment(FirstLaunchOptionsViewModel.preview)
+    }
+#endif
 
 // MARK: - Test Info
 

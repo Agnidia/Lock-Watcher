@@ -19,8 +19,8 @@ fi
 SUITE=$(sed -n 's/.*userDefaultsId *= *"\([^"]*\)".*/\1/p' "$REPO/Source/Application/Secrets.swift")
 [ -n "$SUITE" ] || { echo "no userDefaultsId in Source/Application/Secrets.swift" >&2; exit 1; }
 
-# launch <lang> <section>: seeds demo-safe settings and history, then starts the app in <lang> with one
-# Settings section expanded.
+# launch <lang> <page>: seeds demo-safe settings and person history, then starts the app in <lang> with the
+# Settings window set to <page> (a SettingsPage raw value stored in UISettings.lastSettingsPage).
 launch() {
   pkill -f "$APP/Contents/MacOS" || true
   sleep 2
@@ -40,10 +40,10 @@ window() {
   "$WORK/wins" "$(pgrep -f "$APP/Contents/MacOS" | head -1)" | awk -v l="$1" '$2==l' | head -1
 }
 
-# capture <lang> <section> <settings-name> [popover-name]
+# capture <lang> <page> <settings-name> [popover-name]
 capture() {
-  local lang=$1 section=$2 out=$3 pop=${4:-}
-  launch "$lang" "$section"
+  local lang=$1 page=$2 out=$3 pop=${4:-}
+  launch "$lang" "$page"
   osascript -e 'tell application "System Events" to tell process "Lock-Watcher" to click menu bar item 1 of menu bar 2' >/dev/null
   sleep 2
   read -r wid _ bx by _ <<< "$(window 25)"
@@ -65,9 +65,10 @@ capture() {
 for pair in en-US:en uk:uk; do
   locale=${pair%%:*}; lang=${pair##*:}; raw="$SHOTS/$locale/raw"
   mkdir -p "$raw"
-  capture "$lang" snap "$raw/settings-snapshot.png" "$raw/menu-popover.png"
-  capture "$lang" opts "$raw/settings-options.png"
+  capture "$lang" capture "$raw/settings-capture.png" "$raw/menu-popover.png"
+  capture "$lang" snapshot "$raw/settings-triggers.png"
   capture "$lang" sync "$raw/settings-sync.png"
+  capture "$lang" notifications "$raw/settings-notifications.png"
 done
 pkill -f "$APP/Contents/MacOS" || true
 echo "check every raw capture for a blue focus ring before composing"

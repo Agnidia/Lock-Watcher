@@ -11,3 +11,6 @@
 
 #include "../release.xcconfig"
 #include "app-no-mas.xcconfig"
+
+// Preview persons are for DEBUG previews and screenshots only; DEVELOPMENT_ASSET_PATHS alone still compiles them into the build.
+EXCLUDED_SOURCE_FILE_NAMES = "Preview Assets.xcassets"

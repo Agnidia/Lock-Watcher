@@ -71,11 +71,13 @@ final class FirstLaunchProgressViewModel {
     }
 }
 
-extension FirstLaunchProgressViewModel {
-    /// A preview instance of the view model with a default frame size.
-    ///
-    /// This is useful for design-time previewing in SwiftUI.
-    static var preview: FirstLaunchProgressViewModel {
-        .init(frameSize: CGSize(width: 300, height: 300))
+#if DEBUG
+    extension FirstLaunchProgressViewModel {
+        /// A preview instance of the view model with a default frame size.
+        ///
+        /// This is useful for design-time previewing in SwiftUI.
+        static var preview: FirstLaunchProgressViewModel {
+            .init(frameSize: CGSize(width: 300, height: 300))
+        }
     }
-}
+#endif

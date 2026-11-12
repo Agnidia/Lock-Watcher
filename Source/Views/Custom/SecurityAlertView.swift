@@ -70,6 +70,8 @@ struct SecurityAlertView: View {
     }
 }
 
-#Preview("Security Alert") {
-    SecurityAlertView(password: .constant("1234"), isPresented: .constant(true))
-}
+#if DEBUG
+    #Preview("Security Alert") {
+        SecurityAlertView(password: .constant("1234"), isPresented: .constant(true))
+    }
+#endif

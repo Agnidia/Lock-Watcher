@@ -61,9 +61,11 @@ final class MainViewModel: DomainViewConstantProtocol {
     }
 }
 
-/// An extension providing a preview instance of `MainViewModel` for design and testing purposes.
-extension MainViewModel {
-    static var preview: MainViewModel {
-        .init(thiefManager: ThiefManagerPreview())
+#if DEBUG
+    /// An extension providing a preview instance of `MainViewModel` for design and testing purposes.
+    extension MainViewModel {
+        static var preview: MainViewModel {
+            .init(thiefManager: ThiefManagerPreview())
+        }
     }
-}
+#endif

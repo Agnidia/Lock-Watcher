@@ -56,6 +56,14 @@ final class InfoViewModel {
         NSApplication.displaySettingsWindow()
     }
     
+    /// Provides the title for the iPhone companion link.
+    func companionTitle() -> Text {
+        Text("ButtonCompanion")
+    }
+
+    /// The App Store page of the iPhone companion.
+    let companionUrl: URL = CompanionDownloadView.storeURL
+
     /// Provides the title for the quit application button.
     func quitAppTitle() -> Text {
         Text("Quit")

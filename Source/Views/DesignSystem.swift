@@ -133,8 +133,17 @@ enum DesignSystem {
         /// Main view width
         static let mainViewWidth: CGFloat = 340
 
-        /// Settings view width
-        static let settingsViewWidth: CGFloat = 420
+        /// Settings window width: sidebar plus form
+        static let settingsViewWidth: CGFloat = 640
+
+        /// Settings window height
+        static let settingsViewHeight: CGFloat = 480
+
+        /// Settings sidebar column width
+        static let settingsSidebarWidth: CGFloat = 200
+
+        /// Side of the coloured square behind a sidebar symbol
+        static let settingsSidebarIconSize: CGFloat = 24
 
         /// First launch view size
         static let firstLaunchSize = CGSize(width: 320, height: 220)
@@ -222,6 +231,7 @@ enum AccessibilityID {
         static let debugTriggerButton = "info.debugTriggerButton"
         static let cleanButton = "info.cleanButton"
         static let openSettingsButton = "info.openSettingsButton"
+        static let companionButton = "info.companionButton"
         static let quitButton = "info.quitButton"
         static let websiteLink = "info.websiteLink"
         static let expandToggle = "info.expandToggle"
@@ -231,9 +241,18 @@ enum AccessibilityID {
 
     enum Settings {
         static let container = "settings.container"
+        static let sidebar = "settings.sidebar"
+        static let about = "settings.about"
+
+        static func sidebarItem(_ page: String) -> String {
+            "settings.sidebar.\(page)"
+        }
+
+        static func page(_ page: String) -> String {
+            "settings.page.\(page)"
+        }
 
         // Security section
-        static let securitySection = "settings.securitySection"
         static let launchAtLoginToggle = "settings.launchAtLoginToggle"
         static let protectionToggle = "settings.protectionToggle"
         static let passwordField = "settings.passwordField"
@@ -241,7 +260,6 @@ enum AccessibilityID {
         static let biometryToggle = "settings.biometryToggle"
 
         // Snapshot triggers section
-        static let snapshotSection = "settings.snapshotSection"
         static let wakeUpToggle = "settings.wakeUpToggle"
         static let loginToggle = "settings.loginToggle"
         static let wrongPasswordToggle = "settings.wrongPasswordToggle"
@@ -253,13 +271,13 @@ enum AccessibilityID {
         static let lockedInputDelayStepper = "settings.lockedInputDelayStepper"
 
         // Options section
-        static let optionsSection = "settings.optionsSection"
         static let keepLastStepper = "settings.keepLastStepper"
         static let locationToggle = "settings.locationToggle"
         static let ipAddressToggle = "settings.ipAddressToggle"
         static let traceRouteToggle = "settings.traceRouteToggle"
         static let traceRouteServerField = "settings.traceRouteServerField"
         static let saveToDiskToggle = "settings.saveToDiskToggle"
+        static let browseLocalButton = "settings.browseLocalButton"
         static let snapshotQualityPicker = "settings.snapshotQualityPicker"
         static let outputTypePicker = "settings.outputTypePicker"
         static let videoDurationStepper = "settings.videoDurationStepper"
@@ -268,14 +286,20 @@ enum AccessibilityID {
         static let keepFilesFootnote = "settings.keepFilesFootnote"
 
         // Sync section
-        static let syncSection = "settings.syncSection"
         static let emailToggle = "settings.emailToggle"
         static let emailField = "settings.emailField"
         static let iCloudToggle = "settings.iCloudToggle"
+        static let browseICloudButton = "settings.browseICloudButton"
         static let dropboxToggle = "settings.dropboxToggle"
         static let dropboxAuthButton = "settings.dropboxAuthButton"
         static let dropboxLogoutButton = "settings.dropboxLogoutButton"
         static let notificationToggle = "settings.notificationToggle"
+        static let pushToggle = "settings.pushToggle"
+        static let companionDownloadButton = "settings.companionDownloadButton"
+        static let pushPairButton = "settings.pushPairButton"
+        static let pushForgetButton = "settings.pushForgetButton"
+        static let pushRepairButton = "settings.pushRepairButton"
+        static let pushPairingSheet = "settings.pushPairingSheet"
     }
 
     // MARK: - First Launch View
@@ -333,6 +357,7 @@ enum AccessibilityLabel {
 
     enum Info {
         static let openSettings = NSLocalizedString("AccessibilityOpenSettings", comment: "Open application settings")
+        static let openCompanion = NSLocalizedString("AccessibilityOpenCompanion", comment: "Open the iPhone companion in the App Store")
         static let quitApp = NSLocalizedString("AccessibilityQuitApp", comment: "Quit Lock-Watcher")
         static let visitWebsite = NSLocalizedString("AccessibilityVisitWebsite", comment: "Visit Agnidia website")
         static let expandSection = NSLocalizedString("AccessibilityExpandInfo", comment: "Expand information section")
@@ -381,6 +406,7 @@ enum AccessibilityLabel {
         static let syncICloud = NSLocalizedString("AccessibilitySyncICloud", comment: "Sync snapshots to iCloud")
         static let syncDropbox = NSLocalizedString("AccessibilitySyncDropbox", comment: "Sync snapshots to Dropbox")
         static let localNotification = NSLocalizedString("AccessibilityLocalNotification", comment: "Show local notifications for snapshots")
+        static let pushToiPhone = NSLocalizedString("AccessibilityPushToiPhone", comment: "Send alerts to the paired iPhone")
     }
 
     // MARK: - First Launch
@@ -426,6 +452,10 @@ enum AccessibilityHint {
         static let tapToOpen = NSLocalizedString("AccessibilityHintTapToOpen", comment: "Double-tap to open in Preview")
         static let tapToSelect = NSLocalizedString("AccessibilityHintTapToSelect", comment: "Double-tap to select this snapshot")
         static let tapToRemove = NSLocalizedString("AccessibilityHintTapToRemove", comment: "Double-tap to remove this snapshot")
+    }
+
+    enum Info {
+        static let openCompanion = NSLocalizedString("AccessibilityHintOpenCompanion", comment: "Opens the App Store in the browser")
     }
 
     enum Settings {

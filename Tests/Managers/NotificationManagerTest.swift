@@ -73,6 +73,41 @@ final class NotificationManagerTests: XCTestCase {
 
         XCTAssertEqual(report, .empty)
     }
+
+    func testPushChannelRunsOnlyWhenEnabled() async {
+        var sync = SyncSettings()
+        sync.isSendPushEnable = true
+        let push = MockNotifier()
+        let idlePush = MockNotifier()
+        let enabled = NotificationManager(settings: MockAppSettings(sync: sync), mail: MockNotifier(), iCloud: MockNotifier(), dropbox: MockNotifier(),
+                                          notification: MockNotifier(), push: push, logger: LogMock())
+        let disabled = NotificationManager(settings: MockAppSettings(), mail: MockNotifier(), iCloud: MockNotifier(), dropbox: MockNotifier(),
+                                           notification: MockNotifier(), push: idlePush, logger: LogMock())
+
+        let enabledReport = await enabled.send(ThiefDto(triggerType: .onWakeUp))
+        let disabledReport = await disabled.send(ThiefDto(triggerType: .onWakeUp))
+
+        XCTAssertEqual(enabledReport.outcomes, [.push: .unconfirmed])
+        XCTAssertFalse(enabledReport.isRemoteUploadConfirmed)
+        XCTAssertEqual(push.sentCount, 1)
+        XCTAssertEqual(disabledReport, .empty)
+        XCTAssertEqual(idlePush.sentCount, 0)
+    }
+
+    func testUnregisteredDeviceIsLoggedByCaseName() async {
+        var sync = SyncSettings()
+        sync.isSendPushEnable = true
+        let push = MockNotifier()
+        push.error = NotifierError.deviceUnregistered
+        let logger = LogMock()
+        let sut = NotificationManager(settings: MockAppSettings(sync: sync), mail: MockNotifier(), iCloud: MockNotifier(), dropbox: MockNotifier(),
+                                      notification: MockNotifier(), push: push, logger: logger)
+
+        let report = await sut.send(ThiefDto(triggerType: .onWakeUp))
+
+        XCTAssertEqual(report.outcomes, [.push: .failed])
+        XCTAssertEqual(logger.errorMessage, "push delivery failed: deviceUnregistered")
+    }
 }
 
 final class MediaAttachmentPolicyTests: XCTestCase {
