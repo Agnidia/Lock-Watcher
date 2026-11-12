@@ -8,20 +8,6 @@
 #if DEBUG
 import Foundation
 
-/// Fixture photo names are `person-N.jpeg`, so an alert's `fileName` selects its person in the preview asset catalog.
-enum PreviewPersons {
-    static let count = 11
-    
-    static func fileName(_ index: Int) -> String {
-        index < count ? "person-\(index).jpeg" : "person-\(index % count)-\(index).jpeg"
-    }
-    
-    static func assetName(forFileName fileName: String) -> String? {
-        guard fileName.hasPrefix("person-"), let index = Int(fileName.dropFirst("person-".count).prefix { $0.isNumber }), index < count else { return nil }
-        return "Persons/person-\(index)"
-    }
-}
-
 /// One made-up alert per trigger, so previews and screenshots can show every title, symbol and detail layout.
 enum PreviewAlerts {
     static let referenceDate = Date(timeIntervalSince1970: 1_793_021_520)
