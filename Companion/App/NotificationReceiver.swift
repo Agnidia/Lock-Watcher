@@ -8,7 +8,7 @@
 import Foundation
 import UserNotifications
 
-/// UserNotifications calls its delegate off the main actor with non-Sendable values, so each callback parses to `ReceivedAlert` before the main-actor hop.
+/// The delegate uses the completion-handler methods and calls them on the main actor: UIKit finishes a notification response by updating the app snapshot, which asserts on the main thread, and an async delegate method completes on a background task thread.
 final class NotificationReceiver: NSObject, UNUserNotificationCenterDelegate, Sendable {
     private let sink: @MainActor @Sendable ([ReceivedAlert], _ opened: Bool) -> Void
 
@@ -16,15 +16,24 @@ final class NotificationReceiver: NSObject, UNUserNotificationCenterDelegate, Se
         self.sink = sink
     }
 
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification) async -> UNNotificationPresentationOptions {
+    nonisolated func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification,
+                                            withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         let alert = Self.alert(from: notification)
-        await sink([alert], false)
-        return [.banner, .list, .sound]
+        nonisolated(unsafe) let finish = completionHandler
+        Task { @MainActor in
+            sink([alert], false)
+            finish([.banner, .list, .sound])
+        }
     }
 
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
+    nonisolated func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse,
+                                            withCompletionHandler completionHandler: @escaping () -> Void) {
         let alert = Self.alert(from: response.notification)
-        await sink([alert], true)
+        nonisolated(unsafe) let finish = completionHandler
+        Task { @MainActor in
+            sink([alert], true)
+            finish()
+        }
     }
 
     /// Alerts that arrived while the app was closed; without a service extension this pull is the only way to list them.
