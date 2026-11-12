@@ -191,7 +191,7 @@ struct CompanionRootView: View {
                 .tabItem { Label { Text("TabPro") } icon: { proTabIcon } }
                 .tag(CompanionTab.pro)
         }
-        .task(id: scenePhase) {
+        .task(id: scenePhase) { @MainActor in
             if scenePhase == .active {
                 await container.becameActive()
             }

@@ -37,7 +37,7 @@ struct AlertDetailView: View {
                 .padding(16)
             }
 #if DEBUG
-            .task {
+            .task { @MainActor in
                 if scrollsToEnd {
                     try? await Task.sleep(for: .seconds(3))
                     proxy.scrollTo(Self.endAnchor, anchor: .bottom)
@@ -104,7 +104,7 @@ private struct CopyButton: View {
                 .foregroundStyle(Color.Text.copy)
         }
         .buttonStyle(.bordered)
-        .task(id: showsCopied) {
+        .task(id: showsCopied) { @MainActor in
             guard showsCopied else { return }
             try? await Task.sleep(for: .seconds(1.5))
             showsCopied = false
@@ -340,7 +340,7 @@ private struct CapturePhoto: View {
             .accessibilityElement(children: .ignore)
             .accessibilityLabel("PhotoAccessibilityLabel")
             .accessibilityAddTraits(.isButton)
-            .task(id: photo.id) {
+            .task(id: photo.id) { @MainActor in
                 let result = await library.image(for: photo, maxPixelSize: 1200)
                 if !Task.isCancelled {
                     state = result

@@ -79,7 +79,7 @@ struct PhotoThumbnail: View {
             .accessibilityElement(children: .ignore)
             .accessibilityLabel("PhotoAccessibilityLabel")
             .accessibilityValue(Text(photo.date, format: .dateTime.day().month().year().hour().minute()))
-            .task(id: photo.id) {
+            .task(id: photo.id) { @MainActor in
                 let result = await library.image(for: photo, maxPixelSize: 360)
                 if !Task.isCancelled {
                     state = result

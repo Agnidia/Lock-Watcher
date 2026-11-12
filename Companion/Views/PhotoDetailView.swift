@@ -27,7 +27,7 @@ struct PhotoDetailView: View {
                     shareControl
                 }
             }
-            .task(id: photo.id) {
+            .task(id: photo.id) { @MainActor in
                 let result = await library.image(for: photo, maxPixelSize: 2048)
                 if !Task.isCancelled {
                     state = result
