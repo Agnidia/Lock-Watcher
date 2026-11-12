@@ -35,6 +35,8 @@ actor AVQRCodeScanner: QRCodeScanning {
 
     /// Shared with the preview layer only; `AVCaptureVideoPreviewLayer` may attach to a session that another queue drives.
     private nonisolated(unsafe) let session = AVCaptureSession()
+    /// The preview is created before `codes()` adds the camera input, and its connection exists only after that, so `configure()` mirrors it then.
+    private nonisolated(unsafe) weak var previewLayer: AVCaptureVideoPreviewLayer?
     private let output = AVCaptureVideoDataOutput()
     private var delegate: FrameDelegate?
     private var isConfigured = false
@@ -67,7 +69,16 @@ actor AVQRCodeScanner: QRCodeScanning {
     func makePreviewLayer() -> CALayer? {
         let layer = AVCaptureVideoPreviewLayer(session: session)
         layer.videoGravity = .resizeAspectFill
+        previewLayer = layer
+        mirrorPreview()
         return layer
+    }
+
+    /// Shows the camera like a mirror; the frames sent to Vision stay unmirrored, so the QR still decodes.
+    private nonisolated func mirrorPreview() {
+        guard let connection = previewLayer?.connection, connection.isVideoMirroringSupported else { return }
+        connection.automaticallyAdjustsVideoMirroring = false
+        connection.isVideoMirrored = true
     }
 
     /// A busy or missing camera (CameraSnap may hold it) throws instead of crashing.
@@ -92,6 +103,7 @@ actor AVQRCodeScanner: QRCodeScanning {
         session.addInput(input)
         session.addOutput(output)
         output.alwaysDiscardsLateVideoFrames = true
+        mirrorPreview()
         isConfigured = true
     }
 }
